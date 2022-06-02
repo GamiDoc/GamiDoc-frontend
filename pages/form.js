@@ -36,58 +36,59 @@ class Post extends Component {
     return (
       <div className="flex flex-col h-screen justify-between">
         <Header />
-
+        
+        <div className="flex flex-col gap-10">
         {!this.state.postSubmitted ? (
-          <form>
-            <fieldset>
-              <legend className="text-center header">Add new Post</legend>
-              <div className="form-group">
-                <span className="col-md-1 col-md-offset-2 text-center">
-                  <i className="fa fa-user bigicon"></i>
-                </span>
-                <input
-                  onChange={this.onChange("title")}
-                  name="title"
-                  type="text"
-                  placeholder="Post Title"
-                  className="form-control"
-                />
-              </div>
-              <div className="form-group">
-                <span className="col-md-1 col-md-offset-2 text-center">
-                  <i className="fa fa-user bigicon"></i>
-                </span>
-                <input
-                  onChange={this.onChange("image")}
-                  name="image"
-                  type="text"
-                  placeholder="https://"
-                  className="form-control"
-                />
-              </div>
-              <div className="form-group">
-                <span className="col-md-1 col-md-offset-2 text-center">
-                  <i className="fa fa-pencil-square-o bigicon"></i>
-                </span>
-                <textarea
-                  onChange={this.onChange("content")}
-                  className="form-control"
-                  name="content"
-                  placeholder="Enter your text here"
-                  rows="7"
-                ></textarea>
-              </div>
-              <div className="form-group">
-                <button
-                  type="button"
-                  onClick={this.sunmitPost}
-                  className="btn btn-primary btn-lg"
-                >
-                  Submit
-                </button>
-              </div>
-            </fieldset>
-          </form>
+            <form >
+              <fieldset>
+                <legend className="text-center header">Add new Post</legend>
+                <div className="form-group">
+                  <span className="col-md-1 col-md-offset-2 text-center">
+                    <i className="fa fa-user bigicon"></i>
+                  </span>
+                  <input
+                    onChange={this.onChange("title")}
+                    name="title"
+                    type="text"
+                    placeholder="Post Title"
+                    className="form-control"
+                  />
+                </div>
+                <div className="form-group">
+                  <span className="col-md-1 col-md-offset-2 text-center">
+                    <i className="fa fa-user bigicon"></i>
+                  </span>
+                  <input
+                    onChange={this.onChange("image")}
+                    name="image"
+                    type="text"
+                    placeholder="https://"
+                    className="form-control"
+                  />
+                </div>
+                <div className="form-group">
+                  <span className="col-md-1 col-md-offset-2 text-center">
+                    <i className="fa fa-pencil-square-o bigicon"></i>
+                  </span>
+                  <textarea
+                    onChange={this.onChange("content")}
+                    className="form-control"
+                    name="content"
+                    placeholder="Enter your text here"
+                    rows="7"
+                  ></textarea>
+                </div>
+                <div className="form-group">
+                  <button
+                    type="button"
+                    onClick={this.sunmitPost}
+                    className="btn btn-primary btn-lg"
+                  >
+                    Submit
+                  </button>
+                </div>
+              </fieldset>
+            </form>
         ) : (
           <PDF
             title={this.state.title}
@@ -95,6 +96,7 @@ class Post extends Component {
             image={this.state.image}
           />
         )}
+        </div>
         <Footer />
       </div>
     );
