@@ -2,7 +2,6 @@ import React from "react";
 import logo from "../public/Logo.png";
 import Image from "next/image";
 
-
 const sanityIoImageLoader = ({ src, width, quality }) => {
   return `https://i.imgur.com/Bz1HHLx.png`;
 };

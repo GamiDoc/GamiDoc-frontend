@@ -6,76 +6,73 @@ import dynamic from "next/dynamic";
 const Pdf = dynamic(() => import("../components/CreatePDF"), { ssr: false });
 
 export default function Home() {
-    const [selected, setSelected] = useState(1);
-    function handleSwitch() {
-        switch (selected) {
-          case 1:
-            return (
-              <div className="grid grid-cols-2 gap-2">
-                <div className="mb-2 mx-2">
-                  <label className="block text-gray-700 text-sm font-bold mb-2">
-                    Username
-                  </label>
-                  <input
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="username"
-                    type="text"
-                    placeholder="Username"
-                  />
-                </div>
-                <div className="mb-2 mx-2">
-                  <label className="block text-gray-700 text-sm font-bold mb-2">
-                    Password
-                  </label>
-                  <input
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                    id="password"
-                    type="password"
-                    placeholder="******************"
-                  />
-                </div>
-                <div className="mx-2">
-                  <label className="block text-gray-700 text-sm font-bold mb-2">
-                    Cose
-                  </label>
-                  <input
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    type="text"
-                    id="cosa"
-                    placeholder="cose"
-                  />
-                </div>
-                <div className="mx-2">
-                  <label className="block text-gray-700 text-sm font-bold mb-2">
-                    Cose2
-                  </label>
-                  <input
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                    id="cosa2"
-                    type="text"
-                    placeholder="troppe cose"
-                  />
-                </div>
-              </div>
-            );
-          case 2:
-            return <div> ciao2</div>;
-          case 3:
-            return <div> ciao3</div>;
-          case 4:
-            return <div> ciao4</div>;
-        }
-      }
-    
-
-
+  const [selected, setSelected] = useState(1);
+  function handleSwitch() {
+    switch (selected) {
+      case 1:
+        return (
+          <div className="grid grid-cols-2 gap-2">
+            <div className="mb-2 mx-2">
+              <label className="block text-gray-700 text-sm font-bold mb-2">
+                Username
+              </label>
+              <input
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="username"
+                type="text"
+                placeholder="Username"
+              />
+            </div>
+            <div className="mb-2 mx-2">
+              <label className="block text-gray-700 text-sm font-bold mb-2">
+                Password
+              </label>
+              <input
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                id="password"
+                type="password"
+                placeholder="******************"
+              />
+            </div>
+            <div className="mx-2">
+              <label className="block text-gray-700 text-sm font-bold mb-2">
+                Cose
+              </label>
+              <input
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                type="text"
+                id="cosa"
+                placeholder="cose"
+              />
+            </div>
+            <div className="mx-2">
+              <label className="block text-gray-700 text-sm font-bold mb-2">
+                Cose2
+              </label>
+              <input
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                id="cosa2"
+                type="text"
+                placeholder="troppe cose"
+              />
+            </div>
+          </div>
+        );
+      case 2:
+        return <div> ciao2</div>;
+      case 3:
+        return <div> ciao3</div>;
+      case 4:
+        return <div> ciao4</div>;
+    }
+  }
 
   return (
     <div className="flex flex-col h-screen justify-between">
-      <Header />   
+      <Header />
       <div className="flex flex-col items-center w-screen justify-center h-screen">
         <div className="flex flex-col justify-center">
-          <div className="flex flex-row justify-center items-center gap-14 py-3">
+          <div className="flex flex-row justify-center items-center gap-32 text-2xl py-3">
             <NavbarIcon
               position={1}
               selected={selected}
@@ -136,7 +133,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-
 
       <Footer />
     </div>
