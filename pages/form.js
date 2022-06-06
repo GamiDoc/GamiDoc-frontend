@@ -7,11 +7,13 @@ const Pdf = dynamic(() => import("../components/CreatePDF"), { ssr: false });
 
 export default function Home() {
   const [selected, setSelected] = useState(1);
+  const [username, setUsername] = useState();
+
   function handleSwitch() {
     switch (selected) {
       case 1:
         return (
-          <div className="grid grid-cols-2 gap-2">
+          <div className="flex flex-col gap-2">
             <div className="mb-2 mx-2">
               <label className="block text-gray-700 text-sm font-bold mb-2">
                 Username
@@ -28,10 +30,10 @@ export default function Home() {
                 Password
               </label>
               <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                id="password"
-                type="password"
-                placeholder="******************"
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700  leading-tight focus:outline-none focus:shadow-outline"
+                id="text"
+                type="text"
+                placeholder=""
               />
             </div>
             <div className="mx-2">
@@ -39,9 +41,9 @@ export default function Home() {
                 Cose
               </label>
               <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded w-full mb-2 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 type="text"
-                id="cosa"
+                id="text"
                 placeholder="cose"
               />
             </div>
@@ -50,7 +52,25 @@ export default function Home() {
                 Cose2
               </label>
               <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-2 leading-tight focus:outline-none focus:shadow-outline"
+                id="cosa2"
+                type="text"
+                placeholder="troppe cose"
+              />
+              <label className="block text-gray-700 text-sm font-bold mb-2">
+                Cose2
+              </label>
+              <input
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-2 leading-tight focus:outline-none focus:shadow-outline"
+                id="cosa2"
+                type="text"
+                placeholder="troppe cose"
+              />
+              <label className="block text-gray-700 text-sm font-bold mb-2">
+                Cose2
+              </label>
+              <input
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-2 leading-tight focus:outline-none focus:shadow-outline"
                 id="cosa2"
                 type="text"
                 placeholder="troppe cose"
@@ -68,11 +88,11 @@ export default function Home() {
   }
 
   return (
-    <div className="flex flex-col h-screen justify-between">
+    <div className="flex flex-col justify-between ">
       <Header />
-      <div className="flex flex-col items-center w-screen justify-center h-screen">
+      <div className="flex flex-col items-center w-screen justify-center py-10 ">
         <div className="flex flex-col justify-center">
-          <div className="flex flex-row justify-center items-center gap-32 text-2xl py-3">
+          <div className="flex flex-row justify-center items-center gap-32 text-2xl py-">
             <NavbarIcon
               position={1}
               selected={selected}
@@ -106,7 +126,7 @@ export default function Home() {
             />
           </div>
 
-          <div className="h-80 flex justify-center items-center w-full">
+          <div className=" flex py-10 justify-center items-center  w-full">
             {handleSwitch()}
           </div>
 

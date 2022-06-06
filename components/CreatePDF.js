@@ -8,16 +8,16 @@ import {
   PDFDownloadLink,
 } from "@react-pdf/renderer";
 
-function CreatePDF({ content }) {
+function CreatePDF({ content  }) {
   const styles = StyleSheet.create({
     page: {
-      flexDirection: "row",
-      backgroundColor: "#E4E4E4",
+ //     flexDirection: "row",
+      backgroundColor: "white",
     },
     section: {
       margin: 10,
       padding: 10,
-      flexGrow: 1,
+//      flexGrow: 1,
     },
   });
 
