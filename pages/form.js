@@ -34,11 +34,36 @@ const KoivistoHamari = [
   { id: 22, name: "Theory", unavailable: false },
 ];
 
+const Aimo = [
+  { id: 1, name: "Education/Learning", unavailable: false },
+  { id: 2, name: "Health/Exercise", unavailable: false },
+  { id: 3, name: "Crowdsourcing", unavailable: false },
+  { id: 4, name: "Social behavior/networking/sharing", unavailable: true },
+  { id: 5, name: "Software development/design", unavailable: false },
+  { id: 6, name: "Business/Management", unavailable: false },
+  { id: 7, name: "Ecological/environmental behavior", unavailable: false },
+  { id: 8, name: "eCommerce/eServices", unavailable: true },
+  { id: 9, name: "Software engineering", unavailable: false },
+  { id: 10, name: "Marketing/Consumer behavior", unavailable: false },
+  { id: 11, name: "Citizen/public engagement/activity", unavailable: false },
+  { id: 12, name: "Entertainment", unavailable: true },
+  { id: 13, name: "Innovation", unavailable: false },
+  { id: 14, name: "Transportation/Mobility", unavailable: false },
+  { id: 15, name: "Culture/Tourism", unavailable: false },
+  { id: 16, name: "Architecture", unavailable: true },
+  { id: 17, name: "Communication", unavailable: false },
+  { id: 18, name: "Emergency planning", unavailable: false },
+  { id: 19, name: "Politics", unavailable: false },
+  { id: 20, name: "Welfare/city/human/public services", unavailable: true },
+  { id: 21, name: "Work", unavailable: false },
+  { id: 22, name: "Theory", unavailable: false },
+];
+
 export default function Home() {
   const [selected, setSelected] = useState(1);
   const [domain, setDomain] = useState(KoivistoHamari[0]);
-  const [behavior, setBehavior] = useState();
-  const [aim, setAim] = useState(KoivistoHamari[0]);
+  const [behavior, setBehavior] = useState("none");
+  const [aim, setAim] = useState(Aimo[0]);
 
   function handleSwitch() {
     switch (selected) {
@@ -107,7 +132,7 @@ export default function Home() {
             <Listbox value={aim} onChange={setAim}>
               <div className="relative mt-1">
                 <Listbox.Button className="relative w-full border cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
-                  <span className="block truncate">{domain.name}</span>
+                  <span className="block truncate">{aim.name}</span>
                   <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
                     <SelectorIcon
                       className="h-5 w-5 text-gray-400"
@@ -122,7 +147,7 @@ export default function Home() {
                   leaveTo="opacity-0"
                 >
                   <Listbox.Options className="relative mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                    {KoivistoHamari.map((person) => (
+                    {Aimo.map((person) => (
                       <Listbox.Option
                         key={person.id}
                         className={({ active }) =>
@@ -134,16 +159,16 @@ export default function Home() {
                         }
                         value={person}
                       >
-                        {({ domain }) => (
+                        {({ aim }) => (
                           <>
                             <span
                               className={`block truncate ${
-                                domain ? "font-medium" : "font-normal"
+                                aim ? "font-medium" : "font-normal"
                               }`}
                             >
                               {person.name}
                             </span>
-                            {domain ? (
+                            {aim ? (
                               <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-amber-600">
                                 <CheckIcon className="h-5 w-5" />
                               </span>
@@ -166,11 +191,10 @@ export default function Home() {
               id="username"
               type="text"
               minRows={4}
-              placeholder="Username"
+              placeholder="Behaviors"
               value={behavior}
               onChange={(e) => setBehavior(e.target.value)}
             />
-
             <label className="mt-4 block text-gray-700 text-sm font-bold mb-2">
               Target user
             </label>
@@ -179,7 +203,7 @@ export default function Home() {
               type="text"
               id="text"
               minRows={4}
-              placeholder="cose"
+              placeholder="Target user"
             />
           </div>
         );
@@ -236,7 +260,7 @@ export default function Home() {
           </div>
 
           <div className="flex flex-row justify-end gap-5 mb-2 mr-2">
-            <Pdf behavior={behavior} domain={domain.name} />
+            <Pdf behavior={behavior} domain={domain.name} aim={aim.name} />
             <div
               className="py-4 inline-block px-8 bg-yellow-gamy text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md  hover:bg-yellow-600 hover:shadow-lg focus:bg-yellow-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out "
               onClick={() => {
