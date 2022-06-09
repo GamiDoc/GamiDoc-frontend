@@ -37,140 +37,158 @@ const KoivistoHamari = [
 export default function Home() {
   const [selected, setSelected] = useState(1);
   const [domain, setDomain] = useState(KoivistoHamari[0]);
-  const [behavior, setBehavior] = useState("Behavior");
-  const [username, setUsername] = useState();
-
+  const [behavior, setBehavior] = useState();
+  const [aim, setAim] = useState(KoivistoHamari[0]);
 
   function handleSwitch() {
     switch (selected) {
       case 1:
         return (
-          <div className="flex flex-col gap-2">
-            <div className="mb-2 mx-2">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
-                Domain
-              </label>
-              <Listbox value={domain} onChange={(e)=>{setDomain(e.target.value)}}>
-                <div className="relative mt-1">
-                  <Listbox.Button className="relative w-full border cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
-                    <span className="block truncate">{domain.name}</span>
-                    <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
-                      <SelectorIcon
-                        className="h-5 w-5 text-gray-400"
-                        aria-hidden="true"
-                      />
-                    </span>
-                  </Listbox.Button>
-                  <Transition
-                    as={Fragment}
-                    leave="transition ease-in duration-100"
-                    leaveFrom="opacity-100"
-                    leaveTo="opacity-0"
-                  >
-                    <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                      {KoivistoHamari.map((person, personIdx) => (
-                        <Listbox.Option
-                          key={personIdx}
-                          className={({ active }) =>
-                            `relative cursor-default select-none py-2 pl-10 pr-4 ${
-                              active
-                                ? "bg-amber-100 text-amber-900"
-                                : "text-gray-900"
-                            }`
-                          }
-                          value={person}
-                        >
-                          {({ domain }) => (
-                            <>
-                              <span
-                                className={`block truncate ${
-                                  domain ? "font-medium" : "font-normal"
-                                }`}
-                              >
-                                {person.name}
+          <div className="flex flex-col py-4">
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              Domain
+            </label>
+            <Listbox value={domain} onChange={setDomain}>
+              <div className="relative mt-1">
+                <Listbox.Button className="relative w-full border cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
+                  <span className="block truncate">{domain.name}</span>
+                  <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+                    <SelectorIcon
+                      className="h-5 w-5 text-gray-400"
+                      aria-hidden="true"
+                    />
+                  </span>
+                </Listbox.Button>
+                <Transition
+                  as={Fragment}
+                  leave="transition ease-in duration-100"
+                  leaveFrom="opacity-100"
+                  leaveTo="opacity-0"
+                >
+                  <Listbox.Options className="relative mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                    {KoivistoHamari.map((person) => (
+                      <Listbox.Option
+                        key={person.id}
+                        className={({ active }) =>
+                          `relative cursor-default select-none py-2 pl-10 pr-4 ${
+                            active
+                              ? "bg-amber-100 text-amber-900"
+                              : "text-gray-900"
+                          }`
+                        }
+                        value={person}
+                      >
+                        {({ domain }) => (
+                          <>
+                            <span
+                              className={`block truncate ${
+                                domain ? "font-medium" : "font-normal"
+                              }`}
+                            >
+                              {person.name}
+                            </span>
+                            {domain ? (
+                              <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-amber-600">
+                                <CheckIcon className="h-5 w-5" />
                               </span>
-                              {domain ? (
-                                <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-amber-600">
-                                  <CheckIcon
-                                    className="h-5 w-5"
-                                    
-                                  />
-                                </span>
-                              ) : null}
-                            </>
-                          )}
-                        </Listbox.Option>
-                      ))}
-                    </Listbox.Options>
-                  </Transition>
-                </div>
-              </Listbox>
-            </div>
-            <div className="mb-2 mx-2">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
-                Behaviors to be encouraged...
-              </label>
-              <label className="block text-gray-700 text-sm  font-bold mb-2" />
-              <TextareaAutosize
-                className="w-96 border cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none   sm:text-sm"
-                id="username"
-                type="text"
-                minRows={3}
-                placeholder="Username"
-                value={behavior}
-                onChange={(e) => 
-                  setBehavior(e.target.value)
-                }
-              />
-            </div>
-            <div className="mx-2">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
-                Cose
-              </label>
-              <TextareaAutosize
-                className=" w-full h-56 border cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none sm:text-sm"
-                type="text"
-                id="text"
-                placeholder="cose"
-              />
-            </div>
-            <div className="mx-2">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
-                Cose2
-              </label>
-              <TextareaAutosize
-                className=" w-full border cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none sm:text-sm"
-                id="cosa2"
-                type="text"
-                placeholder="troppe cose"
-              />
-              <label className="block text-gray-700 text-sm font-bold mb-2">
-                Cose2
-              </label>
-              <TextareaAutosize
-                className=" w-full border cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none sm:text-sm"
-                id="cosa2"
-                type="text"
-                placeholder="troppe cose"
-              />
-              <label className="block text-gray-700 text-sm font-bold mb-2">
-                Cose2
-              </label>
-              <TextareaAutosize
-                className=" w-full border cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none sm:text-sm"
-                id="cosa2"
-                type="text"
-                placeholder="troppe cose"
-              />
-            </div>
+                            ) : null}
+                          </>
+                        )}
+                      </Listbox.Option>
+                    ))}
+                  </Listbox.Options>
+                </Transition>
+              </div>
+            </Listbox>
+
+            <label className="mt-4 block text-gray-700 text-sm font-bold mb-2">
+              Aim
+            </label>
+            <Listbox value={aim} onChange={setAim}>
+              <div className="relative mt-1">
+                <Listbox.Button className="relative w-full border cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
+                  <span className="block truncate">{domain.name}</span>
+                  <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+                    <SelectorIcon
+                      className="h-5 w-5 text-gray-400"
+                      aria-hidden="true"
+                    />
+                  </span>
+                </Listbox.Button>
+                <Transition
+                  as={Fragment}
+                  leave="transition ease-in duration-100"
+                  leaveFrom="opacity-100"
+                  leaveTo="opacity-0"
+                >
+                  <Listbox.Options className="relative mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                    {KoivistoHamari.map((person) => (
+                      <Listbox.Option
+                        key={person.id}
+                        className={({ active }) =>
+                          `relative cursor-default select-none py-2 pl-10 pr-4 ${
+                            active
+                              ? "bg-amber-100 text-amber-900"
+                              : "text-gray-900"
+                          }`
+                        }
+                        value={person}
+                      >
+                        {({ domain }) => (
+                          <>
+                            <span
+                              className={`block truncate ${
+                                domain ? "font-medium" : "font-normal"
+                              }`}
+                            >
+                              {person.name}
+                            </span>
+                            {domain ? (
+                              <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-amber-600">
+                                <CheckIcon className="h-5 w-5" />
+                              </span>
+                            ) : null}
+                          </>
+                        )}
+                      </Listbox.Option>
+                    ))}
+                  </Listbox.Options>
+                </Transition>
+              </div>
+            </Listbox>
+
+            <label className="mt-4 block text-gray-700 text-sm font-bold mb-2">
+              Behaviors to be encouraged...
+            </label>
+            <label className="block text-gray-700 text-sm  font-bold mb-2" />
+            <TextareaAutosize
+              className="w-96 border cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none   sm:text-sm"
+              id="username"
+              type="text"
+              minRows={4}
+              placeholder="Username"
+              value={behavior}
+              onChange={(e) => setBehavior(e.target.value)}
+            />
+
+            <label className="mt-4 block text-gray-700 text-sm font-bold mb-2">
+              Target user
+            </label>
+            <TextareaAutosize
+              className=" w-full h-56 border cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none sm:text-sm"
+              type="text"
+              id="text"
+              minRows={4}
+              placeholder="cose"
+            />
           </div>
         );
       case 2:
-        return <div> ciao2</div>;
+        return <div> to be done</div>;
       case 3:
-        return <div> ciao3</div>;
+        return <div> to be done</div>;
       case 4:
-        return <div></div>;
+        return <div> to be done</div>;
     }
   }
 
@@ -213,12 +231,12 @@ export default function Home() {
             />
           </div>
 
-          <div className=" flex py-10 justify-center items-center  w-full">
+          <div className=" flex py-10 justify-center items-center">
             {handleSwitch()}
           </div>
 
           <div className="flex flex-row justify-end gap-5 mb-2 mr-2">
-            <Pdf behavior={behavior} />
+            <Pdf behavior={behavior} domain={domain.name} />
             <div
               className="py-4 inline-block px-8 bg-yellow-gamy text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md  hover:bg-yellow-600 hover:shadow-lg focus:bg-yellow-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out "
               onClick={() => {
