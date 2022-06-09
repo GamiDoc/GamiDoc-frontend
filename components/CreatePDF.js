@@ -7,8 +7,9 @@ import {
   StyleSheet,
   PDFDownloadLink,
 } from "@react-pdf/renderer";
+import { getDomainLocale } from "next/dist/shared/lib/router/router";
 
-function CreatePDF({ content  }) {
+function CreatePDF({ behavior  }) {
   const styles = StyleSheet.create({
     page: {
  //     flexDirection: "row",
@@ -25,7 +26,8 @@ function CreatePDF({ content  }) {
     <Document>
       <Page size="A4" style={styles.page}>
         <View style={styles.section}>
-          <Text>{content}</Text>
+          <Text>{behavior}</Text>
+         
         </View>
       </Page>
     </Document>
