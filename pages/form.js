@@ -2,13 +2,21 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { useState, useEffect } from "react";
 import { Fragment } from "react";
-import NavbarIcon from "../components/NavbarIcon";
 import dynamic from "next/dynamic";
 const Pdf = dynamic(() => import("../components/CreatePDF"), { ssr: false });
 import { Listbox, Transition } from "@headlessui/react";
 import { Dialog } from "@headlessui/react";
 import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
 import TextareaAutosize from "@mui/material/TextareaAutosize";
+
+// Tabs
+import { Tab } from "@headlessui/react";
+import Context from "../components/tabs/Context";
+import Affordances from "../components/tabs/Affordances";
+import Rules from "../components/tabs/Rules";
+import Aesthetics from "../components/tabs/Aesthetics";
+import Device from "../components/tabs/Device";
+// import { Rule } from "postcss";
 
 const KoivistoHamari = [
   { id: 1, name: "Education/Learning", unavailable: false },
@@ -77,200 +85,110 @@ export default function Home() {
     setIsOpen(true);
   }
 
-  function handleSwitch() {
-    switch (selected) {
-      case 1:
-        return (
-          <div className="flex flex-col py-4">
-            <label className=" mt-4 block text-gray-700 text-sm font-bold mb-2">
-              Domain
-            </label>
-            <Listbox value={domain} onChange={setDomain}>
-              <div className="relative mt-1">
-                <Listbox.Button className="relative w-full border cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
-                  <span className="block truncate">{domain.name}</span>
-                  <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
-                    <SelectorIcon
-                      className="h-5 w-5 text-gray-400"
-                      aria-hidden="true"
-                    />
-                  </span>
-                </Listbox.Button>
-                <Transition
-                  as={Fragment}
-                  leave="transition ease-in duration-100"
-                  leaveFrom="opacity-100"
-                  leaveTo="opacity-0"
-                >
-                  <Listbox.Options className="relative mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                    {KoivistoHamari.map((person) => (
-                      <Listbox.Option
-                        key={person.id}
-                        className={({ active }) =>
-                          `relative cursor-default select-none py-2 pl-10 pr-4 ${
-                            active
-                              ? "bg-amber-100 text-amber-900"
-                              : "text-gray-900"
-                          }`
-                        }
-                        value={person}
-                      >
-                        {({ domain }) => (
-                          <>
-                            <span
-                              className={`block truncate ${
-                                domain ? "font-medium" : "font-normal"
-                              }`}
-                            >
-                              {person.name}
-                            </span>
-                            {domain ? (
-                              <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-amber-600">
-                                <CheckIcon className="h-5 w-5" />
-                              </span>
-                            ) : null}
-                          </>
-                        )}
-                      </Listbox.Option>
-                    ))}
-                  </Listbox.Options>
-                </Transition>
-              </div>
-            </Listbox>
-
-            <label className="mt-4 block text-gray-700 text-sm font-bold mb-2">
-              Aim
-            </label>
-            <Listbox value={aim} onChange={setAim}>
-              <div className="relative mt-1">
-                <Listbox.Button className="relative w-full border cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
-                  <span className="block truncate">{aim.name}</span>
-                  <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
-                    <SelectorIcon
-                      className="h-5 w-5 text-gray-400"
-                      aria-hidden="true"
-                    />
-                  </span>
-                </Listbox.Button>
-                <Transition
-                  as={Fragment}
-                  leave="transition ease-in duration-100"
-                  leaveFrom="opacity-100"
-                  leaveTo="opacity-0"
-                >
-                  <Listbox.Options className="relative mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                    {Aimo.map((person) => (
-                      <Listbox.Option
-                        key={person.id}
-                        className={({ active }) =>
-                          `relative cursor-default select-none py-2 pl-10 pr-4 ${
-                            active
-                              ? "bg-amber-100 text-amber-900"
-                              : "text-gray-900"
-                          }`
-                        }
-                        value={person}
-                      >
-                        {({ aim }) => (
-                          <>
-                            <span
-                              className={`block truncate ${
-                                aim ? "font-medium" : "font-normal"
-                              }`}
-                            >
-                              {person.name}
-                            </span>
-                            {aim ? (
-                              <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-amber-600">
-                                <CheckIcon className="h-5 w-5" />
-                              </span>
-                            ) : null}
-                          </>
-                        )}
-                      </Listbox.Option>
-                    ))}
-                  </Listbox.Options>
-                </Transition>
-              </div>
-            </Listbox>
-
-            <label className="mt-4 block text-gray-700 text-sm font-bold mb-2">
-              Behaviors to be encouraged...
-            </label>
-            <label className="block text-gray-700 text-sm  font-bold mb-2" />
-            <TextareaAutosize
-              className="w-96 border cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none   sm:text-sm"
-              id="username"
-              type="text"
-              minRows={4}
-              placeholder="Behaviors"
-              value={behavior}
-              onChange={(e) => setBehavior(e.target.value)}
-            />
-            <label className="mt-4 block text-gray-700 text-sm font-bold mb-2">
-              Target user
-            </label>
-            <TextareaAutosize
-              className=" w-full h-56 border cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none sm:text-sm"
-              type="text"
-              id="target"
-              minRows={4}
-              placeholder="Target user"
-              value={target}
-              onChange={(e) => setTarget(e.target.value)}
-            />
-          </div>
-        );
-      case 2:
-        return <div> to be done</div>;
-      case 3:
-        return <div> to be done</div>;
-      case 4:
-        return <div> to be done</div>;
-    }
-  }
-
   return (
     <div className="flex flex-col justify-between ">
       <Header />
-      <div className="flex flex-col items-center w-screen justify-center py-10 ">
+      <div className="flex flex-col items-center w-screen justify-center ">
         <div className="flex flex-col justify-center">
-          <div className="flex flex-row justify-center items-center gap-32 text-2xl py-">
-            <NavbarIcon
-              position={1}
-              selected={selected}
-              setSelected={setSelected}
-              value="Context"
-            />
-            <NavbarIcon
-              position={2}
-              selected={selected}
-              setSelected={setSelected}
-              value="Device"
-            />
-
-            <NavbarIcon
-              position={3}
-              selected={selected}
-              setSelected={setSelected}
-              value="Affordances"
-            />
-            <NavbarIcon
-              position={4}
-              selected={selected}
-              setSelected={setSelected}
-              value="Rules"
-            />
-            <NavbarIcon
-              position={4}
-              selected={selected}
-              setSelected={setSelected}
-              value="Aesthetics"
-            />
-          </div>
-
-          <div className=" flex py-10 justify-center items-center">
-            {handleSwitch()}
+          <div className=" flex-col flex py-10 justify-center items-center">
+            {/* {handleSwitch()} */}
+            <Tab.Group>
+              <Tab.List className="flex flex-row gap-28">
+                <Tab as={Fragment}>
+                  {({ selected }) => (
+                    <div
+                      className={
+                        selected
+                          ? "text-center text-3xl bg-yellow-gamy font-medium text-white rounded-3xl shadow-md font-sans px-4 py-2 "
+                          : "text-center text-2xl font-medium text-black rounded-md font-sans"
+                      }
+                    >
+                      Context
+                    </div>
+                  )}
+                </Tab>
+                <Tab as={Fragment}>
+                  {({ selected }) => (
+                    <div
+                      className={
+                        selected
+                          ? "text-center text-3xl bg-yellow-gamy font-medium text-white rounded-3xl shadow-md font-sans px-4 py-2 "
+                          : "text-center text-2xl font-medium text-black rounded-md font-sans"
+                      }
+                    >
+                      Affordances
+                    </div>
+                  )}
+                </Tab>
+                <Tab as={Fragment}>
+                  {({ selected }) => (
+                    <div
+                      className={
+                        selected
+                          ? "text-center text-3xl bg-yellow-gamy font-medium text-white rounded-3xl shadow-md font-sans px-4 py-2 "
+                          : "text-center text-2xl font-medium text-black rounded-md font-sans"
+                      }
+                    >
+                      Rules
+                    </div>
+                  )}
+                </Tab>
+                <Tab as={Fragment}>
+                  {({ selected }) => (
+                    <div
+                      className={
+                        selected
+                          ? "text-center text-3xl bg-yellow-gamy font-medium text-white rounded-3xl shadow-md font-sans px-4 py-2 "
+                          : "text-center text-2xl font-medium text-black rounded-md font-sans"
+                      }
+                    >
+                      Aesthetics
+                    </div>
+                  )}
+                </Tab>
+                <Tab as={Fragment}>
+                  {({ selected }) => (
+                    <div
+                      className={
+                        selected
+                          ? "text-center text-3xl bg-yellow-gamy font-medium text-white rounded-3xl shadow-md font-sans px-4 py-2 "
+                          : "text-center text-2xl font-medium text-black rounded-md font-sans"
+                      }
+                    >
+                     Device 
+                    </div>
+                  )}
+                </Tab>
+              </Tab.List>
+              <Tab.Panels>
+                <Tab.Panel>
+                  <Context
+                    aim={aim}
+                    setAim={setAim}
+                    domain={domain}
+                    setDomain={setDomain}
+                    target={target}
+                    setTarget={setTarget}
+                    behavior={behavior}
+                    setBehavior={setBehavior}
+                    selectObj1={KoivistoHamari}
+                    selectObj2={Aimo}
+                  />
+                </Tab.Panel>
+                <Tab.Panel>
+                  <Affordances />
+                </Tab.Panel>
+                <Tab.Panel>
+                  <Rules />
+                </Tab.Panel>
+                <Tab.Panel>
+                  <Aesthetics />
+                </Tab.Panel>
+                <Tab.Panel>
+                  <Device />
+                </Tab.Panel>
+              </Tab.Panels>
+            </Tab.Group>
           </div>
 
           <div className="flex flex-row justify-end gap-5 mb-2 mr-2">
