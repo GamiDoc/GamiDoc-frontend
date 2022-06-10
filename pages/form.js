@@ -64,13 +64,30 @@ export default function Home() {
   const [domain, setDomain] = useState(KoivistoHamari[0]);
   const [behavior, setBehavior] = useState("none");
   const [aim, setAim] = useState(Aimo[0]);
+  const [name, setName] = useState("");
+  const [target, setTarget] = useState("");
+
+
 
   function handleSwitch() {
     switch (selected) {
       case 1:
         return (
           <div className="flex flex-col py-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
+             <label className="block text-gray-700 text-sm font-bold mb-2">
+              Name of the project
+            </label>
+            <TextareaAutosize
+              className="w-96 border cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none   sm:text-sm"
+              id="Name"
+              type="text"
+              minRows={1}
+              placeholder="Name of the project"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+
+            <label className=" mt-4 block text-gray-700 text-sm font-bold mb-2">
               Domain
             </label>
             <Listbox value={domain} onChange={setDomain}>
@@ -201,9 +218,11 @@ export default function Home() {
             <TextareaAutosize
               className=" w-full h-56 border cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none sm:text-sm"
               type="text"
-              id="text"
+              id="target"
               minRows={4}
               placeholder="Target user"
+              value={target}
+              onChange={(e) => setTarget(e.target.value)}
             />
           </div>
         );
@@ -260,7 +279,7 @@ export default function Home() {
           </div>
 
           <div className="flex flex-row justify-end gap-5 mb-2 mr-2">
-            <Pdf behavior={behavior} domain={domain.name} aim={aim.name} />
+            <Pdf name={name} behavior={behavior} domain={domain.name} aim={aim.name} target={target} />
             <div
               className="py-4 inline-block px-8 bg-yellow-gamy text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md  hover:bg-yellow-600 hover:shadow-lg focus:bg-yellow-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out "
               onClick={() => {
