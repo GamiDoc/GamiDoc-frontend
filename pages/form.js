@@ -92,7 +92,10 @@ export default function Home() {
         <div className="flex flex-col justify-center">
           <div className=" flex-col flex py-10 justify-center items-center">
             {/* {handleSwitch()} */}
-            <Tab.Group selectedIndex={selectedIndex} onChange={setSelectedIndex}>
+            <Tab.Group
+              selectedIndex={selectedIndex}
+              onChange={setSelectedIndex}
+            >
               <Tab.List className="flex flex-row gap-28 items-center ">
                 <Tab as={Fragment}>
                   {({ selected }) => (
@@ -114,7 +117,6 @@ export default function Home() {
                         selected
                           ? " text-center text-3xl font-bold text-black rounded-3xl  font-sans px-4 py-2  ring ring-transparent outline-none"
                           : " text-center text-2xl font-medium text-black rounded-md font-sans px-4 py-2 ring ring-transparent outline-none"
-
                       }
                     >
                       Affordances
@@ -128,7 +130,6 @@ export default function Home() {
                         selected
                           ? " text-center text-3xl font-bold text-black rounded-3xl  font-sans px-4 py-2  ring ring-transparent outline-none"
                           : " text-center text-2xl font-medium text-black rounded-md font-sans px-4 py-2 ring ring-transparent outline-none"
-
                       }
                     >
                       Rules
@@ -142,7 +143,6 @@ export default function Home() {
                         selected
                           ? " text-center text-3xl font-bold text-black rounded-3xl  font-sans px-4 py-2 ring ring-transparent outline-none"
                           : " text-center text-2xl font-medium text-black rounded-md font-sans px-4 py-2 ring ring-transparent outline-none"
-
                       }
                     >
                       Aesthetics
@@ -158,7 +158,7 @@ export default function Home() {
                           : " text-center text-2xl font-medium text-black rounded-md font-sans px-4 py-2 ring ring-transparent outline-none"
                       }
                     >
-                     Device 
+                      Device
                     </div>
                   )}
                 </Tab>
@@ -194,7 +194,7 @@ export default function Home() {
             </Tab.Group>
           </div>
 
-          <div className="flex flex-row justify-end gap-5 mb-2 mr-2">
+          <div className="flex flex-row justify-center items-center mb-2 mr-2">
             <Pdf
               name={name}
               behavior={behavior}
@@ -202,23 +202,25 @@ export default function Home() {
               aim={aim.name}
               target={target}
             />
-            <div
-              className="py-4 inline-block px-8 bg-yellow-gamy text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md  hover:bg-yellow-600 hover:shadow-lg focus:bg-yellow-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out "
-              onClick={() => {
-                if (selectedIndex == 0) setSelectedIndex(4);
-                else setSelectedIndex(selectedIndex - 1);
-              }}
-            >
-              <h1 className="font-bold py-0.5 px-2 ">Previus</h1>
-            </div>
-            <div
-              className="py-4 inline-block px-8 bg-yellow-gamy text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md  hover:bg-yellow-600 hover:shadow-lg focus:bg-yellow-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out"
-              onClick={() => {
-                if (selectedIndex == 4) setSelectedIndex(0);
-                else setSelectedIndex(selectedIndex + 1);
-              }}
-            >
-              <h1 className="font-bold py-0.5 px-2 ">Next</h1>
+            <div className="grow flex-row flex gap-5 items-center justify-end">
+              <div
+                className="py-4 inline-block px-8 bg-yellow-gamy text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md  hover:bg-yellow-600 hover:shadow-lg focus:bg-yellow-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out "
+                onClick={() => {
+                  if (selectedIndex == 0) setSelectedIndex(4);
+                  else setSelectedIndex(selectedIndex - 1);
+                }}
+              >
+                <h1 className="font-bold py-0.5 px-2 ">Previus</h1>
+              </div>
+              <div
+                className="py-4 inline-block px-8 bg-yellow-gamy text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md  hover:bg-yellow-600 hover:shadow-lg focus:bg-yellow-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out"
+                onClick={() => {
+                  if (selectedIndex == 4) setSelectedIndex(0);
+                  else setSelectedIndex(selectedIndex + 1);
+                }}
+              >
+                <h1 className="font-bold py-0.5 px-2 ">Next</h1>
+              </div>
             </div>
           </div>
         </div>
