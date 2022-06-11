@@ -93,14 +93,14 @@ export default function Home() {
           <div className=" flex-col flex py-10 justify-center items-center">
             {/* {handleSwitch()} */}
             <Tab.Group>
-              <Tab.List className="flex flex-row gap-28">
+              <Tab.List className="flex flex-row gap-28 items-center ">
                 <Tab as={Fragment}>
                   {({ selected }) => (
                     <div
                       className={
                         selected
-                          ? " text-center text-3xl font-bold text-black rounded-3xl  font-sans px-4 py-2 ring ring-white "
-                          : " text-center text-2xl font-medium text-black rounded-md font-sans px-4 py-2 ring ring-white"
+                          ? " text-center text-3xl font-bold text-black rounded-3xl  font-sans px-4 py-2 ring ring-transparent  outline-none "
+                          : " text-center text-2xl font-medium text-black rounded-md font-sans px-4 py-2 ring ring-transparent outline-none"
                       }
                     >
                       Context
@@ -112,8 +112,8 @@ export default function Home() {
                     <div
                       className={
                         selected
-                          ? " text-center text-3xl font-bold text-black rounded-3xl  font-sans px-4 py-2  ring ring-white"
-                          : " text-center text-2xl font-medium text-black rounded-md font-sans px-4 py-2 ring ring-white"
+                          ? " text-center text-3xl font-bold text-black rounded-3xl  font-sans px-4 py-2  ring ring-transparent outline-none"
+                          : " text-center text-2xl font-medium text-black rounded-md font-sans px-4 py-2 ring ring-transparent outline-none"
 
                       }
                     >
@@ -126,8 +126,8 @@ export default function Home() {
                     <div
                       className={
                         selected
-                          ? " text-center text-3xl font-bold text-black rounded-3xl  font-sans px-4 py-2  ring ring-white"
-                          : " text-center text-2xl font-medium text-black rounded-md font-sans px-4 py-2 ring ring-white"
+                          ? " text-center text-3xl font-bold text-black rounded-3xl  font-sans px-4 py-2  ring ring-transparent outline-none"
+                          : " text-center text-2xl font-medium text-black rounded-md font-sans px-4 py-2 ring ring-transparent outline-none"
 
                       }
                     >
@@ -140,8 +140,8 @@ export default function Home() {
                     <div
                       className={
                         selected
-                          ? " text-center text-3xl font-bold text-black rounded-3xl  font-sans px-4 py-2 ring ring-white"
-                          : " text-center text-2xl font-medium text-black rounded-md font-sans px-4 py-2 ring ring-white"
+                          ? " text-center text-3xl font-bold text-black rounded-3xl  font-sans px-4 py-2 ring ring-transparent outline-none"
+                          : " text-center text-2xl font-medium text-black rounded-md font-sans px-4 py-2 ring ring-transparent outline-none"
 
                       }
                     >
@@ -154,8 +154,8 @@ export default function Home() {
                     <div
                       className={
                         selected
-                          ? " text-center text-3xl font-bold text-black rounded-3xl  font-sans px-4 py-2 ring ring-white "
-                          : " text-center text-2xl font-medium text-black rounded-md font-sans px-4 py-2 ring ring-white"
+                          ? " text-center text-3xl font-bold text-black rounded-3xl  font-sans px-4 py-2 ring ring-transparent outline-none"
+                          : " text-center text-2xl font-medium text-black rounded-md font-sans px-4 py-2 ring ring-transparent outline-none"
                       }
                     >
                      Device 
