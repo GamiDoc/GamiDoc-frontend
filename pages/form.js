@@ -99,8 +99,8 @@ export default function Home() {
                     <div
                       className={
                         selected
-                          ? "text-center text-3xl bg-yellow-gamy font-medium text-white rounded-3xl shadow-md font-sans px-4 py-2 "
-                          : "text-center text-2xl font-medium text-black rounded-md font-sans"
+                          ? " text-center text-3xl font-bold text-black rounded-3xl  font-sans px-4 py-2 ring ring-white "
+                          : " text-center text-2xl font-medium text-black rounded-md font-sans px-4 py-2 ring ring-white"
                       }
                     >
                       Context
@@ -112,8 +112,9 @@ export default function Home() {
                     <div
                       className={
                         selected
-                          ? "text-center text-3xl bg-yellow-gamy font-medium text-white rounded-3xl shadow-md font-sans px-4 py-2 "
-                          : "text-center text-2xl font-medium text-black rounded-md font-sans"
+                          ? " text-center text-3xl font-bold text-black rounded-3xl  font-sans px-4 py-2  ring ring-white"
+                          : " text-center text-2xl font-medium text-black rounded-md font-sans px-4 py-2 ring ring-white"
+
                       }
                     >
                       Affordances
@@ -125,8 +126,9 @@ export default function Home() {
                     <div
                       className={
                         selected
-                          ? "text-center text-3xl bg-yellow-gamy font-medium text-white rounded-3xl shadow-md font-sans px-4 py-2 "
-                          : "text-center text-2xl font-medium text-black rounded-md font-sans"
+                          ? " text-center text-3xl font-bold text-black rounded-3xl  font-sans px-4 py-2  ring ring-white"
+                          : " text-center text-2xl font-medium text-black rounded-md font-sans px-4 py-2 ring ring-white"
+
                       }
                     >
                       Rules
@@ -138,8 +140,9 @@ export default function Home() {
                     <div
                       className={
                         selected
-                          ? "text-center text-3xl bg-yellow-gamy font-medium text-white rounded-3xl shadow-md font-sans px-4 py-2 "
-                          : "text-center text-2xl font-medium text-black rounded-md font-sans"
+                          ? " text-center text-3xl font-bold text-black rounded-3xl  font-sans px-4 py-2 ring ring-white"
+                          : " text-center text-2xl font-medium text-black rounded-md font-sans px-4 py-2 ring ring-white"
+
                       }
                     >
                       Aesthetics
@@ -151,8 +154,8 @@ export default function Home() {
                     <div
                       className={
                         selected
-                          ? "text-center text-3xl bg-yellow-gamy font-medium text-white rounded-3xl shadow-md font-sans px-4 py-2 "
-                          : "text-center text-2xl font-medium text-black rounded-md font-sans"
+                          ? " text-center text-3xl font-bold text-black rounded-3xl  font-sans px-4 py-2 ring ring-white "
+                          : " text-center text-2xl font-medium text-black rounded-md font-sans px-4 py-2 ring ring-white"
                       }
                     >
                      Device 
