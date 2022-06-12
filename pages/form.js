@@ -11,7 +11,7 @@ import TextareaAutosize from "@mui/material/TextareaAutosize";
 
 // Tabs
 import { Tab } from "@headlessui/react";
-import Context from "../components/tabs/Context";
+import Context  from "../components/tabs/Context";
 import Affordances from "../components/tabs/Affordances";
 import Rules from "../components/tabs/Rules";
 import Aesthetics from "../components/tabs/Aesthetics";
