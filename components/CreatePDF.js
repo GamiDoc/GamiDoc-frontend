@@ -78,11 +78,11 @@ function CreatePDF({ name, behavior, domain, aim ,target}) {
   );
 
   return (
-    <div>
+    <div className="w-1/2 flex items-center justify-end" >
       <PDFDownloadLink
         document={<MyDoc />}
         fileName="mockup.pdf"
-        className="rounded-md  bg-black"
+        className="rounded-xl  bg-white p-2 hover:bg-yellow-gamy  "
       >
         {
           ({ blob, url, loading, error }) =>
