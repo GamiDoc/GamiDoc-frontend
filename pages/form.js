@@ -275,6 +275,9 @@ export default function Home() {
               domain={domain.name}
               aim={aim.name}
               target={target}
+              timing={timing}
+              context={context}
+              modality={modality}
             />
             <div className="grow flex-row flex gap-5 items-center justify-end">
               <div

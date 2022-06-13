@@ -9,7 +9,16 @@ import {
   PDFDownloadLink,
 } from "@react-pdf/renderer";
 
-function CreatePDF({ name, behavior, domain, aim ,target}) {
+export default function CreatePDF({ 
+  name, 
+  behavior, 
+  domain, 
+  aim ,
+  target,
+  modality,
+  timing,
+  context
+}) {
   const styles = StyleSheet.create({
     page: {
       //     flexDirection: "row",
@@ -44,6 +53,10 @@ function CreatePDF({ name, behavior, domain, aim ,target}) {
       position:"relative",
       top:78,
     },
+    tab: {
+      fontSize:"16",
+      fontWeight:"ultrabold",
+    },
     h1: {
       fontSize: "13",
       fontWeight: "ultrabold",
@@ -67,22 +80,37 @@ function CreatePDF({ name, behavior, domain, aim ,target}) {
           <Text style={styles.h1}>Behaviors to be encouraged:</Text>
           <Text style={styles.h2}>{behavior}</Text>
           <Text style={styles.h1}>Domain:</Text>
-          <Text style={styles.h2}>{domain}</Text>
+          <Text style={styles.h2}>{domain.name}</Text>
           <Text style={styles.h1}>Aim:</Text>
-          <Text style={styles.h2}>{aim}</Text>
+          <Text style={styles.h2}>{aim.name}</Text>
           <Text style={styles.h1}>Target:</Text>
           <Text style={styles.h2}>{target}</Text>
         </View>
       </Page>
+      <Page size="A4" style={styles.page}>
+        <View style={styles.section}>
+          <Text style={styles.h1}>Modality:</Text>
+          <Text style={styles.h2}>{modality.mode}</Text>
+        </View>
+      </Page>
+      <Page size="A4" style={styles.page}>
+        <View style={styles.section}>
+          <Text style={styles.h1}>Timing:</Text>
+          <Text style={styles.h2}>{timing.frame}</Text>
+          <Text style={styles.h1}>Context:</Text>
+          <Text style={styles.h2}>{context.text}</Text>
+        </View>
+      </Page>
     </Document>
   );
+
 
   return (
     <div className="w-1/2 flex items-center justify-end" >
       <PDFDownloadLink
         document={<MyDoc />}
         fileName="mockup.pdf"
-        className="rounded-xl  bg-yellow-gamy p-2 hover:font-bold hover:scale-125"
+        className="rounded-xl bg-yellow-gamy p-2 hover:font-bold hover:scale-125"
       >
         {
           ({ blob, url, loading, error }) =>
@@ -93,5 +121,3 @@ function CreatePDF({ name, behavior, domain, aim ,target}) {
     </div>
   );
 }
-
-export default CreatePDF;
