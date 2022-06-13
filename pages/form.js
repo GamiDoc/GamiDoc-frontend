@@ -194,7 +194,7 @@ export default function Home() {
             </Tab.Group>
           </div>
 
-          <div className="flex flex-row justify-center items-center mb-2 mr-2">
+          <div className="flex flex-row justify-center items-center mb-10 mr-2">
             <Pdf
               name={name}
               behavior={behavior}
