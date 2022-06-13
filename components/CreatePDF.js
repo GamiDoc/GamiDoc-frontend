@@ -82,7 +82,7 @@ function CreatePDF({ name, behavior, domain, aim ,target}) {
       <PDFDownloadLink
         document={<MyDoc />}
         fileName="mockup.pdf"
-        className="rounded-xl  bg-white p-2 hover:bg-yellow-gamy  "
+        className="rounded-xl  bg-yellow-gamy p-2 hover:font-bold hover:scale-125"
       >
         {
           ({ blob, url, loading, error }) =>
