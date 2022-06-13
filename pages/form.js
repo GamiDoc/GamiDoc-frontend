@@ -70,7 +70,36 @@ const Aimo = [
   { id: 22, name: "Theory", unavailable: false },
 ];
 
+// Modality 
+const modes= [
+  { id: 1, mode: "Individual",},
+  { id: 2, mode: "Cooperative",},
+  { id: 3, mode: "Competitive",},
+  { id: 4, mode: "Cooperative-Competitive",},
+]; 
+
+// Feedback
+const t= [
+  { id: 1, frame: "Immediate Feedback",},
+  { id: 2, frame: "Late Feedback",},
+];
+const content= [
+  { id: 1, text: "Corrective Feedback",},
+  { id: 2, text: "Explicative Feedback",},
+  { id: 3, text: "Reporting Feedback",},
+  { id: 4, text: "Personalized Feedback",},
+];
+
 export default function Home() {
+
+  // Feedback Page states
+  const [timing,setTiming] = useState(t[0]);
+  const [context,setContext] = useState(content[0]);
+
+  // Modality Page state 
+  const [modality,setModality] = useState(modes[0]);
+
+
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [domain, setDomain] = useState(KoivistoHamari[0]);
   const [behavior, setBehavior] = useState("none");
@@ -210,10 +239,21 @@ export default function Home() {
                   <Device />
                 </Tab.Panel>
                 <Tab.Panel>
-                  <Modality/>
+                  <Modality
+                  modality={modality}
+                  setModality={setModality}
+                  selectObj1={modes}
+                  />
                 </Tab.Panel>
                 <Tab.Panel>
-                  <Feedback/>
+                  <Feedback
+                    timing={timing}
+                    setTiming={setTiming}
+                    context={context}
+                    setContext={setContext}
+                    selectObj1={t}
+                    selectObj2={content}
+                  />
                 </Tab.Panel>
                 <Tab.Panel>
                   <Affordances />
