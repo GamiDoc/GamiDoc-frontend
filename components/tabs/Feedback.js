@@ -3,14 +3,14 @@ import { Fragment } from "react";
 import { Transition, Listbox } from "@headlessui/react";
 import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
 
-export default function Feedback(
+export default function Feedback({
   timing,
   setTiming,
   context,
   setContext,
   selectObj1,
   selectObj2
-) {
+}) {
   const [isShowing, setIsShowing] = useState(0); // per transition
   return (
     <div className="flex flex-col gap-2 justify-center">

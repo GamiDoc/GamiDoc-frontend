@@ -6,7 +6,7 @@ import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
 export default function Modality({ 
   modality, 
   setModality,
-  selectObj1, 
+  selectObj1
   }){
 
   const [isShowing, setIsShowing] = useState(0); // per transition

@@ -79,11 +79,11 @@ const modes= [
 ]; 
 
 // Feedback
-const t= [
+const tt=[
   { id: 1, frame: "Immediate Feedback",},
   { id: 2, frame: "Late Feedback",},
 ];
-const content= [
+const contenuti= [
   { id: 1, text: "Corrective Feedback",},
   { id: 2, text: "Explicative Feedback",},
   { id: 3, text: "Reporting Feedback",},
@@ -93,8 +93,8 @@ const content= [
 export default function Home() {
 
   // Feedback Page states
-  const [timing,setTiming] = useState(t[0]);
-  const [context,setContext] = useState(content[0]);
+  const [timing,setTiming] = useState(tt[0]);
+  const [context,setContext] = useState(contenuti[0]);
 
   // Modality Page state 
   const [modality,setModality] = useState(modes[0]);
@@ -242,7 +242,7 @@ export default function Home() {
                   <Modality
                   modality={modality}
                   setModality={setModality}
-                  selectObj1={modes}
+                  selectObj1={modes} 
                   />
                 </Tab.Panel>
                 <Tab.Panel>
@@ -251,8 +251,8 @@ export default function Home() {
                     setTiming={setTiming}
                     context={context}
                     setContext={setContext}
-                    selectObj1={t}
-                    selectObj2={content}
+                    selectObj1={tt}
+                    selectObj2={contenuti}
                   />
                 </Tab.Panel>
                 <Tab.Panel>
