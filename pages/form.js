@@ -6,12 +6,12 @@ import dynamic from "next/dynamic";
 const Pdf = dynamic(() => import("../components/CreatePDF"), { ssr: false });
 import { Listbox, Transition } from "@headlessui/react";
 import { Dialog } from "@headlessui/react";
-import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
+// import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
 import TextareaAutosize from "@mui/material/TextareaAutosize";
 
 // Tabs
 import { Tab } from "@headlessui/react";
-import Context from "../components/tabs/Context";
+import Context  from "../components/tabs/Context";
 import Affordances from "../components/tabs/Affordances";
 import Rules from "../components/tabs/Rules";
 import Aesthetics from "../components/tabs/Aesthetics";
@@ -194,7 +194,7 @@ export default function Home() {
             </Tab.Group>
           </div>
 
-          <div className="flex flex-row justify-center items-center mb-2 mr-2">
+          <div className="flex flex-row justify-center items-center mb-10 mr-2">
             <Pdf
               name={name}
               behavior={behavior}
