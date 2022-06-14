@@ -10,6 +10,7 @@ import {
 } from "@react-pdf/renderer";
 
 export default function CreatePDF({ 
+  selectedIndex,
   name, 
   behavior, 
   domain, 
@@ -51,18 +52,23 @@ export default function CreatePDF({
       alignItems:"center",
       alignSelf:"center",
       position:"relative",
+      fontfamily: "Computer Modern",
       top:78,
     },
     tab: {
       fontSize:"18",
       fontWeight:"bold",
+      fontfamily: "Computer Modern",
     },
     h1: {
       fontSize: "13",
       fontWeight: "bold",
+      fontfamily: "Computer Modern",
+
     },
     h2: {
       fontSize: "11",
+      fontfamily: "Computer Modern",
     },
   });
 
@@ -110,7 +116,11 @@ export default function CreatePDF({
       <PDFDownloadLink
         document={<MyDoc />}
         fileName="mockup.pdf"
-        className="rounded-xl bg-yellow-gamy p-2 hover:font-bold hover:scale-125"
+        className={
+          selectedIndex == 6
+            ? " py-4 inline-block px-8 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md  hover:bg-blue-400 hover:shadow-lg focus:bg-blue-400 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out"
+            : " invisible"
+        }
       >
         {
           ({ blob, url, loading, error }) =>
