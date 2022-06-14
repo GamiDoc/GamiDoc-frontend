@@ -11,11 +11,13 @@ import TextareaAutosize from "@mui/material/TextareaAutosize";
 
 // Tabs
 import { Tab } from "@headlessui/react";
-import Context  from "../components/tabs/Context";
+import Context from "../components/tabs/Context";
 import Affordances from "../components/tabs/Affordances";
 import Rules from "../components/tabs/Rules";
 import Aesthetics from "../components/tabs/Aesthetics";
 import Device from "../components/tabs/Device";
+import Feedback from "../components/tabs/Feedback";
+import Modality from "../components/tabs/Modality";
 // import { Rule } from "postcss";
 
 const KoivistoHamari = [
@@ -68,7 +70,36 @@ const Aimo = [
   { id: 22, name: "Theory", unavailable: false },
 ];
 
+// Modality 
+const modes= [
+  { id: 1, mode: "Individual",},
+  { id: 2, mode: "Cooperative",},
+  { id: 3, mode: "Competitive",},
+  { id: 4, mode: "Cooperative-Competitive",},
+]; 
+
+// Feedback
+const tt=[
+  { id: 1, frame: "Immediate Feedback",},
+  { id: 2, frame: "Late Feedback",},
+];
+const contenuti= [
+  { id: 1, text: "Corrective Feedback",},
+  { id: 2, text: "Explicative Feedback",},
+  { id: 3, text: "Reporting Feedback",},
+  { id: 4, text: "Personalized Feedback",},
+];
+
 export default function Home() {
+
+  // Feedback Page states
+  const [timing,setTiming] = useState(tt[0]);
+  const [context,setContext] = useState(contenuti[0]);
+
+  // Modality Page state 
+  const [modality,setModality] = useState(modes[0]);
+
+
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [domain, setDomain] = useState(KoivistoHamari[0]);
   const [behavior, setBehavior] = useState("none");
@@ -96,14 +127,14 @@ export default function Home() {
               selectedIndex={selectedIndex}
               onChange={setSelectedIndex}
             >
-              <Tab.List className="flex flex-row gap-28 items-center ">
+              <Tab.List className="flex flex-row gap-16 items-center ">
                 <Tab as={Fragment}>
                   {({ selected }) => (
                     <div
                       className={
                         selected
-                          ? " text-center text-3xl font-bold text-black rounded-3xl  font-sans px-4 py-2 ring ring-transparent  outline-none "
-                          : " text-center text-2xl font-medium text-black rounded-md font-sans px-4 py-2 ring ring-transparent outline-none"
+                          ? " text-center text-2xl font-bold text-black rounded-3xl  font-sans px-4 py-2 ring ring-transparent  outline-none "
+                          : " text-center text-xl font-medium text-black rounded-md font-sans px-4 py-2 ring ring-transparent outline-none"
                       }
                     >
                       Context
@@ -115,8 +146,47 @@ export default function Home() {
                     <div
                       className={
                         selected
-                          ? " text-center text-3xl font-bold text-black rounded-3xl  font-sans px-4 py-2  ring ring-transparent outline-none"
-                          : " text-center text-2xl font-medium text-black rounded-md font-sans px-4 py-2 ring ring-transparent outline-none"
+                          ? " text-center text-2xl font-bold text-black rounded-3xl  font-sans px-4 py-2 ring ring-transparent outline-none"
+                          : " text-center text-xl font-medium text-black rounded-md font-sans px-4 py-2 ring ring-transparent outline-none"
+                      }
+                    >
+                      Device
+                    </div>
+                  )}
+                </Tab>
+                <Tab as={Fragment}>
+                  {({ selected }) => (
+                    <div
+                      className={
+                        selected
+                          ? " text-center text-2xl font-bold text-black rounded-3xl  font-sans px-4 py-2 ring ring-transparent outline-none"
+                          : " text-center text-xl font-medium text-black rounded-md font-sans px-4 py-2 ring ring-transparent outline-none"
+                      }
+                    >
+                     Modality 
+                    </div>
+                  )}
+                </Tab>
+                <Tab as={Fragment}>
+                  {({ selected }) => (
+                    <div
+                      className={
+                        selected
+                          ? " text-center text-2xl font-bold text-black rounded-3xl  font-sans px-4 py-2 ring ring-transparent outline-none"
+                          : " text-center text-xl font-medium text-black rounded-md font-sans px-4 py-2 ring ring-transparent outline-none"
+                      }
+                    >
+                    Feedback 
+                    </div>
+                  )}
+                </Tab>
+                <Tab as={Fragment}>
+                  {({ selected }) => (
+                    <div
+                      className={
+                        selected
+                          ? " text-center text-2xl font-bold text-black rounded-3xl  font-sans px-4 py-2  ring ring-transparent outline-none"
+                          : " text-center text-xl font-medium text-black rounded-md font-sans px-4 py-2 ring ring-transparent outline-none"
                       }
                     >
                       Affordances
@@ -128,8 +198,8 @@ export default function Home() {
                     <div
                       className={
                         selected
-                          ? " text-center text-3xl font-bold text-black rounded-3xl  font-sans px-4 py-2  ring ring-transparent outline-none"
-                          : " text-center text-2xl font-medium text-black rounded-md font-sans px-4 py-2 ring ring-transparent outline-none"
+                          ? " text-center text-2xl font-bold text-black rounded-3xl  font-sans px-4 py-2  ring ring-transparent outline-none"
+                          : " text-center text-xl font-medium text-black rounded-md font-sans px-4 py-2 ring ring-transparent outline-none"
                       }
                     >
                       Rules
@@ -141,24 +211,11 @@ export default function Home() {
                     <div
                       className={
                         selected
-                          ? " text-center text-3xl font-bold text-black rounded-3xl  font-sans px-4 py-2 ring ring-transparent outline-none"
-                          : " text-center text-2xl font-medium text-black rounded-md font-sans px-4 py-2 ring ring-transparent outline-none"
+                          ? " text-center text-2xl font-bold text-black rounded-3xl  font-sans px-4 py-2 ring ring-transparent outline-none"
+                          : " text-center text-xl font-medium text-black rounded-md font-sans px-4 py-2 ring ring-transparent outline-none"
                       }
                     >
                       Aesthetics
-                    </div>
-                  )}
-                </Tab>
-                <Tab as={Fragment}>
-                  {({ selected }) => (
-                    <div
-                      className={
-                        selected
-                          ? " text-center text-3xl font-bold text-black rounded-3xl  font-sans px-4 py-2 ring ring-transparent outline-none"
-                          : " text-center text-2xl font-medium text-black rounded-md font-sans px-4 py-2 ring ring-transparent outline-none"
-                      }
-                    >
-                      Device
                     </div>
                   )}
                 </Tab>
@@ -179,6 +236,26 @@ export default function Home() {
                   />
                 </Tab.Panel>
                 <Tab.Panel>
+                  <Device />
+                </Tab.Panel>
+                <Tab.Panel>
+                  <Modality
+                  modality={modality}
+                  setModality={setModality}
+                  selectObj1={modes} 
+                  />
+                </Tab.Panel>
+                <Tab.Panel>
+                  <Feedback
+                    timing={timing}
+                    setTiming={setTiming}
+                    context={context}
+                    setContext={setContext}
+                    selectObj1={tt}
+                    selectObj2={contenuti}
+                  />
+                </Tab.Panel>
+                <Tab.Panel>
                   <Affordances />
                 </Tab.Panel>
                 <Tab.Panel>
@@ -186,9 +263,6 @@ export default function Home() {
                 </Tab.Panel>
                 <Tab.Panel>
                   <Aesthetics />
-                </Tab.Panel>
-                <Tab.Panel>
-                  <Device />
                 </Tab.Panel>
               </Tab.Panels>
             </Tab.Group>
@@ -201,6 +275,9 @@ export default function Home() {
               domain={domain.name}
               aim={aim.name}
               target={target}
+              timing={timing}
+              context={context}
+              modality={modality}
             />
             <div className="grow flex-row flex gap-5 items-center justify-end">
               <div
