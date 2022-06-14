@@ -13,7 +13,7 @@ export default function Home() {
           <h1 className="font-extrabold text-5xl ">
             A holistic process for designing and evaluating gamified solution.
           </h1>
-          <h3 className="py-5 text-lg">
+          <h3 className="py-5 text-2xl">
             The purpose of this tool is to lead the designer through various
             steps, from the first contextual ideas, to the final evaluation of
             the developed software.

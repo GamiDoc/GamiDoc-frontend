@@ -6,12 +6,12 @@ import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
 export default function Modality({ modality, setModality, selectObj1 }) {
   const [isShowing, setIsShowing] = useState(0); // per transition
   return (
-    <div className="flex flex-col gap-2 justify-center w-[60em]">
-      <label className=" mt-4 block text-gray-700 text-sm font-bold mb-2 ml-0.5 ">
+    <div className="flex flex-col py-4 w-[60em]">
+      <label className=" mt-4 block text-gray-700  font-bold mb-2">
         Type of Modality:
       </label>
 
-      <h2 className="mt-4 block text-gray-700 text-sm mb-2 ">
+      <h2 className="mt-4 block text-gray-700  mb-2 ">
         This section is dedicated to the definition of the main modality
         included in the gamification software.
       </h2>
@@ -22,7 +22,7 @@ export default function Modality({ modality, setModality, selectObj1 }) {
             className="relative w-full border cursor-default rounded-lg bg-white py-2
                  pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2
                  focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2
-                 focus-visible:ring-offset-orange-300 sm:text-sm"
+                 focus-visible:ring-offset-orange-300 sm:"
           >
             <span className="block truncate">{modality.mode}</span>
             <span className="poiListboxnter-events-none absolute inset-y-0 right-0 flex items-center pr-2">
@@ -41,7 +41,7 @@ export default function Modality({ modality, setModality, selectObj1 }) {
             <Listbox.Options
               className="relative mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1
                    text-base shadow-lg ring-1 ring-black ring-opacity-5
-                   focus:outline-none sm:text-sm  "
+                   focus:outline-none sm:  "
             >
               {selectObj1.map((modality) => (
                 <Listbox.Option
