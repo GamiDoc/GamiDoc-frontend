@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import TextareaAutosize from "@mui/material/TextareaAutosize";
 
-function Rules(rules, setRules) {
+function Rules({rules, setRules}) {
   const [isShowing, setIsShowing] = useState(0); // per transition
 
   return (

@@ -1,7 +1,7 @@
 import React from "react";
 import TextareaAutosize from "@mui/material/TextareaAutosize";
 
-function Aesthetics(aesthetics, setAesthetics) {
+function Aesthetics({aesthetics, setAesthetics}) {
   return (
     <div>
       <label className="mt-4 block text-gray-700 text-sm font-bold mb-2">

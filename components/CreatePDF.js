@@ -54,12 +54,12 @@ export default function CreatePDF({
       top:78,
     },
     tab: {
-      fontSize:"16",
-      fontWeight:"ultrabold",
+      fontSize:"18",
+      fontWeight:"bold",
     },
     h1: {
       fontSize: "13",
-      fontWeight: "ultrabold",
+      fontWeight: "bold",
     },
     h2: {
       fontSize: "11",
