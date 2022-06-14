@@ -364,7 +364,7 @@ export default function Home() {
               <div
                 className="py-4 inline-block px-8 bg-gray-800 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md  hover:bg-gray-600 hover:shadow-lg focus:bg-yellow-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out "
                 onClick={() => {
-                  if (selectedIndex == 0) setSelectedIndex(4);
+                  if (selectedIndex == 0) setSelectedIndex(6);
                   else setSelectedIndex(selectedIndex - 1);
                 }}
               >
@@ -376,6 +376,10 @@ export default function Home() {
                     ? " invisible"
                     : " py-4 inline-block px-8 bg-yellow-gamy text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md  hover:bg-yellow-600 hover:shadow-lg focus:bg-yellow-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out"
                 }
+                onClick={() => {
+                  if (selectedIndex == 6) setSelectedIndex(0);
+                  else setSelectedIndex(selectedIndex + 1);
+                }}
               >
                 <h1 className="font-bold py-0.5 px-2 ">Next</h1>
               </div>
