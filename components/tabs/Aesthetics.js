@@ -1,13 +1,7 @@
 import React from "react";
-import { useState } from "react";
-import { Fragment } from "react";
-import { Listbox, Transition } from "@headlessui/react";
-import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
 import TextareaAutosize from "@mui/material/TextareaAutosize";
 
-function Aesthetics(aesthetics,setAesthetics) {
-  const [isShowing, setIsShowing] = useState(0); // per transition
-
+function Aesthetics(aesthetics, setAesthetics) {
   return (
     <div>
       <label className="mt-4 block text-gray-700 text-sm font-bold mb-2">
@@ -24,7 +18,6 @@ function Aesthetics(aesthetics,setAesthetics) {
       </h2>
       <label className="block text-gray-700 text-sm  font-bold mb-2" />
       <TextareaAutosize
-        onClick={() => setIsShowing(3)}
         className="w-full border cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none   sm:text-sm"
         id="aesthetics"
         type="text"

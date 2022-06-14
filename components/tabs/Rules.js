@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import TextareaAutosize from "@mui/material/TextareaAutosize";
 
-function Rules(rules,setRules) {
+function Rules(rules, setRules) {
   const [isShowing, setIsShowing] = useState(0); // per transition
 
   return (
@@ -11,7 +11,8 @@ function Rules(rules,setRules) {
         Rules
       </label>
       <h2 className="w-[60em] mt-4 block text-gray-700 text-sm mb-2 ">
-      In this section, we ask designers to clearly define the game rules in detail.
+        In this section, we ask designers to clearly define the game rules in
+        detail.
       </h2>
       <label className="block text-gray-700 text-sm  font-bold mb-2" />
       <TextareaAutosize

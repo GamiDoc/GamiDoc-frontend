@@ -4,9 +4,8 @@ import { useState, useEffect } from "react";
 import { Fragment } from "react";
 import dynamic from "next/dynamic";
 const Pdf = dynamic(() => import("../components/CreatePDF"), { ssr: false });
-import { Listbox, Transition } from "@headlessui/react";
+import { Transition } from "@headlessui/react";
 import { Dialog } from "@headlessui/react";
-// import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
 import TextareaAutosize from "@mui/material/TextareaAutosize";
 
 // Tabs
@@ -114,34 +113,33 @@ const fictionalSelection = [
   { id: 2, name: "Story telling", unavailable: false },
 ];
 
-// Modality 
-const modes= [
-  { id: 1, mode: "Individual",},
-  { id: 2, mode: "Cooperative",},
-  { id: 3, mode: "Competitive",},
-  { id: 4, mode: "Cooperative-Competitive",},
-]; 
+// Modality
+const modes = [
+  { id: 1, mode: "Individual" },
+  { id: 2, mode: "Cooperative" },
+  { id: 3, mode: "Competitive" },
+  { id: 4, mode: "Cooperative-Competitive" },
+];
 
 // Feedback
-const tt=[
-  { id: 1, frame: "Immediate Feedback",},
-  { id: 2, frame: "Late Feedback",},
+const tt = [
+  { id: 1, frame: "Immediate Feedback" },
+  { id: 2, frame: "Late Feedback" },
 ];
-const contenuti= [
-  { id: 1, text: "Corrective Feedback",},
-  { id: 2, text: "Explicative Feedback",},
-  { id: 3, text: "Reporting Feedback",},
-  { id: 4, text: "Personalized Feedback",},
+const contenuti = [
+  { id: 1, text: "Corrective Feedback" },
+  { id: 2, text: "Explicative Feedback" },
+  { id: 3, text: "Reporting Feedback" },
+  { id: 4, text: "Personalized Feedback" },
 ];
 
 export default function Home() {
-
   // Feedback Page states
-  const [timing,setTiming] = useState(tt[0]);
-  const [context,setContext] = useState(contenuti[0]);
+  const [timing, setTiming] = useState(tt[0]);
+  const [context, setContext] = useState(contenuti[0]);
 
-  // Modality Page state 
-  const [modality,setModality] = useState(modes[0]);
+  // Modality Page state
+  const [modality, setModality] = useState(modes[0]);
 
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [domain, setDomain] = useState(KoivistoHamari[0]);
@@ -165,7 +163,7 @@ export default function Home() {
   const [aesthetics, setAesthetics] = useState("");
 
   //Rules
-  const [rules,setRules] = useState("");
+  const [rules, setRules] = useState("");
 
   function closeModal() {
     setIsOpen(false);
@@ -176,7 +174,7 @@ export default function Home() {
   }
 
   return (
-    <div className="flex flex-col justify-between ">
+    <div className="flex flex-col justify-between h-screen">
       <Header />
       <div className="flex flex-col items-center w-screen justify-center ">
         <div className="flex flex-col justify-center">
@@ -222,7 +220,7 @@ export default function Home() {
                           : " text-center text-xl font-medium text-black rounded-md font-sans px-4 py-2 ring ring-transparent outline-none"
                       }
                     >
-                     Modality 
+                      Modality
                     </div>
                   )}
                 </Tab>
@@ -235,21 +233,7 @@ export default function Home() {
                           : " text-center text-xl font-medium text-black rounded-md font-sans px-4 py-2 ring ring-transparent outline-none"
                       }
                     >
-                    Feedback 
-                    </div>
-                  )}
-                </Tab>
-                <Tab as={Fragment}>
-                  {({ selected }) => (
-                    <div
-                      className={
-                        selected
-                          ? " text-center text-3xl font-bold text-black rounded-3xl  font-sans px-4 py-2  ring ring-transparent outline-none"
-                          : " text-center text-xl font-medium text-black rounded-md font-sans px-4 py-2 ring ring-transparent outline-none"
-                      }
-                    >
-                      Affordances
-
+                      Feedback
                     </div>
                   )}
                 </Tab>
@@ -271,11 +255,24 @@ export default function Home() {
                     <div
                       className={
                         selected
-                          ? " text-center text-3xl font-bold text-black rounded-3xl  font-sans px-4 py-2 ring ring-transparent outline-none"
+                          ? " text-center text-3xl font-bold text-black rounded-3xl  font-sans px-4 py-2  ring ring-transparent outline-none"
                           : " text-center text-xl font-medium text-black rounded-md font-sans px-4 py-2 ring ring-transparent outline-none"
                       }
                     >
                       Aesthetics
+                    </div>
+                  )}
+                </Tab>
+                <Tab as={Fragment}>
+                  {({ selected }) => (
+                    <div
+                      className={
+                        selected
+                          ? " text-center text-3xl font-bold text-black rounded-3xl  font-sans px-4 py-2 ring ring-transparent outline-none"
+                          : " text-center text-xl font-medium text-black rounded-md font-sans px-4 py-2 ring ring-transparent outline-none"
+                      }
+                    >
+                      Affordances
                     </div>
                   )}
                 </Tab>
@@ -304,9 +301,9 @@ export default function Home() {
                 </Tab.Panel>
                 <Tab.Panel>
                   <Modality
-                  modality={modality}
-                  setModality={setModality}
-                  selectObj1={modes} 
+                    modality={modality}
+                    setModality={setModality}
+                    selectObj1={modes}
                   />
                 </Tab.Panel>
                 <Tab.Panel>
@@ -320,9 +317,7 @@ export default function Home() {
                   />
                 </Tab.Panel>
                 <Tab.Panel>
-                  <Rules 
-                  rules={rules}
-                  setRules={setRules}/>
+                  <Rules rules={rules} setRules={setRules} />
                 </Tab.Panel>
                 <Tab.Panel>
                   <Aesthetics
