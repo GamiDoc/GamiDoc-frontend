@@ -70,6 +70,50 @@ const Aimo = [
   { id: 22, name: "Theory", unavailable: false },
 ];
 
+const DeviceSelection = [
+  { id: 1, name: "Mobile", unavailable: false },
+  { id: 2, name: "Laptop", unavailable: false },
+  { id: 3, name: "Tablet", unavailable: false },
+  { id: 4, name: "Head-mounted Display", unavailable: true },
+  { id: 5, name: "Other", unavailable: true },
+];
+
+const performanceSelection = [
+  { id: 1, name: "Acknowledgement", unavailable: false },
+  { id: 2, name: "Level", unavailable: false },
+  { id: 3, name: "Progression", unavailable: false },
+  { id: 4, name: "Point", unavailable: true },
+  { id: 5, name: "Stats", unavailable: true },
+];
+
+const ecologicalSelection = [
+  { id: 1, name: "Chance", unavailable: false },
+  { id: 2, name: "Imposed choice", unavailable: false },
+  { id: 3, name: "Economy", unavailable: false },
+  { id: 4, name: "Rarity", unavailable: true },
+  { id: 5, name: "Time pressure", unavailable: true },
+];
+
+const socialSelection = [
+  { id: 1, name: "Competition", unavailable: false },
+  { id: 2, name: "Cooperation", unavailable: false },
+  { id: 3, name: "Reputation", unavailable: false },
+  { id: 4, name: "Social pressure", unavailable: true },
+];
+
+const personalSelection = [
+  { id: 1, name: "Novelty", unavailable: false },
+  { id: 2, name: "Objectives", unavailable: false },
+  { id: 3, name: "Puzzle", unavailable: false },
+  { id: 4, name: "Renovation", unavailable: true },
+  { id: 5, name: "Sensation", unavailable: true },
+];
+
+const fictionalSelection = [
+  { id: 1, name: "Narrative", unavailable: false },
+  { id: 2, name: "Story telling", unavailable: false },
+];
+
 // Modality 
 const modes= [
   { id: 1, mode: "Individual",},
@@ -99,14 +143,29 @@ export default function Home() {
   // Modality Page state 
   const [modality,setModality] = useState(modes[0]);
 
-
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [domain, setDomain] = useState(KoivistoHamari[0]);
-  const [behavior, setBehavior] = useState("none");
+  const [behavior, setBehavior] = useState("");
   const [aim, setAim] = useState(Aimo[0]);
   const [name, setName] = useState("");
   const [target, setTarget] = useState("");
   let [isOpen, setIsOpen] = useState(true);
+
+  //Device
+  const [device, setDevice] = useState(DeviceSelection[0]);
+
+  //Affordances
+  const [performance, setPerformance] = useState(performanceSelection[0]);
+  const [ecological, setEcological] = useState(ecologicalSelection[0]);
+  const [social, setSocial] = useState(socialSelection[0]);
+  const [personal, setPersonal] = useState(personalSelection[0]);
+  const [fictional, setFictional] = useState(fictionalSelection[0]);
+
+  //Aestethics
+  const [aesthetics, setAesthetics] = useState("");
+
+  //Rules
+  const [rules,setRules] = useState("");
 
   function closeModal() {
     setIsOpen(false);
@@ -190,6 +249,7 @@ export default function Home() {
                       }
                     >
                       Affordances
+
                     </div>
                   )}
                 </Tab>
@@ -236,7 +296,11 @@ export default function Home() {
                   />
                 </Tab.Panel>
                 <Tab.Panel>
-                  <Device />
+                  <Device
+                    device={device}
+                    setDevice={setDevice}
+                    DeviceSelection={DeviceSelection}
+                  />
                 </Tab.Panel>
                 <Tab.Panel>
                   <Modality
@@ -256,13 +320,34 @@ export default function Home() {
                   />
                 </Tab.Panel>
                 <Tab.Panel>
-                  <Affordances />
+                  <Rules 
+                  rules={rules}
+                  setRules={setRules}/>
                 </Tab.Panel>
                 <Tab.Panel>
-                  <Rules />
+                  <Aesthetics
+                    aesthetics={aesthetics}
+                    setAesthetics={setAesthetics}
+                  />
                 </Tab.Panel>
                 <Tab.Panel>
-                  <Aesthetics />
+                  <Affordances
+                    performance={performance}
+                    performanceSelection={performanceSelection}
+                    setPerformance={setPerformance}
+                    ecological={ecological}
+                    ecologicalSelection={ecologicalSelection}
+                    setEcological={setEcological}
+                    social={social}
+                    socialSelection={socialSelection}
+                    setSocial={setSocial}
+                    personal={personal}
+                    personalSelection={personalSelection}
+                    setPersonal={setPersonal}
+                    fictional={fictional}
+                    fictionalSelection={fictionalSelection}
+                    setFictional={setFictional}
+                  />
                 </Tab.Panel>
               </Tab.Panels>
             </Tab.Group>
