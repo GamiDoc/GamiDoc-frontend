@@ -9,28 +9,24 @@ export default function Feedback({
   context,
   setContext,
   selectObj1,
-  selectObj2
+  selectObj2,
 }) {
   const [isShowing, setIsShowing] = useState(0); // per transition
   return (
-    <div className="flex flex-col gap-2 justify-center">
+    <div className="w-[60em] flex flex-col gap-2 justify-center">
+      <h2 className=" mt-4 block text-gray-700 text-sm mb-2 ">
+        This section refers to the selection of the kind of feedback used in the
+        software. Since feedback works differently across certain domains and
+        users, it is important to specify the content and the timing of used
+        feedback.
+      </h2>
+
       <label className=" mt-4 block text-gray-700 text-sm font-bold mb-2 ml-0.5">
         Timing:
       </label>
-      <Transition
-        as={Fragment}
-        show={isShowing == 1}
-        enter="transition-opacity duration-75"
-        enterFrom="opacity-0"
-        enterTo="opacity-100"
-        leave="transition-opacity duration-150"
-        leaveFrom="opacity-100"
-        leaveTo="opacity-0"
-      >
-        <h1 className="ml-0.5">L0r3m 1pSum</h1>
-      </Transition>
+
       <Listbox value={timing} onChange={setTiming}>
-        <div className="relative mt-1 w-60">
+        <div className="relative mt-1 ">
           <Listbox.Button
             onClick={() => setIsShowing(1)}
             className="relative w-full border cursor-default rounded-lg bg-white py-2
@@ -93,20 +89,9 @@ export default function Feedback({
       <label className=" mt-4 block text-gray-700 text-sm font-bold mb-2 ml-0.5">
         Content:
       </label>
-      <Transition
-        as={Fragment}
-        show={isShowing == 2}
-        enter="transition-opacity duration-75"
-        enterFrom="opacity-0"
-        enterTo="opacity-100"
-        leave="transition-opacity duration-150"
-        leaveFrom="opacity-100"
-        leaveTo="opacity-0"
-      >
-        <h1 className="ml-0.5">L0r3m 1pSum</h1>
-      </Transition>
+
       <Listbox value={context} onChange={setContext}>
-        <div className="relative mt-1 w-60">
+        <div className="relative mt-1">
           <Listbox.Button
             onClick={() => setIsShowing(2)}
             className="relative w-full border cursor-default rounded-lg bg-white py-2

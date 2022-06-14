@@ -133,7 +133,7 @@ export default function Home() {
                     <div
                       className={
                         selected
-                          ? " text-center text-2xl font-bold text-black rounded-3xl  font-sans px-4 py-2 ring ring-transparent  outline-none "
+                          ? " text-center text-3xl font-bold text-black rounded-3xl  font-sans px-4 py-2 ring ring-transparent  outline-none "
                           : " text-center text-xl font-medium text-black rounded-md font-sans px-4 py-2 ring ring-transparent outline-none"
                       }
                     >
@@ -146,7 +146,7 @@ export default function Home() {
                     <div
                       className={
                         selected
-                          ? " text-center text-2xl font-bold text-black rounded-3xl  font-sans px-4 py-2 ring ring-transparent outline-none"
+                          ? " text-center text-3xl font-bold text-black rounded-3xl  font-sans px-4 py-2 ring ring-transparent outline-none"
                           : " text-center text-xl font-medium text-black rounded-md font-sans px-4 py-2 ring ring-transparent outline-none"
                       }
                     >
@@ -159,7 +159,7 @@ export default function Home() {
                     <div
                       className={
                         selected
-                          ? " text-center text-2xl font-bold text-black rounded-3xl  font-sans px-4 py-2 ring ring-transparent outline-none"
+                          ? " text-center text-3xl font-bold text-black rounded-3xl  font-sans px-4 py-2 ring ring-transparent outline-none"
                           : " text-center text-xl font-medium text-black rounded-md font-sans px-4 py-2 ring ring-transparent outline-none"
                       }
                     >
@@ -172,7 +172,7 @@ export default function Home() {
                     <div
                       className={
                         selected
-                          ? " text-center text-2xl font-bold text-black rounded-3xl  font-sans px-4 py-2 ring ring-transparent outline-none"
+                          ? " text-center text-3xl font-bold text-black rounded-3xl  font-sans px-4 py-2 ring ring-transparent outline-none"
                           : " text-center text-xl font-medium text-black rounded-md font-sans px-4 py-2 ring ring-transparent outline-none"
                       }
                     >
@@ -185,7 +185,7 @@ export default function Home() {
                     <div
                       className={
                         selected
-                          ? " text-center text-2xl font-bold text-black rounded-3xl  font-sans px-4 py-2  ring ring-transparent outline-none"
+                          ? " text-center text-3xl font-bold text-black rounded-3xl  font-sans px-4 py-2  ring ring-transparent outline-none"
                           : " text-center text-xl font-medium text-black rounded-md font-sans px-4 py-2 ring ring-transparent outline-none"
                       }
                     >
@@ -198,7 +198,7 @@ export default function Home() {
                     <div
                       className={
                         selected
-                          ? " text-center text-2xl font-bold text-black rounded-3xl  font-sans px-4 py-2  ring ring-transparent outline-none"
+                          ? " text-center text-3xl font-bold text-black rounded-3xl  font-sans px-4 py-2  ring ring-transparent outline-none"
                           : " text-center text-xl font-medium text-black rounded-md font-sans px-4 py-2 ring ring-transparent outline-none"
                       }
                     >
@@ -211,7 +211,7 @@ export default function Home() {
                     <div
                       className={
                         selected
-                          ? " text-center text-2xl font-bold text-black rounded-3xl  font-sans px-4 py-2 ring ring-transparent outline-none"
+                          ? " text-center text-3xl font-bold text-black rounded-3xl  font-sans px-4 py-2 ring ring-transparent outline-none"
                           : " text-center text-xl font-medium text-black rounded-md font-sans px-4 py-2 ring ring-transparent outline-none"
                       }
                     >

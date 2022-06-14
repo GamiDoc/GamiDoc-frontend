@@ -1,34 +1,22 @@
 import React, { useState } from "react";
 import { Fragment } from "react";
-import { Transition,Listbox } from "@headlessui/react";
+import { Transition, Listbox } from "@headlessui/react";
 import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
 
-export default function Modality({ 
-  modality, 
-  setModality,
-  selectObj1
-  }){
-
+export default function Modality({ modality, setModality, selectObj1 }) {
   const [isShowing, setIsShowing] = useState(0); // per transition
   return (
-    <div className="flex flex-col gap-2 justify-center">
-      <label className=" mt-4 block text-gray-700 text-sm font-bold mb-2 ml-0.5">
+    <div className="flex flex-col gap-2 justify-center w-[60em]">
+      <label className=" mt-4 block text-gray-700 text-sm font-bold mb-2 ml-0.5 ">
         Type of Modality:
       </label>
-      <Transition
-        as={Fragment}
-        show={isShowing == 1}
-        enter="transition-opacity duration-75"
-        enterFrom="opacity-0"
-        enterTo="opacity-100"
-        leave="transition-opacity duration-150"
-        leaveFrom="opacity-100"
-        leaveTo="opacity-0"
-      >
-        <h1 className="ml-0.5">L0r3m 1pSum</h1>
-      </Transition>
+
+      <h2 className="mt-4 block text-gray-700 text-sm mb-2 ">
+        This section is dedicated to the definition of the main modality
+        included in the gamification software.
+      </h2>
       <Listbox value={modality} onChange={setModality}>
-        <div className="relative mt-1 w-60">
+        <div className="relative mt-1 ">
           <Listbox.Button
             onClick={() => setIsShowing(1)}
             className="relative w-full border cursor-default rounded-lg bg-white py-2
