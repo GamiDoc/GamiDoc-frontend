@@ -15,13 +15,17 @@ function Footer() {
               loader={sanityIoImageLoader}
               src="image-src"
               alt="GamiDoc"
-              width={119} height={34}
+              width={119}
+              height={34}
             />
             <p className="mb-4  text-gray-400">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste
-              atque ea quis molestias. Fugiat pariatur maxime quis culpa
-              corporis vitae repudiandae aliquam voluptatem veniam, est atque
-              cumque eum delectus sint!
+              A holistic process to guide designers and researchers in the
+              development of gamified solutions, by providing a game design
+              model and its review, a methods design control, a support in the
+              selection of gamified elements, a help in the software
+              development, and a list of standardized user experience
+              questionnaire in order to evaluate the user experience in a proper
+              way.
             </p>
           </div>
           <div></div>

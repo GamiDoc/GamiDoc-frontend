@@ -1,7 +1,7 @@
 import React from "react";
 import TextareaAutosize from "@mui/material/TextareaAutosize";
 
-function Aesthetics({aesthetics, setAesthetics}) {
+function Aesthetics({ aesthetics, setAesthetics }) {
   return (
     <div>
       <label className="mt-4 block text-gray-700 text-sm font-bold mb-2">
@@ -25,6 +25,14 @@ function Aesthetics({aesthetics, setAesthetics}) {
         placeholder="Aesthetics"
         value={aesthetics}
         onChange={(e) => setAesthetics(e.target.value)}
+      />
+
+      <input
+        type="file"
+        name="myImage"
+        accept="image/png, image/gif, image/jpeg"
+        className="gap-9 w-full border cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none   sm:text-sm
+        "
       />
     </div>
   );
