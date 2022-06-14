@@ -86,9 +86,9 @@ export default function CreatePDF({
           <Text style={styles.h1}>Behaviors to be encouraged:</Text>
           <Text style={styles.h2}>{behavior}</Text>
           <Text style={styles.h1}>Domain:</Text>
-          <Text style={styles.h2}>{domain.name}</Text>
+          <Text style={styles.h2}>{domain}</Text>
           <Text style={styles.h1}>Aim:</Text>
-          <Text style={styles.h2}>{aim.name}</Text>
+          <Text style={styles.h2}>{aim}</Text>
           <Text style={styles.h1}>Target:</Text>
           <Text style={styles.h2}>{target}</Text>
         </View>
