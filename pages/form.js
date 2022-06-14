@@ -143,7 +143,7 @@ export default function Home() {
 
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [domain, setDomain] = useState(KoivistoHamari[0]);
-  const [behavior, setBehavior] = useState("");
+  const [behavior, setBehavior] = useState();
   const [aim, setAim] = useState(Aimo[0]);
   const [name, setName] = useState("");
   const [target, setTarget] = useState("");
