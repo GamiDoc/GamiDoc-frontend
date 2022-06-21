@@ -13,15 +13,15 @@ export default function Feedback({
 }) {
   const [isShowing, setIsShowing] = useState(0); // per transition
   return (
-    <div className="w-[60em] flex flex-col gap-2 justify-center">
-      <h2 className=" mt-4 block text-gray-700 text-sm mb-2 ">
+    <div className="flex flex-col py-4 w-[60em]">
+      <h2 className=" mt-4 block text-gray-700  mb-2 ">
         This section refers to the selection of the kind of feedback used in the
         software. Since feedback works differently across certain domains and
         users, it is important to specify the content and the timing of used
         feedback.
       </h2>
 
-      <label className=" mt-4 block text-gray-700 text-sm font-bold mb-2 ml-0.5">
+      <label className=" mt-4 block text-gray-700  font-bold mb-2 ml-0.5">
         Timing:
       </label>
 
@@ -32,7 +32,7 @@ export default function Feedback({
             className="relative w-full border cursor-default rounded-lg bg-white py-2
                  pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2
                  focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2
-                 focus-visible:ring-offset-orange-300 sm:text-sm"
+                 focus-visible:ring-offset-orange-300 sm:"
           >
             <span className="block truncate">{timing.frame}</span>
             <span className="poiListboxnter-events-none absolute inset-y-0 right-0 flex items-center pr-2">
@@ -51,7 +51,7 @@ export default function Feedback({
             <Listbox.Options
               className="relative mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1
                    text-base shadow-lg ring-1 ring-black ring-opacity-5
-                   focus:outline-none sm:text-sm  "
+                   focus:outline-none sm:  "
             >
               {selectObj1.map((timing) => (
                 <Listbox.Option
@@ -86,7 +86,7 @@ export default function Feedback({
         </div>
       </Listbox>
       {/*Seconda Listbox*/}
-      <label className=" mt-4 block text-gray-700 text-sm font-bold mb-2 ml-0.5">
+      <label className=" mt-4 block text-gray-700  font-bold mb-2 ml-0.5">
         Content:
       </label>
 
@@ -97,7 +97,7 @@ export default function Feedback({
             className="relative w-full border cursor-default rounded-lg bg-white py-2
                  pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2
                  focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2
-                 focus-visible:ring-offset-orange-300 sm:text-sm"
+                 focus-visible:ring-offset-orange-300 sm:"
           >
             <span className="block truncate">{context.text}</span>
             <span className="poiListboxnter-events-none absolute inset-y-0 right-0 flex items-center pr-2">
@@ -116,7 +116,7 @@ export default function Feedback({
             <Listbox.Options
               className="relative mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1
                    text-base shadow-lg ring-1 ring-black ring-opacity-5
-                   focus:outline-none sm:text-sm  "
+                   focus:outline-none sm:  "
             >
               {selectObj2.map((coso) => (
                 <Listbox.Option

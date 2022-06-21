@@ -28,11 +28,11 @@ function Affordances({
   const [isShowing, setIsShowing] = useState(0); // per transition
   return (
     <div className="flex flex-col w-[60em] py-4">
-      <label className=" mt-4 block text-gray-700 text-sm font-bold mb-2">
+      <label className=" mt-4 block text-gray-700   font-bold mb-2">
         Perfomances
       </label>
 
-      <h2 className="w-[60em] mt-4 block text-gray-700 text-sm mb-2 ">----</h2>
+      <h2 className="w-[60em] mt-4 block text-gray-700   mb-2 ">----</h2>
 
       <Listbox value={performance} onChange={setPerformance}>
         <div className="relative mt-1">
@@ -41,7 +41,7 @@ function Affordances({
             className="relative w-full border cursor-default rounded-lg bg-white py-2
                  pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2
                  focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2
-                 focus-visible:ring-offset-orange-300 sm:text-sm"
+                 focus-visible:ring-offset-orange-300 sm: "
           >
             <span className="block truncate">{performance.name}</span>
             <span className="poiListboxnter-events-none absolute inset-y-0 right-0 flex items-center pr-2">
@@ -60,7 +60,7 @@ function Affordances({
             <Listbox.Options
               className="relative mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1
                    text-base shadow-lg ring-1 ring-black ring-opacity-5
-                   focus:outline-none sm:text-sm"
+                   focus:outline-none sm: "
             >
               {performanceSelection.map((person) => (
                 <Listbox.Option
@@ -95,11 +95,11 @@ function Affordances({
         </div>
       </Listbox>
 
-      <label className=" mt-4 block text-gray-700 text-sm font-bold mb-2">
+      <label className=" mt-4 block text-gray-700   font-bold mb-2">
         Ecological
       </label>
 
-      <h2 className="w-[60em] mt-4 block text-gray-700 text-sm mb-2 ">---</h2>
+      <h2 className="w-[60em] mt-4 block text-gray-700   mb-2 ">---</h2>
 
       <Listbox value={ecological} onChange={setEcological}>
         <div className="relative mt-1">
@@ -108,7 +108,7 @@ function Affordances({
             className="relative w-full border cursor-default rounded-lg bg-white py-2
                  pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2
                  focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2
-                 focus-visible:ring-offset-orange-300 sm:text-sm"
+                 focus-visible:ring-offset-orange-300 sm: "
           >
             <span className="block truncate">{ecological.name}</span>
             <span className="poiListboxnter-events-none absolute inset-y-0 right-0 flex items-center pr-2">
@@ -127,7 +127,7 @@ function Affordances({
             <Listbox.Options
               className="relative mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1
                    text-base shadow-lg ring-1 ring-black ring-opacity-5
-                   focus:outline-none sm:text-sm"
+                   focus:outline-none sm: "
             >
               {ecologicalSelection.map((person) => (
                 <Listbox.Option
@@ -162,11 +162,11 @@ function Affordances({
         </div>
       </Listbox>
 
-      <label className=" mt-4 block text-gray-700 text-sm font-bold mb-2">
+      <label className=" mt-4 block text-gray-700   font-bold mb-2">
         Social
       </label>
 
-      <h2 className="w-[60em] mt-4 block text-gray-700 text-sm mb-2 ">---</h2>
+      <h2 className="w-[60em] mt-4 block text-gray-700   mb-2 ">---</h2>
 
       <Listbox value={social} onChange={setSocial}>
         <div className="relative mt-1">
@@ -175,7 +175,7 @@ function Affordances({
             className="relative w-full border cursor-default rounded-lg bg-white py-2
                  pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2
                  focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2
-                 focus-visible:ring-offset-orange-300 sm:text-sm"
+                 focus-visible:ring-offset-orange-300 sm: "
           >
             <span className="block truncate">{social.name}</span>
             <span className="poiListboxnter-events-none absolute inset-y-0 right-0 flex items-center pr-2">
@@ -194,7 +194,7 @@ function Affordances({
             <Listbox.Options
               className="relative mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1
                    text-base shadow-lg ring-1 ring-black ring-opacity-5
-                   focus:outline-none sm:text-sm"
+                   focus:outline-none sm: "
             >
               {socialSelection.map((person) => (
                 <Listbox.Option
@@ -229,11 +229,11 @@ function Affordances({
         </div>
       </Listbox>
 
-      <label className=" mt-4 block text-gray-700 text-sm font-bold mb-2">
+      <label className=" mt-4 block text-gray-700   font-bold mb-2">
         Personal
       </label>
 
-      <h2 className="w-[60em] mt-4 block text-gray-700 text-sm mb-2 ">---</h2>
+      <h2 className="w-[60em] mt-4 block text-gray-700   mb-2 ">---</h2>
 
       <Listbox value={personal} onChange={setPersonal}>
         <div className="relative mt-1">
@@ -242,7 +242,7 @@ function Affordances({
             className="relative w-full border cursor-default rounded-lg bg-white py-2
                  pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2
                  focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2
-                 focus-visible:ring-offset-orange-300 sm:text-sm"
+                 focus-visible:ring-offset-orange-300 sm: "
           >
             <span className="block truncate">{personal.name}</span>
             <span className="poiListboxnter-events-none absolute inset-y-0 right-0 flex items-center pr-2">
@@ -261,7 +261,7 @@ function Affordances({
             <Listbox.Options
               className="relative mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1
                    text-base shadow-lg ring-1 ring-black ring-opacity-5
-                   focus:outline-none sm:text-sm"
+                   focus:outline-none sm: "
             >
               {personalSelection.map((person) => (
                 <Listbox.Option
@@ -296,11 +296,11 @@ function Affordances({
         </div>
       </Listbox>
 
-      <label className=" mt-4 block text-gray-700 text-sm font-bold mb-2">
+      <label className=" mt-4 block text-gray-700   font-bold mb-2">
         Fictional
       </label>
 
-      <h2 className="w-[60em] mt-4 block text-gray-700 text-sm mb-2 ">---</h2>
+      <h2 className="w-[60em] mt-4 block text-gray-700   mb-2 ">---</h2>
 
       <Listbox value={fictional} onChange={setFictional}>
         <div className="relative mt-1">
@@ -309,7 +309,7 @@ function Affordances({
             className="relative w-full border cursor-default rounded-lg bg-white py-2
                  pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2
                  focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2
-                 focus-visible:ring-offset-orange-300 sm:text-sm"
+                 focus-visible:ring-offset-orange-300 sm: "
           >
             <span className="block truncate">{fictional.name}</span>
             <span className="poiListboxnter-events-none absolute inset-y-0 right-0 flex items-center pr-2">
@@ -328,7 +328,7 @@ function Affordances({
             <Listbox.Options
               className="relative mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1
                    text-base shadow-lg ring-1 ring-black ring-opacity-5
-                   focus:outline-none sm:text-sm"
+                   focus:outline-none sm: "
             >
               {fictionalSelection.map((person) => (
                 <Listbox.Option

@@ -44,31 +44,6 @@ const KoivistoHamari = [
   { id: 22, name: "Theory", unavailable: false },
 ];
 
-const Aimo = [
-  { id: 1, name: "Education/Learning", unavailable: false },
-  { id: 2, name: "Health/Exercise", unavailable: false },
-  { id: 3, name: "Crowdsourcing", unavailable: false },
-  { id: 4, name: "Social behavior/networking/sharing", unavailable: true },
-  { id: 5, name: "Software development/design", unavailable: false },
-  { id: 6, name: "Business/Management", unavailable: false },
-  { id: 7, name: "Ecological/environmental behavior", unavailable: false },
-  { id: 8, name: "eCommerce/eServices", unavailable: true },
-  { id: 9, name: "Software engineering", unavailable: false },
-  { id: 10, name: "Marketing/Consumer behavior", unavailable: false },
-  { id: 11, name: "Citizen/public engagement/activity", unavailable: false },
-  { id: 12, name: "Entertainment", unavailable: true },
-  { id: 13, name: "Innovation", unavailable: false },
-  { id: 14, name: "Transportation/Mobility", unavailable: false },
-  { id: 15, name: "Culture/Tourism", unavailable: false },
-  { id: 16, name: "Architecture", unavailable: true },
-  { id: 17, name: "Communication", unavailable: false },
-  { id: 18, name: "Emergency planning", unavailable: false },
-  { id: 19, name: "Politics", unavailable: false },
-  { id: 20, name: "Welfare/city/human/public services", unavailable: true },
-  { id: 21, name: "Work", unavailable: false },
-  { id: 22, name: "Theory", unavailable: false },
-];
-
 const DeviceSelection = [
   { id: 1, name: "Mobile", unavailable: false },
   { id: 2, name: "Laptop", unavailable: false },
@@ -144,7 +119,7 @@ export default function Home() {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [domain, setDomain] = useState(KoivistoHamari[0]);
   const [behavior, setBehavior] = useState();
-  const [aim, setAim] = useState(Aimo[0]);
+  const [aim, setAim] = useState("");
   const [name, setName] = useState("");
   const [target, setTarget] = useState("");
   let [isOpen, setIsOpen] = useState(true);
@@ -246,7 +221,7 @@ export default function Home() {
                           : " text-center text-xl font-medium text-black rounded-md font-sans px-4 py-2 ring ring-transparent outline-none"
                       }
                     >
-                      Rules
+                      Affordances
                     </div>
                   )}
                 </Tab>
@@ -259,7 +234,7 @@ export default function Home() {
                           : " text-center text-xl font-medium text-black rounded-md font-sans px-4 py-2 ring ring-transparent outline-none"
                       }
                     >
-                      Aesthetics
+                      Rules
                     </div>
                   )}
                 </Tab>
@@ -272,7 +247,7 @@ export default function Home() {
                           : " text-center text-xl font-medium text-black rounded-md font-sans px-4 py-2 ring ring-transparent outline-none"
                       }
                     >
-                      Affordances
+                      Aesthetics
                     </div>
                   )}
                 </Tab>
@@ -289,7 +264,6 @@ export default function Home() {
                     behavior={behavior}
                     setBehavior={setBehavior}
                     selectObj1={KoivistoHamari}
-                    selectObj2={Aimo}
                   />
                 </Tab.Panel>
                 <Tab.Panel>
@@ -317,15 +291,6 @@ export default function Home() {
                   />
                 </Tab.Panel>
                 <Tab.Panel>
-                  <Rules rules={rules} setRules={setRules} />
-                </Tab.Panel>
-                <Tab.Panel>
-                  <Aesthetics
-                    aesthetics={aesthetics}
-                    setAesthetics={setAesthetics}
-                  />
-                </Tab.Panel>
-                <Tab.Panel>
                   <Affordances
                     performance={performance}
                     performanceSelection={performanceSelection}
@@ -342,6 +307,15 @@ export default function Home() {
                     fictional={fictional}
                     fictionalSelection={fictionalSelection}
                     setFictional={setFictional}
+                  />
+                </Tab.Panel>
+                <Tab.Panel>
+                  <Rules rules={rules} setRules={setRules} />
+                </Tab.Panel>
+                <Tab.Panel>
+                  <Aesthetics
+                    aesthetics={aesthetics}
+                    setAesthetics={setAesthetics}
                   />
                 </Tab.Panel>
               </Tab.Panels>

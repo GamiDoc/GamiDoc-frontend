@@ -9,16 +9,14 @@ export default function Home() {
     <div className="flex flex-col h-screen justify-between">
       <Header />
       <div className="px-28">
-        <div>
+        <div className="w-[50em]">
           <h1 className="font-extrabold text-5xl ">
-            Lorem ipsum dolor sit amet,
-            <br /> consectetur adipiscing elit.
+            A holistic process for designing and evaluating gamified solution.
           </h1>
-          <h3 className="py-5 text-lg">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            <br /> Sed fermentum at felis quis consequat. <br />
-            Cras lacinia, quam in facilisis venenatis, ipsum lacus imperdiet
-            erat, <br />a elementum dolor nisi vel leo
+          <h3 className="py-5 text-2xl">
+            The purpose of this tool is to lead the designer through various
+            steps, from the first contextual ideas, to the final evaluation of
+            the developed software.
           </h3>
         </div>
         <button
