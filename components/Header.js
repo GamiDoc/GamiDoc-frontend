@@ -15,7 +15,7 @@ function Header() {
           src="image-src"
           alt="GamiDoc"
           width={119}
-          height={34}
+          height={20}
         />
       </Link>
       <div className="flex flex-row gap-5" id="button">
