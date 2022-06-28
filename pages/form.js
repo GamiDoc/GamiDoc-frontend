@@ -157,7 +157,7 @@ export default function Home() {
             {/* {handleSwitch()} */}
             <Tab.Group
               selectedIndex={selectedIndex}
-              onChange={setSelectedIndex}
+              onChange={setSelectedIndex} 
             >
               <Tab.List className="flex flex-row gap-16 items-center ">
                 <Tab as={Fragment}>
