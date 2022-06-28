@@ -7,7 +7,7 @@ const sanityIoImageLoader = ({ src, width, quality }) => {
 
 function Footer() {
   return (
-    <footer className="text-center lg:text-left bg-gray-800 text-white">
+    <footer className="text-center lg:text-left bg-gray-800 text-white ">
       <div className="mx-40 py-10 text-center md:text-left">
         <div className="grid grid-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
           <div className="">
@@ -18,7 +18,7 @@ function Footer() {
               width={119}
               height={34}
             />
-            <p className="mb-4  text-gray-400">
+            <p className="mb-4  text-gray-400 md:text-xs ">
               A holistic process to guide designers and researchers in the
               development of gamified solutions, by providing a game design
               model and its review, a methods design control, a support in the

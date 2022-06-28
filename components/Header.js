@@ -8,7 +8,7 @@ const sanityIoImageLoader = ({ src, width, quality }) => {
 
 function Header() {
   return (
-    <div className=" relative px-24 py-9 flex flex-wrap items-center justify-between mb-3">
+    <div className="relative px-24 py-9 flex flex-wrap items-center justify-between mb-3">
       <Link href="/">
         <Image
           loader={sanityIoImageLoader}

@@ -9,11 +9,11 @@ export default function Home() {
     <div className="flex flex-col h-screen justify-between">
       <Header />
       <div className="px-28">
-        <div className="w-[50em]">
+        <div className="w-[50em] xs:w-[10em]">
           <h1 className="font-extrabold text-5xl ">
             A holistic process for designing and evaluating gamified solution.
           </h1>
-          <h3 className="py-5 text-2xl">
+          <h3 className="py-5 text-2xl  ">
             The purpose of this tool is to lead the designer through various
             steps, from the first contextual ideas, to the final evaluation of
             the developed software.

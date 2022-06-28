@@ -9,9 +9,12 @@ module.exports = {
       colors: {
         'yellow-gamy': '#FFB900',
       },
-
+      screens: {
+        'xs':{'max': '640px'},
+      },
 
     },
+
   },
   plugins: [],
 }
