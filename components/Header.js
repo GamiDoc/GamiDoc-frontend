@@ -3,7 +3,7 @@ import Link from 'next/link'
 import Image from "next/image";
 
 const sanityIoImageLoader = ({ src, width, quality }) => {
-  return `https://i.imgur.com/Bz1HHLx.png`;
+  return `https://i.imgur.com/Y3QF08D.png`;
 };
 
 function Header() {
