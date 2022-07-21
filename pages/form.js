@@ -8,9 +8,6 @@ import { Transition } from "@headlessui/react";
 import { Dialog } from "@headlessui/react";
 import TextareaAutosize from "@mui/material/TextareaAutosize";
 
-
-
-
 // Tabs
 import { Tab } from "@headlessui/react";
 import Context from "../components/tabs/Context";
@@ -23,28 +20,28 @@ import Modality from "../components/tabs/Modality";
 // import { Rule } from "postcss";
 
 const KoivistoHamari = [
-  { id: 1, name: "Education/Learning", unavailable: false },
-  { id: 2, name: "Health/Exercise", unavailable: false },
-  { id: 3, name: "Crowdsourcing", unavailable: false },
-  { id: 4, name: "Social behavior/networking/sharing", unavailable: true },
-  { id: 5, name: "Software development/design", unavailable: false },
-  { id: 6, name: "Business/Management", unavailable: false },
-  { id: 7, name: "Ecological/environmental behavior", unavailable: false },
-  { id: 8, name: "eCommerce/eServices", unavailable: true },
-  { id: 9, name: "Software engineering", unavailable: false },
-  { id: 10, name: "Marketing/Consumer behavior", unavailable: false },
-  { id: 11, name: "Citizen/public engagement/activity", unavailable: false },
-  { id: 12, name: "Entertainment", unavailable: true },
-  { id: 13, name: "Innovation", unavailable: false },
-  { id: 14, name: "Transportation/Mobility", unavailable: false },
-  { id: 15, name: "Culture/Tourism", unavailable: false },
-  { id: 16, name: "Architecture", unavailable: true },
-  { id: 17, name: "Communication", unavailable: false },
-  { id: 18, name: "Emergency planning", unavailable: false },
-  { id: 19, name: "Politics", unavailable: false },
-  { id: 20, name: "Welfare/city/human/public services", unavailable: true },
-  { id: 21, name: "Work", unavailable: false },
-  { id: 22, name: "Theory", unavailable: false },
+  "Education/Learning",
+  "Health/Exercise",
+  "Crowdsourcing",
+  "Social behavior/networking/sharing",
+  "Software development/design",
+  "Business/Management",
+  "Ecological/environmental behavior",
+  "eCommerce/eServices",
+  "Software engineering",
+  "Marketing/Consumer behavior",
+  "Citizen/public engagement/activity",
+  "Entertainment",
+  "Innovation",
+  "Transportation/Mobility",
+  "Culture/Tourism",
+  "Architecture",
+  "Communication",
+  "Emergency planning",
+  "Politics",
+  "Welfare/city/human/public services",
+  "Work",
+  "Theory",
 ];
 
 const ageSelection = [
@@ -66,8 +63,8 @@ const ageSelection = [
 ];
 
 const categoriesSelection = [
-  { id: 1, name: "Student", unavailable: false },
-  { id: 2, name: "Employees", unavailable: false },
+  "Student", 
+  "Employees", 
 ];
 
 const DeviceSelection = [
@@ -144,12 +141,14 @@ export default function Home() {
 
   //context
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [domain, setDomain] = useState(KoivistoHamari[0]);
+  const [domain, setDomain] = useState([]);
   const [behavior, setBehavior] = useState();
   const [aim, setAim] = useState("");
   const [name, setName] = useState("");
   const [target, setTarget] = useState("");
-  const [targetCat, setTargetCat] = useState(categoriesSelection[0]);
+  const [targetAge, setTargetAge] = useState([]);
+
+  const [targetCat, setTargetCat] = useState([]);
 
   let [isOpen, setIsOpen] = useState(true);
 
@@ -290,14 +289,14 @@ export default function Home() {
                     setDomain={setDomain}
                     target={target}
                     setTarget={setTarget}
-                    
-                   
+                    targetAge={targetAge}
+                    setTargetAge={setTargetAge}
                     targetCat={targetCat}
                     setTargetCat={setTargetCat}
                     behavior={behavior}
                     setBehavior={setBehavior}
                     selectObj1={KoivistoHamari}
-                    
+                    selectObj3={categoriesSelection}
                     selectObj4={ageSelection}
                   />
                 </Tab.Panel>

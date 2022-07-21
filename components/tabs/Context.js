@@ -1,16 +1,11 @@
 import { useState } from "react";
-import { Fragment } from "react";
-import { Listbox, Transition } from "@headlessui/react";
-import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
 import TextareaAutosize from "@mui/material/TextareaAutosize";
 import * as React from "react";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
-import ListItemText from "@mui/material/ListItemText";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-import Checkbox from "@mui/material/Checkbox";
 
 
 function Context({
@@ -20,17 +15,16 @@ function Context({
   setDomain,
   aim,
   setAim,
-  target,
-  setTarget,
-
+  targetAge,
+  setTargetAge,
   targetCat,
   setTargetCat,
 
   selectObj1, // L'oggetto che contiene i campi del select
+  selectObj3, //set target cat
   selectObj4, // Target categories
 }) {
   const [isShowing, setIsShowing] = useState(0); // per transition
-  const [targetAge, setTargetAge] = useState([]);
 
   const handleChange = (event) => {
     const {
@@ -42,77 +36,40 @@ function Context({
     );
   };
 
+  const handleChangeDomain = (event) => {
+    setDomain(event.target.value);
+  };
+
+  const handleChangeCat = (event) => {
+    setTargetCat(event.target.value);
+  };
+
   return (
     <div className="flex flex-col py-4 w-[60em]">
       <label className=" mt-4 block text-gray-700  font-bold mb-2">
         Domain
       </label>
-      <h2 className=" mt-4 block text-gray-700  mb-2 ">
+      <h2 className=" mt-4  block text-gray-700  mb-2 ">
         Gamification elements work differently in relation to context. In this
         section, we ask designers to list the applicational domain.
       </h2>
-
-      <Listbox value={domain} onChange={setDomain}>
-        <div className="relative mt-1">
-          <Listbox.Button
-            onClick={() => setIsShowing(1)}
-            className="relative w-full border cursor-default rounded-lg bg-white py-2
-                 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2
-                 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2
-                 focus-visible:ring-offset-orange-300 sm:"
-          >
-            <span className="block truncate">{domain.name}</span>
-            <span className="poiListboxnter-events-none absolute inset-y-0 right-0 flex items-center pr-2">
-              <SelectorIcon
-                className="h-5 w-5 text-gray-400"
-                aria-hidden="true"
-              />
-            </span>
-          </Listbox.Button>
-          <Transition
-            as={Fragment}
-            leave="transition ease-in duration-100"
-            leaveFrom="opacity-100"
-            leaveTo="opacity-0"
-          >
-            <Listbox.Options
-              className="relative mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1
-                   text-base shadow-lg ring-1 ring-black ring-opacity-5
-                   focus:outline-none "
-            >
-              {selectObj1.map((person) => (
-                <Listbox.Option
-                  key={person.id}
-                  className={({ active }) =>
-                    `relative cursor-default select-none py-2 pl-10 pr-4 ${
-                      active ? "bg-amber-100 text-amber-900" : "text-gray-900"
-                    }`
-                  }
-                  value={person}
-                >
-                  {({ domain }) => (
-                    <>
-                      <span
-                        className={`block truncate ${
-                          domain ? "font-medium" : "font-normal"
-                        }`}
-                      >
-                        {person.name}
-                      </span>
-                      {domain ? (
-                        <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-amber-600">
-                          <CheckIcon className="h-5 w-5" />
-                        </span>
-                      ) : null}
-                    </>
-                  )}
-                </Listbox.Option>
-              ))}
-            </Listbox.Options>
-          </Transition>
-        </div>
-      </Listbox>
-
+      <FormControl>
+        <InputLabel>Domain</InputLabel>
+        <Select
+          className="relative w-full shadow-md rounded-lg"
+          single
+          value={domain}
+          onChange={handleChangeDomain}
+          input={<OutlinedInput label="Name" />}
+        >
+          {selectObj1.map((name) => (
+            <MenuItem key={name} value={name}>
+              {name}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+     
       <label className=" mt-4 block text-gray-700  font-bold mb-2">Aim</label>
       <h2 className=" mt-4 block text-gray-700  mb-2 ">
         To clearly understand the goal of the software, we ask designers to
@@ -120,7 +77,7 @@ function Context({
       </h2>
       <TextareaAutosize
         onClick={() => setIsShowing(2)}
-        className="w-full border cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none   "
+        className="w-full border  cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none   "
         id="Aim"
         type="text"
         minRows={4}
@@ -164,16 +121,29 @@ function Context({
       <FormControl>
         <InputLabel>Age</InputLabel>
         <Select
-          className="relative w-full cursor-default rounded-lg bg-white py-2
-         pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2
-         focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2
-         focus-visible:ring-offset-orange-300 sm:"
+          className="relative w-full shadow-md rounded-lg"
           multiple
           value={targetAge}
           onChange={handleChange}
           input={<OutlinedInput label="Name" />}
         >
           {selectObj4.map((name) => (
+            <MenuItem key={name} value={name}>
+              {name}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+      <FormControl className="top-10">
+        <InputLabel>Categories</InputLabel>
+        <Select
+          className="relative w-full shadow-md rounded-lg"
+          
+          value={targetCat}
+          onChange={handleChangeCat}
+          input={<OutlinedInput label="Name" />}
+        >
+          {selectObj3.map((name) => (
             <MenuItem key={name} value={name}>
               {name}
             </MenuItem>
