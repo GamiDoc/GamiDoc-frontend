@@ -1,9 +1,17 @@
-import React from "react";
 import { useState } from "react";
 import { Fragment } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
 import TextareaAutosize from "@mui/material/TextareaAutosize";
+import * as React from "react";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import ListItemText from "@mui/material/ListItemText";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
+import Checkbox from "@mui/material/Checkbox";
+
 
 function Context({
   behavior,
@@ -14,10 +22,26 @@ function Context({
   setAim,
   target,
   setTarget,
+
+  targetCat,
+  setTargetCat,
+
   selectObj1, // L'oggetto che contiene i campi del select
-  selectObj2, // Aimo, campo del lavoro
+  selectObj4, // Target categories
 }) {
   const [isShowing, setIsShowing] = useState(0); // per transition
+  const [targetAge, setTargetAge] = useState([]);
+
+  const handleChange = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setTargetAge(
+      // On autofill we get a stringified value.
+      typeof value === "string" ? value.split(",") : value
+    );
+  };
+
   return (
     <div className="flex flex-col py-4 w-[60em]">
       <label className=" mt-4 block text-gray-700  font-bold mb-2">
@@ -89,9 +113,7 @@ function Context({
         </div>
       </Listbox>
 
-      <label className=" mt-4 block text-gray-700  font-bold mb-2">
-        Aim
-      </label>
+      <label className=" mt-4 block text-gray-700  font-bold mb-2">Aim</label>
       <h2 className=" mt-4 block text-gray-700  mb-2 ">
         To clearly understand the goal of the software, we ask designers to
         clearly state the final purpose of the future software.
@@ -138,16 +160,26 @@ function Context({
         target users, reporting all the relevant information (age range,
         specific categories, etc).
       </h2>
-      <TextareaAutosize
-        onClick={() => setIsShowing(4)}
-        className=" w-full h-56 border cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none "
-        type="text"
-        id="target"
-        minRows={4}
-        placeholder="Target user"
-        value={target}
-        onChange={(e) => setTarget(e.target.value)}
-      />
+
+      <FormControl>
+        <InputLabel>Age</InputLabel>
+        <Select
+          className="relative w-full cursor-default rounded-lg bg-white py-2
+         pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2
+         focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2
+         focus-visible:ring-offset-orange-300 sm:"
+          multiple
+          value={targetAge}
+          onChange={handleChange}
+          input={<OutlinedInput label="Name" />}
+        >
+          {selectObj4.map((name) => (
+            <MenuItem key={name} value={name}>
+              {name}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
     </div>
   );
 }
