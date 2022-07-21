@@ -8,6 +8,9 @@ import { Transition } from "@headlessui/react";
 import { Dialog } from "@headlessui/react";
 import TextareaAutosize from "@mui/material/TextareaAutosize";
 
+
+
+
 // Tabs
 import { Tab } from "@headlessui/react";
 import Context from "../components/tabs/Context";
@@ -42,6 +45,29 @@ const KoivistoHamari = [
   { id: 20, name: "Welfare/city/human/public services", unavailable: true },
   { id: 21, name: "Work", unavailable: false },
   { id: 22, name: "Theory", unavailable: false },
+];
+
+const ageSelection = [
+  "1-3",
+  "4-5",
+  "6-9",
+  "10-12",
+  "13-15",
+  "16-18",
+  "19-25",
+  "26-29",
+  "30-35",
+  "35-39",
+  "40-49",
+  "50-59",
+  "60-69",
+  "70-79",
+  "80+",
+];
+
+const categoriesSelection = [
+  { id: 1, name: "Student", unavailable: false },
+  { id: 2, name: "Employees", unavailable: false },
 ];
 
 const DeviceSelection = [
@@ -116,12 +142,15 @@ export default function Home() {
   // Modality Page state
   const [modality, setModality] = useState(modes[0]);
 
+  //context
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [domain, setDomain] = useState(KoivistoHamari[0]);
   const [behavior, setBehavior] = useState();
   const [aim, setAim] = useState("");
   const [name, setName] = useState("");
   const [target, setTarget] = useState("");
+  const [targetCat, setTargetCat] = useState(categoriesSelection[0]);
+
   let [isOpen, setIsOpen] = useState(true);
 
   //Device
@@ -157,7 +186,7 @@ export default function Home() {
             {/* {handleSwitch()} */}
             <Tab.Group
               selectedIndex={selectedIndex}
-              onChange={setSelectedIndex} 
+              onChange={setSelectedIndex}
             >
               <Tab.List className="flex flex-row gap-16 items-center ">
                 <Tab as={Fragment}>
@@ -261,9 +290,15 @@ export default function Home() {
                     setDomain={setDomain}
                     target={target}
                     setTarget={setTarget}
+                    
+                   
+                    targetCat={targetCat}
+                    setTargetCat={setTargetCat}
                     behavior={behavior}
                     setBehavior={setBehavior}
                     selectObj1={KoivistoHamari}
+                    
+                    selectObj4={ageSelection}
                   />
                 </Tab.Panel>
                 <Tab.Panel>
