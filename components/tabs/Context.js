@@ -6,7 +6,7 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-
+import TextField from "@mui/material/TextField";
 
 function Context({
   behavior,
@@ -56,7 +56,7 @@ function Context({
       <FormControl>
         <InputLabel>Domain</InputLabel>
         <Select
-          className="relative w-full shadow-md rounded-lg"
+          className="relative w-full shadow-md "
           single
           value={domain}
           onChange={handleChangeDomain}
@@ -69,22 +69,25 @@ function Context({
           ))}
         </Select>
       </FormControl>
-     
+
       <label className=" mt-4 block text-gray-700  font-bold mb-2">Aim</label>
       <h2 className=" mt-4 block text-gray-700  mb-2 ">
         To clearly understand the goal of the software, we ask designers to
         clearly state the final purpose of the future software.
       </h2>
-      <TextareaAutosize
-        onClick={() => setIsShowing(2)}
-        className="w-full border  cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none   "
-        id="Aim"
-        type="text"
-        minRows={4}
-        placeholder="Aim"
-        value={aim}
-        onChange={(e) => setAim(e.target.value)}
-      />
+
+        <TextField
+          onClick={() => setIsShowing(2)}
+          multiline
+          className="w-full rounded-lg  shadow-md"
+          id="Aim"
+          type="text"
+          placeholder="Aim"
+          rows={3}
+          value={aim}
+          onChange={(e) => setAim(e.target.value)}
+        />
+  
 
       <label className="mt-4 block text-gray-700  font-bold mb-2">
         Behaviors to be encouraged...
@@ -96,12 +99,12 @@ function Context({
         encouraged and which ones should be avoided to reach the goal.
       </h2>
       <label className="block text-gray-700   font-bold mb-2" />
-      <TextareaAutosize
-        onClick={() => setIsShowing(3)}
-        className="w-full border cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none   "
+      <TextField
+        className="w-full border  shadow-md "
         id="username"
         type="text"
-        minRows={4}
+        multiline
+        rows={3}
         placeholder="Behaviors"
         value={behavior}
         onChange={(e) => setBehavior(e.target.value)}
@@ -121,7 +124,7 @@ function Context({
       <FormControl>
         <InputLabel>Age</InputLabel>
         <Select
-          className="relative w-full shadow-md rounded-lg"
+          className="relative w-full shadow-md "
           multiple
           value={targetAge}
           onChange={handleChange}
@@ -137,8 +140,7 @@ function Context({
       <FormControl className="top-10">
         <InputLabel>Categories</InputLabel>
         <Select
-          className="relative w-full shadow-md rounded-lg"
-          
+          className="relative w-full shadow-md "
           value={targetCat}
           onChange={handleChangeCat}
           input={<OutlinedInput label="Name" />}

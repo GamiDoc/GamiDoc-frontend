@@ -62,48 +62,46 @@ const ageSelection = [
   "80+",
 ];
 
-const categoriesSelection = [
-  "Student", 
-  "Employees", 
-];
+const categoriesSelection = ["Student", "Employees"];
 
 const DeviceSelection = [
-  { id: 1, name: "Mobile", unavailable: false },
-  { id: 2, name: "Laptop", unavailable: false },
-  { id: 3, name: "Tablet", unavailable: false },
-  { id: 4, name: "Head-mounted Display", unavailable: true },
-  { id: 5, name: "Other", unavailable: true },
+  "Mobile",
+  "Computer/Laptop",
+  "Tablet",
+  "Head-mounted Display",
+  "Augmented Reality",
+  "Real Life (/non digital)"
 ];
 
 const performanceSelection = [
   { id: 1, name: "Acknowledgement", unavailable: false },
   { id: 2, name: "Level", unavailable: false },
   { id: 3, name: "Progression", unavailable: false },
-  { id: 4, name: "Point", unavailable: true },
-  { id: 5, name: "Stats", unavailable: true },
+  { id: 4, name: "Point", unavailable: false },
+  { id: 5, name: "Stats", unavailable: false },
 ];
 
 const ecologicalSelection = [
   { id: 1, name: "Chance", unavailable: false },
   { id: 2, name: "Imposed choice", unavailable: false },
   { id: 3, name: "Economy", unavailable: false },
-  { id: 4, name: "Rarity", unavailable: true },
-  { id: 5, name: "Time pressure", unavailable: true },
+  { id: 4, name: "Rarity", unavailable: false },
+  { id: 5, name: "Time pressure", unavailable: false },
 ];
 
 const socialSelection = [
   { id: 1, name: "Competition", unavailable: false },
   { id: 2, name: "Cooperation", unavailable: false },
   { id: 3, name: "Reputation", unavailable: false },
-  { id: 4, name: "Social pressure", unavailable: true },
+  { id: 4, name: "Social pressure", unavailable: false },
 ];
 
 const personalSelection = [
   { id: 1, name: "Novelty", unavailable: false },
   { id: 2, name: "Objectives", unavailable: false },
   { id: 3, name: "Puzzle", unavailable: false },
-  { id: 4, name: "Renovation", unavailable: true },
-  { id: 5, name: "Sensation", unavailable: true },
+  { id: 4, name: "Renovation", unavailable: false },
+  { id: 5, name: "Sensation", unavailable: false },
 ];
 
 const fictionalSelection = [
@@ -153,7 +151,7 @@ export default function Home() {
   let [isOpen, setIsOpen] = useState(true);
 
   //Device
-  const [device, setDevice] = useState(DeviceSelection[0]);
+  const [device, setDevice] = useState([]);
 
   //Affordances
   const [performance, setPerformance] = useState(performanceSelection[0]);
@@ -396,64 +394,6 @@ export default function Home() {
         </div>
       </div>
       <Footer />
-
-      <Transition appear show={isOpen} as={Fragment}>
-        <Dialog as="div" className="relative z-10" onClose={closeModal}>
-          <Transition.Child
-            as={Fragment}
-            enter="ease-out duration-300"
-            enterFrom="opacity-0"
-            enterTo="opacity-100"
-            leave="ease-in duration-200"
-            leaveFrom="opacity-100"
-            leaveTo="opacity-0"
-          >
-            <div className="fixed inset-0 bg-black bg-opacity-25" />
-          </Transition.Child>
-          <div className="fixed inset-0 overflow-y-auto">
-            <div className="flex min-h-full items-center justify-center p-4 text-center">
-              <Transition.Child
-                as={Fragment}
-                enter="ease-out duration-300"
-                enterFrom="opacity-0 scale-95"
-                enterTo="opacity-100 scale-100"
-                leave="ease-in duration-200"
-                leaveFrom="opacity-100 scale-100"
-                leaveTo="opacity-0 scale-95"
-              >
-                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
-                  <Dialog.Title
-                    as="h3"
-                    className="text-lg font-medium leading-6 text-gray-900"
-                  >
-                    Project name
-                  </Dialog.Title>
-                  <div className="mt-2">
-                    <TextareaAutosize
-                      className="w-96 border cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none   sm:text-sm"
-                      id="Name"
-                      type="text"
-                      minRows={1}
-                      placeholder="Name of the project"
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
-                    />
-                  </div>
-                  <div className="mt-4">
-                    <button
-                      type="button"
-                      className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                      onClick={closeModal}
-                    >
-                      Save!
-                    </button>
-                  </div>
-                </Dialog.Panel>
-              </Transition.Child>
-            </div>
-          </div>
-        </Dialog>
-      </Transition>
     </div>
   );
 }
