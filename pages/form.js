@@ -19,6 +19,8 @@ import Feedback from "../components/tabs/Feedback";
 import Modality from "../components/tabs/Modality";
 // import { Rule } from "postcss";
 
+const Aimo = ["Outcome", "Performance", "Process/learning"];
+
 const KoivistoHamari = [
   "Education/Learning",
   "Health/Exercise",
@@ -70,7 +72,7 @@ const DeviceSelection = [
   "Tablet",
   "Head-mounted Display",
   "Augmented Reality",
-  "Real Life (/non digital)"
+  "Real Life (/non digital)",
 ];
 
 const performanceSelection = [
@@ -141,7 +143,7 @@ export default function Home() {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [domain, setDomain] = useState([]);
   const [behavior, setBehavior] = useState();
-  const [aim, setAim] = useState("");
+  const [aim, setAim] = useState([]);
   const [name, setName] = useState("");
   const [target, setTarget] = useState("");
   const [targetAge, setTargetAge] = useState([]);
@@ -294,6 +296,7 @@ export default function Home() {
                     behavior={behavior}
                     setBehavior={setBehavior}
                     selectObj1={KoivistoHamari}
+                    selectObj2={Aimo}
                     selectObj3={categoriesSelection}
                     selectObj4={ageSelection}
                   />
@@ -359,8 +362,8 @@ export default function Home() {
               selectedIndex={selectedIndex}
               name={name}
               behavior={behavior}
-              domain={domain.name}
-              aim={aim.name}
+              domain={domain}
+              aim={aim}
               target={target}
               timing={timing}
               context={context}

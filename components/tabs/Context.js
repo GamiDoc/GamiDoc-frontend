@@ -21,7 +21,8 @@ function Context({
   setTargetCat,
 
   selectObj1, // L'oggetto che contiene i campi del select
-  selectObj3, //set target cat
+  selectObj2, // Aimo
+  selectObj3, // set target cat
   selectObj4, // Target categories
 }) {
   const [isShowing, setIsShowing] = useState(0); // per transition
@@ -76,17 +77,23 @@ function Context({
         clearly state the final purpose of the future software.
       </h2>
 
-        <TextField
-          onClick={() => setIsShowing(2)}
-          multiline
-          className="w-full rounded-lg  shadow-md"
-          id="Aim"
-          type="text"
-          placeholder="Aim"
-          rows={3}
+      <FormControl>
+        <InputLabel>Aim</InputLabel>
+        <Select
+          className="relative w-full shadow-md "
+          single
           value={aim}
           onChange={(e) => setAim(e.target.value)}
-        />
+          input={<OutlinedInput label="Name" />}
+        >
+          {selectObj2.map((name) => (
+            <MenuItem key={name} value={name}>
+              {name}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+ 
   
 
       <label className="mt-4 block text-gray-700  font-bold mb-2">
@@ -137,7 +144,7 @@ function Context({
           ))}
         </Select>
       </FormControl>
-      <FormControl className="top-10">
+      <FormControl className="top-5">
         <InputLabel>Categories</InputLabel>
         <Select
           className="relative w-full shadow-md "
