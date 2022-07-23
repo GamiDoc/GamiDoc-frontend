@@ -1,9 +1,9 @@
 import React from "react";
-import { useState } from "react";
-import TextareaAutosize from "@mui/material/TextareaAutosize";
+import TextField from "@mui/material/TextField";
+
+
 
 function Rules({rules, setRules}) {
-  const [isShowing, setIsShowing] = useState(0); // per transition
 
   return (
     <div className="flex flex-col py-4 w-[60em]">
@@ -15,16 +15,16 @@ function Rules({rules, setRules}) {
         detail.
       </h2>
       <label className="block text-gray-700   font-bold mb-2" />
-      <TextareaAutosize
-        onClick={() => setIsShowing(1)}
-        className="w-full border cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none   sm:"
-        id="rules"
-        type="text"
-        minRows={4}
-        placeholder="Rules"
-        value={rules}
-        onChange={(e) => setRules(e.target.value)}
-      />
+      <TextField
+          className="  w-full border shadow-md "
+          id="username"
+          type="text"
+          multiline
+          rows={3}
+          placeholder="Rules"
+          value={rules}
+          onChange={(e) => setRules(e.target.value)}
+        />
     </div>
   );
 }
