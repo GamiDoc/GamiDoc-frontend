@@ -10,17 +10,24 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 
 export default function Home() {
-
   const router = useRouter();
   return (
     <div className="flex flex-col justify-between h-screen">
       <Header />
       <div className="text-center ">
-        <h1 className=" text-3xl  font-bold">
-          Lets start with the name:
-        </h1>
-        <Box className="py-8" component="form" noValidate required autoComplete="off">
-          <TextField id="outlined-basic" label="GamiDoc" variant="outlined" />
+        <h1 className=" text-3xl  font-bold">Lets start with the name:</h1>
+        <Box
+          className="py-8"
+          component="form"
+          noValidate
+          required
+          autoComplete="off"
+        >
+          <TextField
+            id="outlined-basic"
+            label="GamiDoc"
+            variant="outlined"
+          />
         </Box>
         <button
           onClick={() => router.push("/form")}

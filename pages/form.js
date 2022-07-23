@@ -1,12 +1,9 @@
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { useState, useEffect } from "react";
+import { useState , useEffect} from "react";
 import { Fragment } from "react";
 import dynamic from "next/dynamic";
 const Pdf = dynamic(() => import("../components/CreatePDF"), { ssr: false });
-import { Transition } from "@headlessui/react";
-import { Dialog } from "@headlessui/react";
-import TextareaAutosize from "@mui/material/TextareaAutosize";
 
 // Tabs
 import { Tab } from "@headlessui/react";
@@ -113,31 +110,30 @@ const fictionalSelection = [
 
 // Modality
 const modes = [
-  { id: 1, mode: "Individual" },
-  { id: 2, mode: "Cooperative" },
-  { id: 3, mode: "Competitive" },
-  { id: 4, mode: "Cooperative-Competitive" },
+  "Individual",
+  "Cooperative",
+  "Competitive",
+  "Cooperative-Competitive",
 ];
 
 // Feedback
-const tt = [
-  { id: 1, frame: "Immediate Feedback" },
-  { id: 2, frame: "Late Feedback" },
-];
+const tt = ["Immediate Feedback", "Late Feedback"];
 const contenuti = [
-  { id: 1, text: "Corrective Feedback" },
-  { id: 2, text: "Explicative Feedback" },
-  { id: 3, text: "Reporting Feedback" },
-  { id: 4, text: "Personalized Feedback" },
+  "Corrective Feedback",
+  "Explicative Feedback",
+  "Reporting Feedback",
+  "Personalized Feedback",
 ];
 
 export default function Home() {
   // Feedback Page states
-  const [timing, setTiming] = useState(tt[0]);
-  const [context, setContext] = useState(contenuti[0]);
+  const [timing, setTiming] = useState([]);
+  const [context, setContext] = useState([]);
+  const [timingDescription, setTimingDescription] = useState("");
+  const [contextDescription, setContextDescription] = useState("");
 
   // Modality Page state
-  const [modality, setModality] = useState(modes[0]);
+  const [modality, setModality] = useState([]);
 
   //context
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -321,6 +317,10 @@ export default function Home() {
                     setTiming={setTiming}
                     context={context}
                     setContext={setContext}
+                    timingDescription={timingDescription}
+                    setTimingDescription={setTimingDescription}
+                    contextDescription={contextDescription}
+                    setContextDescription={setContextDescription}
                     selectObj1={tt}
                     selectObj2={contenuti}
                   />
