@@ -73,11 +73,11 @@ const DeviceSelection = [
 ];
 
 const performanceSelection = [
-  { id: 1, name: "Acknowledgement", unavailable: false },
-  { id: 2, name: "Level", unavailable: false },
-  { id: 3, name: "Progression", unavailable: false },
-  { id: 4, name: "Point", unavailable: false },
-  { id: 5, name: "Stats", unavailable: false },
+  "Acknowledgement", 
+  "Level", 
+   "Progression", 
+   "Point", 
+   "Stats", 
 ];
 
 const ecologicalSelection = [
