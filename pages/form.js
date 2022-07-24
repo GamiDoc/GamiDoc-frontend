@@ -364,10 +364,16 @@ export default function Home() {
               behavior={behavior}
               domain={domain}
               aim={aim}
-              target={target}
+              targetAge={targetAge}
+              targetCat={targetCat}
               timing={timing}
               context={context}
               modality={modality}
+              device={device}
+              timingDescription={timingDescription}
+              contextDescription={contextDescription}
+              rules = {rules}
+              aesthetics= {aesthetics}
             />
             <div className="grow flex-row flex gap-5 items-center justify-end">
               <div
