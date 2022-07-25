@@ -36,12 +36,12 @@ function Footer() {
             </h6>
             <p className="mb-4">
               <a href="#!" className="text-gray-300">
-                FAQ's
+                FAQ s
               </a>
             </p>
             <p className="mb-4">
-              <a href="/Form" className="text-gray-300">
-                Terms & condition
+              <a href="/documentation" className="text-gray-300">
+                Documentation
               </a>
             </p>
             <p className="mb-4">

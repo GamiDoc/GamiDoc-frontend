@@ -1,12 +1,9 @@
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { useState, useEffect } from "react";
+import { useState , useEffect} from "react";
 import { Fragment } from "react";
 import dynamic from "next/dynamic";
 const Pdf = dynamic(() => import("../components/CreatePDF"), { ssr: false });
-import { Transition } from "@headlessui/react";
-import { Dialog } from "@headlessui/react";
-import TextareaAutosize from "@mui/material/TextareaAutosize";
 
 // Tabs
 import { Tab } from "@headlessui/react";
@@ -19,68 +16,91 @@ import Feedback from "../components/tabs/Feedback";
 import Modality from "../components/tabs/Modality";
 // import { Rule } from "postcss";
 
+const Aimo = ["Outcome", "Performance", "Process/learning"];
+
 const KoivistoHamari = [
-  { id: 1, name: "Education/Learning", unavailable: false },
-  { id: 2, name: "Health/Exercise", unavailable: false },
-  { id: 3, name: "Crowdsourcing", unavailable: false },
-  { id: 4, name: "Social behavior/networking/sharing", unavailable: true },
-  { id: 5, name: "Software development/design", unavailable: false },
-  { id: 6, name: "Business/Management", unavailable: false },
-  { id: 7, name: "Ecological/environmental behavior", unavailable: false },
-  { id: 8, name: "eCommerce/eServices", unavailable: true },
-  { id: 9, name: "Software engineering", unavailable: false },
-  { id: 10, name: "Marketing/Consumer behavior", unavailable: false },
-  { id: 11, name: "Citizen/public engagement/activity", unavailable: false },
-  { id: 12, name: "Entertainment", unavailable: true },
-  { id: 13, name: "Innovation", unavailable: false },
-  { id: 14, name: "Transportation/Mobility", unavailable: false },
-  { id: 15, name: "Culture/Tourism", unavailable: false },
-  { id: 16, name: "Architecture", unavailable: true },
-  { id: 17, name: "Communication", unavailable: false },
-  { id: 18, name: "Emergency planning", unavailable: false },
-  { id: 19, name: "Politics", unavailable: false },
-  { id: 20, name: "Welfare/city/human/public services", unavailable: true },
-  { id: 21, name: "Work", unavailable: false },
-  { id: 22, name: "Theory", unavailable: false },
+  "Education/Learning",
+  "Health/Exercise",
+  "Crowdsourcing",
+  "Social behavior/networking/sharing",
+  "Software development/design",
+  "Business/Management",
+  "Ecological/environmental behavior",
+  "eCommerce/eServices",
+  "Software engineering",
+  "Marketing/Consumer behavior",
+  "Citizen/public engagement/activity",
+  "Entertainment",
+  "Innovation",
+  "Transportation/Mobility",
+  "Culture/Tourism",
+  "Architecture",
+  "Communication",
+  "Emergency planning",
+  "Politics",
+  "Welfare/city/human/public services",
+  "Work",
+  "Theory",
 ];
 
+const ageSelection = [
+  "1-3",
+  "4-5",
+  "6-9",
+  "10-12",
+  "13-15",
+  "16-18",
+  "19-25",
+  "26-29",
+  "30-35",
+  "35-39",
+  "40-49",
+  "50-59",
+  "60-69",
+  "70-79",
+  "80+",
+];
+
+const categoriesSelection = ["Student", "Employees"];
+
 const DeviceSelection = [
-  { id: 1, name: "Mobile", unavailable: false },
-  { id: 2, name: "Laptop", unavailable: false },
-  { id: 3, name: "Tablet", unavailable: false },
-  { id: 4, name: "Head-mounted Display", unavailable: true },
-  { id: 5, name: "Other", unavailable: true },
+  "Mobile",
+  "Computer/Laptop",
+  "Tablet",
+  "Head-mounted Display",
+  "Augmented Reality",
+  "Real Life (/non digital)",
 ];
 
 const performanceSelection = [
-  { id: 1, name: "Acknowledgement", unavailable: false },
-  { id: 2, name: "Level", unavailable: false },
-  { id: 3, name: "Progression", unavailable: false },
-  { id: 4, name: "Point", unavailable: true },
-  { id: 5, name: "Stats", unavailable: true },
+  "Acknowledgement", 
+  "Level", 
+   "Progression", 
+   "Point", 
+   "Stats", 
 ];
 
 const ecologicalSelection = [
   { id: 1, name: "Chance", unavailable: false },
   { id: 2, name: "Imposed choice", unavailable: false },
   { id: 3, name: "Economy", unavailable: false },
-  { id: 4, name: "Rarity", unavailable: true },
-  { id: 5, name: "Time pressure", unavailable: true },
+  { id: 4, name: "Rarity", unavailable: false },
+  { id: 5, name: "Time pressure", unavailable: false },
 ];
 
 const socialSelection = [
   { id: 1, name: "Competition", unavailable: false },
   { id: 2, name: "Cooperation", unavailable: false },
   { id: 3, name: "Reputation", unavailable: false },
-  { id: 4, name: "Social pressure", unavailable: true },
+  { id: 4, name: "Social pressure", unavailable: false },
 ];
 
 const personalSelection = [
   { id: 1, name: "Novelty", unavailable: false },
   { id: 2, name: "Objectives", unavailable: false },
   { id: 3, name: "Puzzle", unavailable: false },
-  { id: 4, name: "Renovation", unavailable: true },
-  { id: 5, name: "Sensation", unavailable: true },
+  { id: 4, name: "Renovation", unavailable: false },
+  { id: 5, name: "Sensation", unavailable: false },
 ];
 
 const fictionalSelection = [
@@ -90,42 +110,46 @@ const fictionalSelection = [
 
 // Modality
 const modes = [
-  { id: 1, mode: "Individual" },
-  { id: 2, mode: "Cooperative" },
-  { id: 3, mode: "Competitive" },
-  { id: 4, mode: "Cooperative-Competitive" },
+  "Individual",
+  "Cooperative",
+  "Competitive",
+  "Cooperative-Competitive",
 ];
 
 // Feedback
-const tt = [
-  { id: 1, frame: "Immediate Feedback" },
-  { id: 2, frame: "Late Feedback" },
-];
+const tt = ["Immediate Feedback", "Late Feedback"];
 const contenuti = [
-  { id: 1, text: "Corrective Feedback" },
-  { id: 2, text: "Explicative Feedback" },
-  { id: 3, text: "Reporting Feedback" },
-  { id: 4, text: "Personalized Feedback" },
+  "Corrective Feedback",
+  "Explicative Feedback",
+  "Reporting Feedback",
+  "Personalized Feedback",
 ];
 
 export default function Home() {
   // Feedback Page states
-  const [timing, setTiming] = useState(tt[0]);
-  const [context, setContext] = useState(contenuti[0]);
+  const [timing, setTiming] = useState([]);
+  const [context, setContext] = useState([]);
+  const [timingDescription, setTimingDescription] = useState("");
+  const [contextDescription, setContextDescription] = useState("");
 
   // Modality Page state
-  const [modality, setModality] = useState(modes[0]);
+  const [modality, setModality] = useState([]);
 
+  //context
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [domain, setDomain] = useState(KoivistoHamari[0]);
+  const [domain, setDomain] = useState([]);
   const [behavior, setBehavior] = useState();
-  const [aim, setAim] = useState("");
+  const [aim, setAim] = useState([]);
   const [name, setName] = useState("");
   const [target, setTarget] = useState("");
+  const [targetAge, setTargetAge] = useState([]);
+
+  const [targetCat, setTargetCat] = useState([]);
+
   let [isOpen, setIsOpen] = useState(true);
 
   //Device
-  const [device, setDevice] = useState(DeviceSelection[0]);
+  const [device, setDevice] = useState([]);
 
   //Affordances
   const [performance, setPerformance] = useState(performanceSelection[0]);
@@ -157,7 +181,7 @@ export default function Home() {
             {/* {handleSwitch()} */}
             <Tab.Group
               selectedIndex={selectedIndex}
-              onChange={setSelectedIndex} 
+              onChange={setSelectedIndex}
             >
               <Tab.List className="flex flex-row gap-16 items-center ">
                 <Tab as={Fragment}>
@@ -261,9 +285,16 @@ export default function Home() {
                     setDomain={setDomain}
                     target={target}
                     setTarget={setTarget}
+                    targetAge={targetAge}
+                    setTargetAge={setTargetAge}
+                    targetCat={targetCat}
+                    setTargetCat={setTargetCat}
                     behavior={behavior}
                     setBehavior={setBehavior}
                     selectObj1={KoivistoHamari}
+                    selectObj2={Aimo}
+                    selectObj3={categoriesSelection}
+                    selectObj4={ageSelection}
                   />
                 </Tab.Panel>
                 <Tab.Panel>
@@ -286,6 +317,10 @@ export default function Home() {
                     setTiming={setTiming}
                     context={context}
                     setContext={setContext}
+                    timingDescription={timingDescription}
+                    setTimingDescription={setTimingDescription}
+                    contextDescription={contextDescription}
+                    setContextDescription={setContextDescription}
                     selectObj1={tt}
                     selectObj2={contenuti}
                   />
@@ -327,12 +362,18 @@ export default function Home() {
               selectedIndex={selectedIndex}
               name={name}
               behavior={behavior}
-              domain={domain.name}
-              aim={aim.name}
-              target={target}
+              domain={domain}
+              aim={aim}
+              targetAge={targetAge}
+              targetCat={targetCat}
               timing={timing}
               context={context}
               modality={modality}
+              device={device}
+              timingDescription={timingDescription}
+              contextDescription={contextDescription}
+              rules = {rules}
+              aesthetics= {aesthetics}
             />
             <div className="grow flex-row flex gap-5 items-center justify-end">
               <div
@@ -362,64 +403,6 @@ export default function Home() {
         </div>
       </div>
       <Footer />
-
-      <Transition appear show={isOpen} as={Fragment}>
-        <Dialog as="div" className="relative z-10" onClose={closeModal}>
-          <Transition.Child
-            as={Fragment}
-            enter="ease-out duration-300"
-            enterFrom="opacity-0"
-            enterTo="opacity-100"
-            leave="ease-in duration-200"
-            leaveFrom="opacity-100"
-            leaveTo="opacity-0"
-          >
-            <div className="fixed inset-0 bg-black bg-opacity-25" />
-          </Transition.Child>
-          <div className="fixed inset-0 overflow-y-auto">
-            <div className="flex min-h-full items-center justify-center p-4 text-center">
-              <Transition.Child
-                as={Fragment}
-                enter="ease-out duration-300"
-                enterFrom="opacity-0 scale-95"
-                enterTo="opacity-100 scale-100"
-                leave="ease-in duration-200"
-                leaveFrom="opacity-100 scale-100"
-                leaveTo="opacity-0 scale-95"
-              >
-                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
-                  <Dialog.Title
-                    as="h3"
-                    className="text-lg font-medium leading-6 text-gray-900"
-                  >
-                    Project name
-                  </Dialog.Title>
-                  <div className="mt-2">
-                    <TextareaAutosize
-                      className="w-96 border cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none   sm:text-sm"
-                      id="Name"
-                      type="text"
-                      minRows={1}
-                      placeholder="Name of the project"
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
-                    />
-                  </div>
-                  <div className="mt-4">
-                    <button
-                      type="button"
-                      className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                      onClick={closeModal}
-                    >
-                      Save!
-                    </button>
-                  </div>
-                </Dialog.Panel>
-              </Transition.Child>
-            </div>
-          </div>
-        </Dialog>
-      </Transition>
     </div>
   );
 }

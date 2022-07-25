@@ -8,6 +8,7 @@ import {
   StyleSheet,
   PDFDownloadLink,
 } from "@react-pdf/renderer";
+import Aesthetics from "./tabs/Aesthetics";
 
 export default function CreatePDF({ 
   selectedIndex,
@@ -15,10 +16,17 @@ export default function CreatePDF({
   behavior, 
   domain, 
   aim ,
-  target,
+  targetCat,
+  targetAge,
   modality,
   timing,
-  context
+  timingDescription,
+  contextDescription,
+  context,
+  device,
+  affordances,
+  rules,
+  aesthetics
 }) {
   const styles = StyleSheet.create({
     page: {
@@ -52,23 +60,23 @@ export default function CreatePDF({
       alignItems:"center",
       alignSelf:"center",
       position:"relative",
-      fontfamily: "Computer Modern",
+      fontfamily: "Sen",
       top:78,
     },
     tab: {
       fontSize:"18",
       fontWeight:"bold",
-      fontfamily: "Computer Modern",
+      fontfamily: "Sen",
     },
     h1: {
       fontSize: "13",
-      fontWeight: "bold",
-      fontfamily: "Computer Modern",
+      fontWeight: "black",
+      fontfamily: "Sen",
 
     },
     h2: {
       fontSize: "11",
-      fontfamily: "Computer Modern",
+      fontfamily: "Sen",
     },
   });
 
@@ -90,21 +98,52 @@ export default function CreatePDF({
           <Text style={styles.h1}>Aim:</Text>
           <Text style={styles.h2}>{aim}</Text>
           <Text style={styles.h1}>Target:</Text>
-          <Text style={styles.h2}>{target}</Text>
+          <Text style={styles.h2}>{targetAge}</Text>
+          <Text style={styles.h2}>{targetCat}</Text>
+        </View>
+      </Page>
+      <Page size="A4" style={styles.page}>
+      <View style={styles.section}>
+          <Text style={styles.h1}>Device:</Text>
+          <Text style={styles.h2}>{device}</Text>
         </View>
       </Page>
       <Page size="A4" style={styles.page}>
         <View style={styles.section}>
           <Text style={styles.h1}>Modality:</Text>
-          <Text style={styles.h2}>{modality.mode}</Text>
+          <Text style={styles.h2}>{modality}</Text>
         </View>
       </Page>
+      
       <Page size="A4" style={styles.page}>
         <View style={styles.section}>
           <Text style={styles.h1}>Timing:</Text>
-          <Text style={styles.h2}>{timing.frame}</Text>
+          <Text style={styles.h2}>{timing}</Text>
+          <Text style={styles.h2}>{timingDescription}</Text>
           <Text style={styles.h1}>Context:</Text>
-          <Text style={styles.h2}>{context.text}</Text>
+          <Text style={styles.h2}>{context}</Text>
+          <Text style={styles.h2}>{contextDescription}</Text>
+        </View>
+      </Page>
+
+      <Page size="A4" style={styles.page}>
+        <View style={styles.section}>
+          <Text style={styles.h1}>Afforndances:</Text>
+          <Text style={styles.h2}>{affordances}</Text>
+        </View>
+      </Page>
+
+      <Page size="A4" style={styles.page}>
+        <View style={styles.section}>
+          <Text style={styles.h1}>Rules:</Text>
+          <Text style={styles.h2}>{rules}</Text>
+        </View>
+      </Page>
+
+      <Page size="A4" style={styles.page}>
+        <View style={styles.section}>
+          <Text style={styles.h1}>Aestethics:</Text>
+          <Text style={styles.h2}>{aesthetics}</Text>
         </View>
       </Page>
     </Document>

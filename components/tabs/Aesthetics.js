@@ -1,5 +1,5 @@
 import React from "react";
-import TextareaAutosize from "@mui/material/TextareaAutosize";
+import TextField from "@mui/material/TextField";
 
 function Aesthetics({ aesthetics, setAesthetics }) {
   return (
@@ -17,21 +17,22 @@ function Aesthetics({ aesthetics, setAesthetics }) {
         interface, and so forth.
       </h2>
       <label className="block text-gray-700   font-bold mb-2" />
-      <TextareaAutosize
-        className="w-full border cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none   sm:"
-        id="aesthetics"
-        type="text"
-        minRows={4}
-        placeholder="Aesthetics"
-        value={aesthetics}
-        onChange={(e) => setAesthetics(e.target.value)}
-      />
+      <TextField
+          className="  w-full border shadow-md "
+          id="username"
+          type="text"
+          multiline
+          rows={3}
+          placeholder="Rules"
+          value={aesthetics}
+          onChange={(e) => setAesthetics(e.target.value)}
+        />
 
       <input
         type="file"
         name="myImage"
         accept="image/png, image/gif, image/jpeg"
-        className="gap-9 w-full border cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none   sm:
+        className="gap-9 w-full border cursor-default rounded-md bg-white py-2 pl-3 pr-10  shadow-md
         "
       />
     </div>
