@@ -8,7 +8,6 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 
 
 export default function Modality({ modality, setModality, selectObj1 }) {
-  const [isShowing, setIsShowing] = useState(0); // per transition
   return (
     <div className="flex flex-col py-4 w-[60em]">
       <label className=" mt-4 block text-gray-700  font-bold mb-2">
