@@ -14,6 +14,7 @@ export default function Modality({ modality, setModality, selectObj1 }) {
         Type of Modality:
       </label>
 
+
       <h2 className="mt-4 block text-gray-700  mb-2 ">
         This section is dedicated to the definition of the main modality
         included in the gamification software.
