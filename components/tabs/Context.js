@@ -1,5 +1,4 @@
 import { useState } from "react";
-import TextareaAutosize from "@mui/material/TextareaAutosize";
 import * as React from "react";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
