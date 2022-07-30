@@ -5,6 +5,9 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
+import IconButton from "@mui/material/IconButton";
+import { useRouter } from "next/router";
 
 export default function Feedback({
   timing,
@@ -18,8 +21,18 @@ export default function Feedback({
   selectObj1,
   selectObj2,
 }) {
+  const router = useRouter();
   return (
     <div className="flex flex-col py-4 w-[60em]">
+      <label className=" mt-4 block text-gray-700  font-bold mb-2">
+        <IconButton
+          aria-label="Example"
+          onClick={() => router.push("/documentation#technology")}
+        >
+          <InfoOutlinedIcon sx={{ fontSize: 20 }} />
+        </IconButton>
+        Feedback  
+      </label>
       <h2 className=" mt-4 block text-gray-700  mb-2 ">
         This section refers to the selection of the kind of feedback used in the
         software. Since feedback works differently across certain domains and
