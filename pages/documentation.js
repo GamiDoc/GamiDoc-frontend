@@ -155,7 +155,7 @@ export default function documentation() {
         7. Repetition of the learned behaviors in a real context gives an extra 50 points. 
         8. After 150 points, players level up. 
         9. The difficulty of the questions is related to the players’ level. 
-        10. Players' score is shown in a level-locked leaderboard.<br/> <br/>
+        10. Players &apos; score is shown in a level-locked leaderboard.<br/> <br/>
         </div> <div id="mechanics">
         <h1 className="font-bold">
         3.1.2 Game mechanics </h1>
@@ -198,7 +198,7 @@ export default function documentation() {
         7. Repetition of the learned behaviors in a real context gives an extra 50 points (core mechanics). 
         8. After 150 points, players level up (progression mechanics). 
         9. The difficulty of the questions is related to the players’ level (progression mechanics). 
-        10. Players' score is shown in a level-locked leaderboard (secondary mechanics).<br/> <br/>
+        10. Players&apos; score is shown in a level-locked leaderboard (secondary mechanics).<br/> <br/>
         </div> <div id="gameloop">
         <h1 className="font-bold">
         3.2 Game Loop </h1>
@@ -286,7 +286,7 @@ export default function documentation() {
          
         All the gamification elements are picked out based on
         purposes and behaviors to be encouraged, mechanics and dynamics, and
-        optionally based on the user's individual differences. In literature,
+        optionally based on the user&apos;s individual differences. In literature,
         there are several elements to identify any differences between users
         (Bartle et al., 1996; Caillois, 2001; Kotsopoulos et al., 2018; Manero
         et al., 2016; Nacke et al., 2011; Tondello et al., 2016). In this model,

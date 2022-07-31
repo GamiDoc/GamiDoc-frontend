@@ -1,11 +1,14 @@
-import { useState } from "react";
 import * as React from "react";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
+import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
+import IconButton from "@mui/material/IconButton";
+import { useRouter } from "next/router";
+
 
 function Context({
   behavior,
@@ -24,7 +27,7 @@ function Context({
   selectObj3, // set target cat
   selectObj4, // Target categories
 }) {
-  const [isShowing, setIsShowing] = useState(0); // per transition
+  const router = useRouter();
 
   const handleChange = (event) => {
     const {
@@ -47,6 +50,9 @@ function Context({
   return (
     <div className="flex flex-col py-4 w-[60em]">
       <label className=" mt-4 block text-gray-700  font-bold mb-2">
+        <IconButton aria-label="Example" onClick={() => router.push("/documentation#domain")}>
+          <InfoOutlinedIcon sx={{ fontSize: 20 }} />
+        </IconButton>
         Domain
       </label>
       <h2 className=" mt-4  block text-gray-700  mb-2 ">
@@ -70,7 +76,12 @@ function Context({
         </Select>
       </FormControl>
 
-      <label className=" mt-4 block text-gray-700  font-bold mb-2">Aim</label>
+      <label className=" mt-4 block text-gray-700  font-bold mb-2">
+      <IconButton aria-label="Example" onClick={() => router.push("/documentation#aim")}>
+          <InfoOutlinedIcon sx={{ fontSize: 20 }} />
+        </IconButton>
+        Aim
+      </label>
       <h2 className=" mt-4 block text-gray-700  mb-2 ">
         To clearly understand the goal of the software, we ask designers to
         clearly state the final purpose of the future software.
@@ -92,10 +103,11 @@ function Context({
           ))}
         </Select>
       </FormControl>
- 
-  
 
       <label className="mt-4 block text-gray-700  font-bold mb-2">
+      <IconButton aria-label="Example" onClick={() => router.push("/documentation#behaviors")}>
+          <InfoOutlinedIcon sx={{ fontSize: 20 }} />
+        </IconButton>
         Behaviors to be encouraged...
       </label>
       <h2 className="w-[60em] mt-4 block text-gray-700  mb-2 ">
@@ -117,6 +129,9 @@ function Context({
       />
 
       <label className="mt-4 block text-gray-700  font-bold mb-2">
+      <IconButton aria-label="Example" onClick={() => router.push("/documentation#target")}>
+          <InfoOutlinedIcon sx={{ fontSize: 20 }} />
+        </IconButton>
         Target user
       </label>
       <h2 className="w-[60em] mt-4 block text-gray-700  mb-2 ">

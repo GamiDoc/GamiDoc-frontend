@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 const sanityIoImageLoader = ({ src, width, quality }) => {
   return `https://i.imgur.com/jTsP1Dl.png`;
@@ -40,9 +41,9 @@ function Footer() {
               </a>
             </p>
             <p className="mb-4">
-              <a href="/documentation" className="text-gray-300">
-                Documentation
-              </a>
+              <Link href="/documentation">
+                <a>Documentation</a>
+              </Link>
             </p>
             <p className="mb-4">
               <a href="#!" className="text-gray-300">
