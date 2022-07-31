@@ -2,6 +2,9 @@ import React from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Image from "next/image";
+import Sidebar from "../components/Sidebar";
+import Grid from  '@mui/material/Grid';
+
 
 
 const figure1 = ({ src, width, quality }) => {
@@ -14,7 +17,10 @@ export default function documentation() {
   return (
     <div>
       <Header />
-      <div className="p-12">
+      <div className="flex flex-row p-10 ">
+      <div className="w-full relative top-0 "> <Sidebar /></div>
+     
+      <div className="">
         <h1 className="font-bold text-2xl">A holistic model for Gamification</h1>
         <div>
           Several researchers on gamification unanimously agree that
@@ -218,7 +224,7 @@ export default function documentation() {
               height={784/2}
  
             /></div>
-        </div> <div id="game">
+        </div> <div >
         <h1 className="font-bold">
         3.3 Game </h1>
         
@@ -309,6 +315,8 @@ export default function documentation() {
         (Schall, 2007). <br/> <br/>
         
         </div> 
+      </div>
+      
       </div>
       <Footer />
     </div>
