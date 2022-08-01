@@ -18,7 +18,7 @@ export default function documentation() {
     <div>
       <Header />
       <div className="flex flex-row p-10 ">
-      <div className="w-full relative top-0 "> <Sidebar /></div>
+        <div className="w-full relative top-0 "> <Sidebar /></div>
      
       <div className="">
         <h1 className="font-bold text-2xl">A holistic model for Gamification</h1>
