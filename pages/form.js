@@ -146,8 +146,6 @@ export default function Home() {
 
   const [targetCat, setTargetCat] = useState([]);
 
-  let [isOpen, setIsOpen] = useState(true);
-
   //Device
   const [device, setDevice] = useState([]);
 
@@ -164,18 +162,13 @@ export default function Home() {
   //Rules
   const [rules, setRules] = useState("");
 
-  function closeModal() {
-    setIsOpen(false);
-  }
 
-  function openModal() {
-    setIsOpen(true);
-  }
 
   return (
-    <div className="flex flex-col justify-between h-screen">
+    <div className="flex flex-col justify-between h-screen ">
       <Header />
-      <div className="flex flex-col items-center w-screen justify-center ">
+      <h1 className="hidden items-center justify-center font-bold text-2xl xs:flex "> ONLY DESKTOP USE </h1>
+      <div className="flex flex-col items-center w-screen justify-center xs:hidden">
         <div className="flex flex-col justify-center">
           <div className=" flex-col flex py-10 justify-center items-center">
             {/* {handleSwitch()} */}

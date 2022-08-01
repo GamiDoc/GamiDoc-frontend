@@ -10,7 +10,8 @@ module.exports = {
         'yellow-gamy': '#FFB900',
       },
       screens: {
-        'xs':{'max': '640px'},
+        'xs':{'max': '1200px'},
+       
       },
 
     },
