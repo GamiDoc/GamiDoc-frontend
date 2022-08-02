@@ -2,6 +2,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { useRouter } from "next/router";
 import { useState , useEffect} from "react";  
+import MobileOffIcon from '@mui/icons-material/MobileOff';
 
 import dynamic from "next/dynamic";
 const Pdf = dynamic(() => import("../components/CreatePDF"), { ssr: false });
@@ -16,7 +17,8 @@ export default function Home() {
   return (
     <div className="flex flex-col justify-between h-screen">
       <Header />
-      <div className="text-center ">
+      <h1 className="hidden items-center justify-center font-bold text-2xl xs:flex "> ONLY DESKTOP USE <MobileOffIcon/> </h1>
+      <div className="text-center xs:hidden">
         <h1 className=" text-3xl  font-bold">Lets start with the name:</h1>
         <Stack
           className="py-8 "

@@ -4,7 +4,7 @@ import { useState , useEffect} from "react";
 import { Fragment } from "react";
 import dynamic from "next/dynamic";
 const Pdf = dynamic(() => import("../components/CreatePDF"), { ssr: false });
-
+import MobileOffIcon from '@mui/icons-material/MobileOff';
 // Tabs
 import { Tab } from "@headlessui/react";
 import Context from "../components/tabs/Context";
@@ -167,7 +167,7 @@ export default function Home() {
   return (
     <div className="flex flex-col justify-between h-screen ">
       <Header />
-      <h1 className="hidden items-center justify-center font-bold text-2xl xs:flex "> ONLY DESKTOP USE </h1>
+      <h1 className="hidden items-center justify-center font-bold text-2xl xs:flex "> ONLY DESKTOP USE <MobileOffIcon/> </h1>
       <div className="flex flex-col items-center w-screen justify-center xs:hidden">
         <div className="flex flex-col justify-center">
           <div className=" flex-col flex py-10 justify-center items-center">
