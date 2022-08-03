@@ -1,13 +1,14 @@
-import { useState } from "react";
 import * as React from "react";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
+import Select from "@mui/material/Select";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import IconButton from "@mui/material/IconButton";
 import { useRouter } from "next/router";
+import Fab from "@mui/material/Fab";
+import AddIcon from "@mui/icons-material/Add";
 
 function Affordances({
   performance,
@@ -29,6 +30,9 @@ function Affordances({
   fictional,
   fictionalSelection,
   setFictional,
+
+  select1, setSelected1,
+  select2, setSelected2,
 }) {
   const router = useRouter();
 
@@ -46,7 +50,7 @@ function Affordances({
       <FormControl>
         <InputLabel>Performance</InputLabel>
         <Select
-          className="relative w-full shadow-md "
+          className="relative w-full shadow-md mb-4"
           single
           value={performance}
           onChange={(e) => setPerformance(e.target.value)}
@@ -59,6 +63,105 @@ function Affordances({
           ))}
         </Select>
       </FormControl>
+
+      <FormControl>
+        <InputLabel>Performance</InputLabel>
+        <Select
+          className="relative w-full shadow-md mb-4"
+          single
+          value={performance}
+          onChange={(e) => setPerformance(e.target.value)}
+          input={<OutlinedInput label="Name" />}
+        >
+          {performanceSelection.map((name) => (
+            <MenuItem key={name} value={name}>
+              {name}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+
+      <FormControl>
+        <InputLabel>Performance</InputLabel>
+        <Select
+          className="relative w-full shadow-md mb-4"
+          single
+          value={performance}
+          onChange={(e) => setPerformance(e.target.value)}
+          input={<OutlinedInput label="Name" />}
+        >
+          {performanceSelection.map((name) => (
+            <MenuItem key={name} value={name}>
+              {name}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+
+      <FormControl>
+        <InputLabel>Performance</InputLabel>
+        <Select
+          className="relative w-full shadow-md mb-4"
+          single
+          value={performance}
+          onChange={(e) => setPerformance(e.target.value)}
+          input={<OutlinedInput label="Name" />}
+        >
+          {performanceSelection.map((name) => (
+            <MenuItem key={name} value={name}>
+              {name}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+
+      <FormControl className={select1 == true ? "flex" : "hidden"}>
+        <InputLabel>Performance</InputLabel>
+        <Select
+          className="relative w-full shadow-md mb-4 "
+          single
+          value={performance}
+          onChange={(e) => setPerformance(e.target.value)}
+          input={<OutlinedInput label="Name" />}
+        >
+          {performanceSelection.map((name) => (
+            <MenuItem key={name} value={name}>
+              {name}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+
+      <FormControl className={select2 == true ? "flex" : "hidden"}>
+        <InputLabel>Performance</InputLabel>
+        <Select
+          className="relative w-full shadow-md mb-4"
+          single
+          value={performance}
+          onChange={(e) => setPerformance(e.target.value)}
+          input={<OutlinedInput label="Name" />}
+        >
+          {performanceSelection.map((name) => (
+            <MenuItem key={name} value={name}>
+              {name}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+      <div className="justify-center items-center flex">
+        <Fab
+          size="medium"
+          color="info"
+          aria-label="add"
+          className="bg-yellow-gamy  hover:bg-yellow-600 hover:shadow-lg "
+          onClick={() => {
+            if (select1 == false) setSelected1(true);
+            else setSelected2(true);
+          }}
+        >
+          <AddIcon />
+        </Fab>
+      </div>
     </div>
   );
 }

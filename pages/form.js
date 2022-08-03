@@ -1,10 +1,10 @@
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { useState , useEffect} from "react";
+import { useState, useEffect } from "react";
 import { Fragment } from "react";
 import dynamic from "next/dynamic";
 const Pdf = dynamic(() => import("../components/CreatePDF"), { ssr: false });
-import MobileOffIcon from '@mui/icons-material/MobileOff';
+import MobileOffIcon from "@mui/icons-material/MobileOff";
 // Tabs
 import { Tab } from "@headlessui/react";
 import Context from "../components/tabs/Context";
@@ -73,11 +73,17 @@ const DeviceSelection = [
 ];
 
 const performanceSelection = [
-  "Acknowledgement", 
-  "Level", 
+  "Acknowledgement",
+  "Level",
+  "Progression",
    "Progression", 
+  "Progression",
+  "Point",
    "Point", 
+  "Point",
+  "Stats",
    "Stats", 
+  "Stats",
 ];
 
 const ecologicalSelection = [
@@ -155,13 +161,14 @@ export default function Home() {
   const [social, setSocial] = useState(socialSelection[0]);
   const [personal, setPersonal] = useState(personalSelection[0]);
   const [fictional, setFictional] = useState(fictionalSelection[0]);
+  const [select1, setSelected1] = useState(false);
+  const [select2, setSelected2] = useState(false);
 
   //Aestethics
   const [aesthetics, setAesthetics] = useState("");
 
   //Rules
   const [rules, setRules] = useState("");
-
 
 
   return (
@@ -335,67 +342,71 @@ export default function Home() {
                     fictional={fictional}
                     fictionalSelection={fictionalSelection}
                     setFictional={setFictional}
-                  />
-                </Tab.Panel>
-                <Tab.Panel>
-                  <Rules rules={rules} setRules={setRules} />
-                </Tab.Panel>
-                <Tab.Panel>
-                  <Aesthetics
-                    aesthetics={aesthetics}
-                    setAesthetics={setAesthetics}
-                  />
-                </Tab.Panel>
-              </Tab.Panels>
-            </Tab.Group>
-          </div>
+                      select1={select1}
+                      setSelected1={setSelected1}
+                      select2={select2}
+                      setSelected2={setSelected2}
+                    />
+                  </Tab.Panel>
+                  <Tab.Panel>
+                    <Rules rules={rules} setRules={setRules} />
+                  </Tab.Panel>
+                  <Tab.Panel>
+                    <Aesthetics
+                      aesthetics={aesthetics}
+                      setAesthetics={setAesthetics}
+                    />
+                  </Tab.Panel>
+                </Tab.Panels>
+              </Tab.Group>
+            </div>
 
-          <div className="flex flex-row justify-center items-center mb-10 mr-2">
-            <Pdf
-              selectedIndex={selectedIndex}
-              name={name}
-              behavior={behavior}
-              domain={domain}
-              aim={aim}
-              targetAge={targetAge}
-              targetCat={targetCat}
-              timing={timing}
-              context={context}
-              modality={modality}
-              device={device}
-              timingDescription={timingDescription}
-              contextDescription={contextDescription}
-              rules = {rules}
-              aesthetics= {aesthetics}
-            />
-            <div className="grow flex-row flex gap-5 items-center justify-end">
-              <div
-                className="py-4 inline-block px-8 bg-gray-800 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md  hover:bg-gray-600 hover:shadow-lg focus:bg-yellow-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out "
-                onClick={() => {
-                  if (selectedIndex == 0) setSelectedIndex(6);
-                  else setSelectedIndex(selectedIndex - 1);
-                }}
-              >
-                <h1 className="font-bold py-0.5 px-2 ">Previous</h1>
-              </div>
-              <div
-                className={
-                  selectedIndex == 6
-                    ? " invisible"
-                    : " py-4 inline-block px-8 bg-yellow-gamy text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md  hover:bg-yellow-600 hover:shadow-lg focus:bg-yellow-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out"
-                }
-                onClick={() => {
-                  if (selectedIndex == 6) setSelectedIndex(0);
-                  else setSelectedIndex(selectedIndex + 1);
-                }}
-              >
-                <h1 className="font-bold py-0.5 px-2 ">Next</h1>
+            <div className="flex flex-row justify-center items-center mb-10 mr-2">
+              <Pdf
+                selectedIndex={selectedIndex}
+                name={name}
+                behavior={behavior}
+                domain={domain}
+                aim={aim}
+                targetAge={targetAge}
+                targetCat={targetCat}
+                timing={timing}
+                context={context}
+                modality={modality}
+                device={device}
+                timingDescription={timingDescription}
+                contextDescription={contextDescription}
+                rules={rules}
+                aesthetics={aesthetics}
+              />
+              <div className="grow flex-row flex gap-5 items-center justify-end">
+                <div
+                  className="py-4 inline-block px-8 bg-gray-800 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md  hover:bg-gray-600 hover:shadow-lg focus:bg-yellow-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out "
+                  onClick={() => {
+                    if (selectedIndex == 0) setSelectedIndex(6);
+                    else setSelectedIndex(selectedIndex - 1);
+                  }}
+                >
+                  <h1 className="font-bold py-0.5 px-2 ">Previous</h1>
+                </div>
+                <div
+                  className={
+                    selectedIndex == 6
+                      ? " invisible"
+                      : " py-4 inline-block px-8 bg-yellow-gamy text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md  hover:bg-yellow-600 hover:shadow-lg focus:bg-yellow-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out"
+                  }
+                  onClick={() => {
+                    if (selectedIndex == 6) setSelectedIndex(0);
+                    else setSelectedIndex(selectedIndex + 1);
+                  }}
+                >
+                  <h1 className="font-bold py-0.5 px-2 ">Next</h1>
+                </div>
               </div>
             </div>
           </div>
         </div>
+        <Footer />
       </div>
-      <Footer />
-    </div>
   );
 }
