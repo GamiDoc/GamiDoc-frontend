@@ -9,7 +9,6 @@ import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import IconButton from "@mui/material/IconButton";
 import { useRouter } from "next/router";
 
-
 function Context({
   behavior,
   setBehavior,
@@ -50,9 +49,11 @@ function Context({
   return (
     <div className="flex flex-col py-4 w-[60em]">
       <label className=" mt-4 block text-gray-700  font-bold mb-2">
-        <IconButton aria-label="Example" onClick={() => router.push("/documentation#domain")}>
-          <InfoOutlinedIcon sx={{ fontSize: 20 }} />
-        </IconButton>
+        <a href="/documentation#domain">
+          <IconButton aria-label="Example">
+            <InfoOutlinedIcon sx={{ fontSize: 20 }} />
+          </IconButton>
+        </a>
         Domain
       </label>
       <h2 className=" mt-4  block text-gray-700  mb-2 ">
@@ -77,9 +78,11 @@ function Context({
       </FormControl>
 
       <label className=" mt-4 block text-gray-700  font-bold mb-2">
-      <IconButton aria-label="Example" onClick={() => router.push("/documentation#aim")}>
-          <InfoOutlinedIcon sx={{ fontSize: 20 }} />
-        </IconButton>
+        <a href="/documentation#aim">
+          <IconButton aria-label="Example">
+            <InfoOutlinedIcon sx={{ fontSize: 20 }} />
+          </IconButton>
+        </a>
         Aim
       </label>
       <h2 className=" mt-4 block text-gray-700  mb-2 ">
@@ -105,9 +108,11 @@ function Context({
       </FormControl>
 
       <label className="mt-4 block text-gray-700  font-bold mb-2">
-      <IconButton aria-label="Example" onClick={() => router.push("/documentation#behaviors")}>
-          <InfoOutlinedIcon sx={{ fontSize: 20 }} />
-        </IconButton>
+        <a href="/documentation#behaviors">
+          <IconButton aria-label="Example">
+            <InfoOutlinedIcon sx={{ fontSize: 20 }} />
+          </IconButton>
+        </a>
         Behaviors to be encouraged...
       </label>
       <h2 className="w-[60em] mt-4 block text-gray-700  mb-2 ">
@@ -129,9 +134,13 @@ function Context({
       />
 
       <label className="mt-4 block text-gray-700  font-bold mb-2">
-      <IconButton aria-label="Example" onClick={() => router.push("/documentation#target")}>
+      <a href="/documentation#target">
+        <IconButton
+          aria-label="Example"
+        >
           <InfoOutlinedIcon sx={{ fontSize: 20 }} />
         </IconButton>
+        </a>
         Target user
       </label>
       <h2 className="w-[60em] mt-4 block text-gray-700  mb-2 ">

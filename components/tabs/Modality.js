@@ -14,12 +14,12 @@ export default function Modality({ modality, setModality, selectObj1 }) {
 
   return (
     <div className="flex flex-col py-4 w-[60em]">
-      <label className=" mt-4 block text-gray-700  font-bold mb-2"><IconButton
+      <label className=" mt-4 block text-gray-700  font-bold mb-2"><a href="/documentation#modality"><IconButton
           aria-label="Example"
           onClick={() => router.push("/documentation#modality")}
         >
           <InfoOutlinedIcon sx={{ fontSize: 20 }} />
-        </IconButton>
+        </IconButton></a>
         Type of Modality
       </label>
 
