@@ -44,7 +44,7 @@ export default function SignIn() {
   };
 
   return (
-    <ThemeProvider theme={theme}>
+    <div>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -93,11 +93,11 @@ export default function SignIn() {
               type="submit"
               fullWidth
               variant="contained"
-              className="py-4 inline-block px-8 bg-yellow-gamy text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md  hover:bg-yellow-600 hover:shadow-lg focus:bg-yellow-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out"
+              className="py-4 inline-block px-8 bg-yellow-gamy text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md  hover:bg-yellow-600 hover:shadow-lg focus:bg-yellow-600 focus:shadow-lg focus:outline-none focus:ring-0  active:shadow-lg transition duration-150 ease-in-out"
             >
               Sign In
             </Button>
-            <Grid container>
+            <Grid container >
               <Grid item xs>
                 <Link href="#" variant="body2">
                   Forgot password?
@@ -113,6 +113,6 @@ export default function SignIn() {
         </Box>
         <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
-    </ThemeProvider>
+    </div>
   );
 }

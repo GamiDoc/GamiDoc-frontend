@@ -1,9 +1,11 @@
+import * as React from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { useState , useEffect} from "react";
+import { useState, useEffect } from "react";
 import { Fragment } from "react";
 import dynamic from "next/dynamic";
 const Pdf = dynamic(() => import("../components/CreatePDF"), { ssr: false });
+import MobileOffIcon from "@mui/icons-material/MobileOff";
 
 // Tabs
 import { Tab } from "@headlessui/react";
@@ -14,6 +16,15 @@ import Aesthetics from "../components/tabs/Aesthetics";
 import Device from "../components/tabs/Device";
 import Feedback from "../components/tabs/Feedback";
 import Modality from "../components/tabs/Modality";
+
+//alert
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
+
 // import { Rule } from "postcss";
 
 const Aimo = ["Outcome", "Performance", "Process/learning"];
@@ -72,41 +83,66 @@ const DeviceSelection = [
   "Real Life (/non digital)",
 ];
 
+//affordances
+const affordancesSelection = [
+  "Acknowledgement",
+  "Level",
+  "Progression",
+  "Point",
+  "Stats",
+
+  "Chance",
+  "Imposed choice",
+  "Economy",
+  "Rarity",
+  "Time pressure",
+
+  "Competition",
+  "Cooperation",
+  "Reputation",
+  "Social pressure",
+
+  "Novelty",
+  "Objectives",
+  "Puzzle",
+  "Renovation",
+  "Sensation",
+
+  "Narrative", 
+  "Story telling"
+]
 const performanceSelection = [
-  "Acknowledgement", 
-  "Level", 
-   "Progression", 
-   "Point", 
-   "Stats", 
+  "Acknowledgement",
+  "Level",
+  "Progression",
+  "Point",
+  "Stats",
 ];
 
 const ecologicalSelection = [
-  { id: 1, name: "Chance", unavailable: false },
-  { id: 2, name: "Imposed choice", unavailable: false },
-  { id: 3, name: "Economy", unavailable: false },
-  { id: 4, name: "Rarity", unavailable: false },
-  { id: 5, name: "Time pressure", unavailable: false },
+  "Chance",
+  "Imposed choice",
+  "Economy",
+  "Rarity",
+  "Time pressure",
 ];
 
 const socialSelection = [
-  { id: 1, name: "Competition", unavailable: false },
-  { id: 2, name: "Cooperation", unavailable: false },
-  { id: 3, name: "Reputation", unavailable: false },
-  { id: 4, name: "Social pressure", unavailable: false },
+  "Competition",
+  "Cooperation",
+  "Reputation",
+  "Social pressure",
 ];
 
 const personalSelection = [
-  { id: 1, name: "Novelty", unavailable: false },
-  { id: 2, name: "Objectives", unavailable: false },
-  { id: 3, name: "Puzzle", unavailable: false },
-  { id: 4, name: "Renovation", unavailable: false },
-  { id: 5, name: "Sensation", unavailable: false },
+  "Novelty",
+  "Objectives",
+  "Puzzle",
+  "Renovation",
+  "Sensation",
 ];
 
-const fictionalSelection = [
-  { id: 1, name: "Narrative", unavailable: false },
-  { id: 2, name: "Story telling", unavailable: false },
-];
+const fictionalSelection = ["Narrative", "Story telling"];
 
 // Modality
 const modes = [
@@ -118,6 +154,7 @@ const modes = [
 
 // Feedback
 const tt = ["Immediate Feedback", "Late Feedback"];
+
 const contenuti = [
   "Corrective Feedback",
   "Explicative Feedback",
@@ -150,11 +187,29 @@ export default function Home() {
   const [device, setDevice] = useState([]);
 
   //Affordances
-  const [performance, setPerformance] = useState(performanceSelection[0]);
-  const [ecological, setEcological] = useState(ecologicalSelection[0]);
-  const [social, setSocial] = useState(socialSelection[0]);
-  const [personal, setPersonal] = useState(personalSelection[0]);
-  const [fictional, setFictional] = useState(fictionalSelection[0]);
+  const [performance, setPerformance] = useState(2);
+  const [ecological, setEcological] = useState("");
+  const [social, setSocial] = useState("");
+  const [personal, setPersonal] = useState("");
+  const [fictional, setFictional] = useState("");
+  const [select1, setSelected1] = useState(false);
+  const [select2, setSelected2] = useState(false);
+  const [affordances1, setAffordances1] = useState("");
+  const [affordances2, setAffordances2] = useState("");
+  const [affordances3, setAffordances3] = useState("");
+  const [affordances4, setAffordances4] = useState("");
+  const [affordances5, setAffordances5] = useState("");
+  const [affordances6, setAffordances6] = useState("");
+  const [open, setOpen] = React.useState(false);
+  const handleClick = () => {
+    setOpen(true);
+  };
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
+  };
 
   //Aestethics
   const [aesthetics, setAesthetics] = useState("");
@@ -162,12 +217,13 @@ export default function Home() {
   //Rules
   const [rules, setRules] = useState("");
 
-
-
   return (
     <div className="flex flex-col justify-between h-screen ">
       <Header />
-      <h1 className="hidden items-center justify-center font-bold text-2xl xs:flex "> ONLY DESKTOP USE </h1>
+      <h1 className="hidden items-center justify-center font-bold text-2xl xs:flex ">
+        {" "}
+        ONLY DESKTOP USE <MobileOffIcon />{" "}
+      </h1>
       <div className="flex flex-col items-center w-screen justify-center xs:hidden">
         <div className="flex flex-col justify-center">
           <div className=" flex-col flex py-10 justify-center items-center">
@@ -335,6 +391,25 @@ export default function Home() {
                     fictional={fictional}
                     fictionalSelection={fictionalSelection}
                     setFictional={setFictional}
+                    select1={select1}
+                    setSelected1={setSelected1}
+                    select2={select2}
+                    setSelected2={setSelected2}
+                    affordances1={affordances1}
+                    setAffordances1={setAffordances1}
+                    affordances2={affordances2}
+                    setAffordances2={setAffordances2}
+                    affordances3={affordances3}
+                    setAffordances3={setAffordances3}
+                    affordances4={affordances4}
+                    setAffordances4={setAffordances4}
+                    affordances5={affordances5}
+                    setAffordances5={setAffordances5}
+                    affordances6={affordances6}
+                    setAffordances6={setAffordances6}
+                    open={open}
+                    setOpen={setOpen}
+                    affordancesSelection={affordancesSelection}
                   />
                 </Tab.Panel>
                 <Tab.Panel>
@@ -365,8 +440,8 @@ export default function Home() {
               device={device}
               timingDescription={timingDescription}
               contextDescription={contextDescription}
-              rules = {rules}
-              aesthetics= {aesthetics}
+              rules={rules}
+              aesthetics={aesthetics}
             />
             <div className="grow flex-row flex gap-5 items-center justify-end">
               <div
@@ -395,6 +470,11 @@ export default function Home() {
           </div>
         </div>
       </div>
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="warning" sx={{ width: "100%" }}>
+          too much feedback - pls stop!
+        </Alert>
+      </Snackbar>
       <Footer />
     </div>
   );

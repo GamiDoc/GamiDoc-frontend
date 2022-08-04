@@ -47,7 +47,7 @@ export default function SignUp() {
   };
 
   return (
-    <ThemeProvider theme={theme}>
+    <div >
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -73,7 +73,7 @@ export default function SignUp() {
             onSubmit={handleSubmit}
             sx={{ mt: 3 }}
           >
-            <Grid container spacing={2}>
+            <Grid container spacing={2} >
               <Grid item xs={12} sm={6}>
                 <TextField
                   autoComplete="given-name"
@@ -143,6 +143,6 @@ export default function SignUp() {
         </Box>
         <Copyright sx={{ mt: 5 }} />
       </Container>
-    </ThemeProvider>
+    </div>
   );
 }

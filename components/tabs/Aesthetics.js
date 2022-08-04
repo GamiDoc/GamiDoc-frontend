@@ -3,17 +3,19 @@ import TextField from "@mui/material/TextField";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import IconButton from "@mui/material/IconButton";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 function Aesthetics({ aesthetics, setAesthetics }) {
   const router = useRouter();
   return (
     <div className="flex flex-col py-4 w-[60em]">
-      <label className="mt-4 block text-gray-700  font-bold mb-2"><IconButton
+      
+      <label className="mt-4 block text-gray-700  font-bold mb-2"><Link href="/documentation#aesthetics"><IconButton
           aria-label="Example"
-          onClick={() => router.push("/documentation#aesthetics")}
+          //onClick={() => router.push("/documentation#aesthetics")}
         >
           <InfoOutlinedIcon sx={{ fontSize: 20 }} />
-        </IconButton>
+        </IconButton></Link>
         Aesthetics
       </label>
       <h2 className="w-[60em] mt-4 block text-gray-700  mb-2 ">

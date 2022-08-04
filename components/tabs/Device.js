@@ -4,15 +4,15 @@ import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
+import Select from "@mui/material/Select";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import IconButton from "@mui/material/IconButton";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 
 function Device({ device, setDevice, DeviceSelection }) {
   const router = useRouter();
-  const [isShowing, setIsShowing] = useState(0); // per transition
   const handleChange = (event) => {
     const {
       target: { value },
@@ -25,12 +25,12 @@ function Device({ device, setDevice, DeviceSelection }) {
   return (
     <div className="flex flex-col w-[60em] py-4">
       <label className=" mt-4 block text-gray-700  font-bold mb-2">
+        <Link href="/documentation#technology">
         <IconButton
           aria-label="Example"
-          onClick={() => router.push("/documentation#technology")}
         >
           <InfoOutlinedIcon sx={{ fontSize: 20 }} />
-        </IconButton>
+        </IconButton></Link>
         Device
       </label>
 

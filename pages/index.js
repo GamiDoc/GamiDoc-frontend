@@ -2,6 +2,9 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { useRouter } from "next/router";
 
+const figure1 = ({ src, width, quality }) => {
+  return `https://i.imgur.com/np0Cgo4.png`;
+};
 export default function Home() {
   const router = useRouter();
 
@@ -27,7 +30,7 @@ export default function Home() {
           Form
         </button>
       </div>
-
+      
       <Footer />
     </div>
   );
