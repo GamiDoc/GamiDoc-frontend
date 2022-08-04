@@ -9,6 +9,7 @@ import IconButton from "@mui/material/IconButton";
 import { useRouter } from "next/router";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
+import Link from "next/link";
 
 function Affordances({
   performance,
@@ -57,12 +58,12 @@ function Affordances({
   return (
     <div className="flex flex-col w-[60em] py-4">
       <label className=" mt-4 block text-gray-700  font-bold mb-2">
-        <a href="documentation#affordances">
+        <Link href="documentation#affordances">
         <IconButton
           aria-label="Example"
         >
           <InfoOutlinedIcon sx={{ fontSize: 20 }} />
-        </IconButton></a>
+        </IconButton></Link>
         Affordances
       </label>
 

@@ -8,6 +8,7 @@ import TextField from "@mui/material/TextField";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import IconButton from "@mui/material/IconButton";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 export default function Feedback({
   timing,
@@ -25,13 +26,13 @@ export default function Feedback({
   return (
     <div className="flex flex-col py-4 w-[60em]">
       <label className=" mt-4 block text-gray-700  font-bold mb-2">
-      <a href="/documentation#technology">
+      <Link href="/documentation#technology">
         <IconButton
           aria-label="Example"
           //onClick={() => router.push("/documentation#technology")}
         >
           <InfoOutlinedIcon sx={{ fontSize: 20 }} />
-        </IconButton></a>
+        </IconButton></Link>
         Feedback  
       </label>
       <h2 className=" mt-4 block text-gray-700  mb-2 ">

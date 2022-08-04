@@ -8,6 +8,7 @@ import TextField from "@mui/material/TextField";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import IconButton from "@mui/material/IconButton";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 function Context({
   behavior,
@@ -49,11 +50,11 @@ function Context({
   return (
     <div className="flex flex-col py-4 w-[60em]">
       <label className=" mt-4 block text-gray-700  font-bold mb-2">
-        <a href="/documentation#domain">
+        <Link href="/documentation#domain">
           <IconButton aria-label="Example">
             <InfoOutlinedIcon sx={{ fontSize: 20 }} />
           </IconButton>
-        </a>
+        </Link>
         Domain
       </label>
       <h2 className=" mt-4  block text-gray-700  mb-2 ">
@@ -78,11 +79,11 @@ function Context({
       </FormControl>
 
       <label className=" mt-4 block text-gray-700  font-bold mb-2">
-        <a href="/documentation#aim">
+        <Link href="/documentation#aim">
           <IconButton aria-label="Example">
             <InfoOutlinedIcon sx={{ fontSize: 20 }} />
           </IconButton>
-        </a>
+        </Link>
         Aim
       </label>
       <h2 className=" mt-4 block text-gray-700  mb-2 ">
@@ -108,11 +109,11 @@ function Context({
       </FormControl>
 
       <label className="mt-4 block text-gray-700  font-bold mb-2">
-        <a href="/documentation#behaviors">
+        <Link href="/documentation#behaviors">
           <IconButton aria-label="Example">
             <InfoOutlinedIcon sx={{ fontSize: 20 }} />
           </IconButton>
-        </a>
+        </Link>
         Behaviors to be encouraged...
       </label>
       <h2 className="w-[60em] mt-4 block text-gray-700  mb-2 ">
@@ -134,13 +135,13 @@ function Context({
       />
 
       <label className="mt-4 block text-gray-700  font-bold mb-2">
-      <a href="/documentation#target">
+      <Link href="/documentation#target">
         <IconButton
           aria-label="Example"
         >
           <InfoOutlinedIcon sx={{ fontSize: 20 }} />
         </IconButton>
-        </a>
+        </Link>
         Target user
       </label>
       <h2 className="w-[60em] mt-4 block text-gray-700  mb-2 ">

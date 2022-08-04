@@ -8,6 +8,7 @@ import Select from "@mui/material/Select";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import IconButton from "@mui/material/IconButton";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 
 function Device({ device, setDevice, DeviceSelection }) {
@@ -24,12 +25,12 @@ function Device({ device, setDevice, DeviceSelection }) {
   return (
     <div className="flex flex-col w-[60em] py-4">
       <label className=" mt-4 block text-gray-700  font-bold mb-2">
-        <a href="/documentation#technology">
+        <Link href="/documentation#technology">
         <IconButton
           aria-label="Example"
         >
           <InfoOutlinedIcon sx={{ fontSize: 20 }} />
-        </IconButton></a>
+        </IconButton></Link>
         Device
       </label>
 
