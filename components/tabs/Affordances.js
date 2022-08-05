@@ -1,6 +1,5 @@
 import * as React from "react";
 import OutlinedInput from "@mui/material/OutlinedInput";
-import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
@@ -10,28 +9,9 @@ import { useRouter } from "next/router";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 import Link from "next/link";
+import { TextField } from "@mui/material";
 
 function Affordances({
-  performance,
-  performanceSelection,
-  setPerformance,
-
-  ecological,
-  ecologicalSelection,
-  setEcological,
-
-  social,
-  socialSelection,
-  setSocial,
-
-  personal,
-  personalSelection,
-  setPersonal,
-
-  fictional,
-  fictionalSelection,
-  setFictional,
-
   select1,
   setSelected1,
   select2,
@@ -87,6 +67,15 @@ function Affordances({
           
         </Select>
       </FormControl>
+      <TextField
+        className={affordances1 == "" ? "hidden w-full border  shadow-md " : "flex w-full border  shadow-md mb-4"}
+        type="text"
+        multiline
+        rows={3}
+        placeholder={affordances1}
+        // value={behavior}
+        // onChange={(e) => setBehavior(e.target.value)}
+      />
 
       <FormControl>
         
@@ -106,6 +95,15 @@ function Affordances({
           ))}
         </Select>
       </FormControl>
+      <TextField
+        className={affordances2 == "" ? "hidden w-full border  shadow-md " : "flex w-full border  shadow-md mb-4"}
+        type="text"
+        multiline
+        rows={3}
+        placeholder={affordances2}
+        // value={behavior}
+        // onChange={(e) => setBehavior(e.target.value)}
+      />
 
       <FormControl>
         
@@ -125,6 +123,15 @@ function Affordances({
           ))}
         </Select>
       </FormControl>
+      <TextField
+        className={affordances3 == "" ? "hidden w-full border  shadow-md " : "flex w-full border  shadow-md mb-4"}
+        type="text"
+        multiline
+        rows={3}
+        placeholder={affordances3}
+        // value={behavior}
+        // onChange={(e) => setBehavior(e.target.value)}
+      />
 
       <FormControl>
         
@@ -144,6 +151,15 @@ function Affordances({
           ))}
         </Select>
       </FormControl>
+      <TextField
+        className={affordances4 == "" ? "hidden w-full border  shadow-md " : "flex w-full border  shadow-md mb-4"}
+        type="text"
+        multiline
+        rows={3}
+        placeholder={affordances4}
+        // value={behavior}
+        // onChange={(e) => setBehavior(e.target.value)}
+      />
 
       <FormControl className={select1 == true ? "flex" : "hidden"}>
         
@@ -163,9 +179,17 @@ function Affordances({
           ))}
         </Select>
       </FormControl>
+      <TextField
+        className={affordances5 == "" ? "hidden w-full border  shadow-md " : "flex w-full border  shadow-md mb-4"}
+        type="text"
+        multiline
+        rows={3}
+        placeholder={affordances5}
+        // value={behavior}
+        // onChange={(e) => setBehavior(e.target.value)}
+      />
 
       <FormControl className={select2 == true ? "flex" : "hidden"}>
-        
         <Select
           className="relative w-full shadow-md mb-4"
           single
@@ -182,6 +206,16 @@ function Affordances({
           ))}
         </Select>
       </FormControl>
+      <TextField
+        className={affordances6 == "" ? "hidden w-full border  shadow-md " : "flex w-full border  shadow-md mb-4"}
+        type="text"
+        multiline
+        rows={3}
+        placeholder={affordances6}
+        // value={behavior}
+        // onChange={(e) => setBehavior(e.target.value)}
+      />
+
       <div className="justify-center items-center flex">
         <Fab
           size="medium"

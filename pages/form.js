@@ -6,6 +6,7 @@ import { Fragment } from "react";
 import dynamic from "next/dynamic";
 const Pdf = dynamic(() => import("../components/CreatePDF"), { ssr: false });
 import MobileOffIcon from "@mui/icons-material/MobileOff";
+import Head from "next/head";
 
 // Tabs
 import { Tab } from "@headlessui/react";
@@ -108,9 +109,9 @@ const affordancesSelection = [
   "Renovation",
   "Sensation",
 
-  "Narrative", 
-  "Story telling"
-]
+  "Narrative",
+  "Story telling",
+];
 const performanceSelection = [
   "Acknowledgement",
   "Level",
@@ -219,6 +220,10 @@ export default function Home() {
 
   return (
     <div className="flex flex-col justify-between h-screen ">
+      <Head>
+        <title>GamiDoc</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       <Header />
       <h1 className="hidden items-center justify-center font-bold text-2xl xs:flex ">
         {" "}
@@ -376,21 +381,6 @@ export default function Home() {
                 </Tab.Panel>
                 <Tab.Panel>
                   <Affordances
-                    performance={performance}
-                    performanceSelection={performanceSelection}
-                    setPerformance={setPerformance}
-                    ecological={ecological}
-                    ecologicalSelection={ecologicalSelection}
-                    setEcological={setEcological}
-                    social={social}
-                    socialSelection={socialSelection}
-                    setSocial={setSocial}
-                    personal={personal}
-                    personalSelection={personalSelection}
-                    setPersonal={setPersonal}
-                    fictional={fictional}
-                    fictionalSelection={fictionalSelection}
-                    setFictional={setFictional}
                     select1={select1}
                     setSelected1={setSelected1}
                     select2={select2}
