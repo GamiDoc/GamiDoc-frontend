@@ -108,9 +108,9 @@ const affordancesSelection = [
   "Renovation",
   "Sensation",
 
-  "Narrative", 
-  "Story telling"
-]
+  "Narrative",
+  "Story telling",
+];
 const performanceSelection = [
   "Acknowledgement",
   "Level",
@@ -413,7 +413,16 @@ export default function Home() {
                   />
                 </Tab.Panel>
                 <Tab.Panel>
-                  <Rules rules={rules} setRules={setRules} />
+                  <Rules
+                    rules={rules}
+                    setRules={setRules}
+                    affordances1={affordances1}
+                    affordances2={affordances2}
+                    affordances3={affordances3}
+                    affordances4={affordances4}
+                    affordances5={affordances5}
+                    affordances6={affordances6}
+                  />
                 </Tab.Panel>
                 <Tab.Panel>
                   <Aesthetics

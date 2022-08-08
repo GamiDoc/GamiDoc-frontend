@@ -59,45 +59,37 @@ function Affordances({
     <div className="flex flex-col w-[60em] py-4">
       <label className=" mt-4 block text-gray-700  font-bold mb-2">
         <Link href="documentation#affordances">
-        <IconButton
-          aria-label="Example"
-        >
-          <InfoOutlinedIcon sx={{ fontSize: 20 }} />
-        </IconButton></Link>
+          <IconButton aria-label="Example">
+            <InfoOutlinedIcon sx={{ fontSize: 20 }} />
+          </IconButton>
+        </Link>
         Affordances
       </label>
 
       <FormControl>
-        
         <Select
           className="relative w-full shadow-md mb-4"
           single
-          inputProps={{ 'aria-label': 'Without label' }}
-          displayEmpty
           value={affordances1}
           onChange={(e) => setAffordances1(e.target.value)}
-          input={<OutlinedInput label="Name" />}
+          input={<OutlinedInput />}
         >
-          
-            {affordancesSelection.map((name) => (
-              <MenuItem key={name} value={name}>
-                {name}
-              </MenuItem>
-            ))}
-          
+          {affordancesSelection.map((name) => (
+            <MenuItem key={name} value={name}>
+              {name}
+            </MenuItem>
+          ))}
         </Select>
       </FormControl>
 
       <FormControl>
-        
         <Select
           className="relative w-full shadow-md mb-4"
           single
-          inputProps={{ 'aria-label': 'Without label' }}
           displayEmpty
           value={affordances2}
           onChange={(e) => setAffordances2(e.target.value)}
-          input={<OutlinedInput label="Name" />}
+          input={<OutlinedInput />}
         >
           {affordancesSelection.map((name) => (
             <MenuItem key={name} value={name}>
@@ -108,15 +100,13 @@ function Affordances({
       </FormControl>
 
       <FormControl>
-        
         <Select
           className="relative w-full shadow-md mb-4"
           single
-          inputProps={{ 'aria-label': 'Without label' }}
           displayEmpty
           value={affordances3}
           onChange={(e) => setAffordances3(e.target.value)}
-          input={<OutlinedInput label="Name" />}
+          input={<OutlinedInput />}
         >
           {affordancesSelection.map((name) => (
             <MenuItem key={name} value={name}>
@@ -127,15 +117,13 @@ function Affordances({
       </FormControl>
 
       <FormControl>
-        
         <Select
           className="relative w-full shadow-md mb-4"
           single
-          inputProps={{ 'aria-label': 'Without label' }}
           displayEmpty
           value={affordances4}
           onChange={(e) => setAffordances4(e.target.value)}
-          input={<OutlinedInput label="Name" />}
+          input={<OutlinedInput />}
         >
           {affordancesSelection.map((name) => (
             <MenuItem key={name} value={name}>
@@ -146,15 +134,13 @@ function Affordances({
       </FormControl>
 
       <FormControl className={select1 == true ? "flex" : "hidden"}>
-        
         <Select
           className="relative w-full shadow-md mb-4 "
           single
-          inputProps={{ 'aria-label': 'Without label' }}
           displayEmpty
           value={affordances5}
           onChange={(e) => setAffordances5(e.target.value)}
-          input={<OutlinedInput label="Name" />}
+          input={<OutlinedInput />}
         >
           {affordancesSelection.map((name) => (
             <MenuItem key={name} value={name}>
@@ -165,15 +151,13 @@ function Affordances({
       </FormControl>
 
       <FormControl className={select2 == true ? "flex" : "hidden"}>
-        
         <Select
           className="relative w-full shadow-md mb-4"
           single
-          inputProps={{ 'aria-label': 'Without label' }}
           displayEmpty
           value={affordances6}
           onChange={(e) => setAffordances6(e.target.value)}
-          input={<OutlinedInput label="Name" />}
+          input={<OutlinedInput />}
         >
           {affordancesSelection.map((name) => (
             <MenuItem key={name} value={name}>

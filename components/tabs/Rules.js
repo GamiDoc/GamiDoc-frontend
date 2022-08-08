@@ -45,7 +45,9 @@ function Rules({
         value={rules}
         onChange={(e) => setRules(e.target.value)}
       />
-
+      <h2 className={affordances1 == "" ? " hidden w-[60em] mt-4  text-gray-700  mb-2 " : "w-[60em] mt-4 block text-gray-700  mb-2 " }>
+        Clarify the affordances rules.
+      </h2>
 
 
       <TextField
@@ -57,7 +59,7 @@ function Rules({
         type="text"
         multiline
         rows={3}
-        placeholder="Rules for ${affordances1}"
+        label={affordances1}
         // value={behavior}
         // onChange={(e) => setBehavior(e.target.value)}
       />
@@ -70,7 +72,7 @@ function Rules({
         type="text"
         multiline
         rows={3}
-        placeholder={affordances4}
+        label={affordances2}
         // value={behavior}
         // onChange={(e) => setBehavior(e.target.value)}
       />
@@ -83,7 +85,7 @@ function Rules({
         type="text"
         multiline
         rows={3}
-        placeholder={affordances4}
+        label={affordances3}
         // value={behavior}
         // onChange={(e) => setBehavior(e.target.value)}
       />
@@ -96,7 +98,7 @@ function Rules({
         type="text"
         multiline
         rows={3}
-        placeholder={affordances4}
+        label={affordances4}
         // value={behavior}
         // onChange={(e) => setBehavior(e.target.value)}
       />
@@ -109,7 +111,7 @@ function Rules({
         type="text"
         multiline
         rows={3}
-        placeholder={affordances4}
+        label={affordances5}
         // value={behavior}
         // onChange={(e) => setBehavior(e.target.value)}
       />
@@ -122,7 +124,7 @@ function Rules({
         type="text"
         multiline
         rows={3}
-        placeholder={affordances4}
+        label={affordances6}
         // value={behavior}
         // onChange={(e) => setBehavior(e.target.value)}
       />
