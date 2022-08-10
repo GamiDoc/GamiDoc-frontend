@@ -36,24 +36,24 @@ function Footer() {
               Support
             </h6>
             <p className="mb-4">
-              <a href="#!" className="text-gray-300">
-                FAQ s
-              </a>
+              <Link href="/about" className="text-gray-300">
+                About us
+              </Link>
             </p>
             <p className="mb-4">
-              <Link href="/documentation">
+              <Link href="/support" className="text-gray-300">
+                Contact us
+              </Link>
+            </p>
+            <p className="mb-4">
+              <Link href="/documentation" className="text-gray-300">
                 <a>Documentation</a>
               </Link>
             </p>
             <p className="mb-4">
-              <a href="#!" className="text-gray-300">
+              <Link href="#!" className="text-gray-300">
                 Privacy Policy
-              </a>
-            </p>
-            <p>
-              <a href="#!" className="text-gray-300">
-                Contact us
-              </a>
+              </Link>
             </p>
           </div>
         </div>
