@@ -14,7 +14,7 @@ export default function Support() {
           sx={{ width: 80, height: 80 }}
           className="border border-black"
         />
-        <h1 className="text-2xl">We'd love to hear from you!</h1>
+        <h1 className="text-2xl">We&apos;d love to hear from you!</h1>
         <Link href="mailto:carlo.bottaro@studenti.unitn.it">
           <Button
             type="submit"
