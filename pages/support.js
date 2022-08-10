@@ -2,7 +2,7 @@ import * as React from "react";
 import Link from "next/link"
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { Avatar, Button } from "@mui/material";
+import { Avatar } from "@mui/material";
 export default function Support() {
   return (
     <div className="flex flex-col justify-between h-screen">
@@ -16,14 +16,11 @@ export default function Support() {
         />
         <h1 className="text-2xl">We&apos;d love to hear from you!</h1>
         <Link href="mailto:carlo.bottaro@studenti.unitn.it">
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
+          <button
             className="py-4 inline-block px-8 w-40 bg-yellow-gamy text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md  hover:bg-yellow-600 hover:shadow-lg focus:bg-yellow-600 focus:shadow-lg focus:outline-none focus:ring-0  active:shadow-lg transition duration-150 ease-in-out"
           >
             Email us!
-          </Button>
+          </button>
         </Link>
       </div>
       <Footer />
