@@ -45,89 +45,112 @@ function Rules({
         value={rules}
         onChange={(e) => setRules(e.target.value)}
       />
-      <h2 className={affordances1 == "" ? " hidden w-[60em] mt-4  text-gray-700  mb-2 " : "w-[60em] mt-4 block text-gray-700  mb-2 " }>
+      <h2
+        className={
+          affordances1 == ""
+            ? " hidden w-[60em] mt-4  text-gray-700  mb-2 "
+            : "w-[60em] mt-4 block text-gray-700  mb-2 "
+        }
+      >
         Clarify the affordances rules.
       </h2>
 
-
-      <TextField
+      <div
         className={
           affordances1 == ""
             ? "hidden w-full border  shadow-md "
             : "flex w-full border  shadow-md mb-4"
         }
-        type="text"
-        multiline
-        rows={3}
-        label={affordances1}
-        // value={behavior}
-        // onChange={(e) => setBehavior(e.target.value)}
-      />
-      <TextField
+      >
+        <TextField
+          type="text"
+          multiline
+          rows={3}
+          label={affordances1}
+          // value={behavior}
+          // onChange={(e) => setBehavior(e.target.value)}
+        />
+      </div>
+      <div
         className={
           affordances2 == ""
             ? "hidden w-full border  shadow-md "
             : "flex w-full border  shadow-md mb-4"
         }
-        type="text"
-        multiline
-        rows={3}
-        label={affordances2}
-        // value={behavior}
-        // onChange={(e) => setBehavior(e.target.value)}
-      />
-      <TextField
+      >
+        <TextField
+          type="text"
+          multiline
+          rows={3}
+          label={affordances2}
+          // value={behavior}
+          // onChange={(e) => setBehavior(e.target.value)}
+        />
+      </div>
+      <div
         className={
           affordances3 == ""
             ? "hidden w-full border  shadow-md "
             : "flex w-full border  shadow-md mb-4"
         }
-        type="text"
-        multiline
-        rows={3}
-        label={affordances3}
-        // value={behavior}
-        // onChange={(e) => setBehavior(e.target.value)}
-      />
-      <TextField
+      >
+        <TextField
+          type="text"
+          multiline
+          rows={3}
+          label={affordances3}
+          // value={behavior}
+          // onChange={(e) => setBehavior(e.target.value)}
+        />
+      </div>
+      <div
         className={
           affordances4 == ""
             ? "hidden w-full border  shadow-md "
             : "flex w-full border  shadow-md mb-4"
         }
-        type="text"
-        multiline
-        rows={3}
-        label={affordances4}
-        // value={behavior}
-        // onChange={(e) => setBehavior(e.target.value)}
-      />
-      <TextField
+      >
+        <TextField
+          type="text"
+          multiline
+          rows={3}
+          label={affordances4}
+          // value={behavior}
+          // onChange={(e) => setBehavior(e.target.value)}
+        />
+      </div>
+      <div
         className={
           affordances5 == ""
             ? "hidden w-full border  shadow-md "
             : "flex w-full border  shadow-md mb-4"
         }
-        type="text"
-        multiline
-        rows={3}
-        label={affordances5}
-        // value={behavior}
-        // onChange={(e) => setBehavior(e.target.value)}
-      />
-      <TextField
+      >
+        <TextField
+          type="text"
+          multiline
+          rows={3}
+          label={affordances5}
+          // value={behavior}
+          // onChange={(e) => setBehavior(e.target.value)}
+        />
+      </div>
+      <div
         className={
           affordances6 == ""
             ? "hidden w-full border  shadow-md "
             : "flex w-full border  shadow-md mb-4"
         }
-        type="text"
-        multiline
-        rows={3}
-        label={affordances6}
-        // value={behavior}
-        // onChange={(e) => setBehavior(e.target.value)}
-      />
+      >
+        <TextField
+          type="text"
+          multiline
+          rows={3}
+          label={affordances6}
+          // value={behavior}
+          // onChange={(e) => setBehavior(e.target.value)}
+        />
+      </div>
     </div>
   );
 }

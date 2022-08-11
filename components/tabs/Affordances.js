@@ -132,46 +132,45 @@ function Affordances({
           ))}
         </Select>
       </FormControl>
-
-      <FormControl className={select1 == false ? "hidden" : "flex"}>
-        <Select
-          className="relative w-full shadow-md mb-4 "
-          single
-          displayEmpty
-          value={affordances5}
-          onChange={(e) => setAffordances5(e.target.value)}
-          input={<OutlinedInput />}
-        >
-          {affordancesSelection.map((name) => (
-            <MenuItem key={name} value={name}>
-              {name}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-
-      <FormControl className={select2 == false ? "hidden" : "flex"}>
-        <Select
-          className="relative w-full shadow-md mb-4"
-          single
-          displayEmpty
-          value={affordances6}
-          onChange={(e) => setAffordances6(e.target.value)}
-          input={<OutlinedInput />}
-        >
-          {affordancesSelection.map((name) => (
-            <MenuItem key={name} value={name}>
-              {name}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
+      <div className={select1 == false ? "hidden" : "flex"}>
+        <FormControl>
+          <Select
+            className="relative w-full shadow-md mb-4 "
+            single
+            displayEmpty
+            value={affordances5}
+            onChange={(e) => setAffordances5(e.target.value)}
+            input={<OutlinedInput />}
+          >
+            {affordancesSelection.map((name) => (
+              <MenuItem key={name} value={name}>
+                {name}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      </div>
+      <div className={select2 == false ? "hidden" : "flex"}>
+        <FormControl>
+          <Select
+            className="relative w-full shadow-md mb-4"
+            single
+            displayEmpty
+            value={affordances6}
+            onChange={(e) => setAffordances6(e.target.value)}
+            input={<OutlinedInput />}
+          >
+            {affordancesSelection.map((name) => (
+              <MenuItem key={name} value={name}>
+                {name}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      </div>
       <div className="justify-center items-center flex">
-        <Fab
-          size="medium"
-          color="info"
-          aria-label="add"
-          className="bg-yellow-gamy  hover:bg-yellow-600 hover:shadow-lg "
+        <button
+          className="bg-yellow-gamy rounded-full border-0 p-3 hover:bg-yellow-600 hover:shadow-lg "
           onClick={() => {
             if (select1 == false) setSelected1(true);
             else setSelected2(true);
@@ -180,7 +179,7 @@ function Affordances({
           }}
         >
           <AddIcon />
-        </Fab>
+        </button>
       </div>
     </div>
   );
