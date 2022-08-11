@@ -133,7 +133,7 @@ function Affordances({
         </Select>
       </FormControl>
 
-      <FormControl className={select1 == true ? "flex" : "hidden"}>
+      <FormControl className={select1 == false ? "hidden" : "flex"}>
         <Select
           className="relative w-full shadow-md mb-4 "
           single
@@ -150,7 +150,7 @@ function Affordances({
         </Select>
       </FormControl>
 
-      <FormControl className={select2 == true ? "flex" : "hidden"}>
+      <FormControl className={select2 == false ? "hidden" : "flex"}>
         <Select
           className="relative w-full shadow-md mb-4"
           single
