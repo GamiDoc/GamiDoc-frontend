@@ -1,6 +1,5 @@
 import * as React from "react";
 import OutlinedInput from "@mui/material/OutlinedInput";
-import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
@@ -10,28 +9,9 @@ import { useRouter } from "next/router";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 import Link from "next/link";
+import { TextField } from "@mui/material";
 
 function Affordances({
-  performance,
-  performanceSelection,
-  setPerformance,
-
-  ecological,
-  ecologicalSelection,
-  setEcological,
-
-  social,
-  socialSelection,
-  setSocial,
-
-  personal,
-  personalSelection,
-  setPersonal,
-
-  fictional,
-  fictionalSelection,
-  setFictional,
-
   select1,
   setSelected1,
   select2,
@@ -81,6 +61,15 @@ function Affordances({
           ))}
         </Select>
       </FormControl>
+      <TextField
+        className={affordances1 == "" ? "hidden w-full border  shadow-md " : "flex w-full border  shadow-md mb-4"}
+        type="text"
+        multiline
+        rows={3}
+        placeholder={affordances1}
+        // value={behavior}
+        // onChange={(e) => setBehavior(e.target.value)}
+      />
 
       <FormControl>
         <Select
@@ -98,6 +87,15 @@ function Affordances({
           ))}
         </Select>
       </FormControl>
+      <TextField
+        className={affordances2 == "" ? "hidden w-full border  shadow-md " : "flex w-full border  shadow-md mb-4"}
+        type="text"
+        multiline
+        rows={3}
+        placeholder={affordances2}
+        // value={behavior}
+        // onChange={(e) => setBehavior(e.target.value)}
+      />
 
       <FormControl>
         <Select
@@ -115,6 +113,15 @@ function Affordances({
           ))}
         </Select>
       </FormControl>
+      <TextField
+        className={affordances3 == "" ? "hidden w-full border  shadow-md " : "flex w-full border  shadow-md mb-4"}
+        type="text"
+        multiline
+        rows={3}
+        placeholder={affordances3}
+        // value={behavior}
+        // onChange={(e) => setBehavior(e.target.value)}
+      />
 
       <FormControl>
         <Select
@@ -123,7 +130,8 @@ function Affordances({
           displayEmpty
           value={affordances4}
           onChange={(e) => setAffordances4(e.target.value)}
-          input={<OutlinedInput />}
+
+          input={<OutlinedInput label="Name" />}
         >
           {affordancesSelection.map((name) => (
             <MenuItem key={name} value={name}>
@@ -132,6 +140,62 @@ function Affordances({
           ))}
         </Select>
       </FormControl>
+      <TextField
+        className={affordances4 == "" ? "hidden w-full border  shadow-md " : "flex w-full border  shadow-md mb-4"}
+        type="text"
+        multiline
+        rows={3}
+        placeholder={affordances4}
+        // value={behavior}
+        // onChange={(e) => setBehavior(e.target.value)}
+      />
+
+      <FormControl className={select1 == true ? "flex" : "hidden"}>
+        
+        <Select
+          className="relative w-full shadow-md mb-4 "
+          single
+          inputProps={{ 'aria-label': 'Without label' }}
+          displayEmpty
+          value={affordances5}
+          onChange={(e) => setAffordances5(e.target.value)}
+          input={<OutlinedInput label="Name" />}
+        >
+          {affordancesSelection.map((name) => (
+            <MenuItem key={name} value={name}>
+              {name}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+      <TextField
+        className={affordances5 == "" ? "hidden w-full border  shadow-md " : "flex w-full border  shadow-md mb-4"}
+        type="text"
+        multiline
+        rows={3}
+        placeholder={affordances5}
+        // value={behavior}
+        // onChange={(e) => setBehavior(e.target.value)}
+      />
+
+      <FormControl className={select2 == true ? "flex" : "hidden"}>
+        <Select
+          className="relative w-full shadow-md mb-4"
+          single
+          inputProps={{ 'aria-label': 'Without label' }}
+          displayEmpty
+          value={affordances6}
+          onChange={(e) => setAffordances6(e.target.value)}
+          input={<OutlinedInput label="Name" />}
+        >
+          {affordancesSelection.map((name) => (
+            <MenuItem key={name} value={name}>
+              {name}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+
       <div className={select1 == false ? "hidden" : "flex"}>
         <FormControl>
           <Select
@@ -168,6 +232,7 @@ function Affordances({
           </Select>
         </FormControl>
       </div>
+
       <div className="justify-center items-center flex">
         <button
           className="bg-yellow-gamy rounded-full border-0 p-3 hover:bg-yellow-600 hover:shadow-lg "

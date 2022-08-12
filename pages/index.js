@@ -1,5 +1,6 @@
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import Head from "next/head";
 import { useRouter } from "next/router";
 
 const figure1 = ({ src, width, quality }) => {
@@ -10,6 +11,10 @@ export default function Home() {
 
   return (
     <div className="flex flex-col h-screen justify-between gap-5">
+      <Head>
+        <title>GamiDoc</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       <Header />
       <div className="px-28 xs:px-10">
         <div className="w-full lg:grid-cols-2 lg:grid">
@@ -30,7 +35,7 @@ export default function Home() {
           Form
         </button>
       </div>
-      
+
       <Footer />
     </div>
   );

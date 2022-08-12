@@ -11,6 +11,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Image from "next/image";
+import Head from "next/head";
 
 const sanityIoImageLoader = ({ src, width, quality }) => {
   return `https://i.imgur.com/Y3QF08D.png`;
@@ -47,7 +48,11 @@ export default function SignUp() {
   };
 
   return (
-    <div >
+    <div>
+      <Head>
+        <title>GamiDoc</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -63,8 +68,8 @@ export default function SignUp() {
               loader={sanityIoImageLoader}
               src="image-src"
               alt="GamiDoc"
-              width={119*1.5}
-              height={20*1.5}
+              width={119 * 1.5}
+              height={20 * 1.5}
             />
           </Link>
           <Box
@@ -73,7 +78,7 @@ export default function SignUp() {
             onSubmit={handleSubmit}
             sx={{ mt: 3 }}
           >
-            <Grid container spacing={2} >
+            <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
                   autoComplete="given-name"
