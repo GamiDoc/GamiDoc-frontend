@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@auth0/nextjs-auth0": "^1.9.1",
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
     "@headlessui/react": "^1.6.4",
@@ -25,6 +26,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.7",
+    "dotenv": "^16.0.1",
     "eslint": "^8.17.0",
     "eslint-config-next": "12.1.6",
     "postcss": "^8.4.14",
