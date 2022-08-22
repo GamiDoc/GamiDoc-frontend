@@ -35,9 +35,9 @@ function Header() {
                      active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out"
         // onClick={() => router.push("/signup")}
         >
-          <a href="/api/auth/login">
+          <Link href="/api/auth/login">
             SIGN UP
-          </a>
+          </Link>
         </button>
         <button className="py-4 inline-block xs:px-4 xs:py-2 px-8 bg-gray-800 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md  hover:bg-gray-600 hover:shadow-lg focus:bg-gray-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out" onClick={() => router.push("/signin")}>
           {(user) ? "LOGOUT" : "SIGN IN"}
