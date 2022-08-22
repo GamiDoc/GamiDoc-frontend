@@ -14,8 +14,7 @@ export default handleAuth({
           audience: (process.env.SECURE ? 'https://' : 'http://') + process.env.BACK_ENDPOINT,
           scope: 'openid profile email read:messages'
         },
-        returnTo: "/models/routes/checkProfile"
-        // da controllare 
+        returnTo: "/api/firstConfig"
       });
     } catch (error) {
       res.status(error.status || 400).end(error.message);
