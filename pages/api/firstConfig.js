@@ -6,7 +6,7 @@ export default async function firstConfig(req, res) {
 
   const { accessToken } = await getAccessToken(req, res);
 
-  const resp = await axios.get(url + "/routes/user/checkProfile", { // API endpoint per il checkprofile
+  const resp = await axios.get(url + "/routes/user/checkProfile", { // API endpoint per il checkprofilet
     headers: {
       'Authorization': "Bearer " + accessToken
     }
@@ -24,7 +24,7 @@ export default async function firstConfig(req, res) {
     // ti porta alla pagina di firstConfig per l'account 
     res.writeHead(302, {
       // da fare un form che manda la richiesta al back con le informazioni per l'utente
-      Location: '/firstConfig'
+      Location: '/'
     })
     res.end();
   }
