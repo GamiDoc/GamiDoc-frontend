@@ -19,6 +19,7 @@ function Rules({
 
   return (
     <div className="flex flex-col py-4 w-[60em]">
+
       <label className="mt-4 block text-gray-700  font-bold mb-2">
         <Link href="/documentation#gamerules">
           <IconButton
@@ -31,8 +32,21 @@ function Rules({
         Rules
       </label>
       <h2 className="w-[60em] mt-4 block text-gray-700  mb-2 ">
-        In this section, we ask designers to clearly define the game rules in
-        detail.
+      Game behavior component refers to the clarification of the game rules,
+      game mechanics, game progression, and its graphical representation through
+      game loop diagrams. The game rules determine, just like in any other game,
+      how the game inside the application is played. The mechanics describe what
+      happens when a player does something in the game in order to achieve the
+      game&apos;s goal. Progression is defined through a subset of game mechanics
+      that describe how the game overall progresses like, for example, player
+      levels advancing and, thereby, unlocking new things for the game.<br/><br/> The
+      final output consists of a list of the game rules and their links, in
+      which mechanics and progression are specified. Moreover, this part is
+      linked to the dynamics subcomponent, which provides a list of possible
+      dynamics that can emerge runtime or after a certain number of runs. This
+      allows researchers and practitioners to (1) monitor the interaction
+      between users and mechanics, and (2) to modify the design in order to
+      avoid inadequate interactions and behaviors.
       </h2>
       <label className="block text-gray-700   font-bold mb-2" />
       <TextField
@@ -54,7 +68,6 @@ function Rules({
       >
         Clarify the affordances rules.
       </h2>
-
       <div
         className={
           affordances1 == ""

@@ -45,6 +45,21 @@ function Affordances({
         </Link>
         Affordances
       </label>
+      <h2 className=" mt-4 block text-gray-700  mb-2 ">
+        Gamification elements component shows a list of gamified elements used
+        in the software. The previous components are useful to better understand
+        which gamification elements fit in the proper way. The selected taxonomy
+        of possible gamified elements comes from the work of Toda and colleagues
+        (Toda, Klock, et al., 2019; Toda, Oliveira, et al., 2019): <br />
+        • Performance: Acknowledgement, Level, Progression, Points, Stats;{" "}
+        <br />
+        • Ecological: Chance, Imposed choice, Economy, Rarity, Time Pressure;{" "}
+        <br />
+        • Social: Competition, Cooperation, Reputation, Social Pressure; <br />
+        • Personal: Novelty, Objectives, Puzzle, Renovation, Sensation; <br />
+        • Fictional: Narrative, Storytelling
+        <br />
+      </h2>
 
       <FormControl>
         <Select
@@ -62,7 +77,11 @@ function Affordances({
         </Select>
       </FormControl>
       <TextField
-        className={affordances1 == "" ? "hidden w-full border  shadow-md " : "flex w-full border  shadow-md mb-4"}
+        className={
+          affordances1 == ""
+            ? "hidden w-full border  shadow-md "
+            : "flex w-full border  shadow-md mb-4"
+        }
         type="text"
         multiline
         rows={3}
@@ -70,7 +89,6 @@ function Affordances({
         // value={behavior}
         // onChange={(e) => setBehavior(e.target.value)}
       />
-
       <FormControl>
         <Select
           className="relative w-full shadow-md mb-4"
@@ -88,7 +106,11 @@ function Affordances({
         </Select>
       </FormControl>
       <TextField
-        className={affordances2 == "" ? "hidden w-full border  shadow-md " : "flex w-full border  shadow-md mb-4"}
+        className={
+          affordances2 == ""
+            ? "hidden w-full border  shadow-md "
+            : "flex w-full border  shadow-md mb-4"
+        }
         type="text"
         multiline
         rows={3}
@@ -96,7 +118,6 @@ function Affordances({
         // value={behavior}
         // onChange={(e) => setBehavior(e.target.value)}
       />
-
       <FormControl>
         <Select
           className="relative w-full shadow-md mb-4"
@@ -114,7 +135,11 @@ function Affordances({
         </Select>
       </FormControl>
       <TextField
-        className={affordances3 == "" ? "hidden w-full border  shadow-md " : "flex w-full border  shadow-md mb-4"}
+        className={
+          affordances3 == ""
+            ? "hidden w-full border  shadow-md "
+            : "flex w-full border  shadow-md mb-4"
+        }
         type="text"
         multiline
         rows={3}
@@ -122,7 +147,6 @@ function Affordances({
         // value={behavior}
         // onChange={(e) => setBehavior(e.target.value)}
       />
-
       <FormControl>
         <Select
           className="relative w-full shadow-md mb-4"
@@ -130,7 +154,6 @@ function Affordances({
           displayEmpty
           value={affordances4}
           onChange={(e) => setAffordances4(e.target.value)}
-
           input={<OutlinedInput label="Name" />}
         >
           {affordancesSelection.map((name) => (
@@ -141,7 +164,11 @@ function Affordances({
         </Select>
       </FormControl>
       <TextField
-        className={affordances4 == "" ? "hidden w-full border  shadow-md " : "flex w-full border  shadow-md mb-4"}
+        className={
+          affordances4 == ""
+            ? "hidden w-full border  shadow-md "
+            : "flex w-full border  shadow-md mb-4"
+        }
         type="text"
         multiline
         rows={3}
@@ -149,13 +176,11 @@ function Affordances({
         // value={behavior}
         // onChange={(e) => setBehavior(e.target.value)}
       />
-
       <FormControl className={select1 == true ? "flex" : "hidden"}>
-        
         <Select
           className="relative w-full shadow-md mb-4 "
           single
-          inputProps={{ 'aria-label': 'Without label' }}
+          inputProps={{ "aria-label": "Without label" }}
           displayEmpty
           value={affordances5}
           onChange={(e) => setAffordances5(e.target.value)}
@@ -169,7 +194,11 @@ function Affordances({
         </Select>
       </FormControl>
       <TextField
-        className={affordances5 == "" ? "hidden w-full border  shadow-md " : "flex w-full border  shadow-md mb-4"}
+        className={
+          affordances5 == ""
+            ? "hidden w-full border  shadow-md "
+            : "flex w-full border  shadow-md mb-4"
+        }
         type="text"
         multiline
         rows={3}
@@ -177,12 +206,11 @@ function Affordances({
         // value={behavior}
         // onChange={(e) => setBehavior(e.target.value)}
       />
-
       <FormControl className={select2 == true ? "flex" : "hidden"}>
         <Select
           className="relative w-full shadow-md mb-4"
           single
-          inputProps={{ 'aria-label': 'Without label' }}
+          inputProps={{ "aria-label": "Without label" }}
           displayEmpty
           value={affordances6}
           onChange={(e) => setAffordances6(e.target.value)}
@@ -195,7 +223,6 @@ function Affordances({
           ))}
         </Select>
       </FormControl>
-
       <div className={select1 == false ? "hidden" : "flex"}>
         <FormControl>
           <Select
@@ -232,7 +259,6 @@ function Affordances({
           </Select>
         </FormControl>
       </div>
-
       <div className="justify-center items-center flex">
         <button
           className="bg-yellow-gamy rounded-full border-0 p-3 hover:bg-yellow-600 hover:shadow-lg "

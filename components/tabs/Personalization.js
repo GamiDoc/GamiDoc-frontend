@@ -9,8 +9,9 @@ import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import IconButton from "@mui/material/IconButton";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { TextField } from "@mui/material";
 
-function Device({ device, setDevice, DeviceSelection }) {
+function Personalization({ personalization, setPersonalization }) {
   const router = useRouter();
   const handleChange = (event) => {
     const {
@@ -29,37 +30,27 @@ function Device({ device, setDevice, DeviceSelection }) {
             <InfoOutlinedIcon sx={{ fontSize: 20 }} />
           </IconButton>
         </Link>
-        Device
+        Personalization
       </label>
 
       <h2 className="w-[60em] mt-4 block text-gray-700  mb-2 ">
-        The technology component takes into account hardware, software, input
-        and output devices, any other technological component involved in the
-        software development, and the kind of device in which the software will
-        be used. Since there are several different devices that can be used for
-        gamified solutions, it is important to comprehend if the selected
-        choices could fit the context information (i.e. device type, game
-        engine, etc), and then if the selected gamified elements are optimal for
-        the selected device.
+        Several solutions in the gamification field suggest a personalization or
+        adaptation of the gamified solutions according to several individual
+        differences and preferences, such as the player type, personality
+        traits, motivation and goal (Fortes Tondello et al., 2018), and so
+        forth. For this, we decided to add a part related to the selection of a
+        personalization modality and a possible adaptation feature.
       </h2>
-      <FormControl>
-        <InputLabel>Device</InputLabel>
-        <Select
-          className="relative w-full shadow-md "
-          single
-          value={device}
-          onChange={handleChange}
-          input={<OutlinedInput label="Name" />}
-        >
-          {DeviceSelection.map((name) => (
-            <MenuItem key={name} value={name}>
-              {name}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
+      <TextField
+        className={"flex w-full border  shadow-md mb-4"}
+        type="text"
+        multiline
+        rows={3}
+        value={personalization}
+        onChange={(e) => setPersonalization(e.target.value)}
+      />
     </div>
   );
 }
 
-export default Device;
+export default Personalization;

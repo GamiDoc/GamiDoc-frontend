@@ -21,6 +21,8 @@ import Modality from "../components/tabs/Modality";
 //alert
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
+import Dynamics from "../components/tabs/Dynamics";
+import Personalization from "../components/tabs/Personalization";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -154,7 +156,7 @@ const modes = [
 ];
 
 // Feedback
-const tt = ["Immediate Feedback", "Late Feedback"];
+const tt = ["Immediate Feedback", "Late Feedback", "Personalized Timing"];
 
 const contenuti = [
   "Corrective Feedback",
@@ -172,6 +174,12 @@ export default function Home() {
 
   // Modality Page state
   const [modality, setModality] = useState([]);
+
+  //Dynamics
+  const [dynamics, setDynamics] = useState("");
+
+  //Personalization
+  const [personalization, setPersonalization] = useState("");
 
   //context
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -243,8 +251,8 @@ export default function Home() {
                     <div
                       className={
                         selected
-                          ? " text-center text-3xl font-bold text-black rounded-3xl  font-sans px-4 py-2 ring ring-transparent  outline-none "
-                          : " text-center text-xl font-medium text-black rounded-md font-sans px-4 py-2 ring ring-transparent outline-none"
+                          ? " text-center text-3xl font-bold text-black rounded-3xl  font-sans px-3 py-2 ring ring-transparent  outline-none "
+                          : " text-center text-xl font-medium text-black rounded-md font-sans px-3 py-2 ring ring-transparent outline-none"
                       }
                     >
                       Context
@@ -256,8 +264,8 @@ export default function Home() {
                     <div
                       className={
                         selected
-                          ? " text-center text-3xl font-bold text-black rounded-3xl  font-sans px-4 py-2 ring ring-transparent outline-none"
-                          : " text-center text-xl font-medium text-black rounded-md font-sans px-4 py-2 ring ring-transparent outline-none"
+                          ? " text-center text-3xl font-bold text-black rounded-3xl  font-sans px-3 py-2 ring ring-transparent outline-none"
+                          : " text-center text-xl font-medium text-black rounded-md font-sans px-3 py-2 ring ring-transparent outline-none"
                       }
                     >
                       Device
@@ -269,8 +277,8 @@ export default function Home() {
                     <div
                       className={
                         selected
-                          ? " text-center text-3xl font-bold text-black rounded-3xl  font-sans px-4 py-2 ring ring-transparent outline-none"
-                          : " text-center text-xl font-medium text-black rounded-md font-sans px-4 py-2 ring ring-transparent outline-none"
+                          ? " text-center text-3xl font-bold text-black rounded-3xl  font-sans px-3 py-2 ring ring-transparent outline-none"
+                          : " text-center text-xl font-medium text-black rounded-md font-sans px-3 py-2 ring ring-transparent outline-none"
                       }
                     >
                       Modality
@@ -282,8 +290,34 @@ export default function Home() {
                     <div
                       className={
                         selected
-                          ? " text-center text-3xl font-bold text-black rounded-3xl  font-sans px-4 py-2 ring ring-transparent outline-none"
-                          : " text-center text-xl font-medium text-black rounded-md font-sans px-4 py-2 ring ring-transparent outline-none"
+                          ? " text-center text-3xl font-bold text-black rounded-3xl  font-sans px-3 py-2 ring ring-transparent outline-none"
+                          : " text-center text-xl font-medium text-black rounded-md font-sans px-3 py-2 ring ring-transparent outline-none"
+                      }
+                    >
+                      Dynamics
+                    </div>
+                  )}
+                </Tab>
+                <Tab as={Fragment}>
+                  {({ selected }) => (
+                    <div
+                      className={
+                        selected
+                          ? " text-center text-3xl font-bold text-black rounded-3xl  font-sans px-3 py-2 ring ring-transparent outline-none"
+                          : " text-center text-xl font-medium text-black rounded-md font-sans px-3 py-2 ring ring-transparent outline-none"
+                      }
+                    >
+                      Personalization
+                    </div>
+                  )}
+                </Tab>
+                <Tab as={Fragment}>
+                  {({ selected }) => (
+                    <div
+                      className={
+                        selected
+                          ? " text-center text-3xl font-bold text-black rounded-3xl  font-sans px-3 py-2 ring ring-transparent outline-none"
+                          : " text-center text-xl font-medium text-black rounded-md font-sans px-3 py-2 ring ring-transparent outline-none"
                       }
                     >
                       Feedback
@@ -295,8 +329,8 @@ export default function Home() {
                     <div
                       className={
                         selected
-                          ? " text-center text-3xl font-bold text-black rounded-3xl  font-sans px-4 py-2  ring ring-transparent outline-none"
-                          : " text-center text-xl font-medium text-black rounded-md font-sans px-4 py-2 ring ring-transparent outline-none"
+                          ? " text-center text-3xl font-bold text-black rounded-3xl  font-sans px-3 py-2  ring ring-transparent outline-none"
+                          : " text-center text-xl font-medium text-black rounded-md font-sans px-3 py-2 ring ring-transparent outline-none"
                       }
                     >
                       Affordances
@@ -308,8 +342,8 @@ export default function Home() {
                     <div
                       className={
                         selected
-                          ? " text-center text-3xl font-bold text-black rounded-3xl  font-sans px-4 py-2  ring ring-transparent outline-none"
-                          : " text-center text-xl font-medium text-black rounded-md font-sans px-4 py-2 ring ring-transparent outline-none"
+                          ? " text-center text-3xl font-bold text-black rounded-3xl  font-sans px-3 py-2  ring ring-transparent outline-none"
+                          : " text-center text-xl font-medium text-black rounded-md font-sans px-3 py-2 ring ring-transparent outline-none"
                       }
                     >
                       Rules
@@ -321,8 +355,8 @@ export default function Home() {
                     <div
                       className={
                         selected
-                          ? " text-center text-3xl font-bold text-black rounded-3xl  font-sans px-4 py-2 ring ring-transparent outline-none"
-                          : " text-center text-xl font-medium text-black rounded-md font-sans px-4 py-2 ring ring-transparent outline-none"
+                          ? " text-center text-3xl font-bold text-black rounded-3xl  font-sans px-3 py-2 ring ring-transparent outline-none"
+                          : " text-center text-xl font-medium text-black rounded-md font-sans px-3 py-2 ring ring-transparent outline-none"
                       }
                     >
                       Aesthetics
@@ -363,6 +397,15 @@ export default function Home() {
                     modality={modality}
                     setModality={setModality}
                     selectObj1={modes}
+                  />
+                </Tab.Panel>
+                <Tab.Panel>
+                  <Dynamics dynamics={dynamics} setDynamics={setDynamics} />
+                </Tab.Panel>
+                <Tab.Panel>
+                  <Personalization
+                    personalization={personalization}
+                    setPersonalization={setPersonalization}
                   />
                 </Tab.Panel>
                 <Tab.Panel>
