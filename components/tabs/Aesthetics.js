@@ -13,7 +13,7 @@ function Aesthetics({ aesthetics, setAesthetics }) {
         <Link href="/documentation#aesthetics">
           <IconButton
             aria-label="Example"
-            //onClick={() => router.push("/documentation#aesthetics")}
+          //onClick={() => router.push("/documentation#aesthetics")}
           >
             <InfoOutlinedIcon sx={{ fontSize: 20 }} />
           </IconButton>

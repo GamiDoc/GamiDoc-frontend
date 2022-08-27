@@ -210,6 +210,7 @@ export default function Home() {
   const [affordances5, setAffordances5] = useState("");
   const [affordances6, setAffordances6] = useState("");
   const [open, setOpen] = React.useState(false);
+
   const handleClick = () => {
     setOpen(true);
   };
@@ -220,7 +221,14 @@ export default function Home() {
     setOpen(false);
   };
 
-  //Aestethics
+  // const [affordancesSum, setAffordancesSum] = useState([]);
+  // let aff
+  // for (let i = 1; i <= 6; i++) {
+  //   aff = ("affordances" + i)
+  //   setAffordancesSum([...affordancesSum, aff])
+  // }
+
+  //Aestethics 
   const [aesthetics, setAesthetics] = useState("");
 
   //Rules
@@ -468,6 +476,7 @@ export default function Home() {
           </div>
 
           <div className="flex flex-row justify-center items-center mb-10 mr-2">
+
             <Pdf
               selectedIndex={selectedIndex}
               name={name}
@@ -476,13 +485,19 @@ export default function Home() {
               aim={aim}
               targetAge={targetAge}
               targetCat={targetCat}
+
               timing={timing}
+              timingDescription={timingDescription}
+
               context={context}
+              contextDescription={contextDescription}
+
               modality={modality}
               device={device}
-              timingDescription={timingDescription}
-              contextDescription={contextDescription}
+
               rules={rules}
+              affordances={affordances1}
+
               aesthetics={aesthetics}
             />
             <div className="grow flex-row flex gap-5 items-center justify-end">

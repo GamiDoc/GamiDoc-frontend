@@ -16,10 +16,13 @@
     "@mui/icons-material": "^5.8.4",
     "@mui/material": "^5.8.1",
     "@react-pdf/renderer": "^2.1.1",
+    "@reduxjs/toolkit": "^1.8.5",
     "iconv-lite": "^0.6.3",
     "next": "12.1.6",
+    "next-redux-wrapper": "^7.0.5",
     "react": "18.1.0",
     "react-dom": "18.1.0",
+    "react-redux": "^8.0.2",
     "react-to-pdf": "^0.0.14",
     "styled-components": "^5.3.5"
   },
