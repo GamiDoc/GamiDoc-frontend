@@ -467,8 +467,8 @@ export default function Home() {
                 </Tab.Panel>
                 <Tab.Panel>
                   <Aesthetics
-                    aesthetics={aesthetics}
-                    setAesthetics={setAesthetics}
+                  // aesthetics={aesthetics}
+                  // setAesthetics={setAesthetics}
                   />
                 </Tab.Panel>
               </Tab.Panels>

@@ -5,8 +5,15 @@ import IconButton from "@mui/material/IconButton";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
-function Aesthetics({ aesthetics, setAesthetics }) {
+// Redux states 
+import { useSelector, useDispatch } from 'react-redux';
+import { set, selectAesthetics } from "../../store/reducers/aesthetics"
+
+function Aesthetics() {
   const router = useRouter();
+  const aesthetics = useSelector(selectAesthetics) // il vaolore del mio stato (slice)
+  const dispatch = useDispatch(); // funzione che ci permette di chiamare i reducer 
+
   return (
     <div className="flex flex-col py-4 w-[60em]">
       <label className="mt-4 block text-gray-700  font-bold mb-2">
@@ -37,13 +44,13 @@ function Aesthetics({ aesthetics, setAesthetics }) {
       <label className="block text-gray-700   font-bold mb-2" />
       <TextField
         className="  w-full border shadow-md "
-        id="username"
+        id="content"
         type="text"
         multiline
         rows={3}
         placeholder="Rules"
         value={aesthetics}
-        onChange={(e) => setAesthetics(e.target.value)}
+        onChange={(e) => dispatch(set(e.target.value))}
       />
 
       <input

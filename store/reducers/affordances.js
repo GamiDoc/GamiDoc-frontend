@@ -3,14 +3,14 @@ import { createSlice } from '@reduxjs/toolkit'
 export const affordancesSlice = createSlice({
   name: 'affordances',
   initialState: {
-    value: "",
+    value: ["---", "---", "---", "---", "---", "---"],
   },
   reducers: {
     unset: (state) => {
       state.value = ""
     },
     set: (state, action) => {
-      state.value = action.payload
+      state.value[action.pos] = action.payload
     },
   },
 })

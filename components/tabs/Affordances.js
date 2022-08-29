@@ -11,29 +11,35 @@ import AddIcon from "@mui/icons-material/Add";
 import Link from "next/link";
 import { TextField } from "@mui/material";
 
+// Redux states 
+import { useSelector, useDispatch } from 'react-redux';
+import { set, selectAffordances } from "../../store/reducers/affordances"
+
 function Affordances({
   select1,
   setSelected1,
   select2,
   setSelected2,
 
-  affordances1,
-  setAffordances1,
-  affordances2,
-  setAffordances2,
-  affordances3,
-  setAffordances3,
-  affordances4,
-  setAffordances4,
-  affordances5,
-  setAffordances5,
-  affordances6,
-  setAffordances6,
+  // affordances1,
+  // setAffordances1,
+  // affordances2,
+  // setAffordances2,
+  // affordances3,
+  // setAffordances3,
+  // affordances4,
+  // setAffordances4,
+  // affordances5,
+  // setAffordances5,
+  // affordances6,
+  // setAffordances6,
   open,
   setOpen,
   affordancesSelection,
 }) {
   const router = useRouter();
+  const affordances = useSelector(selectAffordances) // il vaolore del mio stato (slice)
+  const dispatch = useDispatch(); // funzione che ci permette di chiamare i reducer 
 
   return (
     <div className="flex flex-col w-[60em] py-4">
@@ -65,8 +71,8 @@ function Affordances({
         <Select
           className="relative w-full shadow-md mb-4"
           single
-          value={affordances1}
-          onChange={(e) => setAffordances1(e.target.value)}
+          value={affordances[0]}
+          onChange={(e) => dispatch(set({ payload: e.target.value, pos: 0 }))}
           input={<OutlinedInput />}
         >
           {affordancesSelection.map((name) => (
@@ -78,24 +84,24 @@ function Affordances({
       </FormControl>
       <TextField
         className={
-          affordances1 == ""
+          affordances[0] == ""
             ? "hidden w-full border  shadow-md "
             : "flex w-full border  shadow-md mb-4"
         }
         type="text"
         multiline
         rows={3}
-        placeholder={affordances1}
-        // value={behavior}
-        // onChange={(e) => setBehavior(e.target.value)}
+        placeholder={affordances[0]}
+      // value={behavior}
+      // onChange={(e) => setBehavior(e.target.value)}
       />
       <FormControl>
         <Select
           className="relative w-full shadow-md mb-4"
           single
           displayEmpty
-          value={affordances2}
-          onChange={(e) => setAffordances2(e.target.value)}
+          value={affordances[1]}
+          onChange={(e) => dispatch(set({ payload: e.target.value, pos: 1 }))}
           input={<OutlinedInput />}
         >
           {affordancesSelection.map((name) => (
@@ -107,24 +113,24 @@ function Affordances({
       </FormControl>
       <TextField
         className={
-          affordances2 == ""
+          affordances[1] == ""
             ? "hidden w-full border  shadow-md "
             : "flex w-full border  shadow-md mb-4"
         }
         type="text"
         multiline
         rows={3}
-        placeholder={affordances2}
-        // value={behavior}
-        // onChange={(e) => setBehavior(e.target.value)}
+        placeholder={affordances[1]}
+      // value={behavior}
+      // onChange={(e) => setBehavior(e.target.value)}
       />
       <FormControl>
         <Select
           className="relative w-full shadow-md mb-4"
           single
           displayEmpty
-          value={affordances3}
-          onChange={(e) => setAffordances3(e.target.value)}
+          value={affordances[2]}
+          onChange={(e) => dispatch(set({ payload: e.target.value, pos: 2 }))}
           input={<OutlinedInput />}
         >
           {affordancesSelection.map((name) => (
@@ -136,24 +142,24 @@ function Affordances({
       </FormControl>
       <TextField
         className={
-          affordances3 == ""
+          affordances[2] == ""
             ? "hidden w-full border  shadow-md "
             : "flex w-full border  shadow-md mb-4"
         }
         type="text"
         multiline
         rows={3}
-        placeholder={affordances3}
-        // value={behavior}
-        // onChange={(e) => setBehavior(e.target.value)}
+        placeholder={affordances[2]}
+      // value={behavior}
+      // onChange={(e) => setBehavior(e.target.value)}
       />
       <FormControl>
         <Select
           className="relative w-full shadow-md mb-4"
           single
           displayEmpty
-          value={affordances4}
-          onChange={(e) => setAffordances4(e.target.value)}
+          value={affordances[3]}
+          onChange={(e) => dispatch(set({ payload: e.target.value, pos: 3 }))}
           input={<OutlinedInput label="Name" />}
         >
           {affordancesSelection.map((name) => (
@@ -165,16 +171,16 @@ function Affordances({
       </FormControl>
       <TextField
         className={
-          affordances4 == ""
+          affordances[3] == ""
             ? "hidden w-full border  shadow-md "
             : "flex w-full border  shadow-md mb-4"
         }
         type="text"
         multiline
         rows={3}
-        placeholder={affordances4}
-        // value={behavior}
-        // onChange={(e) => setBehavior(e.target.value)}
+        placeholder={affordances[3]}
+      // value={behavior}
+      // onChange={(e) => setBehavior(e.target.value)}
       />
       <FormControl className={select1 == true ? "flex" : "hidden"}>
         <Select
@@ -182,8 +188,8 @@ function Affordances({
           single
           inputProps={{ "aria-label": "Without label" }}
           displayEmpty
-          value={affordances5}
-          onChange={(e) => setAffordances5(e.target.value)}
+          value={affordances[4]}
+          onChange={(e) => dispatch(set({ payload: e.target.value, pos: 4 }))}
           input={<OutlinedInput label="Name" />}
         >
           {affordancesSelection.map((name) => (
@@ -195,16 +201,16 @@ function Affordances({
       </FormControl>
       <TextField
         className={
-          affordances5 == ""
+          affordances[4] == ""
             ? "hidden w-full border  shadow-md "
             : "flex w-full border  shadow-md mb-4"
         }
         type="text"
         multiline
         rows={3}
-        placeholder={affordances5}
-        // value={behavior}
-        // onChange={(e) => setBehavior(e.target.value)}
+        placeholder={affordances[4]}
+      // value={behavior}
+      // onChange={(e) => setBehavior(e.target.value)}
       />
       <FormControl className={select2 == true ? "flex" : "hidden"}>
         <Select
@@ -212,8 +218,8 @@ function Affordances({
           single
           inputProps={{ "aria-label": "Without label" }}
           displayEmpty
-          value={affordances6}
-          onChange={(e) => setAffordances6(e.target.value)}
+          value={affordances[5]}
+          onChange={(e) => dispatch(set({ payload: e.target.value, pos: 5 }))}
           input={<OutlinedInput label="Name" />}
         >
           {affordancesSelection.map((name) => (
@@ -229,7 +235,7 @@ function Affordances({
             className="relative w-full shadow-md mb-4 "
             single
             displayEmpty
-            value={affordances5}
+            value={affordances[5]}
             onChange={(e) => setAffordances5(e.target.value)}
             input={<OutlinedInput />}
           >
@@ -272,7 +278,7 @@ function Affordances({
           <AddIcon />
         </button>
       </div>
-    </div>
+    </div >
   );
 }
 
