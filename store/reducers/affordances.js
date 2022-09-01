@@ -1,9 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { HYDRATE } from 'next-redux-wrapper'
 
 export const affordancesSlice = createSlice({
   name: 'affordances',
   initialState: {
+    // affordances: {
     value: ["---", "---", "---", "---", "---", "---"],
+    // }
   },
   reducers: {
     unset: (state) => {
@@ -11,6 +14,14 @@ export const affordancesSlice = createSlice({
     },
     set: (state, action) => {
       state.value[action.pos] = action.payload
+    },
+  },
+  extraReducers: {
+    [HYDRATE]: (state, action) => {
+      return {
+        ...state,
+        ...action.payload.affordances,
+      }
     },
   },
 })

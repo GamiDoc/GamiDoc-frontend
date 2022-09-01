@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { HYDRATE } from 'next-redux-wrapper'
 
 export const feedbackSlice = createSlice({
   name: 'feedback',
@@ -13,6 +14,14 @@ export const feedbackSlice = createSlice({
       state.value = action.payload
     },
   },
+  extraReducers: {
+    [HYDRATE]: (state, action) => {
+      return {
+        ...state,
+        ...action.payload.feedback,
+      }
+    }
+  }
 })
 // Reducers 
 export const { set, unset } = feedbackSlice.actions

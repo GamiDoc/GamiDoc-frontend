@@ -45,5 +45,4 @@ export default function SinglePage({ pdf }) {
       </div>
     </div>
   )
-
 }

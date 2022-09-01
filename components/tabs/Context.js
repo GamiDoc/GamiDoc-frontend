@@ -10,30 +10,43 @@ import IconButton from "@mui/material/IconButton";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
-function Context({
-  behavior,
-  setBehavior,
-  domain,
-  setDomain,
-  aim,
-  setAim,
-  targetAge,
-  setTargetAge,
-  targetCat,
-  setTargetCat,
 
-  selectObj1, // L'oggetto che contiene i campi del select
-  selectObj2, // Aimo
-  selectObj3, // set target cat
-  selectObj4, // Target categories
+import { useSelector, useDispatch } from "react-redux"
+import { setAge, setCat, setBehavior, setDomain, setAim, selectContext } from "../../store/reducers/context"
+
+function Context({
+  // behavior,
+  // setBehavior,
+  // domain,
+  // setDomain,
+  // aim,
+  // setAim,
+  // targetAge,
+  // setTargetAge,
+  // targetCat,
+  // setTargetCat,
+
+  // selectObj1, // L'oggetto che contiene i campi del select
+  // selectObj2, // Aimo
+  // selectObj3, // set target cat
+  // selectObj4, // Target categories
 }) {
   const router = useRouter();
+
+  const dispatch = useDispatch()
+  const context = useSelector(selectContext)
+  // i getter dei singoli stati ! 
+  const behavior = context.behavior
+  const domain = context.domain
+  const aim = context.aim
+  const targetAge = context.targetAge
+  const targetCat = context.targetCat
 
   const handleChange = (event) => {
     const {
       target: { value },
     } = event;
-    setTargetAge(
+    setAge(
       // On autofill we get a stringified value.
       typeof value === "string" ? value.split(",") : value
     );
@@ -44,7 +57,7 @@ function Context({
   };
 
   const handleChangeCat = (event) => {
-    setTargetCat(event.target.value);
+    setCat(event.target.value);
   };
 
   return (

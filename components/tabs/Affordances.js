@@ -20,24 +20,39 @@ function Affordances({
   setSelected1,
   select2,
   setSelected2,
-
-  // affordances1,
-  // setAffordances1,
-  // affordances2,
-  // setAffordances2,
-  // affordances3,
-  // setAffordances3,
-  // affordances4,
-  // setAffordances4,
-  // affordances5,
-  // setAffordances5,
-  // affordances6,
-  // setAffordances6,
   open,
   setOpen,
-  affordancesSelection,
-}) {
+}) {//affordances
+
+  const affordancesSelection = [
+    "Acknowledgement",
+    "Level",
+    "Progression",
+    "Point",
+    "Stats",
+
+    "Chance",
+    "Imposed choice",
+    "Economy",
+    "Rarity",
+    "Time pressure",
+
+    "Competition",
+    "Cooperation",
+    "Reputation",
+    "Social pressure",
+
+    "Novelty",
+    "Objectives",
+    "Puzzle",
+    "Renovation",
+    "Sensation",
+
+    "Narrative",
+    "Story telling",
+  ];
   const router = useRouter();
+  // const affordances = useSelector((state) => { return state })  // il vaolore del mio stato (slice)
   const affordances = useSelector(selectAffordances) // il vaolore del mio stato (slice)
   const dispatch = useDispatch(); // funzione che ci permette di chiamare i reducer 
 
@@ -236,7 +251,7 @@ function Affordances({
             single
             displayEmpty
             value={affordances[5]}
-            onChange={(e) => setAffordances5(e.target.value)}
+            onChange={(e) => dispatch(set(e.target.value))}
             input={<OutlinedInput />}
           >
             {affordancesSelection.map((name) => (
@@ -253,8 +268,8 @@ function Affordances({
             className="relative w-full shadow-md mb-4"
             single
             displayEmpty
-            value={affordances6}
-            onChange={(e) => setAffordances6(e.target.value)}
+            value={affordances[6]}
+            onChange={(e) => dispatch(set(e.target.value))}
             input={<OutlinedInput />}
           >
             {affordancesSelection.map((name) => (

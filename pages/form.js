@@ -375,22 +375,22 @@ export default function Home() {
               <Tab.Panels>
                 <Tab.Panel>
                   <Context
-                    aim={aim}
-                    setAim={setAim}
-                    domain={domain}
-                    setDomain={setDomain}
-                    target={target}
-                    setTarget={setTarget}
-                    targetAge={targetAge}
-                    setTargetAge={setTargetAge}
-                    targetCat={targetCat}
-                    setTargetCat={setTargetCat}
-                    behavior={behavior}
-                    setBehavior={setBehavior}
-                    selectObj1={KoivistoHamari}
-                    selectObj2={Aimo}
-                    selectObj3={categoriesSelection}
-                    selectObj4={ageSelection}
+                  // aim={aim}
+                  // setAim={setAim}
+                  // domain={domain}
+                  // setDomain={setDomain}
+                  // target={target}
+                  // setTarget={setTarget}
+                  // targetAge={targetAge}
+                  // setTargetAge={setTargetAge}
+                  // targetCat={targetCat}
+                  // setTargetCat={setTargetCat}
+                  // behavior={behavior}
+                  // setBehavior={setBehavior}
+                  // selectObj1={KoivistoHamari}
+                  // selectObj2={Aimo}
+                  // selectObj3={categoriesSelection}
+                  // selectObj4={ageSelection}
                   />
                 </Tab.Panel>
                 <Tab.Panel>
@@ -478,27 +478,27 @@ export default function Home() {
           <div className="flex flex-row justify-center items-center mb-10 mr-2">
 
             <Pdf
-              selectedIndex={selectedIndex}
-              name={name}
-              behavior={behavior}
-              domain={domain}
-              aim={aim}
-              targetAge={targetAge}
-              targetCat={targetCat}
+            // selectedIndex={selectedIndex}
+            // name={name}
+            // behavior={behavior}
+            // domain={domain}
+            // aim={aim}
+            // targetAge={targetAge}
+            // targetCat={targetCat}
 
-              timing={timing}
-              timingDescription={timingDescription}
+            // timing={timing}
+            // timingDescription={timingDescription}
 
-              context={context}
-              contextDescription={contextDescription}
+            // context={context}
+            // contextDescription={contextDescription}
 
-              modality={modality}
-              device={device}
+            // modality={modality}
+            // device={device}
 
-              rules={rules}
-              affordances={affordances1}
+            // rules={rules}
+            // affordances={affordances1}
 
-              aesthetics={aesthetics}
+            // aesthetics={aesthetics}
             />
             <div className="grow flex-row flex gap-5 items-center justify-end">
               <div

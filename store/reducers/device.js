@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-
+import { HYDRATE } from "next-redux-wrapper"
 export const deviceSlice = createSlice({
   name: 'device',
   initialState: {
@@ -13,6 +13,14 @@ export const deviceSlice = createSlice({
       state.value = action.payload
     },
   },
+  extraReducers: {
+    [HYDRATE]: (state, action) => {
+      return {
+        ...state,
+        ...action.payload.device,
+      }
+    }
+  }
 })
 // Reducers 
 export const { set, unset } = deviceSlice.actions

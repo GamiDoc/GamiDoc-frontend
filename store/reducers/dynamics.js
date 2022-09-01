@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-
+import { HYDRATE } from "next-redux-wrapper"
 export const dynamicsSlice = createSlice({
   name: 'dynamics',
   initialState: {
@@ -13,6 +13,14 @@ export const dynamicsSlice = createSlice({
       state.value = action.payload
     },
   },
+  extraReducers: {
+    [HYDRATE]: (state, action) => {
+      return {
+        ...state,
+        ...action.payload.dynamics,
+      }
+    }
+  }
 })
 // Reducers 
 export const { set, unset } = dynamicsSlice.actions

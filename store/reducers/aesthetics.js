@@ -1,9 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { HYDRATE } from 'next-redux-wrapper'
 
 export const aestheticsSlice = createSlice({
   name: 'aesthetics',
   initialState: {
+    // aesthetics: {
     value: "",
+    // }
   },
   reducers: {
     unset: (state) => {
@@ -11,6 +14,14 @@ export const aestheticsSlice = createSlice({
     },
     set: (state, action) => {
       state.value = action.payload
+    },
+  },
+  extraReducers: {
+    [HYDRATE]: (state, action) => {
+      return {
+        ...state,
+        ...action.payload.aesthetics,
+      }
     },
   },
 })

@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { HYDRATE } from 'next-redux-wrapper'
 
 export const modalitySlice = createSlice({
   name: 'modality',
@@ -11,6 +12,14 @@ export const modalitySlice = createSlice({
     },
     set: (state, action) => {
       state.value = action.payload
+    },
+  },
+  extraReducers: {
+    [HYDRATE]: (state, action) => {
+      return {
+        ...state,
+        ...action.payload.modality,
+      }
     },
   },
 })

@@ -7,15 +7,15 @@ import { configureStore } from "@reduxjs/toolkit"
 import { createWrapper } from "next-redux-wrapper";
 
 // reducers   ( funzioni per cambiare lo stato) 
-import aestheticsReducer from "./reducers/aesthetics";
-import affordancesReducer from "./reducers/affordances";
-import contextReducer from "./reducers/context";
-import deviceReducer from "./reducers/device";
-import dynamicsReducer from "./reducers/dynamics";
-import feedbackReducer from "./reducers/feedback";
-import modalityReducer from "./reducers/modality";
-import personalizationReducer from "./reducers/personalization";
-import rulesReducer from "./reducers/rules";
+import { aestheticsSlice } from "./reducers/aesthetics";
+import { affordancesSlice } from "./reducers/affordances";
+import { contextSlice } from "./reducers/context";
+import { deviceSlice } from "./reducers/device";
+import { dynamicsSlice } from "./reducers/dynamics";
+import { feedbackSlice } from "./reducers/feedback";
+import { modalitySlice } from "./reducers/modality";
+import { personalizationSlice } from "./reducers/personalization";
+import { rulesSlice } from "./reducers/rules";
 
 // initial states here
 // const initalState = {};
@@ -25,17 +25,18 @@ import rulesReducer from "./reducers/rules";
 // creating store
 export const store = configureStore({
   reducer: {
-    aestheticsReducer,
-    affordancesReducer,
-    contextReducer,
-    deviceReducer,
-    dynamicsReducer,
-    feedbackReducer,
-    modalityReducer,
-    personalizationReducer,
-    rulesReducer,
+    [aestheticsSlice.name]: aestheticsSlice.reducer,
+    [affordancesSlice.name]: affordancesSlice.reducer,
+    [contextSlice.name]: contextSlice.reducer,
+    [deviceSlice.name]: deviceSlice.reducer,
+    [dynamicsSlice]: dynamicsSlice.reducer,
+    [feedbackSlice.name]: dynamicsSlice.reducer,
+    [modalitySlice.name]: modalitySlice.reducer,
+    [personalizationSlice.name]: personalizationSlice.reducer,
+    [rulesSlice.name]: rulesSlice.reducer,
   },
-  devTools: true,
+  devTools: 1,
+
 }
 );
 

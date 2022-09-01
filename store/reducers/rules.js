@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { HYDRATE } from 'next-redux-wrapper'
 
 export const rulesSlice = createSlice({
   name: 'rules',
@@ -13,6 +14,14 @@ export const rulesSlice = createSlice({
       state.value = action.payload
     },
   },
+  extraReducers: {
+    [HYDRATE]: (state, action) => {
+      return {
+        ...state,
+        ...action.payload.rules
+      }
+    }
+  }
 })
 // Reducers 
 export const { set, unset } = rulesSlice.actions

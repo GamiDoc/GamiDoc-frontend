@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { HYDRATE } from 'next-redux-wrapper'
 
 export const personalizationSlice = createSlice({
   name: 'personalization',
@@ -13,6 +14,14 @@ export const personalizationSlice = createSlice({
       state.value = action.payload
     },
   },
+  extraReducers: {
+    [HYDRATE]: (state, action) => {
+      return {
+        ...state,
+        ...action.payload.personalization,
+      }
+    }
+  }
 })
 // Reducers 
 export const { set, unset } = personalizationSlice.actions
