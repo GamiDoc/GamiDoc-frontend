@@ -40,6 +40,7 @@ function Aesthetics({ aesthetics, setAesthetics }) {
         id="username"
         type="text"
         multiline
+        placeholder="Aesthetics"
         rows={3}
         value={aesthetics}
         onChange={(e) => setAesthetics(e.target.value)}

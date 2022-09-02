@@ -77,7 +77,7 @@ function Context({
           single
           value={domain}
           onChange={handleChangeDomain}
-          input={<OutlinedInput label="Name" />}
+          input={<OutlinedInput label="Domain" />}
         >
           {selectObj1.map((name) => (
             <MenuItem key={name} value={name}>
@@ -111,7 +111,7 @@ function Context({
           single
           value={aim}
           onChange={(e) => setAim(e.target.value)}
-          input={<OutlinedInput label="Name" />}
+          input={<OutlinedInput label="Aim" />}
         >
           {selectObj2.map((name) => (
             <MenuItem key={name} value={name}>
@@ -165,7 +165,7 @@ function Context({
           multiple
           value={targetAge}
           onChange={handleChange}
-          input={<OutlinedInput label="Name" />}
+          input={<OutlinedInput label="Age" />}
         >
           {selectObj4.map((name) => (
             <MenuItem key={name} value={name}>
@@ -173,16 +173,16 @@ function Context({
             </MenuItem>
           ))}
         </Select>
-</FormControl>
-            <TextField
-        className="w-full border  shadow-md "
+      </FormControl>
+      <TextField
+        className="w-full border  shadow-md top-5"
         id="username"
         type="text"
         multiline
         rows={3}
-        placeholder="Behaviors"
-        value={behavior}
-        onChange={(e) => setBehavior(e.target.value)}
+        placeholder="Target user"
+        // value={behavior}
+        // onChange={(e) => setBehavior(e.target.value)}
       />
     </div>
   );

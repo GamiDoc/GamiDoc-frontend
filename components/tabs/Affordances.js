@@ -6,10 +6,14 @@ import Select from "@mui/material/Select";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import IconButton from "@mui/material/IconButton";
 import { useRouter } from "next/router";
-import Fab from "@mui/material/Fab";
-import AddIcon from "@mui/icons-material/Add";
+import Image from "next/image";
+import InputLabel from "@mui/material/InputLabel";
 import Link from "next/link";
 import { TextField } from "@mui/material";
+
+const sanityIoImageLoader = ({ src, width, quality }) => {
+  return `https://i.imgur.com/jUFe5JY.png`;
+};
 
 function Affordances({
   select1,
@@ -50,20 +54,77 @@ function Affordances({
         in the software. The previous components are useful to better understand
         which gamification elements fit in the proper way. The selected taxonomy
         of possible gamified elements comes from the work of Toda and colleagues
-        (Toda, Klock, et al., 2019; Toda, Oliveira, et al., 2019): <br />
-        • Performance: Acknowledgement, Level, Progression, Points, Stats;{" "}
-        <br />
-        • Ecological: Chance, Imposed choice, Economy, Rarity, Time Pressure;{" "}
+        (Toda, Klock, et al., 2019; Toda, Oliveira, et al., 2019): <br />•
+        Performance: Acknowledgement, Level, Progression, Points, Stats; <br />•
+        Ecological: Chance, Imposed choice, Economy, Rarity, Time Pressure;{" "}
         <br />
         • Social: Competition, Cooperation, Reputation, Social Pressure; <br />
         • Personal: Novelty, Objectives, Puzzle, Renovation, Sensation; <br />
         • Fictional: Narrative, Storytelling
         <br />
       </h2>
+      <div className="w-auto mt-3">
+        <TextField
+          className=" -top-2 w-31 border shadow-md "
+          id="username"
+          type="text"
+          multiline
+          placeholder="Game action"
+          rows={1}
+          // value={aesthetics}
+          // onChange={(e) => setAesthetics(e.target.value)}
+        />
+        <Image
+          loader={sanityIoImageLoader}
+          src="image-src"
+          alt="GamiDoc"
+          height={34}
+          width={85}
+        />
+        <TextField
+          className=" -top-2 w-31 border shadow-md "
+          id="username"
+          type="text"
+          multiline
+          placeholder="Condition"
+          rows={1}
+          // value={aesthetics}
+          // onChange={(e) => setAesthetics(e.target.value)}
+        />
+        <Image
+          loader={sanityIoImageLoader}
+          className="top-4"
+          src="image-src"
+          alt="GamiDoc"
+          height={34}
+          width={85}
+        />
+        <FormControl className="relative w-60 shadow-md mb-4 -top-2">
 
-      <FormControl>
+          <Select
+            displayEmpty
+
+            single
+            value={affordances1}
+            onChange={(e) => setAffordances1(e.target.value)}
+            input={<OutlinedInput />}
+
+          >
+            <MenuItem disabled value="">
+            <em className="text-gray-400 font-normal ">Game elements</em>
+          </MenuItem>
+            {affordancesSelection.map((name) => (
+              <MenuItem key={name} value={name}>
+                {name}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      </div>
+
+      {/* <FormControl>
         <Select
-          className="relative w-full shadow-md mb-4"
+          className="  shadow-md mb-4 -top-2"
           single
           value={affordances1}
           onChange={(e) => setAffordances1(e.target.value)}
@@ -271,7 +332,7 @@ function Affordances({
         >
           <AddIcon />
         </button>
-      </div>
+      </div> */}
     </div>
   );
 }

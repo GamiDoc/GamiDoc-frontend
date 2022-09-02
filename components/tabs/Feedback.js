@@ -48,10 +48,10 @@ export default function Feedback({
         reporting feedback, and personalized feedback).
       </h2>
 
-      <FormControl>
+      <FormControl className="top-3">
         <InputLabel>Timing</InputLabel>
         <Select
-          className="relative w-full shadow-md "
+          className="relative w-full shadow-md"
           single
           value={timing}
           onChange={(e) => setTiming(e.target.value)}
@@ -66,7 +66,7 @@ export default function Feedback({
       </FormControl>
 
       <TextField
-        className="w-full border shadow-md "
+        className="w-full border  top-4"
         id="username"
         type="text"
         multiline
@@ -79,7 +79,7 @@ export default function Feedback({
       <FormControl className="top-10">
         <InputLabel>Content</InputLabel>
         <Select
-          className=" w-full shadow-md "
+          className=" w-full  shadow-md"
           single
           value={context}
           onChange={(e) => setContext(e.target.value)}
@@ -94,7 +94,7 @@ export default function Feedback({
       </FormControl>
 
       <TextField
-        className=" top-10  w-full border shadow-md "
+        className=" top-11  w-full border  "
         id="username"
         type="text"
         multiline

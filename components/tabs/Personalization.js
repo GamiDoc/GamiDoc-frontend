@@ -44,6 +44,7 @@ function Personalization({ personalization, setPersonalization }) {
       <TextField
         className={"flex w-full border  shadow-md mb-4"}
         type="text"
+        placeholder="Personalization"
         multiline
         rows={3}
         value={personalization}

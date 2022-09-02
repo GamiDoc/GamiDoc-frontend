@@ -41,6 +41,7 @@ function Dynamics({ dynamics, setDynamics }) {
       <TextField
         className={"flex w-full border  shadow-md mb-4"}
         type="text"
+        placeholder="Target user"
         multiline
         rows={4}
         value={dynamics}
