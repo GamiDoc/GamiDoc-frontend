@@ -77,7 +77,7 @@ export default function Feedback({
       />
 
       <FormControl className="top-10">
-        <InputLabel>Context</InputLabel>
+        <InputLabel>Content</InputLabel>
         <Select
           className=" w-full shadow-md "
           single

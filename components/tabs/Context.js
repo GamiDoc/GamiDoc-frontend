@@ -173,22 +173,17 @@ function Context({
             </MenuItem>
           ))}
         </Select>
-      </FormControl>
-      <FormControl className="top-5">
-        <InputLabel>Categories</InputLabel>
-        <Select
-          className="relative w-full shadow-md "
-          value={targetCat}
-          onChange={handleChangeCat}
-          input={<OutlinedInput label="Name" />}
-        >
-          {selectObj3.map((name) => (
-            <MenuItem key={name} value={name}>
-              {name}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
+</FormControl>
+            <TextField
+        className="w-full border  shadow-md "
+        id="username"
+        type="text"
+        multiline
+        rows={3}
+        placeholder="Behaviors"
+        value={behavior}
+        onChange={(e) => setBehavior(e.target.value)}
+      />
     </div>
   );
 }

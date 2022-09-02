@@ -41,7 +41,6 @@ function Aesthetics({ aesthetics, setAesthetics }) {
         type="text"
         multiline
         rows={3}
-        placeholder="Rules"
         value={aesthetics}
         onChange={(e) => setAesthetics(e.target.value)}
       />
