@@ -1,6 +1,8 @@
-// import SMVtoJSON from "../components/UseSMVtoJSON"
-import { useState } from "react"
+import Link from "next/link"
+import { useState, useEffect } from "react"
 import axios from "axios"
+import FileSaver from "file-saver"
+import Header from "../components/Header";
 
 async function SMVtoJSON(event) {
   const file = event.target.files.item(0)
@@ -9,46 +11,76 @@ async function SMVtoJSON(event) {
   return content.replace(/\n/g, "\\\\n")
 }
 
-
 export default function smvPage() {
   const [text, setText] = useState("")
   const [output, setOutput] = useState("")
+  const [url, setUrl] = useState()
+  var blob
+  useEffect(() => {
+    blob = new Blob([output]);
+    // setUrl(URL.createObjectURL(blob));
+  }, [output])
   return (
-    <div className="flex w-screen gap-5">
-      <div className="flex-col gap-2 items-center w-1/3 h-1/3 border-2">
-        <input type="file"
-          onChange={async (event) => {
-            let val = await SMVtoJSON(event)
-            setText(val)
-          }}
-          className="w-full" />
-        {(text == "") ? "" : <button
-          onClick={
-            async () => await axios.post("https://provadocker1234.herokuapp.com/converter/convert", { "data": text })
-              .then((response) => {
-                console.log(response)
-                setOutput(response.data.Data)
-              })
-              .catch((err) => {
-                console.log(err)
-              })
-          } > convert </button>}
+    <div >
+      <Header />
+      <div className="flex justify-center m-2 items-center gap-2">
+        {(text == "") ? <></> :
+          <button
+            onClick={
+              async () => await axios.post("https://provadocker1234.herokuapp.com/converter/convert", { "data": text })
+                .then((response) => {
+                  console.log(response)
+                  if (response.data.Data.search("syntools") != -1) {
+                    let noBoilerPlate = response.data.Data.split("Please report bugs to <support@astroproject.org>.")
+                    setOutput(noBoilerPlate[1])
+                  } else setOutput("error")
+                })
+                .catch((err) => {
+                  console.log(err)
+                })
+            }
+            className="py-4 inline-block px-8 xs:px-4 xs:py-2 bg-yellow-gamy text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md  hover:bg-yellow-600 hover:shadow-lg focus:bg-yellow-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out"
+          > convert </button>}
+
+        {(output == "") ? <></> :
+          <button
+            className="py-4 inline-block px-8 xs:px-4 xs:py-2 bg-yellow-gamy text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md  hover:bg-yellow-600 hover:shadow-lg focus:bg-yellow-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out"
+            onClick={() => {
+              // const blob = new Blob([output])
+              FileSaver.saveAs(blob, "output.dot")
+            }}
+          >
+            Download
+          </button>
+        }
       </div>
-      <div className="w-1/3 h-full border-2 flex-col items-center ">
-        <span className="flex justify-center items-center font-bold text-xl border-2">
-          SMV file
-        </span>
-        <div className="w-full h-full " >
-          {text}
+      <div className="flex w-screen gap-5">
+        <div className="flex gap-2 items-center w-1/3 h-1/3 justify-center">
+          <input type="file"
+            onChange={async (event) => {
+              let val = await SMVtoJSON(event)
+              setText(val)
+            }}
+            className="flex-col justify-center items-center border-2" />
         </div>
-      </div>
-      <div className="border-2 w-1/3 h-full flex-col  items-center " >
-        <span className="flex justify-center items-center font-bold text-xl border-2 ">
-          DOT file
-        </span>
-        <div className="w-full  h-full " >
-          {output}
+        <div className="w-1/3 h-full  flex-col items-center ">
+          <span className="flex justify-center items-center font-bold text-xl border-2">
+            .SMV
+          </span>
+          {(text != "") ?
+            <div className="w-full h-full text-sm p-2 border-2" >
+              {text}
+            </div> : <></>}
         </div>
+        <div className=" w-1/3 h-full flex-col  items-center " >
+          <span className="flex justify-center items-center font-bold text-xl border-2 ">
+            .DOT
+          </span>
+          {(output != "") ?
+            <div className="w-full  h-full text-sm p-2 border-2" >
+              {output}
+            </div> : <></>}
+        </div >
       </div >
     </div >
   )
