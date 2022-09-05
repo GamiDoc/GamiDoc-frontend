@@ -10,12 +10,12 @@ import {
 } from "@react-pdf/renderer";
 import Aesthetics from "./tabs/Aesthetics";
 
-export default function CreatePDF({ 
+export default function CreatePDF({
   selectedIndex,
-  name, 
-  behavior, 
-  domain, 
-  aim ,
+  name,
+  behavior,
+  domain,
+  aim,
   targetCat,
   targetAge,
   modality,
@@ -33,7 +33,7 @@ export default function CreatePDF({
       //     flexDirection: "row",
       backgroundColor: "white",
       margin: 20,
-      lineHeight:2,
+      lineHeight: 2,
     },
     section: {
       margin: 10,
@@ -41,31 +41,31 @@ export default function CreatePDF({
       //      flexGrow: 1,
     },
     logo: {
-      alignContent:"right",
-      alignItems:"right",
-      
+      alignContent: "right",
+      alignItems: "right",
+
       width: "20%",
     },
     centerImage: {
-      alignContent:"center",
-      alignItems:"center",
-      alignSelf:"center",
-      top:64,
+      alignContent: "center",
+      alignItems: "center",
+      alignSelf: "center",
+      top: 64,
       width: "40%",
     },
     title: {
       fontSize: "20",
       fontWeight: "black",
-      alignContent:"center",
-      alignItems:"center",
-      alignSelf:"center",
-      position:"relative",
+      alignContent: "center",
+      alignItems: "center",
+      alignSelf: "center",
+      position: "relative",
       fontfamily: "Sen",
-      top:78,
+      top: 78,
     },
     tab: {
-      fontSize:"18",
-      fontWeight:"bold",
+      fontSize: "18",
+      fontWeight: "bold",
       fontfamily: "Sen",
     },
     h1: {
@@ -86,6 +86,7 @@ export default function CreatePDF({
         <Image
           src="https://i.imgur.com/Y3QF08D.png"
           style={styles.centerImage}
+          alt="logo"
         />
         <Text style={styles.title}>{name}</Text>
       </Page>
@@ -103,7 +104,7 @@ export default function CreatePDF({
         </View>
       </Page>
       <Page size="A4" style={styles.page}>
-      <View style={styles.section}>
+        <View style={styles.section}>
           <Text style={styles.h1}>Device:</Text>
           <Text style={styles.h2}>{device}</Text>
         </View>
@@ -114,7 +115,7 @@ export default function CreatePDF({
           <Text style={styles.h2}>{modality}</Text>
         </View>
       </Page>
-      
+
       <Page size="A4" style={styles.page}>
         <View style={styles.section}>
           <Text style={styles.h1}>Timing:</Text>

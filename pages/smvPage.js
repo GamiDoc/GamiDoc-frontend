@@ -1,5 +1,4 @@
-import Link from "next/link"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import axios from "axios"
 import FileSaver from "file-saver"
 import Header from "../components/Header";
@@ -11,13 +10,13 @@ async function SMVtoJSON(event) {
   return content.replace(/\n/g, "\\\\n")
 }
 
-export default function smvPage() {
+export default function SmvPage() {
   const [text, setText] = useState("")
   const [output, setOutput] = useState("")
   const [url, setUrl] = useState()
-  var blob
+  var blob = useRef()
   useEffect(() => {
-    blob = new Blob([output]);
+    blob.current = new Blob([output]);
     // setUrl(URL.createObjectURL(blob));
   }, [output])
   return (
@@ -47,7 +46,7 @@ export default function smvPage() {
             className="py-4 inline-block px-8 xs:px-4 xs:py-2 bg-yellow-gamy text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md  hover:bg-yellow-600 hover:shadow-lg focus:bg-yellow-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out"
             onClick={() => {
               // const blob = new Blob([output])
-              FileSaver.saveAs(blob, "output.dot")
+              FileSaver.saveAs(blob.current, "output.dot")
             }}
           >
             Download
