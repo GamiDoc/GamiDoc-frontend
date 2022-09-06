@@ -19,6 +19,7 @@
     "axios": "^0.27.2",
     "file-saver": "^2.0.5",
     "graphviz-react": "^1.2.1",
+    "html2canvas": "^1.4.1",
     "iconv-lite": "^0.6.3",
     "next": "12.1.6",
     "react": "18.1.0",
