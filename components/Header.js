@@ -35,9 +35,9 @@ function Header() {
                      active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out"
         // onClick={() => router.push("/signup")}
         >
-          <a href="/api/auth/login">
+          <Link href="/api/auth/login">
             SIGN UP
-          </a>
+          </Link>
         </button>
         
       </div>
