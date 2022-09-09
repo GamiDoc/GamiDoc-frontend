@@ -2,7 +2,7 @@ require('dotenv').config()
 import { handleAuth, handleLogin, handleCallback } from '@auth0/nextjs-auth0';
 
 const afterCallback = async (req, res, session, state) => {
-  console.log(session);
+//  console.log(session);
   return session;
 }
 

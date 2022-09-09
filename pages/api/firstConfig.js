@@ -15,16 +15,17 @@ export default async function firstConfig(req, res) {
       }
     })
   }catch(error){
-    console.error(error);  
+    console.error(error.response.data);  
     //.response.data
   }
-  
+  console.log(resp)
   if (!resp) return res;
   if (resp.data?.status == true) {
     // ti riporta alla homepage 
     res.writeHead(302, {
       Location: '/'
     })
+    //console.log("good") 
     res.end();
   } else {
     // ti porta alla pagina di firstConfig per l'account 
@@ -32,6 +33,7 @@ export default async function firstConfig(req, res) {
       // da fare un form che manda la richiesta al back con le informazioni per l'utente
       Location: '/'
     })
+    //console.log("good") 
     res.end();
   }
 }
