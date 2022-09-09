@@ -2,17 +2,23 @@ import { getAccessToken } from '@auth0/nextjs-auth0';
 import axios from 'axios';
 
 export default async function firstConfig(req, res) {
-  const url = (process.env.SECURE ? 'https://' : 'http://') + process.env.BACK_ENDPOINT;
+  console.log("sono Dentro!")
 
+  //const url =  "http://"+ process.env.BACK_ENDPOINT;
+  //(process.env.SECURE ? 'https://' : 'http://')
   const { accessToken } = await getAccessToken(req, res);
-
-  const resp = await axios.get(url + "/user/checkProfile", { // API endpoint per il checkprofilet
-    headers: {
-      'Authorization': "Bearer " + accessToken
-    }
-  }).catch(err => {
-    res.status(500).json(err);
-  })
+  let resp 
+  try{
+    resp = await axios.get("http://localhost:5000/user/checkProfile", { // API endpoint per il checkprofilet
+      headers: {
+        'Authorization': "Bearer " + accessToken
+      }
+    })
+  }catch(error){
+    console.error(error);  
+    //.response.data
+  }
+  
   if (!resp) return res;
   if (resp.data?.status == true) {
     // ti riporta alla homepage 
