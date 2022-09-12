@@ -1,3 +1,5 @@
+import * as dotenv from "dotenv"
+dotenv.config()
 import '../styles/globals.css'
 import { UserProvider } from '@auth0/nextjs-auth0';
 

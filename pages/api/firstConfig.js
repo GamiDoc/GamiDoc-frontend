@@ -7,15 +7,15 @@ export default async function firstConfig(req, res) {
   //const url =  "http://"+ process.env.BACK_ENDPOINT;
   //(process.env.SECURE ? 'https://' : 'http://')
   const { accessToken } = await getAccessToken(req, res);
-  let resp 
-  try{
+  let resp
+  try {
     resp = await axios.get("http://localhost:5000/user/checkProfile", { // API endpoint per il checkprofilet
       headers: {
         'Authorization': "Bearer " + accessToken
       }
     })
-  }catch(error){
-    console.error(error.response.data);  
+  } catch (error) {
+    console.error(error.response.data);
     //.response.data
   }
   console.log(resp)
@@ -31,7 +31,7 @@ export default async function firstConfig(req, res) {
     // ti porta alla pagina di firstConfig per l'account 
     res.writeHead(302, {
       // da fare un form che manda la richiesta al back con le informazioni per l'utente
-      Location: '/'
+      Location: '/firstConfig'
     })
     //console.log("good") 
     res.end();
