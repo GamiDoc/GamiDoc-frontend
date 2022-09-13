@@ -1,19 +1,35 @@
-import React from "react";
+import { useEffect, useState } from "react"
 import TextField from "@mui/material/TextField";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import IconButton from "@mui/material/IconButton";
-import { useRouter } from "next/router";
+import Image from "next/image"
 import Link from "next/link";
 
-function Aesthetics({ aesthetics, setAesthetics }) {
-  const router = useRouter();
+function Aesthetics({
+  aesthetics,
+  setAesthetics,
+  images,
+  setImages,
+  imgUrl,
+  setImgUrl
+}) {
+
+  useEffect(() => {
+    if (images.lenght == 0) return
+
+    let newUrls = []
+    images.forEach(img => {
+      newUrls.push(URL.createObjectURL(img))
+    });
+    setImgUrl(newUrls)
+  }, [images])
+
   return (
     <div className="flex flex-col py-4 w-[60em]">
       <label className="mt-4 block text-gray-700  font-bold mb-2">
         <Link href="/documentation#aesthetics">
           <IconButton
             aria-label="Example"
-            //onClick={() => router.push("/documentation#aesthetics")}
           >
             <InfoOutlinedIcon sx={{ fontSize: 20 }} />
           </IconButton>
@@ -47,12 +63,20 @@ function Aesthetics({ aesthetics, setAesthetics }) {
       />
 
       <input
+        className="gap-9 w-full border cursor-default rounded-md bg-white py-2 pl-3 pr-10  shadow-md"
         type="file"
         name="myImage"
-        accept="image/png, image/gif, image/jpeg"
-        className="gap-9 w-full border cursor-default rounded-md bg-white py-2 pl-3 pr-10  shadow-md
-        "
+        accept="image/*"
+        multiple
+        onChange={
+          (e) => {
+            setImages([...e.target.files])
+          }
+        }
       />
+      <div className="grid-cols-2 gap-3 mt-5">
+        {imgUrl.map((imgURL) => <Image alt="Non caricate/renderizzate" src={imgURL} width={300} height={300} layout="fixed" />)}
+      </div>
     </div>
   );
 }

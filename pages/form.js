@@ -178,41 +178,28 @@ export default withPageAuthRequired(function Home({ token }) {
   const [context, setContext] = useState([]);
   const [timingDescription, setTimingDescription] = useState("");
   const [contextDescription, setContextDescription] = useState("");
-
   // Modality Page state
   const [modality, setModality] = useState([]);
-
   //Dynamics
   const [dynamics, setDynamics] = useState("");
-
   //Personalization
   const [personalization, setPersonalization] = useState("");
-
   //context
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [domain, setDomain] = useState([]);
   const [behavior, setBehavior] = useState();
   const [aim, setAim] = useState([]);
   const [targetAge, setTargetAge] = useState([]);
-
-
   //Device
   const [device, setDevice] = useState([]);
-
   //Affordances
-  // const [performance, setPerformance] = useState(2);
-  // const [ecological, setEcological] = useState("");
-  // const [social, setSocial] = useState("");
-  // const [personal, setPersonal] = useState("");
-  // const [fictional, setFictional] = useState("");
   const [affordances, setAffordances] = useState("");
-
   //Aestethics
   const [aesthetics, setAesthetics] = useState("");
+  const [images, setImages] = useState([])
+  const [imgUrl, setImgUrl] = useState([])
   //Rules
   const [rules, setRules] = useState("");
-
-  // const { user, error, isLoading } = useUser();
 
   // Valori URL
   const { query } = useRouter()
@@ -432,6 +419,10 @@ export default withPageAuthRequired(function Home({ token }) {
                   <Aesthetics
                     aesthetics={aesthetics}
                     setAesthetics={setAesthetics}
+                    images={images}
+                    setImages={setImages}
+                    imgUrl={imgUrl}
+                    setImgUrl={setImgUrl}
                   />
                 </Tab.Panel>
               </Tab.Panels>
@@ -443,6 +434,7 @@ export default withPageAuthRequired(function Home({ token }) {
               // Indice e token auth 
               selectedIndex={selectedIndex}
               token={token}
+              imgUrl={imgUrl}
 
               // Dati paper presi come props  
               name={name}

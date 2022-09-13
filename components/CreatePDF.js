@@ -8,6 +8,7 @@ import {
   View,
   StyleSheet,
   PDFDownloadLink,
+  BlobProvider
 } from "@react-pdf/renderer";
 
 let requestURL = (process.env.SECURE) ? "https://" : "http://"
@@ -16,11 +17,11 @@ requestURL = requestURL + process.env.BACK_ENDPOINT + "/paper/new"
 export default function CreatePDF({
   selectedIndex,
   token,
+  imgUrl,
   name,
   description,
 
-  behavior,
-  domain,
+  behavior, domain,
   aim,
   targetAge,
 
@@ -39,6 +40,8 @@ export default function CreatePDF({
   aesthetics,
 }) {
   const [pdfBlob, setPdfBlob] = useState()
+
+  const setBlob = (blob) => setPdfBlob(blob)
 
   const styles = StyleSheet.create({
     page: {
@@ -150,7 +153,7 @@ export default function CreatePDF({
 
       <Page size="A4" style={styles.page}>
         <View style={styles.section}>
-          <Text style={styles.h1}>Afforndances:</Text>
+          <Text style={styles.h1}>Affordances:</Text>
           <Text style={styles.h2}>{affordances}</Text>
         </View>
       </Page>
@@ -167,6 +170,15 @@ export default function CreatePDF({
           <Text style={styles.h1}>Aestethics:</Text>
           <Text style={styles.h2}>{aesthetics}</Text>
         </View>
+        <View style={styles.section}>
+          {imgUrl.map((val) =>
+            <Image
+              src={val}
+              style={styles.tab}
+              alt="logo"
+            />
+          )}
+        </View>
       </Page>
     </Document>
   );
@@ -174,6 +186,16 @@ export default function CreatePDF({
 
   return (
     <div className="w-1/2 flex items-center justify-end gap-2" >
+
+      <BlobProvider
+        document={MyDoc}
+      >
+        {({ blob, url, loading, error }) => {
+          setBlob(blob)
+          return ""
+        }}
+      </BlobProvider>
+
       <PDFDownloadLink
         document={<MyDoc />}
         fileName="mockup.pdf"
@@ -185,13 +207,12 @@ export default function CreatePDF({
       >
         {
           ({ blob, url, loading, error }) => {
-            // setPdfBlob(blob) // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!11
             return "Download now!"
           }
           // da fare caricamento con icone, oppure rendere il bottone incliccabile :)
         }
       </PDFDownloadLink>
-      {(pdfBlob) ?
+      {(name && description) ?
         <button
           onClick={() => {
             axios.post(url, {
@@ -199,19 +220,21 @@ export default function CreatePDF({
               description: description,
               behavior: behavior,
               domain: domain,
-              aim: aim + targetCat + targetAge,
+              aim: aim + targetAge,
+              device: device,
               modality: modality,
+              dynamics: dynamics,
+              personalization: personalization,
               timing: timing + timingDescription,
               context: context + contextDescription,
-              device: device,
               affordances: affordances,
               rules: rules,
               aesthetics: aesthetics,
-
+              pdf: pdfBlob
             },
               {
                 headers: {
-                  Authorization: "bearer" + token
+                  Authorization: "Bearer " + token
                 }
               })
           }}
