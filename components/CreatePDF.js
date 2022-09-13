@@ -101,6 +101,7 @@ export default function CreatePDF({
           alt="logo"
         />
         <Text style={styles.title}>{name}</Text>
+        <Text style={styles.h2}>{description}</Text>
       </Page>
       <Page size="A4" style={styles.page}>
         <View style={styles.section}>

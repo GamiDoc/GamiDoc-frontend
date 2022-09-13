@@ -7,9 +7,9 @@ import dynamic from "next/dynamic";
 const Pdf = dynamic(() => import("../components/CreatePDF"), { ssr: false });
 import MobileOffIcon from "@mui/icons-material/MobileOff";
 import Head from "next/head";
-
+import { useRouter } from "next/router"
 // Auth0 user hook  
-import { useUser, getSession } from '@auth0/nextjs-auth0';
+import { useUser, getSession, withPageAuthRequired } from '@auth0/nextjs-auth0';
 
 // Tabs
 import { Tab } from "@headlessui/react";
@@ -25,11 +25,16 @@ import Modality from "../components/tabs/Modality";
 import Dynamics from "../components/tabs/Dynamics";
 import Personalization from "../components/tabs/Personalization";
 
-export const getServerSideProps = (context) => {
+// export const getServerSideProps = (context) => {
+//   // const session = getSession(req, res)
+//   return { props: { name: context.query.name, description: context.query.description, } }
+// }
+
+export const getServerSideProps = ({ req, res }) => {
   const session = getSession(req, res)
-  return { props: { name: context.query.name, description: context.query.description, token: session.accessToken } }
+  if (!session) return { props: {} }
+  return { props: { token: session.accessToken } }
 }
-// import { Rule } from "postcss";
 
 const Aimo = ["Outcome", "Performance", "Process/learning"];
 
@@ -166,7 +171,7 @@ const contenuti = [
   "Personalized Feedback",
 ];
 
-export default function Home({ name, description, token }) {
+export default withPageAuthRequired(function Home({ token }) {
 
   // Feedback Page states
   const [timing, setTiming] = useState([]);
@@ -207,10 +212,15 @@ export default function Home({ name, description, token }) {
   //Rules
   const [rules, setRules] = useState("");
 
-  const { user, error, isLoading } = useUser();
+  // const { user, error, isLoading } = useUser();
 
+  // Valori URL
+  const { query } = useRouter()
+  let name = query.name
+  let description = query.description
 
-  if (!isLoading) return (
+  // if (!isLoading) 
+  return (
     <div className="flex flex-col justify-between h-screen ">
       <Head>
         <title>GamiDoc</title>
@@ -489,4 +499,4 @@ export default function Home({ name, description, token }) {
       <Footer />
     </div>
   );
-}
+})

@@ -7,6 +7,9 @@ import Head from "next/head";
 import * as React from "react";
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
+import { withPageAuthRequired } from "@auth0/nextjs-auth0"
+
+export const getServerSideProps = withPageAuthRequired()
 
 export default function Name() {
   const router = useRouter();
