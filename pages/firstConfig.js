@@ -42,7 +42,7 @@ export default function FirstConfig({ user, accessToken }) {
   // const theme = createTheme();
 
   let url = (process.env.SECURE) ? "http://" : "https://"
-  url = url + process.env.BACK_ENDPOINT + "/firstConfig"
+  url = url + process.env.BACK_ENDPOINT + "/user/firstConfig"
 
   const sendData = (event) => {
     event.preventDefault();

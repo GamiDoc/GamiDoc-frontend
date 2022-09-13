@@ -8,6 +8,9 @@ const Pdf = dynamic(() => import("../components/CreatePDF"), { ssr: false });
 import MobileOffIcon from "@mui/icons-material/MobileOff";
 import Head from "next/head";
 
+// Auth0 user hook  
+import { useUser, getSession } from '@auth0/nextjs-auth0';
+
 // Tabs
 import { Tab } from "@headlessui/react";
 import Context from "../components/tabs/Context";
@@ -28,6 +31,9 @@ const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
+export const getServerSideProps = (context) => {
+  return { props: { name: context.query.name, description: context.query.description } }
+}
 // import { Rule } from "postcss";
 
 const Aimo = ["Outcome", "Performance", "Process/learning"];
@@ -165,7 +171,8 @@ const contenuti = [
   "Personalized Feedback",
 ];
 
-export default function Home() {
+export default function Home({ name, description }) {
+
   // Feedback Page states
   const [timing, setTiming] = useState([]);
   const [context, setContext] = useState([]);
@@ -186,7 +193,6 @@ export default function Home() {
   const [domain, setDomain] = useState([]);
   const [behavior, setBehavior] = useState();
   const [aim, setAim] = useState([]);
-  const [name, setName] = useState("");
   const [target, setTarget] = useState("");
   const [targetAge, setTargetAge] = useState([]);
 
@@ -222,11 +228,20 @@ export default function Home() {
 
   //Aestethics
   const [aesthetics, setAesthetics] = useState("");
-
+  const { user, error, isLoading } = useUser();
   //Rules
   const [rules, setRules] = useState("");
 
-  return (
+  const [token, setToken] = useState("");
+
+  // useEffect(() => {
+  //   if (!isLoading) {
+  //     const session = getSession(req, res)
+  //     setToken(session.accessToken)
+  //   }
+  // }, [user])
+
+  if (isLoading) return (
     <div className="flex flex-col justify-between h-screen ">
       <Head>
         <title>GamiDoc</title>
@@ -471,6 +486,7 @@ export default function Home() {
             <Pdf
               selectedIndex={selectedIndex}
               name={name}
+              description={description}
               behavior={behavior}
               domain={domain}
               aim={aim}
@@ -484,6 +500,7 @@ export default function Home() {
               contextDescription={contextDescription}
               rules={rules}
               aesthetics={aesthetics}
+              token={token}
             />
             <div className="grow flex-row flex gap-5 items-center justify-end">
               <div

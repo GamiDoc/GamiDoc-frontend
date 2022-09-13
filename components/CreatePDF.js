@@ -1,4 +1,5 @@
-import React from "react";
+import Link from "next/link";
+import { useState } from "react";
 import {
   Document,
   Page,
@@ -8,11 +9,14 @@ import {
   StyleSheet,
   PDFDownloadLink,
 } from "@react-pdf/renderer";
-import Aesthetics from "./tabs/Aesthetics";
+
+let requestURL = (process.env.SECURE) ? "https://" : "http://"
+requestURL = requestURL + process.env.BACK_ENDPOINT + "/paper/new"
 
 export default function CreatePDF({
   selectedIndex,
   name,
+  description,
   behavior,
   domain,
   aim,
@@ -26,8 +30,11 @@ export default function CreatePDF({
   device,
   affordances,
   rules,
-  aesthetics
+  aesthetics,
+  token
 }) {
+  const [pdfBlob, setPdfBlob] = useState()
+
   const styles = StyleSheet.create({
     page: {
       //     flexDirection: "row",
@@ -152,7 +159,7 @@ export default function CreatePDF({
 
 
   return (
-    <div className="w-1/2 flex items-center justify-end" >
+    <div className="w-1/2 flex items-center justify-end gap-2" >
       <PDFDownloadLink
         document={<MyDoc />}
         fileName="mockup.pdf"
@@ -163,11 +170,41 @@ export default function CreatePDF({
         }
       >
         {
-          ({ blob, url, loading, error }) =>
-            loading ? "Loading document..." : "Download now!"
+          ({ blob, url, loading, error }) => {
+            setPdfBlob(blob)
+            return "Download now!"
+          }
           // da fare caricamento con icone, oppure rendere il bottone incliccabile :)
         }
       </PDFDownloadLink>
-    </div>
+      {(pdfBlob) ?
+        <button
+          onClick={() => {
+            axios.post(url, {
+              title: name,
+              description: description,
+              behavior: behavior,
+              domain: domain,
+              aim: aim + targetCat + targetAge,
+              modality: modality,
+              timing: timing + timingDescription,
+              context: context + contextDescription,
+              device: device,
+              affordances: affordances,
+              rules: rules,
+              aesthetics: aesthetics,
+
+            },
+              {
+                headers: {
+                  Authorization: "bearer" + token
+                }
+              })
+          }}
+          className=" py-4 inline-block px-8 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md  hover:bg-blue-400 hover:shadow-lg focus:bg-blue-400 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out"
+        >
+          Save and Send!
+        </button> : ""}
+    </div >
   );
 }
