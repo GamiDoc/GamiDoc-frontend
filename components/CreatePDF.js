@@ -15,23 +15,28 @@ requestURL = requestURL + process.env.BACK_ENDPOINT + "/paper/new"
 
 export default function CreatePDF({
   selectedIndex,
+  token,
   name,
   description,
+
   behavior,
   domain,
   aim,
-  targetCat,
   targetAge,
+
+  device,
   modality,
+  dynamics,
+  personalization,
+
   timing,
   timingDescription,
-  contextDescription,
   context,
-  device,
+  contextDescription,
+
   affordances,
   rules,
   aesthetics,
-  token
 }) {
   const [pdfBlob, setPdfBlob] = useState()
 
@@ -105,9 +110,8 @@ export default function CreatePDF({
           <Text style={styles.h2}>{domain}</Text>
           <Text style={styles.h1}>Aim:</Text>
           <Text style={styles.h2}>{aim}</Text>
-          <Text style={styles.h1}>Target:</Text>
+          <Text style={styles.h1}>Target Age:</Text>
           <Text style={styles.h2}>{targetAge}</Text>
-          <Text style={styles.h2}>{targetCat}</Text>
         </View>
       </Page>
       <Page size="A4" style={styles.page}>
@@ -120,6 +124,15 @@ export default function CreatePDF({
         <View style={styles.section}>
           <Text style={styles.h1}>Modality:</Text>
           <Text style={styles.h2}>{modality}</Text>
+        </View>
+      </Page>
+
+      <Page size="A4" style={styles.page}>
+        <View style={styles.section}>
+          <Text style={styles.h1}>Dynamics:</Text>
+          <Text style={styles.h2}>{dynamics}</Text>
+          <Text style={styles.h1}>Personalization:</Text>
+          <Text style={styles.h2}>{personalization}</Text>
         </View>
       </Page>
 
@@ -171,7 +184,7 @@ export default function CreatePDF({
       >
         {
           ({ blob, url, loading, error }) => {
-            setPdfBlob(blob)
+            // setPdfBlob(blob) // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!11
             return "Download now!"
           }
           // da fare caricamento con icone, oppure rendere il bottone incliccabile :)

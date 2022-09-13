@@ -11,16 +11,19 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 
 export default function Feedback({
+
   timing,
+  setTiming,
   timingDescription,
   setTimingDescription,
-  setTiming,
+  selectObj1,
+
   context,
   contextDescription,
   setContextDescription,
   setContext,
-  selectObj1,
   selectObj2,
+
 }) {
   const router = useRouter();
   return (
@@ -29,7 +32,7 @@ export default function Feedback({
         <Link href="/documentation#technology">
           <IconButton
             aria-label="Example"
-            //onClick={() => router.push("/documentation#technology")}
+          //onClick={() => router.push("/documentation#technology")}
           >
             <InfoOutlinedIcon sx={{ fontSize: 20 }} />
           </IconButton>

@@ -1,7 +1,7 @@
 import * as React from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Fragment } from "react";
 import dynamic from "next/dynamic";
 const Pdf = dynamic(() => import("../components/CreatePDF"), { ssr: false });
@@ -22,17 +22,12 @@ import Feedback from "../components/tabs/Feedback";
 import Modality from "../components/tabs/Modality";
 
 //alert
-import Snackbar from "@mui/material/Snackbar";
-import MuiAlert from "@mui/material/Alert";
 import Dynamics from "../components/tabs/Dynamics";
 import Personalization from "../components/tabs/Personalization";
 
-const Alert = React.forwardRef(function Alert(props, ref) {
-  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-});
-
 export const getServerSideProps = (context) => {
-  return { props: { name: context.query.name, description: context.query.description } }
+  const session = getSession(req, res)
+  return { props: { name: context.query.name, description: context.query.description, token: session.accessToken } }
 }
 // import { Rule } from "postcss";
 
@@ -171,7 +166,7 @@ const contenuti = [
   "Personalized Feedback",
 ];
 
-export default function Home({ name, description }) {
+export default function Home({ name, description, token }) {
 
   // Feedback Page states
   const [timing, setTiming] = useState([]);
@@ -193,55 +188,29 @@ export default function Home({ name, description }) {
   const [domain, setDomain] = useState([]);
   const [behavior, setBehavior] = useState();
   const [aim, setAim] = useState([]);
-  const [target, setTarget] = useState("");
   const [targetAge, setTargetAge] = useState([]);
 
-  const [targetCat, setTargetCat] = useState([]);
 
   //Device
   const [device, setDevice] = useState([]);
 
   //Affordances
-  const [performance, setPerformance] = useState(2);
-  const [ecological, setEcological] = useState("");
-  const [social, setSocial] = useState("");
-  const [personal, setPersonal] = useState("");
-  const [fictional, setFictional] = useState("");
-  const [select1, setSelected1] = useState(false);
-  const [select2, setSelected2] = useState(false);
-  const [affordances1, setAffordances1] = useState("");
-  const [affordances2, setAffordances2] = useState("");
-  const [affordances3, setAffordances3] = useState("");
-  const [affordances4, setAffordances4] = useState("");
-  const [affordances5, setAffordances5] = useState("");
-  const [affordances6, setAffordances6] = useState("");
-  const [open, setOpen] = React.useState(false);
-  const handleClick = () => {
-    setOpen(true);
-  };
-  const handleClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    setOpen(false);
-  };
+  // const [performance, setPerformance] = useState(2);
+  // const [ecological, setEcological] = useState("");
+  // const [social, setSocial] = useState("");
+  // const [personal, setPersonal] = useState("");
+  // const [fictional, setFictional] = useState("");
+  const [affordances, setAffordances] = useState("");
 
   //Aestethics
   const [aesthetics, setAesthetics] = useState("");
-  const { user, error, isLoading } = useUser();
   //Rules
   const [rules, setRules] = useState("");
 
-  const [token, setToken] = useState("");
+  const { user, error, isLoading } = useUser();
 
-  // useEffect(() => {
-  //   if (!isLoading) {
-  //     const session = getSession(req, res)
-  //     setToken(session.accessToken)
-  //   }
-  // }, [user])
 
-  if (isLoading) return (
+  if (!isLoading) return (
     <div className="flex flex-col justify-between h-screen ">
       <Head>
         <title>GamiDoc</title>
@@ -386,18 +355,13 @@ export default function Home({ name, description }) {
                     setAim={setAim}
                     domain={domain}
                     setDomain={setDomain}
-                    target={target}
-                    setTarget={setTarget}
                     targetAge={targetAge}
                     setTargetAge={setTargetAge}
-                    targetCat={targetCat}
-                    setTargetCat={setTargetCat}
                     behavior={behavior}
                     setBehavior={setBehavior}
                     selectObj1={KoivistoHamari}
                     selectObj2={Aimo}
-                    selectObj3={categoriesSelection}
-                    selectObj4={ageSelection}
+                    selectObj3={ageSelection}
                   />
                 </Tab.Panel>
                 <Tab.Panel>
@@ -415,7 +379,11 @@ export default function Home({ name, description }) {
                   />
                 </Tab.Panel>
                 <Tab.Panel>
-                  <Dynamics dynamics={dynamics} setDynamics={setDynamics} />
+                  <Dynamics
+                    dynamics={dynamics}
+                    setDynamics={setDynamics}
+                  />
+
                 </Tab.Panel>
                 <Tab.Panel>
                   <Personalization
@@ -439,24 +407,8 @@ export default function Home({ name, description }) {
                 </Tab.Panel>
                 <Tab.Panel>
                   <Affordances
-                    select1={select1}
-                    setSelected1={setSelected1}
-                    select2={select2}
-                    setSelected2={setSelected2}
-                    affordances1={affordances1}
-                    setAffordances1={setAffordances1}
-                    affordances2={affordances2}
-                    setAffordances2={setAffordances2}
-                    affordances3={affordances3}
-                    setAffordances3={setAffordances3}
-                    affordances4={affordances4}
-                    setAffordances4={setAffordances4}
-                    affordances5={affordances5}
-                    setAffordances5={setAffordances5}
-                    affordances6={affordances6}
-                    setAffordances6={setAffordances6}
-                    open={open}
-                    setOpen={setOpen}
+                    affordances={affordances}
+                    setAffordances={setAffordances}
                     affordancesSelection={affordancesSelection}
                   />
                 </Tab.Panel>
@@ -464,12 +416,6 @@ export default function Home({ name, description }) {
                   <Rules
                     rules={rules}
                     setRules={setRules}
-                    affordances1={affordances1}
-                    affordances2={affordances2}
-                    affordances3={affordances3}
-                    affordances4={affordances4}
-                    affordances5={affordances5}
-                    affordances6={affordances6}
                   />
                 </Tab.Panel>
                 <Tab.Panel>
@@ -484,23 +430,33 @@ export default function Home({ name, description }) {
 
           <div className="flex flex-row justify-center items-center mb-10 mr-2">
             <Pdf
+              // Indice e token auth 
               selectedIndex={selectedIndex}
+              token={token}
+
+              // Dati paper presi come props  
               name={name}
               description={description}
+
+              // Stati delle tabs 
               behavior={behavior}
               domain={domain}
               aim={aim}
               targetAge={targetAge}
-              targetCat={targetCat}
-              timing={timing}
-              context={context}
-              modality={modality}
+
               device={device}
+              modality={modality}
+              dynamics={dynamics}
+              personalization={personalization}
+
+              timing={timing}
               timingDescription={timingDescription}
+              context={context}
               contextDescription={contextDescription}
+
+              affordances={affordances}
               rules={rules}
               aesthetics={aesthetics}
-              token={token}
             />
             <div className="grow flex-row flex gap-5 items-center justify-end">
               <div
@@ -529,11 +485,7 @@ export default function Home({ name, description }) {
           </div>
         </div>
       </div>
-      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="warning" sx={{ width: "100%" }}>
-          too much feedback - pls stop!
-        </Alert>
-      </Snackbar>
+
       <Footer />
     </div>
   );

@@ -2,20 +2,12 @@ import React from "react";
 import TextField from "@mui/material/TextField";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import IconButton from "@mui/material/IconButton";
-import { useRouter } from "next/router";
 import Link from "next/link";
 
 function Rules({
   rules,
   setRules,
-  affordances1,
-  affordances2,
-  affordances3,
-  affordances4,
-  affordances5,
-  affordances6,
 }) {
-  const router = useRouter();
 
   return (
     <div className="flex flex-col py-4 w-[60em]">
@@ -23,7 +15,7 @@ function Rules({
         <Link href="/documentation#gamerules">
           <IconButton
             aria-label="Example"
-            //onClick={() => router.push("/documentation#gamerules")}
+          //onClick={() => router.push("/documentation#gamerules")}
           >
             <InfoOutlinedIcon sx={{ fontSize: 20 }} />
           </IconButton>
