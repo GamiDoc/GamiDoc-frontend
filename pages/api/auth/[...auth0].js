@@ -11,7 +11,7 @@ export default handleAuth({
     try {
       await handleLogin(req, res, {
         authorizationParams: {
-          audience: 'https://' + process.env.BACK_ENDPOINT,
+          // audience: 'https://' + process.env.BACK_ENDPOINT,
           scope: 'openid profile email read:messages'
         },
         returnTo: "/api/firstConfig"
