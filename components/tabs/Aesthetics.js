@@ -75,7 +75,9 @@ function Aesthetics({
         }
       />
       <div className="grid-cols-2 gap-3 mt-5">
-        {imgUrl.map((imgURL) => <Image alt="Non caricate/renderizzate" src={imgURL} width={300} height={300} layout="fixed" />)}
+        {imgUrl.map((imgURL) => <Image alt="Non caricate/renderizzate" src={imgURL} width={300} height={300} layout="fixed"
+          key={val.id}
+        />)}
       </div>
     </div>
   );

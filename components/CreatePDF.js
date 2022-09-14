@@ -173,6 +173,7 @@ export default function CreatePDF({
         <View style={styles.section}>
           {imgUrl.map((val) =>
             <Image
+              key={val.id}
               src={val}
               style={styles.tab}
               alt="logo"
