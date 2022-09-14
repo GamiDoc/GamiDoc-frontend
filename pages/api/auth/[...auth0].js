@@ -2,7 +2,7 @@ require('dotenv').config()
 import { handleAuth, handleLogin, handleCallback } from '@auth0/nextjs-auth0';
 
 const afterCallback = async (req, res, session, state) => {
-//  console.log(session);
+  //  console.log(session);
   return session;
 }
 
@@ -11,7 +11,7 @@ export default handleAuth({
     try {
       await handleLogin(req, res, {
         authorizationParams: {
-          audience: 'http://localhost:5000',// + process.env.BACK_ENDPOINT,
+          audience: 'https://' + process.env.BACK_ENDPOINT,
           scope: 'openid profile email read:messages'
         },
         returnTo: "/api/firstConfig"

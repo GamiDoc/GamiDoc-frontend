@@ -56,7 +56,7 @@ export default function SmvPage() {
         {(text == "") ? <></> :
           <button
             onClick={
-              async () => await axios.post("https://provadocker1234.herokuapp.com/converter/convert", { "data": text })
+              async () => await axios.post(process.env.SMV_ENDPOINT + "/converter/convert", { "data": text })
                 .then((response) => {
                   // console.log(response)
                   if (response.data.Data.search("syntools") != -1) {
