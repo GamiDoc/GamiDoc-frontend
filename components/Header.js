@@ -42,7 +42,9 @@ function Header() {
           <div className="rounded-2xl justify-betwenn m-2 flex items-center bg-yellow-gamy p-2 gap-2 font-xl">
             <Image src={user.picture} width={25} height={25} className="rounded-full" />
             {user.name}
-            <a href="/api/auth/logout">Logout</a>
+            <Link href="/api/auth/logout">
+              <a >Logout</a>
+            </Link>
           </div>
         }
       </div>
