@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { useState } from "react";
+import axios from "axios"
 import {
   Document,
   Page,
@@ -216,7 +217,7 @@ export default function CreatePDF({
       {(name && description) ?
         <button
           onClick={() => {
-            axios.post(url, {
+            axios.post(requestURL, {
               title: name,
               description: description,
               behavior: behavior,
