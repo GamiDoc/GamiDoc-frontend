@@ -31,8 +31,8 @@ export default function SmvPage() {
   // useRef per i blobs dei due file di testo 
   var blob = useRef()
   var graphBlob = useRef()
-
   // useEffect  che avviene ogni nuova traduzione aggiorna blob output e lo stato graph  
+
   useEffect(() => {
     if (output != "") {
       blob.current = new Blob([output]);

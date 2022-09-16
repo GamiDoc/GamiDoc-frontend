@@ -25,15 +25,13 @@ import Modality from "../components/tabs/Modality";
 import Dynamics from "../components/tabs/Dynamics";
 import Personalization from "../components/tabs/Personalization";
 
-// export const getServerSideProps = (context) => {
-//   // const session = getSession(req, res)
-//   return { props: { name: context.query.name, description: context.query.description, } }
-// }
 
 export const getServerSideProps = ({ req, res }) => {
+  let url = (process.env.SECURE) ? "http://" : "https://"
+  url = url + process.env.BACK_ENDPOINT
   const session = getSession(req, res)
   if (!session) return { props: {} }
-  return { props: { token: session.accessToken } }
+  return { props: { token: session.accessToken, url: url } }
 }
 
 const Aimo = ["Outcome", "Performance", "Process/learning"];
@@ -171,27 +169,27 @@ const contenuti = [
   "Personalized Feedback",
 ];
 
-export default withPageAuthRequired(function Home({ token }) {
+export default withPageAuthRequired(function Home({ token, url }) {
 
   // Feedback Page states
-  const [timing, setTiming] = useState([]);
-  const [context, setContext] = useState([]);
+  const [timing, setTiming] = useState("");
+  const [context, setContext] = useState("");
   const [timingDescription, setTimingDescription] = useState("");
   const [contextDescription, setContextDescription] = useState("");
   // Modality Page state
-  const [modality, setModality] = useState([]);
+  const [modality, setModality] = useState("");
   //Dynamics
   const [dynamics, setDynamics] = useState("");
   //Personalization
   const [personalization, setPersonalization] = useState("");
   //context
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [domain, setDomain] = useState([]);
-  const [behavior, setBehavior] = useState();
-  const [aim, setAim] = useState([]);
+  const [domain, setDomain] = useState("");
+  const [behavior, setBehavior] = useState("");
+  const [aim, setAim] = useState("");
   const [targetAge, setTargetAge] = useState([]);
   //Device
-  const [device, setDevice] = useState([]);
+  const [device, setDevice] = useState("");
   //Affordances
   const [affordances, setAffordances] = useState("");
   //Aestethics
@@ -435,6 +433,7 @@ export default withPageAuthRequired(function Home({ token }) {
               selectedIndex={selectedIndex}
               token={token}
               imgUrl={imgUrl}
+              url={url}
 
               // Dati paper presi come props  
               name={name}

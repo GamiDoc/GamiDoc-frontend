@@ -13,7 +13,7 @@ export default handleAuth({
         authorizationParams: {
           // audience: process.env.AUTH0_ISSUER_BASE_URL + "/api/v2", //'https://' + process.env.BACK_ENDPOINT,
           audience: process.env.AUDIENCE,
-          scope: 'openid profile email read:user_app_metadata update:users_app_metadata  read:users update:users'
+          scope: 'openid profile email '
         },
         returnTo: "/api/firstConfig"
       });

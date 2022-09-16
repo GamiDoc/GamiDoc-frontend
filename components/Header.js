@@ -40,9 +40,9 @@ function Header() {
             </Link>
           </button> :
           <div className="rounded-2xl justify-betwenn m-2 flex items-center bg-yellow-gamy p-2 gap-2 font-xl">
-            <Image src={user.picture} width={25} height={25} className="rounded-full" />
+            {/* <Image src={user.picture} width={25} height={25} className="rounded-full" /> */}
             {user.name}
-            <Link href="/api/auth/logout">
+            <Link href="/api/auth/logout" passHref>
               <a >Logout</a>
             </Link>
           </div>

@@ -9,31 +9,33 @@ export default async function firstConfig(req, res) {
   const { accessToken } = await getAccessToken(req, res);
   let resp
   try {
-    resp = await axios.get("http//" + process.env.BACK_ENDPOINT + "/user/checkProfile", { // API endpoint per il checkprofilet
+    resp = await axios.get("http://" + process.env.BACK_ENDPOINT + "/user/checkProfile", { // API endpoint per il checkprofilet
       headers: {
         'Authorization': "Bearer " + accessToken
       }
     })
   } catch (error) {
-    console.error(error.response);
+    console.error(error.response.data);
     //.response.data
   }
   console.log(resp)
-  if (!resp) return res;
-  if (resp.data?.status == true) {
-    // ti riporta alla homepage 
-    res.writeHead(302, {
-      Location: '/'
-    })
-    //console.log("good") 
-    res.end();
-  } else {
-    // ti porta alla pagina di firstConfig per l'account 
-    res.writeHead(302, {
-      // da fare un form che manda la richiesta al back con le informazioni per l'utente
-      Location: '/firstConfig'
-    })
-    //console.log("good") 
-    res.end();
-  }
+  return new Promise((resolve, reject) => {
+    if (!resp) return res;
+    if (resp.data?.status == true) {
+      // ti riporta alla homepage 
+      res.writeHead(302, {
+        Location: '/'
+      })
+      console.log("good")
+      res.end();
+    } else {
+      // ti porta alla pagina di firstConfig per l'account 
+      res.writeHead(302, {
+        // da fare un form che manda la richiesta al back con le informazioni per l'utente
+        Location: '/firstConfig'
+      })
+      console.log("good")
+      res.end();
+    }
+  })
 }

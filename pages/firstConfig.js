@@ -8,14 +8,19 @@ import Container from "@mui/material/Container";
 import { getSession } from "@auth0/nextjs-auth0"
 import Image from "next/image";
 import axios from "axios"
-
+import { useState } from "react"
+import router from "next/router"
 export function getServerSideProps({ req, res }) {
+  let url = (process.env.SECURE) ? "http://" : "https://"
+  url = url + process.env.BACK_ENDPOINT + "/user/firstConfig"
   const session = getSession(req, res)
   if (!session) return { props: {} }
-  return { props: { accessToken: session.accessToken, user: session.user } }
+  return { props: { accessToken: session.accessToken, user: session.user, url: url } }
 }
 
-export default function FirstConfig({ user, accessToken }) {
+export default function FirstConfig({ user, accessToken, url }) {
+  const [userNameState, setUserNameState] = useState("")
+  const [bioState, setBioState] = useState("")
 
   const sanityIoImageLoader = ({ src, width, quality }) => {
     return `https://i.imgur.com/Y3QF08D.png`;
@@ -41,15 +46,14 @@ export default function FirstConfig({ user, accessToken }) {
 
   // const theme = createTheme();
 
-  let url = (process.env.SECURE) ? "http://" : "https://"
-  url = url + process.env.BACK_ENDPOINT + "/user/firstConfig"
-
   const sendData = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
+    // const data = new FormData(event.currentTarget);
+    // console.log(data)
+
     axios.post(url, {
-      username: data.userName,
-      description: data.Bio,
+      username: userNameState,
+      description: bioState,
     }
       , {
         headers: {
@@ -84,7 +88,7 @@ export default function FirstConfig({ user, accessToken }) {
           </Link>
           <Box
             component="form"
-            onSubmit={(data) => sendData(data)}
+            onSubmit={sendData}
             noValidate
             sx={{ mt: 1 }}
           >
@@ -106,6 +110,7 @@ export default function FirstConfig({ user, accessToken }) {
               name="userName"
               autoFocus
               helperText="Please enter your prefered UserName"
+              onChange={(val) => { setUserNameState(val.target.value) }}
             />
             <TextField
               margin="normal"
@@ -116,9 +121,11 @@ export default function FirstConfig({ user, accessToken }) {
               id="Bio"
               multiline
               helperText="A few lines to describe you and your work!"
+              onChange={(val) => { setBioState(val.target.value) }}
             />
             <button
               className="py-4 inline-block px-8 bg-yellow-gamy text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md  hover:bg-yellow-600 hover:shadow-lg focus:bg-yellow-600 focus:shadow-lg focus:outline-none focus:ring-0  active:shadow-lg transition duration-150 ease-in-out"
+              type="submit"
             >
               Subscribe
             </button>

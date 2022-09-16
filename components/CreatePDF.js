@@ -1,5 +1,6 @@
+import { useRouter } from "next/router"
 import Link from "next/link";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import axios from "axios"
 import {
   Document,
@@ -12,8 +13,6 @@ import {
   BlobProvider
 } from "@react-pdf/renderer";
 
-let requestURL = (process.env.SECURE) ? "https://" : "http://"
-requestURL = requestURL + process.env.BACK_ENDPOINT + "/paper/new"
 
 export default function CreatePDF({
   selectedIndex,
@@ -39,9 +38,11 @@ export default function CreatePDF({
   affordances,
   rules,
   aesthetics,
+  url
 }) {
   const [pdfBlob, setPdfBlob] = useState()
-
+  const router = useRouter()
+  let requestURL = url + "/paper/new"
   const setBlob = (blob) => setPdfBlob(blob)
 
   const styles = StyleSheet.create({
@@ -193,7 +194,7 @@ export default function CreatePDF({
         document={MyDoc}
       >
         {({ blob, url, loading, error }) => {
-          setBlob(blob)
+          // setBlob(blob)
           return ""
         }}
       </BlobProvider>
@@ -217,6 +218,8 @@ export default function CreatePDF({
       {(name && description) ?
         <button
           onClick={() => {
+            let time = ""
+            for (let i; i < timing.lenght; i++) time = time + timing[i]
             axios.post(requestURL, {
               title: name,
               description: description,
@@ -227,18 +230,23 @@ export default function CreatePDF({
               modality: modality,
               dynamics: dynamics,
               personalization: personalization,
-              timing: timing + timingDescription,
+              timing: time + timingDescription,
               context: context + contextDescription,
               affordances: affordances,
               rules: rules,
               aesthetics: aesthetics,
-              pdf: pdfBlob
+              // pdf: pdfBlob
             },
               {
                 headers: {
                   Authorization: "Bearer " + token
                 }
               })
+              .then((val) => {
+                // console.log(val)
+                router.push("/")
+              })
+              .catch((err) => console.log(err))
           }}
           className=" py-4 inline-block px-8 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md  hover:bg-blue-400 hover:shadow-lg focus:bg-blue-400 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out"
         >
