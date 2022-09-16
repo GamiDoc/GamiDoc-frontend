@@ -15,10 +15,9 @@ export default async function firstConfig(req, res) {
       }
     })
   } catch (error) {
-    console.error(error.response.data);
+    console.error(error);
     //.response.data
-  }
-  console.log(resp)
+  } console.log(resp)
   return new Promise((resolve, reject) => {
     if (!resp) return res;
     if (resp.data?.status == true) {
