@@ -9,7 +9,8 @@ export default async function firstConfig(req, res) {
   const { accessToken } = await getAccessToken(req, res);
   let resp
   try {
-    resp = await axios.get("https://" + process.env.BACK_ENDPOINT + "/user/checkProfile", { // API endpoint per il checkprofilet
+    let type = (process.env.SECURE) ? "https://" : "http://"
+    resp = await axios.get(type + process.env.BACK_ENDPOINT + "/user/checkProfile", { // API endpoint per il checkprofilet
       headers: {
         'Authorization': "Bearer " + accessToken
       }

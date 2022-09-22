@@ -11,7 +11,7 @@ import axios from "axios"
 import { useState } from "react"
 import router from "next/router"
 export function getServerSideProps({ req, res }) {
-  let url = (process.env.SECURE) ? "http://" : "https://"
+  let url = (process.env.SECURE) ? "https://" : "http://"
   url = url + process.env.BACK_ENDPOINT + "/user/firstConfig"
   const session = getSession(req, res)
   if (!session) return { props: {} }

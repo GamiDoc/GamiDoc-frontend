@@ -27,7 +27,7 @@ import Personalization from "../components/tabs/Personalization";
 
 
 export const getServerSideProps = ({ req, res }) => {
-  let url = (process.env.SECURE) ? "http://" : "https://"
+  let url = (process.env.SECURE) ? "https://" : "http://"
   url = url + process.env.BACK_ENDPOINT
   const session = getSession(req, res)
   if (!session) return { props: {} }
@@ -402,7 +402,7 @@ export default withPageAuthRequired(function Home({ token, url }) {
                 </Tab.Panel>
                 <Tab.Panel>
                   <Affordances
-                    affordances={affordances}
+                    // affordances={affordances}
                     setAffordances={setAffordances}
                     affordancesSelection={affordancesSelection}
                   />

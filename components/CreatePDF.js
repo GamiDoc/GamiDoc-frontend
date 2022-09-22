@@ -41,9 +41,9 @@ export default function CreatePDF({
   url
 }) {
   const [pdfBlob, setPdfBlob] = useState()
+  // let pdfBlob = useRef()
   const router = useRouter()
   let requestURL = url + "/paper/new"
-  const setBlob = (blob) => setPdfBlob(blob)
 
   const styles = StyleSheet.create({
     page: {
@@ -191,10 +191,11 @@ export default function CreatePDF({
     <div className="w-1/2 flex items-center justify-end gap-2" >
 
       <BlobProvider
-        document={MyDoc}
+        // document={MyDoc}
+        document={<MyDoc />}
       >
         {({ blob, url, loading, error }) => {
-          // setBlob(blob)
+          setPdfBlob(blob)
           return ""
         }}
       </BlobProvider>
@@ -235,7 +236,7 @@ export default function CreatePDF({
               affordances: affordances,
               rules: rules,
               aesthetics: aesthetics,
-              // pdf: pdfBlob
+              pdf: pdfBlob.toString("base64")
             },
               {
                 headers: {

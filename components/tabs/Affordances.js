@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useState, useEffect } from "react"
 import OutlinedInput from "@mui/material/OutlinedInput";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
@@ -14,10 +14,20 @@ const sanityIoImageLoader = ({ src, width, quality }) => {
 };
 
 function Affordances({
-  affordances,
   setAffordances,
   affordancesSelection,
 }) {
+
+
+  const [value1, setValue1] = useState("")
+  const [value2, setValue2] = useState("")
+  const [value3, setValue3] = useState("")
+
+  useEffect(() => {
+    if (value1 && value2 && value3) return
+    setAffordances(value1 + " => " + value2 + " => " + value3)
+  }, [value1, value2, value3])
+
 
   return (
     <div className="flex flex-col w-[60em] py-4">
@@ -44,16 +54,17 @@ function Affordances({
         <br />
       </h2>
       <div className="w-auto mt-3">
+
         <TextField
           className=" -top-2 w-31 border shadow-md "
           id="username"
           type="text"
           multiline
           placeholder="Game action"
-          rows={1}
-        // value={aesthetics}
-        // onChange={(e) => setAesthetics(e.target.value)}
+          value={value1}
+          onChange={(e) => setValue1(e.target.value)}
         />
+
         <Image
           loader={sanityIoImageLoader}
           src="image-src"
@@ -61,16 +72,17 @@ function Affordances({
           height={34}
           width={85}
         />
+
         <TextField
-          className=" -top-2 w-31 border shadow-md "
+          className=" top-2 w-31 border shadow-md "
           id="username"
           type="text"
           multiline
           placeholder="Condition"
-          rows={1}
-        // value={aesthetics}
-        // onChange={(e) => setAesthetics(e.target.value)}
+          value={value2}
+          onChange={(e) => setValue2(e.target.value)}
         />
+
         <Image
           loader={sanityIoImageLoader}
           className="top-4"
@@ -80,15 +92,11 @@ function Affordances({
           width={85}
         />
         <FormControl className="relative w-60 shadow-md mb-4 -top-2">
-
           <Select
-            displayEmpty
-
             single
-            value={affordances}
-            onChange={(e) => setAffordances(e.target.value)}
+            value={value3}
+            onChange={(e) => setValue3(e.target.value)}
             input={<OutlinedInput />}
-
           >
             <MenuItem disabled value="">
               <em className="text-gray-400 font-normal ">Game elements</em>
@@ -100,6 +108,7 @@ function Affordances({
             ))}
           </Select>
         </FormControl>
+
       </div>
     </div>
   );

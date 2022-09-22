@@ -41,7 +41,11 @@ function Header() {
           </button> :
           <div className="rounded-2xl justify-betwenn m-2 flex items-center bg-yellow-gamy p-2 gap-2 font-xl">
             {/* <Image src={user.picture} width={25} height={25} className="rounded-full" /> */}
-            {user.name}
+
+            <div onClick={() => router.push({ pathname: "/display", query: { me: 1 } })}
+              className="hover:underline focus:text-sm text-base hover:text-blue-500 text-black">
+              {user.name}
+            </div>
             <Link href="/api/auth/logout" passHref>
               <a >Logout</a>
             </Link>
