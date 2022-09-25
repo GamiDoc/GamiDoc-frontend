@@ -1,6 +1,6 @@
 import { useRouter } from "next/router"
-import Link from "next/link";
-import { useRef, useState } from "react";
+// import Link from "next/link";
+// import { useRef, useState } from "react";
 import axios from "axios"
 import {
   Document,
@@ -9,10 +9,9 @@ import {
   Image,
   View,
   StyleSheet,
+  BlobProvider,
   PDFDownloadLink,
-  BlobProvider
 } from "@react-pdf/renderer";
-
 
 export default function CreatePDF({
   selectedIndex,
@@ -21,7 +20,8 @@ export default function CreatePDF({
   name,
   description,
 
-  behavior, domain,
+  behavior,
+  domain,
   aim,
   targetAge,
 
@@ -40,10 +40,22 @@ export default function CreatePDF({
   aesthetics,
   url
 }) {
-  const [pdfBlob, setPdfBlob] = useState()
-  // let pdfBlob = useRef()
   const router = useRouter()
   let requestURL = url + "/paper/new"
+
+  function blobToBase64(blob) {
+    return new Promise((resolve, _) => {
+      var reader = new FileReader();
+      reader.onload = function() {
+        var dataUrl = reader.result;
+        console.log(dataUrl)
+        var base64 = dataUrl.split(',')[1];
+        resolve(base64);
+      }
+      reader.readAsDataURL(blob);
+    })
+  };
+
 
   const styles = StyleSheet.create({
     page: {
@@ -191,18 +203,57 @@ export default function CreatePDF({
     <div className="w-1/2 flex items-center justify-end gap-2" >
 
       <BlobProvider
-        // document={MyDoc}
         document={<MyDoc />}
       >
         {({ blob, url, loading, error }) => {
-          setPdfBlob(blob)
-          return ""
-        }}
+          return (name && description) ?
+            <button
+              onClick={async () => {
+                let time = ""
+                let blobString = await blobToBase64(blob)
+                console.log(blob)
+                console.log(blobString)
+                for (let i; i < timing.lenght; i++) time = time + timing[i]
+                axios.post(requestURL, {
+                  title: name,
+                  description: description,
+                  behavior: behavior,
+                  domain: domain,
+                  aim: aim + targetAge,
+                  device: device,
+                  modality: modality,
+                  dynamics: dynamics,
+                  personalization: personalization,
+                  timing: time + timingDescription,
+                  context: context + contextDescription,
+                  affordances: affordances,
+                  rules: rules,
+                  aesthetics: aesthetics,
+                  // pdf: blob.toString("base64")
+                  pdf: blobString
+                },
+                  {
+                    headers: {
+                      Authorization: "Bearer " + token
+                    }
+                  })
+                  .then((val) => {
+                    console.log(val.data)
+                    router.push("/")
+                  })
+                  .catch((err) => console.log(err))
+              }}
+              className=" py-4 inline-block px-8 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md  hover:bg-blue-400 hover:shadow-lg focus:bg-blue-400 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out"
+            >
+              Save and Send!
+            </button> : ""
+        }
+        }
       </BlobProvider>
 
       <PDFDownloadLink
         document={<MyDoc />}
-        fileName="mockup.pdf"
+        fileName={name + ".pdf"}
         className={
           selectedIndex == 8
             ? " py-4 inline-block px-8 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md  hover:bg-blue-400 hover:shadow-lg focus:bg-blue-400 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out"
@@ -213,46 +264,8 @@ export default function CreatePDF({
           ({ blob, url, loading, error }) => {
             return "Download now!"
           }
-          // da fare caricamento con icone, oppure rendere il bottone incliccabile :)
         }
       </PDFDownloadLink>
-      {(name && description) ?
-        <button
-          onClick={() => {
-            let time = ""
-            for (let i; i < timing.lenght; i++) time = time + timing[i]
-            axios.post(requestURL, {
-              title: name,
-              description: description,
-              behavior: behavior,
-              domain: domain,
-              aim: aim + targetAge,
-              device: device,
-              modality: modality,
-              dynamics: dynamics,
-              personalization: personalization,
-              timing: time + timingDescription,
-              context: context + contextDescription,
-              affordances: affordances,
-              rules: rules,
-              aesthetics: aesthetics,
-              pdf: pdfBlob.toString("base64")
-            },
-              {
-                headers: {
-                  Authorization: "Bearer " + token
-                }
-              })
-              .then((val) => {
-                // console.log(val)
-                router.push("/")
-              })
-              .catch((err) => console.log(err))
-          }}
-          className=" py-4 inline-block px-8 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md  hover:bg-blue-400 hover:shadow-lg focus:bg-blue-400 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out"
-        >
-          Save and Send!
-        </button> : ""}
     </div >
   );
 }

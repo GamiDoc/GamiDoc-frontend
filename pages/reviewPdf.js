@@ -31,15 +31,17 @@ export default function ReviewPDF({ token, url }) {
       .then((res) => {
         console.log(res.data)
         setPaperMetaData(res.data.info)
-        const data = new Buffer.from(res.data.pdf.data, "base64")
-        setPdfBlob(data)
+        setPdfBlob(res.data.pdf.data)
+        // const data = new Buffer.from(res.data.pdf.data, "base64")
+        // const blob = new Blob(res.data.pdf.data)
+        // setPdfBlob(URL.createObjectURL(blob))
       })
       .catch(err => console.log(err))
   }, [])
 
   if (paperMetaData.Title != null)
     return (
-      <div className="flex-col gap-2 justify-center ">
+      <div className="flex-col gap-2 justify-center items-center">
         <Header />
         <div className="flex row gap-0.5">
           <p className="font-bold text-xl ml-4 text-black">

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Document, Page } from "react-pdf";
-
+import { Document, Page, pdfjs } from "react-pdf";
+import pdfjsWorker from 'pdfjs-dist/build/pdf.worker.entry';
 export default function PdfDisplayer({ pdfBlob }) {
   const [maxPages, setMaxPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1); //setting 1 to show fisrt page
@@ -14,14 +14,16 @@ export default function PdfDisplayer({ pdfBlob }) {
 
   function onDocumentLoadSuccess({ maxPages }) {
     setMaxPages(maxPages);
+    console.log(maxPages)
     setPageNumber(1);
   }
 
+  pdfjs.GlobalWorkerOptions.workerSrc = pdfjsWorker
   return (
-    <div className="flex-col items-center">
+    <div className="flex-col items-center justify-center">
       <Document
-        file={pdfBlob}
-        options={{ workerSrc: "/pdf.worker.js" }}
+        // file={pdfBlob}
+        file={`data:application/pdf;base64,${pdfBlob}`}
         onLoadSuccess={onDocumentLoadSuccess}
       >
         <Page pageNumber={pageNumber} />

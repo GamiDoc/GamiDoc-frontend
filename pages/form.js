@@ -170,7 +170,6 @@ const contenuti = [
 ];
 
 export default withPageAuthRequired(function Home({ token, url }) {
-
   // Feedback Page states
   const [timing, setTiming] = useState("");
   const [context, setContext] = useState("");
