@@ -55,7 +55,7 @@ export default function Display({ token, url }) {
     <div className="w-full m-2 grid gap-2 flex-col">
       <Header />
       {(data) ?
-        <div>
+        <div className="m-3 grid gap-2  grid-cols-5  auto-cols-max auto-rows-max">
           {data.map((val) => {
             return (
               <PaperBox key={val.id} me={me} id={val._id} author={val.Author} title={val.Title} description={val.Description} />
