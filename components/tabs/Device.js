@@ -1,4 +1,3 @@
-import { useState } from "react";
 import * as React from "react";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
@@ -7,20 +6,18 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import IconButton from "@mui/material/IconButton";
-import { useRouter } from "next/router";
 import Link from "next/link";
 
 function Device({ device, setDevice, DeviceSelection }) {
-  const router = useRouter();
-  const handleChange = (event) => {
-    const {
-      target: { value },
-    } = event;
-    setDevice(
-      // On autofill we get a stringified value.
-      typeof value === "string" ? value.split(",") : value
-    );
-  };
+  // const handleChange = (event) => {
+  //   const {
+  //     target: { value },
+  //   } = event;
+  //   setDevice(
+  //     // On autofill we get a stringified value.
+  //     typeof value === "string" ? value.split(",") : value
+  //   );
+  // };
   return (
     <div className="flex flex-col w-[60em] py-4">
       <label className=" mt-4 block text-gray-700  font-bold mb-2">
@@ -48,7 +45,7 @@ function Device({ device, setDevice, DeviceSelection }) {
           className="relative w-full shadow-md "
           single
           value={device}
-          onChange={handleChange}
+          onChange={(e) => setDevice(e.target.value)}
           input={<OutlinedInput label="Name" />}
         >
           {DeviceSelection.map((name) => (

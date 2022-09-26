@@ -1,16 +1,20 @@
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import MobileOffIcon from "@mui/icons-material/MobileOff";
 import Head from "next/head";
 import * as React from "react";
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
+import { withPageAuthRequired } from "@auth0/nextjs-auth0"
+
+export const getServerSideProps = withPageAuthRequired()
 
 export default function Name() {
   const router = useRouter();
   const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
   return (
     <div className="flex flex-col justify-between h-screen">
       <Head>
@@ -36,22 +40,28 @@ export default function Name() {
         >
           <TextField
             id="outlined-basic"
-            label="GamiDoc"
+            label="Paper Name"
             value={name}
             onChange={(e) => setName(e.target.value)}
             variant="outlined"
           />
           <TextField
             id="outlined-basic"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
             label="Description"
             multiline
-            rows={3}
             variant="outlined"
           />
         </Stack>
         <button
-          disabled={name == ""}
-          onClick={() => router.push("/form")}
+          disabled={name == "" || description == ""}
+          onClick={() =>
+            router.push({
+              pathname: "/form",
+              query: { name: name, description: description },
+            })
+          }
           className={
             name === ""
               ? "py-4 inline-block px-8 xs:px-6 xs:py-3 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md   focus:shadow-lg focus:outline-none focus:ring-0 bg-gray-500  transition duration-150 ease-in-out cursor-not-allowed"
@@ -62,6 +72,6 @@ export default function Name() {
         </button>
       </div>
       <Footer />
-    </div>
+    </div >
   );
 }

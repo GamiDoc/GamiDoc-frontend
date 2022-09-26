@@ -9,8 +9,8 @@ export default function About() {
       <h1 className="text-4xl font-bold ml-48 xs:ml-8 xs:mb-16">The team</h1>
       <div
         className="justify-center items-center flex flex-row text-xl gap-24 xs:flex-col"
-        // direction="row"
-        // divider={<Divider orientation="vertical" flexItem />}
+      // direction="row"
+      // divider={<Divider orientation="vertical" flexItem />}
       >
         <Stack className="items-left font-semibold xs:w-40 w-60">
           <Avatar

@@ -19,13 +19,10 @@ function Context({
   setAim,
   targetAge,
   setTargetAge,
-  targetCat,
-  setTargetCat,
 
   selectObj1, // L'oggetto che contiene i campi del select
   selectObj2, // Aimo
-  selectObj3, // set target cat
-  selectObj4, // Target categories
+  selectObj3, // Target categories
 }) {
   const router = useRouter();
 
@@ -43,9 +40,6 @@ function Context({
     setDomain(event.target.value);
   };
 
-  const handleChangeCat = (event) => {
-    setTargetCat(event.target.value);
-  };
 
   return (
     <div className="flex flex-col py-4 w-[60em]">
@@ -167,7 +161,7 @@ function Context({
           onChange={handleChange}
           input={<OutlinedInput label="Age" />}
         >
-          {selectObj4.map((name) => (
+          {selectObj3.map((name) => (
             <MenuItem key={name} value={name}>
               {name}
             </MenuItem>
@@ -181,8 +175,6 @@ function Context({
         multiline
         rows={3}
         placeholder="Target user"
-        // value={behavior}
-        // onChange={(e) => setBehavior(e.target.value)}
       />
     </div>
   );

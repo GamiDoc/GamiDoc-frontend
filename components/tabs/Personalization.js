@@ -1,27 +1,11 @@
-import { useState } from "react";
 import * as React from "react";
-import OutlinedInput from "@mui/material/OutlinedInput";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import IconButton from "@mui/material/IconButton";
-import { useRouter } from "next/router";
 import Link from "next/link";
 import { TextField } from "@mui/material";
 
 function Personalization({ personalization, setPersonalization }) {
-  const router = useRouter();
-  const handleChange = (event) => {
-    const {
-      target: { value },
-    } = event;
-    setDevice(
-      // On autofill we get a stringified value.
-      typeof value === "string" ? value.split(",") : value
-    );
-  };
+
   return (
     <div className="flex flex-col w-[60em] py-4">
       <label className=" mt-4 block text-gray-700  font-bold mb-2">

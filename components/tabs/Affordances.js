@@ -1,13 +1,11 @@
-import * as React from "react";
+import { useState, useEffect } from "react"
 import OutlinedInput from "@mui/material/OutlinedInput";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import IconButton from "@mui/material/IconButton";
-import { useRouter } from "next/router";
 import Image from "next/image";
-import InputLabel from "@mui/material/InputLabel";
 import Link from "next/link";
 import { TextField } from "@mui/material";
 
@@ -16,28 +14,20 @@ const sanityIoImageLoader = ({ src, width, quality }) => {
 };
 
 function Affordances({
-  select1,
-  setSelected1,
-  select2,
-  setSelected2,
-
-  affordances1,
-  setAffordances1,
-  affordances2,
-  setAffordances2,
-  affordances3,
-  setAffordances3,
-  affordances4,
-  setAffordances4,
-  affordances5,
-  setAffordances5,
-  affordances6,
-  setAffordances6,
-  open,
-  setOpen,
+  setAffordances,
   affordancesSelection,
 }) {
-  const router = useRouter();
+
+
+  const [value1, setValue1] = useState("")
+  const [value2, setValue2] = useState("")
+  const [value3, setValue3] = useState("")
+
+  useEffect(() => {
+    if (value1 && value2 && value3) return
+    setAffordances(value1 + " => " + value2 + " => " + value3)
+  }, [value1, value2, value3])
+
 
   return (
     <div className="flex flex-col w-[60em] py-4">
@@ -64,16 +54,17 @@ function Affordances({
         <br />
       </h2>
       <div className="w-auto mt-3">
+
         <TextField
           className=" -top-2 w-31 border shadow-md "
           id="username"
           type="text"
           multiline
           placeholder="Game action"
-          rows={1}
-          // value={aesthetics}
-          // onChange={(e) => setAesthetics(e.target.value)}
+          value={value1}
+          onChange={(e) => setValue1(e.target.value)}
         />
+
         <Image
           loader={sanityIoImageLoader}
           src="image-src"
@@ -81,16 +72,17 @@ function Affordances({
           height={34}
           width={85}
         />
+
         <TextField
-          className=" -top-2 w-31 border shadow-md "
+          className=" top-2 w-31 border shadow-md "
           id="username"
           type="text"
           multiline
           placeholder="Condition"
-          rows={1}
-          // value={aesthetics}
-          // onChange={(e) => setAesthetics(e.target.value)}
+          value={value2}
+          onChange={(e) => setValue2(e.target.value)}
         />
+
         <Image
           loader={sanityIoImageLoader}
           className="top-4"
@@ -100,19 +92,15 @@ function Affordances({
           width={85}
         />
         <FormControl className="relative w-60 shadow-md mb-4 -top-2">
-
           <Select
-            displayEmpty
-
             single
-            value={affordances1}
-            onChange={(e) => setAffordances1(e.target.value)}
+            value={value3}
+            onChange={(e) => setValue3(e.target.value)}
             input={<OutlinedInput />}
-
           >
             <MenuItem disabled value="">
-            <em className="text-gray-400 font-normal ">Game elements</em>
-          </MenuItem>
+              <em className="text-gray-400 font-normal ">Game elements</em>
+            </MenuItem>
             {affordancesSelection.map((name) => (
               <MenuItem key={name} value={name}>
                 {name}
@@ -120,219 +108,8 @@ function Affordances({
             ))}
           </Select>
         </FormControl>
-      </div>
 
-      {/* <FormControl>
-        <Select
-          className="  shadow-md mb-4 -top-2"
-          single
-          value={affordances1}
-          onChange={(e) => setAffordances1(e.target.value)}
-          input={<OutlinedInput />}
-        >
-          {affordancesSelection.map((name) => (
-            <MenuItem key={name} value={name}>
-              {name}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-      <TextField
-        className={
-          affordances1 == ""
-            ? "hidden w-full border  shadow-md "
-            : "flex w-full border  shadow-md mb-4"
-        }
-        type="text"
-        multiline
-        rows={3}
-        placeholder={affordances1}
-        // value={behavior}
-        // onChange={(e) => setBehavior(e.target.value)}
-      />
-      <FormControl>
-        <Select
-          className="relative w-full shadow-md mb-4"
-          single
-          displayEmpty
-          value={affordances2}
-          onChange={(e) => setAffordances2(e.target.value)}
-          input={<OutlinedInput />}
-        >
-          {affordancesSelection.map((name) => (
-            <MenuItem key={name} value={name}>
-              {name}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-      <TextField
-        className={
-          affordances2 == ""
-            ? "hidden w-full border  shadow-md "
-            : "flex w-full border  shadow-md mb-4"
-        }
-        type="text"
-        multiline
-        rows={3}
-        placeholder={affordances2}
-        // value={behavior}
-        // onChange={(e) => setBehavior(e.target.value)}
-      />
-      <FormControl>
-        <Select
-          className="relative w-full shadow-md mb-4"
-          single
-          displayEmpty
-          value={affordances3}
-          onChange={(e) => setAffordances3(e.target.value)}
-          input={<OutlinedInput />}
-        >
-          {affordancesSelection.map((name) => (
-            <MenuItem key={name} value={name}>
-              {name}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-      <TextField
-        className={
-          affordances3 == ""
-            ? "hidden w-full border  shadow-md "
-            : "flex w-full border  shadow-md mb-4"
-        }
-        type="text"
-        multiline
-        rows={3}
-        placeholder={affordances3}
-        // value={behavior}
-        // onChange={(e) => setBehavior(e.target.value)}
-      />
-      <FormControl>
-        <Select
-          className="relative w-full shadow-md mb-4"
-          single
-          displayEmpty
-          value={affordances4}
-          onChange={(e) => setAffordances4(e.target.value)}
-          input={<OutlinedInput label="Name" />}
-        >
-          {affordancesSelection.map((name) => (
-            <MenuItem key={name} value={name}>
-              {name}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-      <TextField
-        className={
-          affordances4 == ""
-            ? "hidden w-full border  shadow-md "
-            : "flex w-full border  shadow-md mb-4"
-        }
-        type="text"
-        multiline
-        rows={3}
-        placeholder={affordances4}
-        // value={behavior}
-        // onChange={(e) => setBehavior(e.target.value)}
-      />
-      <FormControl className={select1 == true ? "flex" : "hidden"}>
-        <Select
-          className="relative w-full shadow-md mb-4 "
-          single
-          inputProps={{ "aria-label": "Without label" }}
-          displayEmpty
-          value={affordances5}
-          onChange={(e) => setAffordances5(e.target.value)}
-          input={<OutlinedInput label="Name" />}
-        >
-          {affordancesSelection.map((name) => (
-            <MenuItem key={name} value={name}>
-              {name}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-      <TextField
-        className={
-          affordances5 == ""
-            ? "hidden w-full border  shadow-md "
-            : "flex w-full border  shadow-md mb-4"
-        }
-        type="text"
-        multiline
-        rows={3}
-        placeholder={affordances5}
-        // value={behavior}
-        // onChange={(e) => setBehavior(e.target.value)}
-      />
-      <FormControl className={select2 == true ? "flex" : "hidden"}>
-        <Select
-          className="relative w-full shadow-md mb-4"
-          single
-          inputProps={{ "aria-label": "Without label" }}
-          displayEmpty
-          value={affordances6}
-          onChange={(e) => setAffordances6(e.target.value)}
-          input={<OutlinedInput label="Name" />}
-        >
-          {affordancesSelection.map((name) => (
-            <MenuItem key={name} value={name}>
-              {name}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-      <div className={select1 == false ? "hidden" : "flex"}>
-        <FormControl>
-          <Select
-            className="relative w-full shadow-md mb-4 "
-            single
-            displayEmpty
-            value={affordances5}
-            onChange={(e) => setAffordances5(e.target.value)}
-            input={<OutlinedInput />}
-          >
-            {affordancesSelection.map((name) => (
-              <MenuItem key={name} value={name}>
-                {name}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
       </div>
-      <div className={select2 == false ? "hidden" : "flex"}>
-        <FormControl>
-          <Select
-            className="relative w-full shadow-md mb-4"
-            single
-            displayEmpty
-            value={affordances6}
-            onChange={(e) => setAffordances6(e.target.value)}
-            input={<OutlinedInput />}
-          >
-            {affordancesSelection.map((name) => (
-              <MenuItem key={name} value={name}>
-                {name}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-      </div>
-      <div className="justify-center items-center flex">
-        <button
-          className="bg-yellow-gamy rounded-full border-0 p-3 hover:bg-yellow-600 hover:shadow-lg "
-          onClick={() => {
-            if (select1 == false) setSelected1(true);
-            else setSelected2(true);
-
-            if (select1 == true) setOpen(true);
-          }}
-        >
-          <AddIcon />
-        </button>
-      </div> */}
     </div>
   );
 }

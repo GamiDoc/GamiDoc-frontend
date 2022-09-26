@@ -1,12 +1,15 @@
 import * as React from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Fragment } from "react";
 import dynamic from "next/dynamic";
 const Pdf = dynamic(() => import("../components/CreatePDF"), { ssr: false });
 import MobileOffIcon from "@mui/icons-material/MobileOff";
 import Head from "next/head";
+import { useRouter } from "next/router"
+// Auth0 user hook  
+import { useUser, getSession, withPageAuthRequired } from '@auth0/nextjs-auth0';
 
 // Tabs
 import { Tab } from "@headlessui/react";
@@ -19,16 +22,17 @@ import Feedback from "../components/tabs/Feedback";
 import Modality from "../components/tabs/Modality";
 
 //alert
-import Snackbar from "@mui/material/Snackbar";
-import MuiAlert from "@mui/material/Alert";
 import Dynamics from "../components/tabs/Dynamics";
 import Personalization from "../components/tabs/Personalization";
 
-const Alert = React.forwardRef(function Alert(props, ref) {
-  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-});
 
-// import { Rule } from "postcss";
+export const getServerSideProps = ({ req, res }) => {
+  let url = (process.env.SECURE) ? "https://" : "http://"
+  url = url + process.env.BACK_ENDPOINT
+  const session = getSession(req, res)
+  if (!session) return { props: {} }
+  return { props: { token: session.accessToken, url: url } }
+}
 
 const Aimo = ["Outcome", "Performance", "Process/learning"];
 
@@ -165,67 +169,41 @@ const contenuti = [
   "Personalized Feedback",
 ];
 
-export default function Home() {
+export default withPageAuthRequired(function Home({ token, url }) {
   // Feedback Page states
-  const [timing, setTiming] = useState([]);
-  const [context, setContext] = useState([]);
+  const [timing, setTiming] = useState("");
+  const [context, setContext] = useState("");
   const [timingDescription, setTimingDescription] = useState("");
   const [contextDescription, setContextDescription] = useState("");
-
   // Modality Page state
-  const [modality, setModality] = useState([]);
-
+  const [modality, setModality] = useState("");
   //Dynamics
   const [dynamics, setDynamics] = useState("");
-
   //Personalization
   const [personalization, setPersonalization] = useState("");
-
   //context
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [domain, setDomain] = useState([]);
-  const [behavior, setBehavior] = useState();
-  const [aim, setAim] = useState([]);
-  const [name, setName] = useState("");
-  const [target, setTarget] = useState("");
+  const [domain, setDomain] = useState("");
+  const [behavior, setBehavior] = useState("");
+  const [aim, setAim] = useState("");
   const [targetAge, setTargetAge] = useState([]);
-
-  const [targetCat, setTargetCat] = useState([]);
-
   //Device
-  const [device, setDevice] = useState([]);
-
+  const [device, setDevice] = useState("");
   //Affordances
-  const [performance, setPerformance] = useState(2);
-  const [ecological, setEcological] = useState("");
-  const [social, setSocial] = useState("");
-  const [personal, setPersonal] = useState("");
-  const [fictional, setFictional] = useState("");
-  const [select1, setSelected1] = useState(false);
-  const [select2, setSelected2] = useState(false);
-  const [affordances1, setAffordances1] = useState("");
-  const [affordances2, setAffordances2] = useState("");
-  const [affordances3, setAffordances3] = useState("");
-  const [affordances4, setAffordances4] = useState("");
-  const [affordances5, setAffordances5] = useState("");
-  const [affordances6, setAffordances6] = useState("");
-  const [open, setOpen] = React.useState(false);
-  const handleClick = () => {
-    setOpen(true);
-  };
-  const handleClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    setOpen(false);
-  };
-
+  const [affordances, setAffordances] = useState("");
   //Aestethics
   const [aesthetics, setAesthetics] = useState("");
-
+  const [images, setImages] = useState([])
+  const [imgUrl, setImgUrl] = useState([])
   //Rules
   const [rules, setRules] = useState("");
 
+  // Valori URL
+  const { query } = useRouter()
+  let name = query.name
+  let description = query.description
+
+  // if (!isLoading) 
   return (
     <div className="flex flex-col justify-between h-screen ">
       <Head>
@@ -371,18 +349,13 @@ export default function Home() {
                     setAim={setAim}
                     domain={domain}
                     setDomain={setDomain}
-                    target={target}
-                    setTarget={setTarget}
                     targetAge={targetAge}
                     setTargetAge={setTargetAge}
-                    targetCat={targetCat}
-                    setTargetCat={setTargetCat}
                     behavior={behavior}
                     setBehavior={setBehavior}
                     selectObj1={KoivistoHamari}
                     selectObj2={Aimo}
-                    selectObj3={categoriesSelection}
-                    selectObj4={ageSelection}
+                    selectObj3={ageSelection}
                   />
                 </Tab.Panel>
                 <Tab.Panel>
@@ -400,7 +373,11 @@ export default function Home() {
                   />
                 </Tab.Panel>
                 <Tab.Panel>
-                  <Dynamics dynamics={dynamics} setDynamics={setDynamics} />
+                  <Dynamics
+                    dynamics={dynamics}
+                    setDynamics={setDynamics}
+                  />
+
                 </Tab.Panel>
                 <Tab.Panel>
                   <Personalization
@@ -424,24 +401,8 @@ export default function Home() {
                 </Tab.Panel>
                 <Tab.Panel>
                   <Affordances
-                    select1={select1}
-                    setSelected1={setSelected1}
-                    select2={select2}
-                    setSelected2={setSelected2}
-                    affordances1={affordances1}
-                    setAffordances1={setAffordances1}
-                    affordances2={affordances2}
-                    setAffordances2={setAffordances2}
-                    affordances3={affordances3}
-                    setAffordances3={setAffordances3}
-                    affordances4={affordances4}
-                    setAffordances4={setAffordances4}
-                    affordances5={affordances5}
-                    setAffordances5={setAffordances5}
-                    affordances6={affordances6}
-                    setAffordances6={setAffordances6}
-                    open={open}
-                    setOpen={setOpen}
+                    // affordances={affordances}
+                    setAffordances={setAffordances}
                     affordancesSelection={affordancesSelection}
                   />
                 </Tab.Panel>
@@ -449,18 +410,16 @@ export default function Home() {
                   <Rules
                     rules={rules}
                     setRules={setRules}
-                    affordances1={affordances1}
-                    affordances2={affordances2}
-                    affordances3={affordances3}
-                    affordances4={affordances4}
-                    affordances5={affordances5}
-                    affordances6={affordances6}
                   />
                 </Tab.Panel>
                 <Tab.Panel>
                   <Aesthetics
                     aesthetics={aesthetics}
                     setAesthetics={setAesthetics}
+                    images={images}
+                    setImages={setImages}
+                    imgUrl={imgUrl}
+                    setImgUrl={setImgUrl}
                   />
                 </Tab.Panel>
               </Tab.Panels>
@@ -469,19 +428,33 @@ export default function Home() {
 
           <div className="flex flex-row justify-center items-center mb-10 mr-2">
             <Pdf
+              // Indice e token auth 
               selectedIndex={selectedIndex}
+              token={token}
+              imgUrl={imgUrl}
+              url={url}
+
+              // Dati paper presi come props  
               name={name}
+              description={description}
+
+              // Stati delle tabs 
               behavior={behavior}
               domain={domain}
               aim={aim}
               targetAge={targetAge}
-              targetCat={targetCat}
-              timing={timing}
-              context={context}
-              modality={modality}
+
               device={device}
+              modality={modality}
+              dynamics={dynamics}
+              personalization={personalization}
+
+              timing={timing}
               timingDescription={timingDescription}
+              context={context}
               contextDescription={contextDescription}
+
+              affordances={affordances}
               rules={rules}
               aesthetics={aesthetics}
             />
@@ -512,12 +485,8 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="warning" sx={{ width: "100%" }}>
-          too much feedback - pls stop!
-        </Alert>
-      </Snackbar>
+
       <Footer />
     </div>
   );
-}
+})

@@ -1,19 +1,14 @@
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import { useRouter } from "next/router";
-import { useState , useEffect} from "react";  
 import MobileOffIcon from '@mui/icons-material/MobileOff';
 
 import * as React from "react";
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
 
-export default function Name({nameP,setNameP}) {
-  const router = useRouter();
+export default function Name({ nameP, setNameP }) {
   return (
     <div className="flex flex-col justify-between h-screen">
-      
-      <h1 className="hidden items-center justify-center font-bold text-2xl xs:flex "> ONLY DESKTOP USE <MobileOffIcon/> </h1>
+
+      <h1 className="hidden items-center justify-center font-bold text-2xl xs:flex "> ONLY DESKTOP USE <MobileOffIcon /> </h1>
       <div className="text-center xs:hidden">
         <h1 className=" text-3xl  font-bold">Lets start with the name:</h1>
         <Stack
@@ -22,7 +17,7 @@ export default function Name({nameP,setNameP}) {
           direction="column"
           justifyContent="center"
           alignItems="center"
-          
+
           noValidate
           required
           autoComplete="off"
@@ -51,7 +46,7 @@ export default function Name({nameP,setNameP}) {
           Form
         </button>
       </div>
-      
+
     </div>
   );
 }
