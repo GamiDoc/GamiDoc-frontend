@@ -74,7 +74,7 @@ function Affordances({
         />
 
         <TextField
-          className=" top-2 w-31 border shadow-md "
+          className=" -top-2 w-31 border shadow-md "
           id="username"
           type="text"
           multiline

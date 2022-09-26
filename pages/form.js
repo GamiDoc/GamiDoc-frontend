@@ -79,7 +79,6 @@ const ageSelection = [
   "80+",
 ];
 
-const categoriesSelection = ["Student", "Employees"];
 
 const DeviceSelection = [
   "Mobile",
@@ -118,38 +117,41 @@ const affordancesSelection = [
   "Narrative",
   "Story telling",
 ];
-const performanceSelection = [
-  "Acknowledgement",
-  "Level",
-  "Progression",
-  "Point",
-  "Stats",
-];
 
-const ecologicalSelection = [
-  "Chance",
-  "Imposed choice",
-  "Economy",
-  "Rarity",
-  "Time pressure",
-];
+// const categoriesSelection = ["Student", "Employees"];
 
-const socialSelection = [
-  "Competition",
-  "Cooperation",
-  "Reputation",
-  "Social pressure",
-];
+// const performanceSelection = [
+//   "Acknowledgement",
+//   "Level",
+//   "Progression",
+//   "Point",
+//   "Stats",
+// ];
 
-const personalSelection = [
-  "Novelty",
-  "Objectives",
-  "Puzzle",
-  "Renovation",
-  "Sensation",
-];
+// const ecologicalSelection = [
+//   "Chance",
+//   "Imposed choice",
+//   "Economy",
+//   "Rarity",
+//   "Time pressure",
+// ];
 
-const fictionalSelection = ["Narrative", "Story telling"];
+// const socialSelection = [
+//   "Competition",
+//   "Cooperation",
+//   "Reputation",
+//   "Social pressure",
+// ];
+
+// const personalSelection = [
+//   "Novelty",
+//   "Objectives",
+//   "Puzzle",
+//   "Renovation",
+//   "Sensation",
+// ];
+
+// const fictionalSelection = ["Narrative", "Story telling"];
 
 // Modality
 const modes = [

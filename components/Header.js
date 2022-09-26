@@ -1,6 +1,7 @@
 import React from "react";
 import Link from 'next/link'
 import Image from "next/image";
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import { useRouter } from "next/router";
 import { useUser } from '@auth0/nextjs-auth0';
 
@@ -12,8 +13,6 @@ const sanityIoImageLoader = ({ src, width, quality }) => {
 function Header() {
   const router = useRouter();
   const { user, error, isLoading } = useUser();
-  // if (isLoading) return <div>Loading...</div>;
-  // if (error) return <div>{error.message}</div>;
 
   return (
     <div className="relative px-24 xs:px-8 py-9 flex flex-wrap items-center justify-between mb-3">
@@ -31,7 +30,7 @@ function Header() {
           <button
             className="py-4 inline-block px-8 xs:px-4 xs:py-2 
                      bg-yellow-gamy text-white font-medium text-xs leading-tight 
-                     uppercase rounded-full shadow-md  hover:bg-yellow-600 hover:shadow-lg
+                     uppercase rounded-full shadow-md  hover:bg-gray-gamy hover:shadow-lg
                      focus:bg-yellow-600 focus:shadow-lg focus:outline-none focus:ring-0 
                      active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out"
           >
@@ -39,19 +38,39 @@ function Header() {
               Login
             </Link>
           </button> :
-          <div className="rounded-2xl justify-betwenn m-2 flex items-center bg-yellow-gamy p-2 gap-2 font-xl">
-            {/* <Image src={user.picture} width={25} height={25} className="rounded-full" /> */}
-            <div onClick={() => router.push({ pathname: "/display", query: { me: 1 } })}
-              className="hover:underline focus:text-sm text-base hover:text-blue-500 text-black">
-              {user.name}
+          <div className="flex gap-10 ">
+            <div className="flex justify-end w-max items-center gap-10 font-medium">
+              <div
+                className=" text-center text-lg font-semibold text-black font-sans px-3 py-2 ring ring-transparent outline-none hover:underline hover:font-semibold"
+                onClick={() => router.push({ pathname: "/feed", })}
+              >
+                Review
+              </div>
+              <div
+                className=" text-center text-lg font-semibold text-black font-sans px-3 py-2 ring ring-transparent outline-none hover:underline hover:font-semibold"
+              >
+                Your Reviews
+              </div>
+              <div
+                onClick={() => router.push({ pathname: "/display", query: { me: 1 } })}
+                className=" text-center text-lg font-semibold text-black font-sans px-3 py-2 ring ring-transparent outline-none hover:underline hover:font-semibold"
+              >
+                Your Papers
+              </div>
             </div>
-            <Link href="/api/auth/logout" passHref>
-              <a >Logout</a>
-            </Link>
+            <div className="w-max rounded-full justify-between m-2 flex items-center p-2 gap-2 font-xl  bg-yellow-gamy">
+              <Image src={user.picture} width={25} height={25} className="rounded-full" />
+              <div className="text-gray-gamy font-sans font-semibold">
+                {user.name}
+              </div>
+              <Link href="/api/auth/logout" passHref>
+                <a ><ExitToAppIcon className=" ease-in-out hover:text-white text-gray-gamy" /></a>
+              </Link>
+            </div>
           </div>
         }
       </div>
-    </div>
+    </div >
   );
 }
 

@@ -6,9 +6,9 @@ import TextField from "@mui/material/TextField"
 import Header from "../components/Header"
 import Footer from "../components/Footer"
 import CustomSlider from "../components/CustomSlider"
+import { createTheme, ThemeProvider } from "@mui/material/styles"
+import Checkbox from '@mui/material/Checkbox';
 import axios from "axios"
-
-
 
 export const getServerSideProps = ({ req, res }) => {
   let url = (process.env.SECURE) ? "https://" : "http://"
@@ -18,38 +18,52 @@ export const getServerSideProps = ({ req, res }) => {
 }
 
 export default function ReviewPDF({ token, url }) {
+  // States that hold all the content fetched from the server 
   const [pdfBlob, setPdfBlob] = useState("")
   const [paperMetaData, setPaperMetaData] = useState("")
-  const [review, setReview] = useState("")
-  const { query } = useRouter()
 
-  let reviewParams = []
+  // States that hold the review params
+  const [review, setReview] = useState("")
+  const [approved, setApproved] = useState(false)
   const [sliderValue, setSliderValue] = useState([])
+  let reviewParams = []
   useEffect(() => {
     reviewParams[sliderValue[1]] = sliderValue[0]
   }, [sliderValue])
 
+  // Url and router stuff
+  const router = useRouter()
+  const { query } = useRouter()
+  const paperID = query.id
+
   useEffect(() => {
-    const paperID = query.id
     axios({
       method: "get",
       url: url + `/paper/${paperID}`,
       headers: { Authorization: "Bearer " + token }
     })
       .then((res) => {
-        console.log(res.data)
+        // console.log(res.data)
         setPaperMetaData(res.data.info)
         setPdfBlob(res.data.pdf.data)
-        // const data = new Buffer.from(res.data.pdf.data, "base64")
-        // const blob = new Blob(res.data.pdf.data)
-        // setPdfBlob(URL.createObjectURL(blob))
       })
       .catch(err => console.log(err))
   }, [])
 
+  const theme = createTheme({
+    palette: {
+      secondary: {
+        main: '#FFB900'
+      },
+      primary: {
+        main: '#374151'
+      },
+    }
+  });
+
   if (paperMetaData.Title != null)
     return (
-      <>
+      <ThemeProvider theme={theme}>
         <Header />
         <div className="flex-col gap-5 justify-center items-center mb-5 ">
           <div className="flex justify-center items-baseline gap-2">
@@ -66,7 +80,7 @@ export default function ReviewPDF({ token, url }) {
               <p className="font-light text-gray-500 ">
                 Title:
               </p>
-              <p className="font-bold text-4xl text-black flex items-center justify-center">
+              <p className="font-bold text-2xl text-black flex items-center justify-center">
                 {paperMetaData.Title}
               </p>
             </>
@@ -82,30 +96,49 @@ export default function ReviewPDF({ token, url }) {
 
           <div className="flex gap-5 justify-center  ">
             {(pdfBlob != null) ? <PdfDisplayer pdfBlob={pdfBlob} /> : ""}
-            <div className="flex-col w-1/3 justify-evenly items-baseline gap-10">
-              <div className="flex justify-center items-center gap-3">
+            <div className="flex-col w-1/3 justify-evenly items-baseline ">
+              <div className="flex justify-center items-center gap-5">
                 <div
                   onClick={() => {
-                    console.log("Send PlaceHolder")
+                    // console.log("Send PlaceHolder")
+                    axios({
+                      method: "post",
+                      url: url + `/paper/reviews/new`,
+                      headers: { Authorization: "Bearer " + token },
+                      data: { paperId: paperID, comment: review, approved: approved, types: reviewParams },
+                    }).then(() => router.push("/"))
                   }}
-                  disabled={review == ""}
-                  className="py-4 inline-block px-8 xs:px-4 xs:py-2 bg-yellow-gamy text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md  hover:bg-blue-500 hover:shadow-xl focus:bg-yellow-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out"
+                  disabled={review === ""}
+                  className="py-4 inline-block px-8 xs:px-4 xs:py-2 bg-yellow-gamy text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md  hover:bg-gray-gamy hover:shadow-xl focus:bg-yellow-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out"
                 >
                   Send
                 </div>
 
                 <div
                   onClick={() => {
-                    console.log("Download PlaceHolder")
+                    // console.log("Download PlaceHolder")
+                    const data = new Buffer.from(pdfBlob, "base64")
+                    const blob = new Blob([data])
+                    const fileURL = window.URL.createObjectURL(blob);
+                    let alink = document.createElement('a');
+                    alink.href = fileURL;
+                    alink.download = `${paperMetaData.Title}.pdf`;
+                    alink.click();
                   }}
                   disabled={pdfBlob == null}
-                  className="py-4 inline-block px-8 xs:px-4 xs:py-2 bg-yellow-gamy text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md  hover:bg-blue-500 hover:shadow-xl focus:bg-yellow-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out"
+                  className="py-4 inline-block px-8 xs:px-4 xs:py-2 bg-yellow-gamy text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md  hover:bg-gray-gamy hover:shadow-xl focus:bg-yellow-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out"
                 >
                   Download Now!
                 </div>
+                <p className="font-semibold text-black">
+                  {"Approved:"}
+                </p>
+                <Checkbox
+                  color="primary"
+                  onChange={() => setApproved(!approved)}
+                />
               </div>
               <CustomSlider
-                data={sliderValue}
                 setState={setSliderValue}
                 pos={0}
                 type="Type1"
@@ -131,15 +164,14 @@ export default function ReviewPDF({ token, url }) {
                 multiline
                 rows={10}
                 variant="outlined"
+                color="primary"
               />
-
             </div>
           </div>
-
           <div>
           </div>
         </div >
         <Footer />
-      </>
+      </ThemeProvider>
     )
 }

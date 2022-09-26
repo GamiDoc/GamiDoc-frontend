@@ -22,15 +22,15 @@ export default function PdfDisplayer({ pdfBlob }) {
 
   pdfjs.GlobalWorkerOptions.workerSrc = pdfjsWorker
   return (
-    <div className="flex items-center  ">
+    <div className="flex items-center gap-2 ">
       {/* shadow-xl shadow-gray-500 */}
       <div
         className="flex justify-center items-center gap-3 pb-2"
       >
         <div
           onClick={previus}
-          disabled={(pageNumber == 1) ? true : false}
-          className=" bg-yellow-gamy text-white font-lg text-lg leading-tight uppercase rounded-full shadow-md  hover:bg-yellow-600 hover:shadow-lg focus:bg-yellow-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out"
+          disabled={(pageNumber === 1) ? true : false}
+          className=" bg-yellow-gamy text-white font-lg text-lg leading-tight uppercase rounded-full shadow-md  hover:bg-gray-gamy hover:shadow-lg focus:bg-yellow-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out"
         >
           <NavigateBeforeIcon />
         </div>
@@ -46,7 +46,8 @@ export default function PdfDisplayer({ pdfBlob }) {
         </Document>
 
         <div className="flex justify-center items-center text-xl font-medium">
-          Page {pageNumber} out of {maxPages}
+          Page {pageNumber}
+          {/*out of {maxPages}*/}
         </div>
       </div>
       <div
@@ -55,7 +56,7 @@ export default function PdfDisplayer({ pdfBlob }) {
         <div
           onClick={next}
           disabled={pageNumber >= maxPages}
-          className=" bg-yellow-gamy text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md  hover:bg-yellow-600 hover:shadow-lg focus:bg-yellow-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out"
+          className=" bg-yellow-gamy text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md  hover:bg-gray-gamy hover:shadow-lg focus:bg-yellow-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out"
         >
           <NavigateNextIcon />
         </div>
