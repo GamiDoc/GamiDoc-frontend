@@ -41,7 +41,7 @@ export default function PaperBox({ id, me, author, title, description }) {
                 })
                 :
                 router.push({
-                  pathname: "/viewPdf",
+                  pathname: "/reviewPdf",
                   query: { id: id }
                 })
             }}

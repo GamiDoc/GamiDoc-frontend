@@ -41,7 +41,7 @@ export default function About() {
             className="border border-black"
           />
           <h1 className="py-4">Carlo Bottaro</h1>
-          <h2 className="font-normal">Non si è ancora capito</h2>
+          <h2 className="font-normal">Developer</h2>
         </Stack>
         <Stack className="items-left font-semibold xs:mb-16 xs:w-40 w-60">
           <Avatar
@@ -51,10 +51,9 @@ export default function About() {
             className="border border-black"
           />
           <h1 className="py-4">Andrea Mangrella</h1>
-          <h2 className="font-normal">Schiavo</h2>
+          <h2 className="font-normal">Developer</h2>
         </Stack>
       </div>
-
       <Footer />
     </div>
   );
