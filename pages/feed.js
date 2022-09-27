@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react"
 import { getSession } from "@auth0/nextjs-auth0"
 import Header from "../components/Header"
 import Footer from "../components/Footer"
+import PaperBox from "../components/PaperBox"
 import axios from "axios"
 
 export const getServerSideProps = ({ req, res }) => {

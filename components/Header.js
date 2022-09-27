@@ -59,7 +59,7 @@ function Header() {
               </div>
             </div>
             <div className="w-max rounded-full justify-between m-2 flex items-center p-2 gap-2 font-xl  bg-yellow-gamy">
-              <Image src={user.picture} width={25} height={25} className="rounded-full" />
+              <Image alt="pfp" src={user.picture} width={25} height={25} className="rounded-full" />
               <div className="text-gray-gamy font-sans font-semibold">
                 {user.name}
               </div>
