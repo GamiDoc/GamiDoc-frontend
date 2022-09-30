@@ -26,9 +26,10 @@ export default function ReviewPDF({ token, url }) {
   const [review, setReview] = useState("")
   const [approved, setApproved] = useState(false)
   const [sliderValue, setSliderValue] = useState([])
-  let reviewParams = []
+  let reviewParams = useRef([5, 5, 5])
   useEffect(() => {
-    reviewParams[sliderValue[1]] = sliderValue[0]
+    reviewParams.current[sliderValue[1]] = sliderValue[0]
+    // console.log(reviewParams.current)
   }, [sliderValue])
 
   // Url and router stuff
@@ -100,13 +101,15 @@ export default function ReviewPDF({ token, url }) {
               <div className="flex justify-center items-center gap-5">
                 <div
                   onClick={() => {
-                    // console.log("Send PlaceHolder")
+                    console.log(paperID)
                     axios({
                       method: "post",
                       url: url + `/paper/reviews/new`,
                       headers: { Authorization: "Bearer " + token },
-                      data: { paperId: paperID, comment: review, approved: approved, types: reviewParams },
-                    }).then(() => router.push("/"))
+                      data: { paperID: paperID, comment: review, approved: approved, types: reviewParams.current },
+                    })
+                      .then(() => { router.push("/") })
+                      .catch((err) => { console.log(err) })
                   }}
                   disabled={review === ""}
                   className="py-4 inline-block px-8 xs:px-4 xs:py-2 bg-yellow-gamy text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md  hover:bg-gray-gamy hover:shadow-xl focus:bg-yellow-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out"
@@ -116,7 +119,6 @@ export default function ReviewPDF({ token, url }) {
 
                 <div
                   onClick={() => {
-                    // console.log("Download PlaceHolder")
                     const data = new Buffer.from(pdfBlob, "base64")
                     const blob = new Blob([data])
                     const fileURL = window.URL.createObjectURL(blob);
@@ -144,13 +146,11 @@ export default function ReviewPDF({ token, url }) {
                 type="Type1"
               />
               <CustomSlider
-                data={sliderValue}
                 setState={setSliderValue}
                 pos={1}
                 type="Type2"
               />
               <CustomSlider
-                data={sliderValue}
                 setState={setSliderValue}
                 pos={2}
                 type="Type3"

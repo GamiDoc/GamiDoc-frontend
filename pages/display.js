@@ -10,6 +10,7 @@ export const getServerSideProps = ({ req, res }) => {
   const session = getSession(req, res)
   let url = (process.env.SECURE) ? "https://" : "http://"
   url = url + process.env.BACK_ENDPOINT
+  // console.log(session.accessToken)
   if (!session) return { props: { url: url } }
   return ({ props: { token: session.accessToken, url: url } })
 }

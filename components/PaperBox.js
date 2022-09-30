@@ -32,7 +32,7 @@ export default function PaperBox({ id, me, author, title, description }) {
         </Typography>
         <div className='justify-center flex items-center'>
           <div
-            className=" flex justify-center items-center rounded-lg border-dotted hover:border-solid  hover:font-semibold hover:bg-yellow-gamy hover:underline w-1/3 mt-3"
+            className=" flex justify-center items-center rounded-lg border-dotted hover:border-solid  hover:font-semibold hover:bg-yellow-gamy w-1/3 mt-3"
             onClick={() => {
               (me) ?
                 router.push({

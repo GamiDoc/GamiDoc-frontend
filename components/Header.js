@@ -1,18 +1,21 @@
-import React from "react";
+import { useState, Fragment } from 'react'
 import Link from 'next/link'
 import Image from "next/image";
-import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import { useRouter } from "next/router";
 import { useUser } from '@auth0/nextjs-auth0';
+// import HeaderSidebar from "./HeaderSideBar"
+import { Dialog, Transition } from '@headlessui/react'
+import { XMarkIcon } from '@heroicons/react/outline'
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 
-const sanityIoImageLoader = ({ src, width, quality }) => {
+const sanityIoImageLoader = () => {
   return `https://i.imgur.com/Y3QF08D.png`;
 };
 
-
-function Header() {
+export default function Header() {
   const router = useRouter();
   const { user, error, isLoading } = useUser();
+  const [open, setOpen] = useState(true)
 
   return (
     <div className="relative px-24 xs:px-8 py-9 flex flex-wrap items-center justify-between mb-3">
@@ -35,18 +38,22 @@ function Header() {
                      active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out"
           >
             <Link href="/api/auth/login">
-              Login
+              <a>
+                Login
+              </a>
             </Link>
           </button> :
-          <div className="flex gap-10 ">
+          <div className="flex items-center  ">
             <div className="flex justify-end w-max items-center gap-10 font-medium">
               <div
                 className=" text-center text-lg font-semibold text-black font-sans px-3 py-2 ring ring-transparent outline-none hover:underline hover:font-semibold"
                 onClick={() => router.push({ pathname: "/feed", })}
               >
                 Review
+                {/* {user.org_id} */}
               </div>
               <div
+                onClick={() => router.push({ pathname: "/yourReviews" })}
                 className=" text-center text-lg font-semibold text-black font-sans px-3 py-2 ring ring-transparent outline-none hover:underline hover:font-semibold"
               >
                 Your Reviews
@@ -69,9 +76,10 @@ function Header() {
             </div>
           </div>
         }
-      </div>
+      </div >
     </div >
   );
 }
 
-export default Header;
+// <HeaderSidebar open={open} setOpen={setOpen} user={user} router={router} />
+
