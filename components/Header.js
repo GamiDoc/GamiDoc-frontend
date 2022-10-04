@@ -4,262 +4,207 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { useUser } from '@auth0/nextjs-auth0';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-import { Menu, Transition } from "@headlessui/react"
-import { ChevronDownIcon } from '@heroicons/react/solid'
-import Swal from "sweetalert2/src/sweetalert2.js"
-// import HeaderSidebar from "./HeaderSideBar"
-// import { Dialog, Transition } from '@headlessui/react'
-// import { XMarkIcon } from '@heroicons/react/outline'
+// import Swal from "sweetalert2"
 
+// Mui menu stuff 
+import Button from '@mui/material/Button';
+import { Divider } from '@mui/material';
+import { createTheme, ThemeProvider } from "@mui/material/styles"
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import ListItemText from '@mui/material/ListItemText';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import Typography from '@mui/material/Typography';
+
+// Menu icons 
+import PersonIcon from '@mui/icons-material/Person';
+import ArticleIcon from '@mui/icons-material/Article';
+import RateReviewsIcon from '@mui/icons-material/RateReview';
+import ReviewsIcon from '@mui/icons-material/Reviews';
+import GradingIcon from '@mui/icons-material/Grading';
+import ModeIcon from '@mui/icons-material/Mode';
+import MenuIcon from '@mui/icons-material/Menu';
+import MenuOpen from '@mui/icons-material/MenuOpen';
 const sanityIoImageLoader = () => {
   return `https://i.imgur.com/Y3QF08D.png`;
 };
 
-const MyMenu = () => {
-  return (
-    <Menu>
-      <Menu.Button className="text-black">More</Menu.Button>
-      <Menu.Items>
-        <Menu.Item>
-          {({ active }) => (
-            <a
-              className={`${active && 'bg-blue-500'}`}
-              href="/account-settings"
-            >
-              Account settings
-            </a>
-          )}
-        </Menu.Item>
-        <Menu.Item>
-          {({ active }) => (
-            <a
-              className={`${active && 'bg-blue-500'}`}
-              href="/account-settings"
-            >
-              Documentation
-            </a>
-          )}
-        </Menu.Item>
-        <Menu.Item disabled>
-          <span className="opacity-75">Invite a friend (coming soon!)</span>
-        </Menu.Item>
-      </Menu.Items>
-    </Menu>
-  )
-}
-
 export default function Header() {
   const router = useRouter();
   const { user, error, isLoading } = useUser();
-  const [open, setOpen] = useState(true)
 
+  // Menu states and callbacks 
+  const [open, setOpen] = useState(null)
+  const menuValue = Boolean(open);
+  const handleClick = (event) => {
+    setOpen(event.currentTarget);
+  };
+  const handleClose = () => {
+    setOpen(null);
+  };
+  const theme = createTheme({
+    palette: {
+      secondary: {
+        main: '#FFB900',
+        font: "bold"
+      },
+      primary: {
+        main: '#374151',
+        font: "bold"
+      },
+      black: {
+        main: '#000000',
+        font: "bold"
+      },
+    }
+  });
   return (
-    <div className="relative px-24 xs:px-8 py-9 flex flex-wrap items-center justify-between mb-3">
-      <Link href="/">
-        <Image
-          loader={sanityIoImageLoader}
-          src="image-src"
-          alt="GamiDoc"
-          width={119}
-          height={20}
-        />
-      </Link>
-      <div className="flex flex-row gap-5" id="button">
-        {(!user) ?
-          <button
-            className="py-4 inline-block px-8 xs:px-4 xs:py-2 
+    <ThemeProvider theme={theme}>
+      <div className="relative px-24 xs:px-8 py-9 flex flex-wrap items-center justify-between mb-3">
+        <Link href="/">
+          <Image
+            loader={sanityIoImageLoader}
+            src="image-src"
+            alt="GamiDoc"
+            width={139}
+            height={24}
+          />
+        </Link>
+        <div className="flex flex-row gap-5" id="button">
+          {(!user) ?
+            <button
+              className="py-4 inline-block px-8 xs:px-4 xs:py-2 
                      bg-yellow-gamy text-white font-medium text-xs leading-tight 
                      uppercase rounded-full shadow-md  hover:bg-gray-gamy hover:shadow-lg
                      focus:bg-yellow-600 focus:shadow-lg focus:outline-none focus:ring-0 
                      active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out"
-          >
-            <Link href="/api/auth/login">
-              <a>
-                Login
-              </a>
-            </Link>
-          </button> :
-          <div className="fixed top-16 w-56 text-right">
-            <MyMenu />
-            {/* <Menu as="div" className="relative inline-block text-left"> */}
-            {/*   <div> */}
-            {/*     <Menu.Button className="inline-flex w-full justify-center rounded-md bg-black bg-opacity-20 px-4 py-2 text-sm font-medium text-black hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"> */}
-            {/*       Options */}
-            {/*       <ChevronDownIcon */}
-            {/*         className="ml-2 -mr-1 h-5 w-5 text-violet-200 hover:text-violet-100" */}
-            {/*         aria-hidden="true" */}
-            {/*       /> */}
-            {/*     </Menu.Button> */}
-            {/*   </div> */}
-            {/*   <Transition */}
-            {/*     as={Fragment} */}
-            {/*     enter="transition ease-out duration-100" */}
-            {/*     enterFrom="transform opacity-0 scale-95" */}
-            {/*     enterTo="transform opacity-100 scale-100" */}
-            {/*     leave="transition ease-in duration-75" */}
-            {/*     leaveFrom="transform opacity-100 scale-100" */}
-            {/*     leaveTo="transform opacity-0 scale-95" */}
-            {/*   > */}
-            {/*     <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"> */}
-            {/*       <div className="px-1 py-1 "> */}
-            {/*         <Menu.Item> */}
-            {/*           {({ active }) => ( */}
-            {/*             <button */}
-            {/*               className={`${active ? 'bg-violet-500 text-white' : 'text-gray-900' */}
-            {/*                 } group flex w-full items-center rounded-md px-2 py-2 text-sm`} */}
-            {/*             > */}
-            {/*               {active ? ( */}
-            {/*                 <EditActiveIcon */}
-            {/*                   className="mr-2 h-5 w-5" */}
-            {/*                   aria-hidden="true" */}
-            {/*                 /> */}
-            {/*               ) : ( */}
-            {/*                 <EditInactiveIcon */}
-            {/*                   className="mr-2 h-5 w-5" */}
-            {/*                   aria-hidden="true" */}
-            {/*                 /> */}
-            {/*               )} */}
-            {/*               Edit */}
-            {/*             </button> */}
-            {/*           )} */}
-            {/*         </Menu.Item> */}
-            {/*         <Menu.Item> */}
-            {/*           {({ active }) => ( */}
-            {/*             <button */}
-            {/*               className={`${active ? 'bg-violet-500 text-white' : 'text-gray-900' */}
-            {/*                 } group flex w-full items-center rounded-md px-2 py-2 text-sm`} */}
-            {/*             > */}
-            {/*               {active ? ( */}
-            {/*                 <DuplicateActiveIcon */}
-            {/*                   className="mr-2 h-5 w-5" */}
-            {/*                   aria-hidden="true" */}
-            {/*                 /> */}
-            {/*               ) : ( */}
-            {/*                 <DuplicateInactiveIcon */}
-            {/*                   className="mr-2 h-5 w-5" */}
-            {/*                   aria-hidden="true" */}
-            {/*                 /> */}
-            {/*               )} */}
-            {/*               Duplicate */}
-            {/*             </button> */}
-            {/*           )} */}
-            {/*         </Menu.Item> */}
-            {/*       </div> */}
-            {/*       <div className="px-1 py-1"> */}
-            {/*         <Menu.Item> */}
-            {/*           {({ active }) => ( */}
-            {/*             <button */}
-            {/*               className={`${active ? 'bg-violet-500 text-white' : 'text-gray-900' */}
-            {/*                 } group flex w-full items-center rounded-md px-2 py-2 text-sm`} */}
-            {/*             > */}
-            {/*               {active ? ( */}
-            {/*                 <ArchiveActiveIcon */}
-            {/*                   className="mr-2 h-5 w-5" */}
-            {/*                   aria-hidden="true" */}
-            {/*                 /> */}
-            {/*               ) : ( */}
-            {/*                 <ArchiveInactiveIcon */}
-            {/*                   className="mr-2 h-5 w-5" */}
-            {/*                   aria-hidden="true" */}
-            {/*                 /> */}
-            {/*               )} */}
-            {/*               Archive */}
-            {/*             </button> */}
-            {/*           )} */}
-            {/*         </Menu.Item> */}
-            {/*         <Menu.Item> */}
-            {/*           {({ active }) => ( */}
-            {/*             <button */}
-            {/*               className={`${active ? 'bg-violet-500 text-white' : 'text-gray-900' */}
-            {/*                 } group flex w-full items-center rounded-md px-2 py-2 text-sm`} */}
-            {/*             > */}
-            {/*               {active ? ( */}
-            {/*                 <MoveActiveIcon */}
-            {/*                   className="mr-2 h-5 w-5" */}
-            {/*                   aria-hidden="true" */}
-            {/*                 /> */}
-            {/*               ) : ( */}
-            {/*                 <MoveInactiveIcon */}
-            {/*                   className="mr-2 h-5 w-5" */}
-            {/*                   aria-hidden="true" */}
-            {/*                 /> */}
-            {/*               )} */}
-            {/*               Move */}
-            {/*             </button> */}
-            {/*           )} */}
-            {/*         </Menu.Item> */}
-            {/*       </div> */}
-            {/*       <div className="px-1 py-1"> */}
-            {/*         <Menu.Item> */}
-            {/*           {({ active }) => ( */}
-            {/*             <button */}
-            {/*               className={`${active ? 'bg-violet-500 text-white' : 'text-gray-900' */}
-            {/*                 } group flex w-full items-center rounded-md px-2 py-2 text-sm`} */}
-            {/*             > */}
-            {/*               {active ? ( */}
-            {/*                 <DeleteActiveIcon */}
-            {/*                   className="mr-2 h-5 w-5 text-violet-400" */}
-            {/*                   aria-hidden="true" */}
-            {/*                 /> */}
-            {/*               ) : ( */}
-            {/*                 <DeleteInactiveIcon */}
-            {/*                   className="mr-2 h-5 w-5 text-violet-400" */}
-            {/*                   aria-hidden="true" */}
-            {/*                 /> */}
-            {/*               )} */}
-            {/*               Delete */}
-            {/*             </button> */}
-            {/*           )} */}
-            {/*         </Menu.Item> */}
-            {/*       </div> */}
-            {/*     </Menu.Items> */}
-            {/*   </Transition> */}
-            {/* </Menu> */}
-          </div>
-        }
+            >
+              <Link href="/api/auth/login">
+                <a>
+                  Login
+                </a>
+              </Link>
+            </button> :
+            <div className="fixed top-5 right-5 text-right">
+              < div className="w-max rounded-full  flex items-center p-2 m-2 font-xl" > {/* shadow-xl border border-gray-gamy */}
+                < Image alt="pfp" src={user.picture} width={35} height={35} className="rounded-full" />
+                <Button
+                  id="basic-button"
+                  aria-controls={open ? 'basic-menu' : undefined}
+                  aria-haspopup="true"
+                  aria-expanded={open ? 'true' : undefined}
+                  onClick={handleClick}
+                  className="bg-yellow-gamy text-yellow-gamy"
+                >
+                  {(open) ? <MenuOpen fontSize='large' color="primary" /> : <MenuIcon fontSize='large' color="black" />}
+                </Button>
+                <Menu
+                  id="basic-menu"
+                  anchorEl={open}
+                  open={menuValue}
+                  onClose={handleClose}
+                  MenuListProps={{
+                    'aria-labelledby': 'basic-button',
+                  }}
+                  className="mt-5 "
+                >
+                  <MenuItem
+                    className=" text-left text-lg font-semibold text-black font-sans px-3 py-5 ring ring-transparent outline-none hover:underline hover:font-semibold"
+                    onClick={() => {
+                      handleClose()
+                      router.push({ pathname: "/feed", })
+                    }
+                    }>
+                    <ListItemIcon >
+                      <RateReviewsIcon color="primary" />
+                    </ListItemIcon >
+                    <ListItemText color="primary">
+                      Review
+                    </ListItemText>
+                  </MenuItem>
+                  <MenuItem
+                    className=" text-left text-lg font-semibold text-black font-sans px-3 py-5 ring ring-transparent outline-none hover:underline hover:font-semibold"
+                    onClick={() => {
+                      router.push({ pathname: "/yourReviews" })
+                      handleClose()
+                    }
+                    }>
+                    <ListItemIcon >
+                      <ReviewsIcon color="primary" />
+                    </ListItemIcon>
+                    <ListItemText color="primary">
+                      Your Reviews
+                    </ListItemText>
+                  </MenuItem>
+                  <MenuItem
+                    className=" text-left text-lg font-semibold text-black font-sans px-3 py-5 ring ring-transparent outline-none hover:underline hover:font-semibold"
+                    onClick={() => {
+                      router.push({ pathname: "/display", query: { me: 1 } })
+                      handleClose()
+                    }
+                    }>
+                    <ListItemIcon >
+                      <ArticleIcon color="primary" />
+                    </ListItemIcon>
+                    <ListItemText color="primary">
+                      Your Papers
+                    </ListItemText>
+                  </MenuItem>
+                  <MenuItem
+                    className=" text-left text-lg font-semibold text-black font-sans px-3 py-5 ring ring-transparent outline-none hover:underline hover:font-semibold"
+                    onClick={() => {
+                      // router.push({ pathname: "/display", query: { me: 1 } })
+                      handleClose()
+                    }
+                    }>
+                    <ListItemIcon >
+                      <ModeIcon color="primary" />
+                    </ListItemIcon>
+                    <ListItemText color="primary">
+                      Drafts
+                    </ListItemText>
+                  </MenuItem>
+                  <Divider />
+                  <MenuItem
+                    className=" text-left text-lg font-semibold text-black font-sans px-3 py-5 ring ring-transparent outline-none hover:underline hover:font-semibold"
+                    onClick={() => {
+                      // router.push({ pathname: "/feed", })
+                      handleClose()
+                    }
+                    }>
+                    <ListItemIcon>
+                      <PersonIcon color="primary" />
+                    </ListItemIcon>
+                    <ListItemText color="primary">
+                      {
+                        (user.name.search("@")) ?
+                          user.name.split("@")[0] : user.name
+                      }
+                    </ListItemText>
+                  </MenuItem>
+
+                  <MenuItem
+                    className=" text-left text-lg font-semibold text-black font-sans px-3 py-2 ring ring-transparent outline-none hover:underline hover:font-semibold"
+                    onClick={() => {
+                      let a = document.createElement("a")
+                      a.href = "/api/auth/logout"
+                      a.click()
+                    }
+                    }>
+                    <ListItemIcon >
+                      <ExitToAppIcon color="primary" />
+                    </ListItemIcon>
+                    <ListItemText color="primary" >
+                      Logout
+                    </ListItemText>
+                  </MenuItem>
+                </Menu>
+              </div >
+            </div>
+          }
+        </div >
       </div >
-    </div >
+    </ThemeProvider>
   );
 }
-// <HeaderSidebar open={open} setOpen={setOpen} user={user} router={router} />
-
-const topbar = () => {
-  return (
-    <div className="flex items-center  ">
-      <div className="flex justify-end w-max items-center gap-10 font-medium">
-        <div
-          className=" text-center text-lg font-semibold text-black font-sans px-3 py-2 ring ring-transparent outline-none hover:underline hover:font-semibold"
-          onClick={() => router.push({ pathname: "/feed", })}
-        >
-          Review
-        </div>
-        <div
-          onClick={() => router.push({ pathname: "/yourReviews" })}
-          className=" text-center text-lg font-semibold text-black font-sans px-3 py-2 ring ring-transparent outline-none hover:underline hover:font-semibold"
-        >
-          Your Reviews
-        </div>
-        < div
-          onClick={() => router.push({ pathname: "/display", query: { me: 1 } })}
-          className=" text-center text-lg font-semibold text-black font-sans px-3 py-2 ring ring-transparent outline-none hover:underline hover:font-semibold"
-        >
-          Your Papers
-        </div >
-      </div >
-      < div className="w-max rounded-full justify-between m-2 flex items-center p-2 gap-2 font-xl  bg-yellow-gamy" >
-        < Image alt="pfp" src={user.picture} width={25} height={25} className="rounded-full" />
-        < div className="text-gray-gamy font-sans font-semibold" >
-          {user.name}
-        </div >
-        < Link href="/api/auth/logout" passHref >
-          < a > <ExitToAppIcon className=" ease-in-out hover:text-white text-gray-gamy" /></a >
-        </Link >
-      </div >
-    </div >
-
-  )
-}
-
-
-
 

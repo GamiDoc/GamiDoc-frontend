@@ -1,5 +1,4 @@
 import { useRouter } from "next/router"
-// import Swal from "sweetalert2/dist/sweetalert2.js"
 import Swal from "sweetalert2"
 // import Link from "next/link";
 // import { useRef, useState } from "react";
@@ -238,7 +237,6 @@ export default function CreatePDF({
                     affordances: affordances,
                     rules: rules,
                     aesthetics: aesthetics,
-                    // pdf: blob.toString("base64")
                     pdf: blobString
                   },
                     {
@@ -247,12 +245,15 @@ export default function CreatePDF({
                       }
                     })
                     .then((val) => {
+                      Swal.fire('Paper Saved!', '', 'success')
                       console.log(val.data)
                       router.push("/")
                     })
-                    .catch((err) => console.log(err))
+                    .catch((err) => {
+                      Swal.fire('Server Error!', '', 'error')
+                      console.log(err)
+                    })
 
-                  Swal.fire('Saved!', '', 'success')
                 }
               }}
               className=" py-4 inline-block px-8 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md  hover:bg-blue-400 hover:shadow-lg focus:bg-blue-400 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out"
