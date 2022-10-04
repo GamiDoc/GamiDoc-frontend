@@ -42,17 +42,17 @@ export default function Home({ token, url }) {
         >
           Form
         </button>
-        <button
-          onClick={() =>
-            axios({
-              method: "get",
-              url: url + "/user/removeFirstConfig",
-              headers: { Authorization: "Bearer " + token }
-            }).then(() => console.log("ha funzionato")).catch((err) => { console.log(err) })}
-          className=" py-4 inline-block px-8 bg-yellow-gamy xs:px-6 xs:py-3 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md  hover:bg-gray-gamy hover:shadow-lg focus:bg-yellow-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out"
-        >
-          Remove Metadata
-        </button>
+        {/* <button */}
+        {/*   onClick={() => */}
+        {/*     axios({ */}
+        {/*       method: "get", */}
+        {/*       url: url + "/user/removeFirstConfig", */}
+        {/*       headers: { Authorization: "Bearer " + token } */}
+        {/*     }).then(() => console.log("ha funzionato")).catch((err) => { console.log(err) })} */}
+        {/*   className=" py-4 inline-block px-8 bg-yellow-gamy xs:px-6 xs:py-3 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md  hover:bg-gray-gamy hover:shadow-lg focus:bg-yellow-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out" */}
+        {/* > */}
+        {/*   Remove Metadata */}
+        {/* </button> */}
       </div>
 
       <Footer />
