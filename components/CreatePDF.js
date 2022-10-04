@@ -1,4 +1,6 @@
 import { useRouter } from "next/router"
+// import Swal from "sweetalert2/dist/sweetalert2.js"
+import Swal from "sweetalert2"
 // import Link from "next/link";
 // import { useRef, useState } from "react";
 import axios from "axios"
@@ -209,39 +211,49 @@ export default function CreatePDF({
           return (name && description) ?
             <button
               onClick={async () => {
-                let time = ""
-                let blobString = await blobToBase64(blob)
-                console.log(blob)
-                console.log(blobString)
-                for (let i; i < timing.lenght; i++) time = time + timing[i]
-                axios.post(requestURL, {
-                  title: name,
-                  description: description,
-                  behavior: behavior,
-                  domain: domain,
-                  aim: aim + targetAge,
-                  device: device,
-                  modality: modality,
-                  dynamics: dynamics,
-                  personalization: personalization,
-                  timing: time + timingDescription,
-                  context: context + contextDescription,
-                  affordances: affordances,
-                  rules: rules,
-                  aesthetics: aesthetics,
-                  // pdf: blob.toString("base64")
-                  pdf: blobString
-                },
-                  {
-                    headers: {
-                      Authorization: "Bearer " + token
-                    }
-                  })
-                  .then((val) => {
-                    console.log(val.data)
-                    router.push("/")
-                  })
-                  .catch((err) => console.log(err))
+                /* let result = await */
+                let result = await Swal.fire({
+                  title: 'Do you want to save the changes?',
+                  showCancelButton: true,
+                  confirmButtonText: 'Save',
+                })
+                if (result.isConfirmed) {
+                  let time = ""
+                  let blobString = await blobToBase64(blob)
+                  console.log(blob)
+                  console.log(blobString)
+                  for (let i; i < timing.lenght; i++) time = time + timing[i]
+                  axios.post(requestURL, {
+                    title: name,
+                    description: description,
+                    behavior: behavior,
+                    domain: domain,
+                    aim: aim + targetAge,
+                    device: device,
+                    modality: modality,
+                    dynamics: dynamics,
+                    personalization: personalization,
+                    timing: time + timingDescription,
+                    context: context + contextDescription,
+                    affordances: affordances,
+                    rules: rules,
+                    aesthetics: aesthetics,
+                    // pdf: blob.toString("base64")
+                    pdf: blobString
+                  },
+                    {
+                      headers: {
+                        Authorization: "Bearer " + token
+                      }
+                    })
+                    .then((val) => {
+                      console.log(val.data)
+                      router.push("/")
+                    })
+                    .catch((err) => console.log(err))
+
+                  Swal.fire('Saved!', '', 'success')
+                }
               }}
               className=" py-4 inline-block px-8 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md  hover:bg-blue-400 hover:shadow-lg focus:bg-blue-400 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out"
             >
@@ -269,3 +281,4 @@ export default function CreatePDF({
     </div >
   );
 }
+

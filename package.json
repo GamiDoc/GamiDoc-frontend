@@ -29,6 +29,8 @@
     "react-pdf": "^5.7.2",
     "react-to-pdf": "^0.0.14",
     "styled-components": "^5.3.5",
+    "sweetalert2": "^11.4.37",
+    "sweetalert2-react-content": "^5.0.3",
     "use-pdf": "^0.1.2"
   },
   "devDependencies": {
