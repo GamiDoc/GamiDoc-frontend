@@ -1,7 +1,7 @@
 import * as React from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Fragment } from "react";
 import dynamic from "next/dynamic";
 const Pdf = dynamic(() => import("../components/CreatePDF"), { ssr: false });
@@ -202,10 +202,117 @@ export default withPageAuthRequired(function Home({ token, url }) {
 
   // Valori URL
   const { query } = useRouter()
+
+
+
+
   let name = query.name
   let description = query.description
 
-  // if (!isLoading) 
+  // DRAFT SAVER  
+  const [timer, setTimer] = useState(false)
+  const [draftID, setDraftID] = useState(draftID)
+  useEffect(() => {
+    if (timer) {
+      setTimer(false)
+      if (!boolean(draftID)) {
+        axios.post(url + "/draft/new", {
+
+        },
+          {
+            headers: {
+              Authorization: "Bearer " + token
+            }
+          }).then((val) => setDraftID(val.data.draft._Id))
+      }
+      else {
+        axios.patch(url + "/draft/" + draftID, {
+          title: name,
+          description: description,
+          Behavior: behavior,
+          Domain: domain,
+          Aim: aim,
+          TargetAge: targetAge,
+          TargetUser: targetUser, //!!!!!!!!!!!!!!!!!!!!!
+          Device: device,
+          Modality: modality,
+          Dynamics: dynamics,
+          Personalization: personalization,
+          Context: context,
+          ContextDescription: contextDescription,
+          Timing: timing, // !!!!!!!!!!!!!1111
+          TimingDescription: timingDescription,
+          GameAction: gameAction,// !!!!!!!!!!!!!1111
+          Condition: condition,// !!!!!!!!!!!!!1111
+          Affordances: affordances,
+          Rules: rules,
+          Aesthetics: aesthetics,
+        },
+          {
+            headers: {
+              Authorization: "Bearer " + token
+            }
+          })
+        //.then((val) => setDraftID(val.data.draft._Id))
+      }
+      setTimeout(() => { setTimer(true) }, 5000); // 10s 
+    }
+  },
+    [
+      timing,
+      context,
+      timingDescription,
+      contextDescription,
+      modality,
+      dynamics,
+      personalization,
+      domain,
+      behavior,
+      aim,
+      targetAge,
+      device,
+      affordances,
+      aesthetics,
+      images,
+      rules,
+    ])
+
+  // Start saving the paper after 10 seconds that u open it 
+  useEffect(() => {
+    if (query.draftID) {
+      axios({
+        method: "get",
+        url: url + "/draft/" + draftID,
+        headers: { Authorization: "Bearer " + token },
+      })
+        .then((val) => {
+          // setTitle(val.data.draft.Title)
+          // setDescription(val.data.draft.Description)
+          setBehavior(val.data.draft.Behavior)
+          setDomain(val.data.draft.Domain)
+          setAim(val.data.draft.Aim)
+          setTargetAge(val.data.draft.TargetAge)
+          // setTargetUser(val.data.draft.TargetUser) // !!!!!!!!!!11
+          setDevice(val.data.draft.Device)
+          setModality(val.data.draft.Modality)
+          setDynamics(val.data.draft.Dynamics)
+          setPersonalization(val.data.draft.Personalization)
+          setContext(val.data.draft.Context)
+          setContextDescription(val.data.draft.ContextDescription)
+          setTiming(val.data.draft.Timing)
+          setTimingDescription(val.data.draft.TimingDescription)
+          // setGameAction(val.data.draft.GameAction)
+          // setCondition(val.data.draft.Condition)
+          setAffordances(val.data.draft.Affordances)
+          setRules(val.data.draft.Rules)
+          setAesthetics(val.data.draft.Aestethics)
+
+        })
+    }
+    setTimeout(() => { setTimer(true) }, 10000); // 10s 
+  }, [])
+
+
   return (
     <div className="flex flex-col justify-between h-screen ">
       <Head>
