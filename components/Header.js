@@ -1,10 +1,15 @@
-import { useState, Fragment } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useUser } from '@auth0/nextjs-auth0';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-// import Swal from "sweetalert2"
+import axios from "axios"
+
+// Sweetalert2
+import Swal from "sweetalert2"
+import withReactContent from 'sweetalert2-react-content'
+const MySwal = withReactContent(Swal) // semplice wrapper
 
 // Mui menu stuff 
 import Button from '@mui/material/Button';
@@ -29,9 +34,20 @@ const sanityIoImageLoader = () => {
   return `https://i.imgur.com/Y3QF08D.png`;
 };
 
-export default function Header() {
+export default function Header({ url, token }) {
   const router = useRouter();
   const { user, error, isLoading } = useUser();
+  const [drafts, setDrafts] = useState()
+  useEffect(() => {
+    if (user)
+      axios({
+        method: "get",
+        url: url + "/draft/me",
+        headers: { Authorization: "Bearer " + token }
+      }).then((val) => {
+        setDrafts(val.data.Drafts)
+      })
+  }, [user])
 
   // Menu states and callbacks 
   const [open, setOpen] = useState(null)
@@ -94,7 +110,6 @@ export default function Header() {
                   aria-haspopup="true"
                   aria-expanded={open ? 'true' : undefined}
                   onClick={handleClick}
-                  className="bg-yellow-gamy text-yellow-gamy"
                 >
                   {(open) ? <MenuOpen fontSize='large' color="primary" /> : <MenuIcon fontSize='large' color="black" />}
                 </Button>
@@ -154,6 +169,37 @@ export default function Header() {
                     className=" text-left text-lg font-semibold text-black font-sans px-3 py-5 ring ring-transparent outline-none hover:underline hover:font-semibold"
                     onClick={() => {
                       // router.push({ pathname: "/display", query: { me: 1 } })
+                      axios({
+                        method: "get",
+                        url: url + "/draft/me",
+                        headers: { Authorization: "Bearer " + token }
+                      }).then((val) => {
+                        setDrafts(val.data.resDrafts)
+                        MySwal.fire({
+                          html: (
+                            <>
+                              <p>
+                                Your Drafts:
+                              </p>
+                              {drafts.map((item) => {
+                                return (
+                                  <div key={item.id} className="flex items-center gap-2 font-bold">
+                                    <p>
+                                      {item.Title}
+                                    </p>
+                                    <p>
+                                      {item.Description}
+                                    </p>
+                                    <div
+                                      onClick={() => router.push({ pathname: "/form", query: { draftID: item._id } })}>
+                                    </div>
+                                  </div>)
+                              })}
+                            </>
+                          )
+                        })
+                      })
+                        .catch((err) => Swal.fire('Server Error!', '', 'error'))
                       handleClose()
                     }
                     }>
@@ -204,7 +250,7 @@ export default function Header() {
           }
         </div >
       </div >
-    </ThemeProvider>
+    </ThemeProvider >
   );
 }
 

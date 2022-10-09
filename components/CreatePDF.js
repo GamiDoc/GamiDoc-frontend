@@ -20,6 +20,7 @@ export default function CreatePDF({
   imgUrl,
   name,
   description,
+  draftID,
 
   behavior,
   domain,
@@ -221,6 +222,7 @@ export default function CreatePDF({
                   let blobString = await blobToBase64(blob)
                   console.log(blob)
                   console.log(blobString)
+                  console.log(draftID)
                   for (let i; i < timing.lenght; i++) time = time + timing[i]
                   axios.post(requestURL, {
                     title: name,
@@ -237,7 +239,8 @@ export default function CreatePDF({
                     affordances: affordances,
                     rules: rules,
                     aesthetics: aesthetics,
-                    pdf: blobString
+                    draftID: draftID,
+                    pdf: blobString,
                   },
                     {
                       headers: {

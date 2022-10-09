@@ -15,6 +15,7 @@ export const getServerSideProps = ({ req, res }) => {
   let url = (process.env.SECURE) ? "https://" : "http://"
   url = url + process.env.BACK_ENDPOINT
   const session = getSession(req, res)
+  if (!session) return ({ props: {} })
   return ({ props: { token: session.accessToken, url: url } })
 }
 
@@ -66,7 +67,7 @@ export default function ReviewPDF({ token, url }) {
   if (paperMetaData.Title != null)
     return (
       <ThemeProvider theme={theme}>
-        <Header />
+        <Header url={url} token={token} />
         <div className="flex-col gap-5 justify-center items-center mb-5 ">
           <div className="flex justify-center items-baseline gap-2">
             <p className="font-light text-gray-500 ">

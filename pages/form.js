@@ -8,6 +8,7 @@ const Pdf = dynamic(() => import("../components/CreatePDF"), { ssr: false });
 import MobileOffIcon from "@mui/icons-material/MobileOff";
 import Head from "next/head";
 import { useRouter } from "next/router"
+import axios from "axios"
 // Auth0 user hook  
 import { useUser, getSession, withPageAuthRequired } from '@auth0/nextjs-auth0';
 
@@ -24,7 +25,6 @@ import Modality from "../components/tabs/Modality";
 //alert
 import Dynamics from "../components/tabs/Dynamics";
 import Personalization from "../components/tabs/Personalization";
-
 
 export const getServerSideProps = ({ req, res }) => {
   let url = (process.env.SECURE) ? "https://" : "http://"
@@ -118,41 +118,6 @@ const affordancesSelection = [
   "Story telling",
 ];
 
-// const categoriesSelection = ["Student", "Employees"];
-
-// const performanceSelection = [
-//   "Acknowledgement",
-//   "Level",
-//   "Progression",
-//   "Point",
-//   "Stats",
-// ];
-
-// const ecologicalSelection = [
-//   "Chance",
-//   "Imposed choice",
-//   "Economy",
-//   "Rarity",
-//   "Time pressure",
-// ];
-
-// const socialSelection = [
-//   "Competition",
-//   "Cooperation",
-//   "Reputation",
-//   "Social pressure",
-// ];
-
-// const personalSelection = [
-//   "Novelty",
-//   "Objectives",
-//   "Puzzle",
-//   "Renovation",
-//   "Sensation",
-// ];
-
-// const fictionalSelection = ["Narrative", "Story telling"];
-
 // Modality
 const modes = [
   "Individual",
@@ -189,6 +154,7 @@ export default withPageAuthRequired(function Home({ token, url }) {
   const [behavior, setBehavior] = useState("");
   const [aim, setAim] = useState("");
   const [targetAge, setTargetAge] = useState([]);
+  const [targetUser, setTargetUser] = useState("");
   //Device
   const [device, setDevice] = useState("");
   //Affordances
@@ -202,61 +168,91 @@ export default withPageAuthRequired(function Home({ token, url }) {
 
   // Valori URL
   const { query } = useRouter()
-
-
-
-
-  let name = query.name
-  let description = query.description
+  const [name, setName] = useState(query.name)
+  const [description, setDescription] = useState(query.description)
+  // console.log(name)
+  // console.log(description)
 
   // DRAFT SAVER  
   const [timer, setTimer] = useState(false)
-  const [draftID, setDraftID] = useState(draftID)
+  const [draftID, setDraftID] = useState(query.draftID)
   useEffect(() => {
+    console.log("1st: in the useEffect")
     if (timer) {
-      setTimer(false)
-      if (!boolean(draftID)) {
+      console.log("2nd:there was no timer")
+      setTimeout(() => {
+        console.log("timer is up ")
+        setTimer(true)
+      }, 5000); // 10s 
+      setTimer(false)// () => {
+      console.log("inside the setState callback")
+      let aff = affordances.split("=>")
+      if (!draftID) {
         axios.post(url + "/draft/new", {
-
+          title: query.name,
+          description: query.description,
+          behavior: behavior,
+          domain: domain,
+          aim: aim,
+          targetAge: targetAge,
+          targetUser: targetUser, //!!!!!!!!!!!!!!!!!!!!!
+          device: device,
+          modality: modality,
+          dynamics: dynamics,
+          personalization: personalization,
+          context: context,
+          contextDescription: contextDescription,
+          timing: timing,
+          timingDescription: timingDescription,
+          gameAction: aff[0],
+          condition: aff[1],
+          affordances: aff[2],
+          rules: rules,
+          aesthetics: aesthetics,
+          draftId: draftID
         },
           {
             headers: {
               Authorization: "Bearer " + token
             }
-          }).then((val) => setDraftID(val.data.draft._Id))
+          }).then((val) => {
+            console.log("NEW:", val.data)
+            setDraftID(val.data.draft._id)
+          }
+          )
       }
       else {
         axios.patch(url + "/draft/" + draftID, {
           title: name,
           description: description,
-          Behavior: behavior,
-          Domain: domain,
-          Aim: aim,
-          TargetAge: targetAge,
-          TargetUser: targetUser, //!!!!!!!!!!!!!!!!!!!!!
-          Device: device,
-          Modality: modality,
-          Dynamics: dynamics,
-          Personalization: personalization,
-          Context: context,
-          ContextDescription: contextDescription,
-          Timing: timing, // !!!!!!!!!!!!!1111
-          TimingDescription: timingDescription,
-          GameAction: gameAction,// !!!!!!!!!!!!!1111
-          Condition: condition,// !!!!!!!!!!!!!1111
-          Affordances: affordances,
-          Rules: rules,
-          Aesthetics: aesthetics,
+          behavior: behavior,
+          domain: domain,
+          aim: aim,
+          targetAge: targetAge,
+          targetUser: targetUser,
+          device: device,
+          modality: modality,
+          dynamics: dynamics,
+          personalization: personalization,
+          context: context,
+          contextDescription: contextDescription,
+          timing: timing,
+          timingDescription: timingDescription,
+          gameAction: aff[0],
+          condition: aff[1],
+          affordances: aff[2],
+          rules: rules,
+          aesthetics: aesthetics,
         },
           {
             headers: {
               Authorization: "Bearer " + token
             }
           })
-        //.then((val) => setDraftID(val.data.draft._Id))
+          .then((val) => console.log("PATCH:", val.data))
       }
-      setTimeout(() => { setTimer(true) }, 5000); // 10s 
-    }
+      // })
+    } else console.log("NO DRAFTING")
   },
     [
       timing,
@@ -270,6 +266,7 @@ export default withPageAuthRequired(function Home({ token, url }) {
       behavior,
       aim,
       targetAge,
+      targetUser,
       device,
       affordances,
       aesthetics,
@@ -277,8 +274,10 @@ export default withPageAuthRequired(function Home({ token, url }) {
       rules,
     ])
 
+
   // Start saving the paper after 10 seconds that u open it 
   useEffect(() => {
+    console.log("0n:in the start useEffect")
     if (query.draftID) {
       axios({
         method: "get",
@@ -286,13 +285,13 @@ export default withPageAuthRequired(function Home({ token, url }) {
         headers: { Authorization: "Bearer " + token },
       })
         .then((val) => {
-          // setTitle(val.data.draft.Title)
-          // setDescription(val.data.draft.Description)
+          setName(val.data.draft.Title)
+          setDescription(val.data.draft.Description)
           setBehavior(val.data.draft.Behavior)
           setDomain(val.data.draft.Domain)
           setAim(val.data.draft.Aim)
           setTargetAge(val.data.draft.TargetAge)
-          // setTargetUser(val.data.draft.TargetUser) // !!!!!!!!!!11
+          setTargetUser(val.data.draft.TargetUser)
           setDevice(val.data.draft.Device)
           setModality(val.data.draft.Modality)
           setDynamics(val.data.draft.Dynamics)
@@ -301,15 +300,16 @@ export default withPageAuthRequired(function Home({ token, url }) {
           setContextDescription(val.data.draft.ContextDescription)
           setTiming(val.data.draft.Timing)
           setTimingDescription(val.data.draft.TimingDescription)
-          // setGameAction(val.data.draft.GameAction)
-          // setCondition(val.data.draft.Condition)
           setAffordances(val.data.draft.Affordances)
           setRules(val.data.draft.Rules)
           setAesthetics(val.data.draft.Aestethics)
 
         })
     }
-    setTimeout(() => { setTimer(true) }, 10000); // 10s 
+    setTimeout(() => {
+      console.log("timer is up (from start timer)")
+      setTimer(true)
+    }, 10000); // 10s 
   }, [])
 
 
@@ -319,7 +319,7 @@ export default withPageAuthRequired(function Home({ token, url }) {
         <title>GamiDoc</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <Header />
+      <Header url={url} token={token} />
       <h1 className="hidden items-center justify-center font-bold text-2xl xs:flex ">
         {" "}
         ONLY DESKTOP USE <MobileOffIcon />{" "}
@@ -456,12 +456,19 @@ export default withPageAuthRequired(function Home({ token, url }) {
                   <Context
                     aim={aim}
                     setAim={setAim}
+
                     domain={domain}
                     setDomain={setDomain}
+
                     targetAge={targetAge}
                     setTargetAge={setTargetAge}
+
+                    targetUser={targetUser}
+                    setTargetUser={setTargetUser}
+
                     behavior={behavior}
                     setBehavior={setBehavior}
+
                     selectObj1={KoivistoHamari}
                     selectObj2={Aimo}
                     selectObj3={ageSelection}
@@ -510,7 +517,7 @@ export default withPageAuthRequired(function Home({ token, url }) {
                 </Tab.Panel>
                 <Tab.Panel>
                   <Affordances
-                    // affordances={affordances}
+                    affordances={affordances}
                     setAffordances={setAffordances}
                     affordancesSelection={affordancesSelection}
                   />
@@ -566,6 +573,7 @@ export default withPageAuthRequired(function Home({ token, url }) {
               affordances={affordances}
               rules={rules}
               aesthetics={aesthetics}
+              draftID={draftID}
             />
             <div className="grow flex-row flex gap-5 items-center justify-end">
               <div
@@ -594,7 +602,6 @@ export default withPageAuthRequired(function Home({ token, url }) {
           </div>
         </div>
       </div>
-
       <Footer />
     </div>
   );

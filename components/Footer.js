@@ -7,6 +7,7 @@ const sanityIoImageLoader = ({ src, width, quality }) => {
 };
 
 function Footer() {
+  // fixed left-0 bottom-0
   return (
     <footer className="text-center lg:text-left bg-gray-800 text-white ">
       <div className="mx-40 xs:mx-8  py-10 text-center md:text-left">

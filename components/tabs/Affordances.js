@@ -14,21 +14,25 @@ const sanityIoImageLoader = ({ src, width, quality }) => {
 };
 
 function Affordances({
+  affordances,
   setAffordances,
   affordancesSelection,
 }) {
-
-
   const [value1, setValue1] = useState("")
   const [value2, setValue2] = useState("")
   const [value3, setValue3] = useState("")
 
   useEffect(() => {
     if (value1 && value2 && value3) return
-    setAffordances(value1 + " => " + value2 + " => " + value3)
+    setAffordances(value1 + "=>" + value2 + "=>" + value3)
   }, [value1, value2, value3])
 
-
+  useEffect(() => {
+    let aff = affordances.split("=>")
+    setValue1(aff[0])
+    setValue2(aff[1])
+    setValue3(aff[2])
+  }, [])
   return (
     <div className="flex flex-col w-[60em] py-4">
       <label className=" mt-4 block text-gray-700  font-bold mb-2">

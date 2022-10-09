@@ -19,6 +19,8 @@ function Context({
   setAim,
   targetAge,
   setTargetAge,
+  targetUser,
+  setTargetUser,
 
   selectObj1, // L'oggetto che contiene i campi del select
   selectObj2, // Aimo
@@ -174,6 +176,8 @@ function Context({
         type="text"
         multiline
         rows={3}
+        value={targetUser}
+        onChange={(event) => setTargetUser(event.target.value)}
         placeholder="Target user"
       />
     </div>

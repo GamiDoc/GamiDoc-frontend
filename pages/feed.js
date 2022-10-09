@@ -31,7 +31,7 @@ export default function Feed({ token, url }) {
 
   return (
     <div>
-      <Header />
+      <Header url={url} token={token} />
       <p className=" flex justify-center text-4xl underline  font-semibold font-sans mb-5 ">
         Pick a Paper to Review:
       </p>

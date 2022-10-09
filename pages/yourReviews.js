@@ -30,7 +30,7 @@ export default function YourReviews({ token, url }) {
   if (reviews)
     return (
       <div >
-        <Header />
+        <Header url={url} token={token} />
         <div className="flex justify-center w-full items-center">
           <div className=" flex-col justify-center gap-4 mb-3">
             {reviews.map((review) => {

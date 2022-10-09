@@ -7,11 +7,19 @@ import Head from "next/head";
 import * as React from "react";
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
-import { withPageAuthRequired } from "@auth0/nextjs-auth0"
+import { getSession, withPageAuthRequired } from "@auth0/nextjs-auth0"
 
-export const getServerSideProps = withPageAuthRequired()
+// export const getServerSideProps = withPageAuthRequired()
 
-export default function Name() {
+export const getServerSideProps = ({ req, res }) => {
+  let url = (process.env.SECURE) ? "https://" : "http://"
+  url = url + process.env.BACK_ENDPOINT
+  const session = getSession(req, res)
+  if (!session) return ({ props: {} })
+  return ({ props: { token: session.accessToken, url: url } })
+}
+
+export default function Name({ url, token }) {
   const router = useRouter();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -21,7 +29,7 @@ export default function Name() {
         <title>GamiDoc</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <Header />
+      <Header url={url} token={token} />
       <h1 className="hidden items-center justify-center font-bold text-2xl xs:flex ">
         {" "}
         ONLY DESKTOP USE <MobileOffIcon />{" "}

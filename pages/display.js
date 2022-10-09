@@ -19,7 +19,6 @@ export default function Display({ token, url }) {
   const [data, setData] = useState([])
   const { query } = useRouter()
   const { me, keyword, userID } = query
-
   // Fetch Only once 
   useEffect(() => {
     if (me)
@@ -53,7 +52,7 @@ export default function Display({ token, url }) {
 
   return (
     <div className="w-full m-2 gap-2 flex-col">
-      <Header />
+      <Header url={url} token={token} />
       <p className=" flex justify-center text-4xl underline  font-semibold font-sans mb-5 ">
         {(me) ? "Your Papers:" : (userID) ? (userID + "Papers:") : (keyword) ? ("Search result for" + keyword + ":") : "Error 404"}
       </p>
