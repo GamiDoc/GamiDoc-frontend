@@ -2,6 +2,7 @@ import * as React from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { Avatar, Stack, Divider, Typography } from "@mui/material";
+import { getSession } from '@auth0/nextjs-auth0';
 
 export const getServerSideProps = ({ req, res }) => {
   let url = (process.env.SECURE) ? "https://" : "http://"

@@ -213,6 +213,7 @@ export default function CreatePDF({
               onClick={async () => {
                 /* let result = await */
                 let result = await Swal.fire({
+                  icon: "question",
                   title: 'Do you want to save the changes?',
                   showCancelButton: true,
                   confirmButtonText: 'Save',
@@ -250,12 +251,12 @@ export default function CreatePDF({
                       }
                     })
                     .then((val) => {
-                      Swal.fire('Paper Saved!', '', 'success')
+                      Swal.fire({ title: 'Paper Saved!', icon: 'success' })
                       console.log(val.data)
                       router.push("/")
                     })
                     .catch((err) => {
-                      Swal.fire('Server Error!', '', 'error')
+                      Swal.fire({ title: 'Server Error!', icon: 'error' })
                       console.log(err)
                     })
 

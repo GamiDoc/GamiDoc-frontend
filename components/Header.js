@@ -10,7 +10,7 @@ import Avatar from "boring-avatars"
 // Sweetalert2
 import Swal from "sweetalert2"
 import withReactContent from 'sweetalert2-react-content'
-const MySwal = withReactContent(Swal) // semplice wrapper
+// const MySwal = withReactContent(Swal) // semplice wrapper
 
 // Mui menu stuff 
 import Button from '@mui/material/Button';
@@ -92,7 +92,7 @@ export default function Header({ url, token }) {
                 </a>
               </Link>
             </button> :
-            <div className="fixed top-5 right-5 text-right">
+            <div className="fixed top-5 right-5 text-right bg-white rounded-full shadow-md">
               < div className="w-max rounded-full  flex items-center p-2 m-2 font-xl" > {/* shadow-xl border border-gray-gamy */}
                 <Avatar
                   size={40}
@@ -119,7 +119,7 @@ export default function Header({ url, token }) {
                   className="mt-5 "
                 >
                   <MenuItem
-                    className=" text-left text-lg font-semibold text-black font-sans px-3 py-5 ring ring-transparent outline-none hover:underline hover:font-semibold"
+                    // className=" text-left text-lg font-semibold text-black font-sans px-3 py-5 ring ring-transparent outline-none hover:underline hover:font-semibold"
                     onClick={() => {
                       handleClose()
                       router.push({ pathname: "/feed", })
@@ -133,7 +133,7 @@ export default function Header({ url, token }) {
                     </ListItemText>
                   </MenuItem>
                   <MenuItem
-                    className=" text-left text-lg font-semibold text-black font-sans px-3 py-5 ring ring-transparent outline-none hover:underline hover:font-semibold"
+                    // className=" text-left text-lg font-semibold text-black font-sans px-3 py-5 ring ring-transparent outline-none hover:underline hover:font-semibold"
                     onClick={() => {
                       router.push({ pathname: "/yourReviews" })
                       handleClose()
@@ -147,7 +147,7 @@ export default function Header({ url, token }) {
                     </ListItemText>
                   </MenuItem>
                   <MenuItem
-                    className=" text-left text-lg font-semibold text-black font-sans px-3 py-5 ring ring-transparent outline-none hover:underline hover:font-semibold"
+                    // className=" text-left text-lg font-semibold text-black font-sans px-3 py-5 ring ring-transparent outline-none hover:underline hover:font-semibold"
                     onClick={() => {
                       router.push({ pathname: "/display", query: { me: 1 } })
                       handleClose()
@@ -161,7 +161,7 @@ export default function Header({ url, token }) {
                     </ListItemText>
                   </MenuItem>
                   <MenuItem
-                    className=" text-left text-lg font-semibold text-black font-sans px-3 py-5 ring ring-transparent outline-none hover:underline hover:font-semibold"
+                    // className=" text-left text-lg font-semibold text-black font-sans px-3 py-5 ring ring-transparent outline-none hover:underline hover:font-semibold"
                     onClick={() => {
                       // router.push({ pathname: "/display", query: { me: 1 } })
                       axios({
@@ -176,6 +176,7 @@ export default function Header({ url, token }) {
                           });
                         }
                         const { value: id } = await Swal.fire({
+                          // icon: "info",
                           title: "Open a draft",
                           input: "select",
                           inputOptions: { Drafts: draftObj },
@@ -208,7 +209,7 @@ export default function Header({ url, token }) {
                   </MenuItem>
                   <Divider />
                   <MenuItem
-                    className=" text-left text-lg font-semibold text-black font-sans px-3 py-5 ring ring-transparent outline-none hover:underline hover:font-semibold"
+                    // className=" text-left text-lg font-semibold text-black font-sans px-3 py-5 ring ring-transparent outline-none hover:underline hover:font-semibold"
                     onClick={() => {
                       // router.push({ pathname: "/feed", })
                       handleClose()
@@ -226,7 +227,7 @@ export default function Header({ url, token }) {
                   </MenuItem>
 
                   <MenuItem
-                    className=" text-left text-lg font-semibold text-black font-sans px-3 py-2 ring ring-transparent outline-none hover:underline hover:font-semibold"
+                    // className=" text-left text-lg font-semibold text-black font-sans px-3 py-2 ring ring-transparent outline-none hover:underline hover:font-semibold"
                     onClick={() => {
                       let a = document.createElement("a")
                       a.href = "/api/auth/logout"
