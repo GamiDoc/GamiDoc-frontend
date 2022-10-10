@@ -216,6 +216,8 @@ export default function CreatePDF({
                   title: 'Do you want to save the changes?',
                   showCancelButton: true,
                   confirmButtonText: 'Save',
+                  confirmButtonColor: "#FFB900",
+                  cancelButtonColor: "#374151",
                 })
                 if (result.isConfirmed) {
                   let time = ""
@@ -278,7 +280,7 @@ export default function CreatePDF({
       >
         {
           ({ blob, url, loading, error }) => {
-            return "Download now!"
+            return "Download as a PDF"
           }
         }
       </PDFDownloadLink>

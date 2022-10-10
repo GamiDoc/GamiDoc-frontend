@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import { useUser } from '@auth0/nextjs-auth0';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import axios from "axios"
+import Avatar from "boring-avatars"
 
 // Sweetalert2
 import Swal from "sweetalert2"
@@ -37,18 +38,7 @@ const sanityIoImageLoader = () => {
 export default function Header({ url, token }) {
   const router = useRouter();
   const { user, error, isLoading } = useUser();
-  const [drafts, setDrafts] = useState()
-  // const [selected, setSelected] = useState()
-  // useEffect(() => {
-  //   if (user)
-  //     axios({
-  //       method: "get",
-  //       url: url + "/draft/me",
-  //       headers: { Authorization: "Bearer " + token }
-  //     }).then((val) => {
-  //       setDrafts(val.data.Drafts)
-  //     })
-  // }, [user])
+  // const [drafts, setDrafts] = useState()
 
   // Menu states and callbacks 
   const [open, setOpen] = useState(null)
@@ -104,7 +94,11 @@ export default function Header({ url, token }) {
             </button> :
             <div className="fixed top-5 right-5 text-right">
               < div className="w-max rounded-full  flex items-center p-2 m-2 font-xl" > {/* shadow-xl border border-gray-gamy */}
-                < Image alt="pfp" src={user.picture} width={35} height={35} className="rounded-full" />
+                <Avatar
+                  size={40}
+                  name={user.email}
+                  variant="beam"
+                />
                 <Button
                   id="basic-button"
                   aria-controls={open ? 'basic-menu' : undefined}
@@ -201,13 +195,7 @@ export default function Header({ url, token }) {
                           confirmButtonText: 'Open',
                         })
                         if (id) router.push({ pathname: "/form", query: { draftID: id } })
-                        // .then((result) => {
-                        // if (result.isConfirmed) {
-                        // }
-                        // })
-
                       })
-                      // .catch((err) => Swal.fire('Server Error!', '', 'error'))
                       handleClose()
                     }
                     }>
