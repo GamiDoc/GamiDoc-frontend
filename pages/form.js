@@ -1,7 +1,7 @@
 import * as React from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Fragment } from "react";
 import dynamic from "next/dynamic";
 const Pdf = dynamic(() => import("../components/CreatePDF"), { ssr: false });
@@ -9,6 +9,7 @@ import MobileOffIcon from "@mui/icons-material/MobileOff";
 import Head from "next/head";
 import { useRouter } from "next/router"
 import axios from "axios"
+var Mutex = require("async-mutex").Mutex
 // Auth0 user hook  
 import { useUser, getSession, withPageAuthRequired } from '@auth0/nextjs-auth0';
 
@@ -170,89 +171,90 @@ export default withPageAuthRequired(function Home({ token, url }) {
   const { query } = useRouter()
   const [name, setName] = useState(query.name)
   const [description, setDescription] = useState(query.description)
-  // console.log(name)
-  // console.log(description)
+
+  const mutex = useRef(new Mutex())
 
   // DRAFT SAVER  
   const [timer, setTimer] = useState(false)
   const [draftID, setDraftID] = useState(query.draftID)
   useEffect(() => {
     console.log("1st: in the useEffect")
-    if (timer) {
-      console.log("2nd:there was no timer")
-      setTimeout(() => {
-        console.log("timer is up ")
-        setTimer(true)
-      }, 5000); // 10s 
-      setTimer(false)// () => {
-      console.log("inside the setState callback")
-      let aff = affordances.split("=>")
-      if (!draftID) {
-        axios.post(url + "/draft/new", {
-          title: query.name,
-          description: query.description,
-          behavior: behavior,
-          domain: domain,
-          aim: aim,
-          targetAge: targetAge,
-          targetUser: targetUser, //!!!!!!!!!!!!!!!!!!!!!
-          device: device,
-          modality: modality,
-          dynamics: dynamics,
-          personalization: personalization,
-          context: context,
-          contextDescription: contextDescription,
-          timing: timing,
-          timingDescription: timingDescription,
-          gameAction: aff[0],
-          condition: aff[1],
-          affordances: aff[2],
-          rules: rules,
-          aesthetics: aesthetics,
-          draftId: draftID
-        },
-          {
-            headers: {
-              Authorization: "Bearer " + token
+    mutex.current.runExclusive(async function() {
+      if (timer) {
+        console.log("2nd:there was no timer")
+        setTimeout(() => {
+          console.log("timer is up ")
+          setTimer(true)
+        }, 5000);
+        setTimer(false)
+        console.log("inside the setState callback")
+        let aff = affordances.split("=>")
+        if (!draftID) {
+          axios.post(url + "/draft/new", {
+            title: query.name,
+            description: query.description,
+            behavior: behavior,
+            domain: domain,
+            aim: aim,
+            targetAge: targetAge,
+            targetUser: targetUser, //!!!!!!!!!!!!!!!!!!!!!
+            device: device,
+            modality: modality,
+            dynamics: dynamics,
+            personalization: personalization,
+            context: context,
+            contextDescription: contextDescription,
+            timing: timing,
+            timingDescription: timingDescription,
+            gameAction: aff[0],
+            condition: aff[1],
+            affordances: aff[2],
+            rules: rules,
+            aesthetics: aesthetics,
+            draftId: draftID
+          },
+            {
+              headers: {
+                Authorization: "Bearer " + token
+              }
+            }).then((val) => {
+              console.log("NEW:", val.data)
+              setDraftID(val.data.draft._id)
             }
-          }).then((val) => {
-            console.log("NEW:", val.data)
-            setDraftID(val.data.draft._id)
-          }
-          )
-      }
-      else {
-        axios.patch(url + "/draft/" + draftID, {
-          title: name,
-          description: description,
-          behavior: behavior,
-          domain: domain,
-          aim: aim,
-          targetAge: targetAge,
-          targetUser: targetUser,
-          device: device,
-          modality: modality,
-          dynamics: dynamics,
-          personalization: personalization,
-          context: context,
-          contextDescription: contextDescription,
-          timing: timing,
-          timingDescription: timingDescription,
-          gameAction: aff[0],
-          condition: aff[1],
-          affordances: aff[2],
-          rules: rules,
-          aesthetics: aesthetics,
-        },
-          {
-            headers: {
-              Authorization: "Bearer " + token
-            }
-          })
-          .then((val) => console.log("PATCH:", val.data))
-      }
-      // })
-    } else console.log("NO DRAFTING")
+            )
+        }
+        else {
+          axios.patch(url + "/draft/" + draftID, {
+            title: name,
+            description: description,
+            behavior: behavior,
+            domain: domain,
+            aim: aim,
+            targetAge: targetAge,
+            targetUser: targetUser,
+            device: device,
+            modality: modality,
+            dynamics: dynamics,
+            personalization: personalization,
+            context: context,
+            contextDescription: contextDescription,
+            timing: timing,
+            timingDescription: timingDescription,
+            gameAction: aff[0],
+            condition: aff[1],
+            affordances: aff[2],
+            rules: rules,
+            aesthetics: aesthetics,
+          },
+            {
+              headers: {
+                Authorization: "Bearer " + token
+              }
+            })
+            .then((val) => console.log("PATCH:", val.data))
+        }
+      } else console.log("NO DRAFTING")
+    })
   },
     [
       timing,
@@ -305,6 +307,7 @@ export default withPageAuthRequired(function Home({ token, url }) {
           setAesthetics(val.data.draft.Aestethics)
 
         })
+      setDraftID(query.draftID)
     }
     setTimeout(() => {
       console.log("timer is up (from start timer)")

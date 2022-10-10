@@ -38,6 +38,7 @@ export default function Header({ url, token }) {
   const router = useRouter();
   const { user, error, isLoading } = useUser();
   const [drafts, setDrafts] = useState()
+  const [selected, setSelected] = useState()
   useEffect(() => {
     if (user)
       axios({
@@ -177,27 +178,34 @@ export default function Header({ url, token }) {
                         setDrafts(val.data.resDrafts)
                         MySwal.fire({
                           html: (
-                            <>
+                            <div className='flex-col items-center justify-center gap-3'>
                               <p>
                                 Your Drafts:
                               </p>
                               {drafts.map((item) => {
                                 return (
-                                  <div key={item.id} className="flex items-center gap-2 font-bold">
+                                  <button
+                                    key={item.id}
+                                    className="flex items-center gap-2 font-bold rounded-xl border-2 justify-center shadow-md "
+                                    onClick={() => setSelected(item._id)}
+                                  >
                                     <p>
                                       {item.Title}
                                     </p>
                                     <p>
                                       {item.Description}
                                     </p>
-                                    <div
-                                      onClick={() => router.push({ pathname: "/form", query: { draftID: item._id } })}>
+                                    <div>
+                                      {item._id}
                                     </div>
-                                  </div>)
+                                  </button>)
                               })}
-                            </>
+                            </div>
                           )
                         })
+                          .then((val) => {
+                            router.push({ pathname: "/form", query: { draftID: selected } })
+                          })
                       })
                         .catch((err) => Swal.fire('Server Error!', '', 'error'))
                       handleClose()
