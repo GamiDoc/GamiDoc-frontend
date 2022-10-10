@@ -38,17 +38,17 @@ export default function Header({ url, token }) {
   const router = useRouter();
   const { user, error, isLoading } = useUser();
   const [drafts, setDrafts] = useState()
-  const [selected, setSelected] = useState()
-  useEffect(() => {
-    if (user)
-      axios({
-        method: "get",
-        url: url + "/draft/me",
-        headers: { Authorization: "Bearer " + token }
-      }).then((val) => {
-        setDrafts(val.data.Drafts)
-      })
-  }, [user])
+  // const [selected, setSelected] = useState()
+  // useEffect(() => {
+  //   if (user)
+  //     axios({
+  //       method: "get",
+  //       url: url + "/draft/me",
+  //       headers: { Authorization: "Bearer " + token }
+  //     }).then((val) => {
+  //       setDrafts(val.data.Drafts)
+  //     })
+  // }, [user])
 
   // Menu states and callbacks 
   const [open, setOpen] = useState(null)
@@ -174,40 +174,40 @@ export default function Header({ url, token }) {
                         method: "get",
                         url: url + "/draft/me",
                         headers: { Authorization: "Bearer " + token }
-                      }).then((val) => {
-                        setDrafts(val.data.resDrafts)
-                        MySwal.fire({
-                          html: (
-                            <div className='flex-col items-center justify-center gap-3'>
-                              <p>
-                                Your Drafts:
-                              </p>
-                              {drafts.map((item) => {
-                                return (
-                                  <button
-                                    key={item.id}
-                                    className="flex items-center gap-2 font-bold rounded-xl border-2 justify-center shadow-md "
-                                    onClick={() => setSelected(item._id)}
-                                  >
-                                    <p>
-                                      {item.Title}
-                                    </p>
-                                    <p>
-                                      {item.Description}
-                                    </p>
-                                    <div>
-                                      {item._id}
-                                    </div>
-                                  </button>)
-                              })}
-                            </div>
-                          )
+                      }).then(async (val) => {
+                        let draftObj = {}
+                        if (val.data.Drafts) {
+                          val.data.Drafts.forEach(element => {
+                            draftObj[element._id] = element.Title + ":         " + element.Description
+                          });
+                        }
+                        const { value: id } = await Swal.fire({
+                          title: "Open a draft",
+                          input: "select",
+                          inputOptions: { Drafts: draftObj },
+                          inputPlaceholder: "Select your draft",
+                          inputValidator: (value) => {
+                            return new Promise(
+                              (resolve) => {
+                                if (value) resolve()
+                                else resolve("Selected draft is not retrivable")
+                              }
+                            )
+                          },
+                          showCancelButton: true,
+                          closeOnCancel: true,
+                          confirmButtonColor: "#FFB900",
+                          cancelButtonColor: "#374151",
+                          confirmButtonText: 'Open',
                         })
-                          .then((val) => {
-                            router.push({ pathname: "/form", query: { draftID: selected } })
-                          })
+                        if (id) router.push({ pathname: "/form", query: { draftID: id } })
+                        // .then((result) => {
+                        // if (result.isConfirmed) {
+                        // }
+                        // })
+
                       })
-                        .catch((err) => Swal.fire('Server Error!', '', 'error'))
+                      // .catch((err) => Swal.fire('Server Error!', '', 'error'))
                       handleClose()
                     }
                     }>
