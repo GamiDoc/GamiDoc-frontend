@@ -68,7 +68,7 @@ export default function ReviewPDF({ token, url }) {
     return (
       <ThemeProvider theme={theme}>
         <Header url={url} token={token} />
-        <div className="flex-col gap-5 justify-center items-center mb-5 ">
+        <div className=" flex-col gap-5 justify-center items-center mb-5 ">
           <div className="flex justify-center items-baseline gap-2">
             <p className="font-light text-gray-500 ">
               Author:

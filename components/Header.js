@@ -67,7 +67,7 @@ export default function Header({ url, token }) {
   });
   return (
     <ThemeProvider theme={theme}>
-      <div className="relative px-24 xs:px-8 py-9 flex flex-wrap items-center justify-between mb-3">
+      <div className="px-24 xs:px-8 py-9 flex flex-wrap items-center justify-between mb-3">
         <Link href="/">
           <Image
             loader={sanityIoImageLoader}

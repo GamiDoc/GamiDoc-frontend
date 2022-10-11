@@ -13,7 +13,7 @@ export const getServerSideProps = ({ req, res }) => {
 }
 
 export default function YourReviews({ token, url }) {
-  const [reviews, setReviews] = useState([])
+  const [reviews, setReviews] = useState()
   useEffect(() => {
     axios({
       method: "get",
@@ -21,24 +21,29 @@ export default function YourReviews({ token, url }) {
       headers: { Authorization: "Bearer " + token }
     })
       .then((val) => {
+        console.log(val)
         setReviews([...val.data.reviews])
       })
       .catch((err) => {
         console.log(err)
       })
   }, [])
+  console.log(reviews)
   if (reviews)
     return (
-      <div >
+      <div className="flex-col gap-3 h-screen">
         <Header url={url} token={token} />
-        <div className="flex justify-center w-full items-center">
-          <div className=" flex-col justify-center gap-4 mb-3">
-            {reviews.map((review) => {
+        <div className=" flex-1 flex-col justify-center gap-4 mb-3">
+          {(reviews[0]) ?
+            reviews.map((review) => {
               return (
                 <ReviewBox key={review.id} review={review} paper={review.Paper} />
               )
-            })}
-          </div>
+            }) :
+            <div className=" font-extrabold text-2xl flex justify-center items-center flex-1">
+              NO REVIEWS
+            </div>
+          }
         </div>
         <Footer />
       </div>
