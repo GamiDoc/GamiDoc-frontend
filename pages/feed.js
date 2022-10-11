@@ -31,21 +31,23 @@ export default function Feed({ token, url }) {
 
 
   return (
-    <div className="flex-col justify-center gap-2 h-full">
+    <div className=" flex flex-col  h-screen">
       <Header url={url} token={token} />
-      <p className="flex justify-center text-4xl font-semibold font-sans mb-5 ">
-        Pick a Paper to Review:
-      </p>
-      <div className="flex items-center justify-center mb-3 ">
-        <Divider className="w-2/3" />
-      </div>
-      <div className="flex-1 flex justify-center items-center w-full">
-        <div className="m-3 grid gap-2  grid-cols-3  w-2/3 auto-cols-max auto-rows-max">
-          {data.map((val) => {
-            return (
-              <PaperBox key={val.id} id={val._id} author={val.Author} title={val.Title} description={val.Description} />
-            )
-          })}
+      <div className="flex-1">
+        <p className="flex justify-center text-4xl font-semibold font-sans mb-5 ">
+          Pick a Paper to Review:
+        </p>
+        <div className="flex  justify-center mb-3 ">
+          <Divider className="w-2/3" />
+        </div>
+        <div className="flex-1 flex justify-center ">
+          <div className="m-3 grid gap-2  grid-cols-3  w-2/3 ">
+            {data.map((val) => {
+              return (
+                <PaperBox key={val.id} id={val._id} author={val.Author} title={val.Title} description={val.Description} />
+              )
+            })}
+          </div>
         </div>
       </div>
       <Footer />

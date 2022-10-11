@@ -23,20 +23,20 @@ export default function Feedback({
   setContextDescription,
   setContext,
   selectObj2,
+  saveDraft
 
 }) {
   const router = useRouter();
   return (
     <div className="flex flex-col py-4 w-[60em]">
       <label className=" mt-4 block text-gray-700  font-bold mb-2">
-        <Link href="/documentation#technology">
-          <IconButton
-            aria-label="Example"
-          //onClick={() => router.push("/documentation#technology")}
-          >
-            <InfoOutlinedIcon sx={{ fontSize: 20 }} />
-          </IconButton>
-        </Link>
+        {/* STRANO CHE FEEDBACK RIPORTI A TECHNOLOGY */}
+        <IconButton aria-label="Example">
+          <InfoOutlinedIcon sx={{ fontSize: 20 }} onClick={() => {
+            saveDraft()
+            router.push("documentation#technology")
+          }} />
+        </IconButton>
         Feedback
       </label>
       <h2 className=" mt-4 block text-gray-700  mb-2 ">

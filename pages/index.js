@@ -2,7 +2,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { getSession } from "@auth0/nextjs-auth0"
+import { getSession, useUser } from "@auth0/nextjs-auth0"
 import axios from "axios";
 
 export const getServerSideProps = ({ req, res }) => {
@@ -16,15 +16,16 @@ export const getServerSideProps = ({ req, res }) => {
 
 export default function Home({ token, url }) {
   const router = useRouter();
+  const { user, error, isLoading } = useUser();
 
   return (
-    <div className="flex flex-col h-screen justify-between gap-5">
+    <div className="flex flex-col h-screen ">
       <Head>
         <title>GamiDoc</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <Header url={url} token={token} />
-      <div className="px-28 xs:px-10">
+      <div className="flex-1 px-28 xs:px-10">
         <div className="w-full lg:grid-cols-2 lg:grid">
           <h1 className="font-extrabold text-5xl xs:text-3xl ">
             A holistic process for designing and evaluating gamified solution.
@@ -36,12 +37,16 @@ export default function Home({ token, url }) {
             the developed software.
           </h3>
         </div>
-        <button
-          onClick={() => router.push("/name")}
-          className=" py-4 inline-block px-8 bg-yellow-gamy xs:px-6 xs:py-3 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md  hover:bg-gray-gamy hover:shadow-lg focus:bg-yellow-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out"
-        >
-          Form
-        </button>
+        {(user) ?
+          <button
+            onClick={() => router.push("/name")}
+            className=" py-4 inline-block px-8 bg-yellow-gamy xs:px-6 xs:py-3 text-md text-white font-medium leading-tight uppercase rounded-full shadow-md  hover:bg-gray-gamy hover:shadow-lg focus:bg-yellow-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out my-5"
+          >
+            Create a Form
+          </button>
+          :
+          ""
+        }
         <button
           onClick={() =>
             axios({
@@ -54,7 +59,6 @@ export default function Home({ token, url }) {
           Remove Metadata
         </button>
       </div>
-
       <Footer />
     </div >
   );

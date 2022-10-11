@@ -31,6 +31,8 @@ import GradingIcon from '@mui/icons-material/Grading';
 import ModeIcon from '@mui/icons-material/Mode';
 import MenuIcon from '@mui/icons-material/Menu';
 import MenuOpen from '@mui/icons-material/MenuOpen';
+import AddCircle from '@mui/icons-material/Add'; //AddCircleOutline
+
 const sanityIoImageLoader = () => {
   return `https://i.imgur.com/Y3QF08D.png`;
 };
@@ -94,6 +96,45 @@ export default function Header({ url, token }) {
             </button> :
             <div className="fixed top-5 right-5 text-right bg-white rounded-full shadow-md">
               < div className="w-max rounded-full  flex items-center p-2 m-2 font-xl" > {/* shadow-xl border border-gray-gamy */}
+                <Button
+                  id="select-button"
+                  onClick={() => { router.push("/name") }}
+                >
+                  <AddCircle sx={{ fontSize: "30px" }} color="primary" />
+                </Button>
+                {/* <Menu */}
+                {/*   id="basic-menu" */}
+                {/*   anchorEl={open} */}
+                {/*   open={menuValue} */}
+                {/*   onClose={handleClose} */}
+                {/*   MenuListProps={{ */}
+                {/*     'aria-labelledby': 'basic-button', */}
+                {/*   }} */}
+                {/*   className="mt-5 " */}
+                {/* > */}
+                {/*   <MenuItem */}
+                {/*     onClick={() => { */}
+                {/*       handleClose() */}
+                {/*       router.push("/name") */}
+                {/*     } */}
+                {/*     }> */}
+                {/*     <ListItemText color="primary"> */}
+                {/*       New Paper */}
+                {/*     </ListItemText> */}
+                {/*   </MenuItem> */}
+
+                {/*   <MenuItem */}
+                {/*     onClick={() => { */}
+                {/*       handleClose() */}
+                {/*       router.push("/feed") */}
+                {/*     } */}
+                {/*     }> */}
+                {/*     <Divider /> */}
+                {/*     <ListItemText color="primary"> */}
+                {/*       New Review */}
+                {/*     </ListItemText> */}
+                {/*   </MenuItem> */}
+                {/* </Menu> */}
                 <Avatar
                   size={40}
                   name={user.email}

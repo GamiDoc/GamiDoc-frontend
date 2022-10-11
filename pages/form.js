@@ -174,6 +174,74 @@ export default withPageAuthRequired(function Home({ token, url }) {
 
   const mutex = useRef(new Mutex())
 
+  const saveDraft = () => {
+    let aff = affordances.split("=>")
+    if (!draftID) {
+      axios.post(url + "/draft/new", {
+        title: query.name,
+        description: query.description,
+        behavior: behavior,
+        domain: domain,
+        aim: aim,
+        targetAge: targetAge,
+        targetUser: targetUser, //!!!!!!!!!!!!!!!!!!!!!
+        device: device,
+        modality: modality,
+        dynamics: dynamics,
+        personalization: personalization,
+        context: context,
+        contextDescription: contextDescription,
+        timing: timing,
+        timingDescription: timingDescription,
+        gameAction: aff[0],
+        condition: aff[1],
+        affordances: aff[2],
+        rules: rules,
+        aesthetics: aesthetics,
+        draftId: draftID
+      },
+        {
+          headers: {
+            Authorization: "Bearer " + token
+          }
+        }).then((val) => {
+          console.log("NEW:", val.data)
+          setDraftID(val.data.draft._id)
+        }
+        )
+    }
+    else {
+      axios.patch(url + "/draft/" + draftID, {
+        title: name,
+        description: description,
+        behavior: behavior,
+        domain: domain,
+        aim: aim,
+        targetAge: targetAge,
+        targetUser: targetUser,
+        device: device,
+        modality: modality,
+        dynamics: dynamics,
+        personalization: personalization,
+        context: context,
+        contextDescription: contextDescription,
+        timing: timing,
+        timingDescription: timingDescription,
+        gameAction: aff[0],
+        condition: aff[1],
+        affordances: aff[2],
+        rules: rules,
+        aesthetics: aesthetics,
+      },
+        {
+          headers: {
+            Authorization: "Bearer " + token
+          }
+        })
+        .then((val) => console.log("PATCH:", val.data))
+    }
+  }
+
   // DRAFT SAVER  
   const [timer, setTimer] = useState(false)
   const [draftID, setDraftID] = useState(query.draftID)
@@ -475,6 +543,7 @@ export default withPageAuthRequired(function Home({ token, url }) {
                     selectObj1={KoivistoHamari}
                     selectObj2={Aimo}
                     selectObj3={ageSelection}
+                    saveDraft={saveDraft}
                   />
                 </Tab.Panel>
                 <Tab.Panel>
@@ -482,6 +551,7 @@ export default withPageAuthRequired(function Home({ token, url }) {
                     device={device}
                     setDevice={setDevice}
                     DeviceSelection={DeviceSelection}
+                    saveDraft={saveDraft}
                   />
                 </Tab.Panel>
                 <Tab.Panel>
@@ -489,12 +559,14 @@ export default withPageAuthRequired(function Home({ token, url }) {
                     modality={modality}
                     setModality={setModality}
                     selectObj1={modes}
+                    saveDraft={saveDraft}
                   />
                 </Tab.Panel>
                 <Tab.Panel>
                   <Dynamics
                     dynamics={dynamics}
                     setDynamics={setDynamics}
+                    saveDraft={saveDraft}
                   />
 
                 </Tab.Panel>
@@ -502,6 +574,7 @@ export default withPageAuthRequired(function Home({ token, url }) {
                   <Personalization
                     personalization={personalization}
                     setPersonalization={setPersonalization}
+                    saveDraft={saveDraft}
                   />
                 </Tab.Panel>
                 <Tab.Panel>
@@ -516,6 +589,7 @@ export default withPageAuthRequired(function Home({ token, url }) {
                     setContextDescription={setContextDescription}
                     selectObj1={tt}
                     selectObj2={contenuti}
+                    saveDraft={saveDraft}
                   />
                 </Tab.Panel>
                 <Tab.Panel>
@@ -523,12 +597,14 @@ export default withPageAuthRequired(function Home({ token, url }) {
                     affordances={affordances}
                     setAffordances={setAffordances}
                     affordancesSelection={affordancesSelection}
+                    saveDraft={saveDraft}
                   />
                 </Tab.Panel>
                 <Tab.Panel>
                   <Rules
                     rules={rules}
                     setRules={setRules}
+                    saveDraft={saveDraft}
                   />
                 </Tab.Panel>
                 <Tab.Panel>
@@ -539,6 +615,7 @@ export default withPageAuthRequired(function Home({ token, url }) {
                     setImages={setImages}
                     imgUrl={imgUrl}
                     setImgUrl={setImgUrl}
+                    saveDraft={saveDraft}
                   />
                 </Tab.Panel>
               </Tab.Panels>

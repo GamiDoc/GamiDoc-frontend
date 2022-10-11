@@ -11,7 +11,8 @@ function Aesthetics({
   images,
   setImages,
   imgUrl,
-  setImgUrl
+  setImgUrl,
+  saveDraft
 }) {
 
   useEffect(() => {
@@ -27,13 +28,12 @@ function Aesthetics({
   return (
     <div className="flex flex-col py-4 w-[60em]">
       <label className="mt-4 block text-gray-700  font-bold mb-2">
-        <Link href="/documentation#aesthetics">
-          <IconButton
-            aria-label="Example"
-          >
-            <InfoOutlinedIcon sx={{ fontSize: 20 }} />
-          </IconButton>
-        </Link>
+        <IconButton aria-label="Example">
+          <InfoOutlinedIcon sx={{ fontSize: 20 }} onClick={() => {
+            saveDraft()
+            router.push("documentation#aesthetics")
+          }} />
+        </IconButton>
         Aesthetics
       </label>
       <h2 className="w-[60em] mt-4 block text-gray-700  mb-2 ">
