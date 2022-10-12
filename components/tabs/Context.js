@@ -1,3 +1,4 @@
+import Swal from "sweetalert2"
 import * as React from "react";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
@@ -19,10 +20,13 @@ function Context({
   setAim,
   targetAge,
   setTargetAge,
+  targetUser,
+  setTargetUser,
 
   selectObj1, // L'oggetto che contiene i campi del select
   selectObj2, // Aimo
   selectObj3, // Target categories
+  saveDraft
 }) {
   const router = useRouter();
 
@@ -52,11 +56,13 @@ function Context({
       </h2>
 
       <label className=" mt-4 block text-gray-700  font-bold mb-2">
-        <Link href="/documentation#domain">
-          <IconButton aria-label="Example">
-            <InfoOutlinedIcon sx={{ fontSize: 20 }} />
-          </IconButton>
-        </Link>
+        <IconButton aria-label="Example">
+          <InfoOutlinedIcon sx={{ fontSize: 20 }} onClick={() => {
+            Swal.fire({ title: 'Your changes have been saved in a Draft', icon: 'info' })
+            saveDraft()
+            router.push("documentation#domain")
+          }} />
+        </IconButton>
         Domain
       </label>
       <h2 className=" mt-4  block text-gray-700  mb-2 ">
@@ -81,11 +87,13 @@ function Context({
         </Select>
       </FormControl>
       <label className=" mt-4 block text-gray-700  font-bold mb-2">
-        <Link href="/documentation#aim">
-          <IconButton aria-label="Example">
-            <InfoOutlinedIcon sx={{ fontSize: 20 }} />
-          </IconButton>
-        </Link>
+        <IconButton aria-label="Example">
+          <InfoOutlinedIcon sx={{ fontSize: 20 }} onClick={() => {
+            Swal.fire({ title: 'Your changes have been saved in a Draft', icon: 'info' })
+            saveDraft()
+            router.push("documentation#aim")
+          }} />
+        </IconButton>
         Aim
       </label>
       <h2 className=" mt-4 block text-gray-700  mb-2 ">
@@ -115,11 +123,13 @@ function Context({
         </Select>
       </FormControl>
       <label className="mt-4 block text-gray-700  font-bold mb-2">
-        <Link href="/documentation#behaviors">
-          <IconButton aria-label="Example">
-            <InfoOutlinedIcon sx={{ fontSize: 20 }} />
-          </IconButton>
-        </Link>
+        <IconButton aria-label="Example">
+          <InfoOutlinedIcon sx={{ fontSize: 20 }} onClick={() => {
+            Swal.fire({ title: 'Your changes have been saved in a Draft', icon: 'info' })
+            saveDraft()
+            router.push("documentation#behaviors")
+          }} />
+        </IconButton>
         Behaviors to be encouraged...
       </label>
       <h2 className="w-[60em] mt-4 block text-gray-700  mb-2 ">
@@ -140,11 +150,13 @@ function Context({
         onChange={(e) => setBehavior(e.target.value)}
       />
       <label className="mt-4 block text-gray-700  font-bold mb-2">
-        <Link href="/documentation#target">
-          <IconButton aria-label="Example">
-            <InfoOutlinedIcon sx={{ fontSize: 20 }} />
-          </IconButton>
-        </Link>
+        <IconButton aria-label="Example">
+          <InfoOutlinedIcon sx={{ fontSize: 20 }} onClick={() => {
+            Swal.fire({ title: 'Your changes have been saved in a Draft', icon: 'info' })
+            saveDraft()
+            router.push("documentation#target")
+          }} />
+        </IconButton>
         Target user
       </label>
       <h2 className="w-[60em] mt-4 block text-gray-700  mb-2 ">
@@ -174,6 +186,8 @@ function Context({
         type="text"
         multiline
         rows={3}
+        value={targetUser}
+        onChange={(event) => setTargetUser(event.target.value)}
         placeholder="Target user"
       />
     </div>

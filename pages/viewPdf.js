@@ -50,7 +50,7 @@ export default function ViewPdf({ token, url }) {
   if (paperMetaData.Title != null)
     return (
       <ThemeProvider theme={theme}>
-        <Header />
+        <Header url={url} token={token} />
         <div className="flex-col gap-5 justify-center items-center mb-5 ">
           <div className="flex justify-center items-baseline gap-2">
             <p className="font-light text-gray-500 ">

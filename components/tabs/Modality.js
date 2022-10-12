@@ -1,3 +1,4 @@
+import Swal from "sweetalert2"
 import * as React from "react";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
@@ -9,20 +10,20 @@ import IconButton from "@mui/material/IconButton";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
-export default function Modality({ modality, setModality, selectObj1 }) {
+export default function Modality({ modality, setModality, selectObj1, saveDraft }) {
   const router = useRouter();
 
   return (
     <div className="flex flex-col py-4 w-[60em]">
       <label className=" mt-4 block text-gray-700  font-bold mb-2">
-        <Link href="/documentation#modality">
-          <IconButton
-            aria-label="Example"
-            onClick={() => router.push("/documentation#modality")}
-          >
-            <InfoOutlinedIcon sx={{ fontSize: 20 }} />
-          </IconButton>
-        </Link>
+        <IconButton aria-label="Example">
+          <InfoOutlinedIcon sx={{ fontSize: 20 }} onClick={() => {
+            Swal.fire({ title: 'Your changes have been saved in a Draft', icon: 'info' })
+            saveDraft()
+            router.push("documentation#modality")
+          }} />
+        </IconButton>
+
         Type of Modality
       </label>
 

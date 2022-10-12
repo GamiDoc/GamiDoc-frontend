@@ -1,25 +1,28 @@
+import Swal from "sweetalert2"
 import React from "react";
 import TextField from "@mui/material/TextField";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import IconButton from "@mui/material/IconButton";
 import Link from "next/link";
+import { useRouter } from "next/router"
 
 function Rules({
   rules,
   setRules,
+  saveDraft
 }) {
+  const router = useRouter()
 
   return (
     <div className="flex flex-col py-4 w-[60em]">
       <label className="mt-4 block text-gray-700  font-bold mb-2">
-        <Link href="/documentation#gamerules">
-          <IconButton
-            aria-label="Example"
-          //onClick={() => router.push("/documentation#gamerules")}
-          >
-            <InfoOutlinedIcon sx={{ fontSize: 20 }} />
-          </IconButton>
-        </Link>
+        <IconButton aria-label="Example">
+          <InfoOutlinedIcon sx={{ fontSize: 20 }} onClick={() => {
+            Swal.fire({ title: 'Your changes have been saved in a Draft', icon: 'info' })
+            saveDraft()
+            router.push("documentation#gamerules")
+          }} />
+        </IconButton>
         Rules
       </label>
       <h2 className="w-[60em] mt-4 block text-gray-700  mb-2 ">

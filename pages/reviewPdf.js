@@ -8,12 +8,14 @@ import Footer from "../components/Footer"
 import CustomSlider from "../components/CustomSlider"
 import { createTheme, ThemeProvider } from "@mui/material/styles"
 import Checkbox from '@mui/material/Checkbox';
+import Swal from "sweetalert2"
 import axios from "axios"
 
 export const getServerSideProps = ({ req, res }) => {
   let url = (process.env.SECURE) ? "https://" : "http://"
   url = url + process.env.BACK_ENDPOINT
   const session = getSession(req, res)
+  if (!session) return ({ props: {} })
   return ({ props: { token: session.accessToken, url: url } })
 }
 
@@ -65,8 +67,8 @@ export default function ReviewPDF({ token, url }) {
   if (paperMetaData.Title != null)
     return (
       <ThemeProvider theme={theme}>
-        <Header />
-        <div className="flex-col gap-5 justify-center items-center mb-5 ">
+        <Header url={url} token={token} />
+        <div className=" flex-col gap-5 justify-center items-center mb-5 ">
           <div className="flex justify-center items-baseline gap-2">
             <p className="font-light text-gray-500 ">
               Author:
@@ -100,16 +102,31 @@ export default function ReviewPDF({ token, url }) {
             <div className="flex-col w-1/3 justify-evenly items-baseline ">
               <div className="flex justify-center items-center gap-5">
                 <div
-                  onClick={() => {
-                    console.log(paperID)
-                    axios({
-                      method: "post",
-                      url: url + `/paper/reviews/new`,
-                      headers: { Authorization: "Bearer " + token },
-                      data: { paperID: paperID, comment: review, approved: approved, types: reviewParams.current },
+                  onClick={async () => {
+                    let result = await Swal.fire({
+                      title: 'Do you want to save the changes?',
+                      showCancelButton: true,
+                      confirmButtonText: 'Save',
                     })
-                      .then(() => { router.push("/") })
-                      .catch((err) => { console.log(err) })
+                    // console.log(paperID)
+                    if (result.isConfirmed) {
+                      axios({
+                        method: "post",
+                        url: url + `/paper/reviews/new`,
+                        headers: { Authorization: "Bearer " + token },
+                        data: { paperID: paperID, comment: review, approved: approved, types: reviewParams.current },
+                      })
+                        .then(() => {
+                          Swal.fire('Review Saved!', '', 'success')
+                          router.push("/")
+                        })
+                        .catch((err) => {
+                          Swal.fire('Server Error!', '', 'error')
+                          console.log(err)
+                        })
+
+
+                    }
                   }}
                   disabled={review === ""}
                   className="py-4 inline-block px-8 xs:px-4 xs:py-2 bg-yellow-gamy text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md  hover:bg-gray-gamy hover:shadow-xl focus:bg-yellow-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out"

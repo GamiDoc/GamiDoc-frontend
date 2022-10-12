@@ -52,22 +52,4 @@ export default function PaperBox({ id, me, author, title, description }) {
       </CardContent>
     </Card >
   )
-
 }
-// import CardActions from '@mui/material/CardActions';
-// import Button from '@mui/material/Button';
-{/* <CardActions> */ }
-{/* <Button */ }
-{/*           size="small" */ }
-{/*           className="my-3 flex justify-center items-center" */ }
-{/*           onClick={() => { */ }
-{/*             router.push({ */ }
-{/*               pathname: "/reviewPdf", */ }
-{/*               query: { id: id, me: me } */ }
-{/*             }) */ }
-{/*           } */ }
-{/*           } */ }
-{/*         > */ }
-{/*           Open */ }
-{/*         </Button> */ }
-{/* </CardActions> */ }

@@ -3,6 +3,7 @@ import { getSession } from "@auth0/nextjs-auth0"
 import Header from "../components/Header"
 import Footer from "../components/Footer"
 import PaperBox from "../components/PaperBox"
+import { Divider } from '@mui/material';
 import axios from "axios"
 
 export const getServerSideProps = ({ req, res }) => {
@@ -30,14 +31,17 @@ export default function Feed({ token, url }) {
 
 
   return (
-    <div>
-      <Header />
-      <p className=" flex justify-center text-4xl underline  font-semibold font-sans mb-5 ">
-        Pick a Paper to Review:
-      </p>
-      {(data) ?
-        <div className="flex justify-center">
-          <div className=" m-3 grid gap-2  grid-cols-4 w-3/4  auto-cols-max auto-rows-max">
+    <div className=" flex flex-col  h-screen">
+      <Header url={url} token={token} />
+      <div className="flex-1">
+        <p className="flex justify-center text-4xl font-semibold font-sans mb-5 ">
+          Pick a Paper to Review:
+        </p>
+        <div className="flex  justify-center mb-3 ">
+          <Divider className="w-2/3" />
+        </div>
+        <div className="flex-1 flex justify-center ">
+          <div className="m-3 grid gap-2  grid-cols-3  w-2/3 ">
             {data.map((val) => {
               return (
                 <PaperBox key={val.id} id={val._id} author={val.Author} title={val.Title} description={val.Description} />
@@ -45,12 +49,9 @@ export default function Feed({ token, url }) {
             })}
           </div>
         </div>
-        : "Loading..."
-      }
-      <div className="">
-        <Footer />
       </div>
-    </div>
+      <Footer />
+    </div >
 
 
 

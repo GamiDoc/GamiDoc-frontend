@@ -1,19 +1,24 @@
+import Swal from "sweetalert2"
 import * as React from "react";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import IconButton from "@mui/material/IconButton";
 import Link from "next/link";
 import { TextField } from "@mui/material";
+import { useRouter } from "next/router"
 
-function Dynamics({ dynamics, setDynamics }) {
-
+function Dynamics({ dynamics, setDynamics, saveDraft }) {
+  const router = useRouter()
   return (
     <div className="flex flex-col w-[60em] py-4">
       <label className=" mt-4 block text-gray-700  font-bold mb-2">
-        <Link href="/documentation#technology">
-          <IconButton aria-label="Example">
-            <InfoOutlinedIcon sx={{ fontSize: 20 }} />
-          </IconButton>
-        </Link>
+        {/* STRANO CHE DYNAMICS RIPORTI A TECHNOLOGY */}
+        <IconButton aria-label="Example">
+          <InfoOutlinedIcon sx={{ fontSize: 20 }} onClick={() => {
+            Swal.fire({ title: 'Your changes have been saved in a Draft', icon: 'info' })
+            saveDraft()
+            router.push("documentation#technology")
+          }} />
+        </IconButton>
         Dynamics
       </label>
 

@@ -50,7 +50,7 @@ export default function SmvPage() {
   // Il jsx del componente ! 
   return (
     <div >
-      <Header />
+      {/* <Header /> */}
       <div className="flex justify-center m-2 items-center gap-3">
 
         {(text == "") ? <></> :

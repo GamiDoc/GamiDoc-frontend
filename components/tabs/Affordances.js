@@ -1,3 +1,4 @@
+import Swal from "sweetalert2"
 import { useState, useEffect } from "react"
 import OutlinedInput from "@mui/material/OutlinedInput";
 import MenuItem from "@mui/material/MenuItem";
@@ -7,6 +8,7 @@ import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import IconButton from "@mui/material/IconButton";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { TextField } from "@mui/material";
 
 const sanityIoImageLoader = ({ src, width, quality }) => {
@@ -14,29 +16,37 @@ const sanityIoImageLoader = ({ src, width, quality }) => {
 };
 
 function Affordances({
+  affordances,
   setAffordances,
   affordancesSelection,
+  saveDraft
 }) {
-
-
   const [value1, setValue1] = useState("")
   const [value2, setValue2] = useState("")
   const [value3, setValue3] = useState("")
+  let router = useRouter()
 
   useEffect(() => {
     if (value1 && value2 && value3) return
-    setAffordances(value1 + " => " + value2 + " => " + value3)
+    setAffordances(value1 + "=>" + value2 + "=>" + value3)
   }, [value1, value2, value3])
 
-
+  useEffect(() => {
+    let aff = affordances.split("=>")
+    setValue1(aff[0])
+    setValue2(aff[1])
+    setValue3(aff[2])
+  }, [])
   return (
     <div className="flex flex-col w-[60em] py-4">
       <label className=" mt-4 block text-gray-700  font-bold mb-2">
-        <Link href="documentation#affordances">
-          <IconButton aria-label="Example">
-            <InfoOutlinedIcon sx={{ fontSize: 20 }} />
-          </IconButton>
-        </Link>
+        <IconButton aria-label="Example">
+          <InfoOutlinedIcon sx={{ fontSize: 20 }} onClick={() => {
+            Swal.fire({ title: 'Your changes have been saved in a Draft', icon: 'info' })
+            saveDraft()
+            router.push("documentation#affordances")
+          }} />
+        </IconButton>
         Affordances
       </label>
       <h2 className=" mt-4 block text-gray-700  mb-2 ">
@@ -54,7 +64,6 @@ function Affordances({
         <br />
       </h2>
       <div className="w-auto mt-3">
-
         <TextField
           className=" -top-2 w-31 border shadow-md "
           id="username"
@@ -64,7 +73,6 @@ function Affordances({
           value={value1}
           onChange={(e) => setValue1(e.target.value)}
         />
-
         <Image
           loader={sanityIoImageLoader}
           src="image-src"
@@ -72,7 +80,6 @@ function Affordances({
           height={34}
           width={85}
         />
-
         <TextField
           className=" -top-2 w-31 border shadow-md "
           id="username"
@@ -82,7 +89,6 @@ function Affordances({
           value={value2}
           onChange={(e) => setValue2(e.target.value)}
         />
-
         <Image
           loader={sanityIoImageLoader}
           className="top-4"

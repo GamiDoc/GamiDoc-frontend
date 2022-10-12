@@ -24,7 +24,7 @@ export default function ReviewBox({ paper, review }) {
         {"Values: "}
         {
           review.Params.map((element) => {
-            return (<p key={key.id} className="mr-0.5">{element}</p>)
+            return (<p key={element.id} className="mr-0.5">{element}</p>)
           })
         }
         < p >
