@@ -405,7 +405,7 @@ export default withPageAuthRequired(function Home({ token, url }) {
         onClose={() => { setAllertBool(false) }}
       >
         <Alert severity="info" >
-          <AlertTitle >Paper saved as a Draft </AlertTitle>
+          Paper saved as a Draft
         </Alert>
       </Snackbar>
 

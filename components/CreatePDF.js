@@ -61,7 +61,7 @@ export default function CreatePDF({
 
   const styles = StyleSheet.create({
     page: {
-      //     flexDirection: "row",
+      // flexDirection: "row",
       backgroundColor: "white",
       margin: 20,
       lineHeight: 2,
@@ -69,12 +69,11 @@ export default function CreatePDF({
     section: {
       margin: 10,
       padding: 10,
-      //      flexGrow: 1,
+      // flexGrow: 1,
     },
     logo: {
       alignContent: "right",
       alignItems: "right",
-
       width: "20%",
     },
     centerImage: {
@@ -93,6 +92,16 @@ export default function CreatePDF({
       position: "relative",
       fontfamily: "Sen",
       top: 78,
+    },
+    description: {
+      fontSize: "13",
+      fontWeight: "black",
+      alignContent: "center",
+      alignItems: "center",
+      alignSelf: "center",
+      position: "relative",
+      fontfamily: "Sen",
+      top: 500,
     },
     tab: {
       fontSize: "18",
@@ -120,7 +129,7 @@ export default function CreatePDF({
           alt="logo"
         />
         <Text style={styles.title}>{name}</Text>
-        <Text style={styles.h2}>{description}</Text>
+        <Text style={styles.description}>{description}</Text>
       </Page>
       <Page size="A4" style={styles.page}>
         <View style={styles.section}>

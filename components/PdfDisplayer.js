@@ -8,9 +8,19 @@ export default function PdfDisplayer({ pdfBlob }) {
   const [pageNumber, setPageNumber] = useState(1); //setting 1 to show fisrt page
 
   const previus = () => {
+    // console.log("Previus: " + pageNumber)
+    if (pageNumber == 1) {
+      setPageNumber(9)
+      return
+    }
     setPageNumber(pageNumber - 1)
   }
   const next = () => {
+    // console.log("Next: " + pageNumber)
+    if (pageNumber == 9) {
+      setPageNumber(1)
+      return
+    }
     setPageNumber(pageNumber + 1)
   }
 

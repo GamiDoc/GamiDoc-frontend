@@ -25,7 +25,7 @@ export default function Home({ token, url }) {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <Header url={url} token={token} />
-      <div className="flex-1 px-28 xs:px-10">
+      <div className="flex-1 px-28 xs:px-10 mt-10">
         <div className="w-full lg:grid-cols-2 lg:grid">
           <h1 className="font-extrabold text-5xl xs:text-3xl ">
             A holistic process for designing and evaluating gamified solution.
