@@ -1,3 +1,4 @@
+import Swal from "sweetalert2"
 import { useState, useEffect } from "react"
 import OutlinedInput from "@mui/material/OutlinedInput";
 import MenuItem from "@mui/material/MenuItem";
@@ -41,6 +42,7 @@ function Affordances({
       <label className=" mt-4 block text-gray-700  font-bold mb-2">
         <IconButton aria-label="Example">
           <InfoOutlinedIcon sx={{ fontSize: 20 }} onClick={() => {
+            Swal.fire({ title: 'Your changes have been saved in a Draft', icon: 'info' })
             saveDraft()
             router.push("documentation#affordances")
           }} />

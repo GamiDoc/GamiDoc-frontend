@@ -1,9 +1,10 @@
+import Swal from "sweetalert2"
 import { useEffect, useState } from "react"
 import TextField from "@mui/material/TextField";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import IconButton from "@mui/material/IconButton";
 import Image from "next/image"
-import Link from "next/link";
+import { useRouter } from "next/router"
 
 function Aesthetics({
   aesthetics,
@@ -14,7 +15,7 @@ function Aesthetics({
   setImgUrl,
   saveDraft
 }) {
-
+  const router = useRouter()
   useEffect(() => {
     if (images.lenght == 0) return
 
@@ -30,6 +31,7 @@ function Aesthetics({
       <label className="mt-4 block text-gray-700  font-bold mb-2">
         <IconButton aria-label="Example">
           <InfoOutlinedIcon sx={{ fontSize: 20 }} onClick={() => {
+            Swal.fire({ title: 'Your changes have been saved in a Draft', icon: 'info' })
             saveDraft()
             router.push("documentation#aesthetics")
           }} />

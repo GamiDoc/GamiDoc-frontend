@@ -252,7 +252,7 @@ export default function CreatePDF({
                     })
                     .then((val) => {
                       Swal.fire({ title: 'Paper Saved!', icon: 'success' })
-                      console.log(val.data)
+                      // console.log(val.data)
                       router.push("/")
                     })
                     .catch((err) => {

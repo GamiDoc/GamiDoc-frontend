@@ -1,3 +1,4 @@
+import Swal from "sweetalert2"
 import * as React from "react";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
@@ -17,6 +18,7 @@ export default function Modality({ modality, setModality, selectObj1, saveDraft 
       <label className=" mt-4 block text-gray-700  font-bold mb-2">
         <IconButton aria-label="Example">
           <InfoOutlinedIcon sx={{ fontSize: 20 }} onClick={() => {
+            Swal.fire({ title: 'Your changes have been saved in a Draft', icon: 'info' })
             saveDraft()
             router.push("documentation#modality")
           }} />

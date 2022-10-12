@@ -22,10 +22,13 @@ import Aesthetics from "../components/tabs/Aesthetics";
 import Device from "../components/tabs/Device";
 import Feedback from "../components/tabs/Feedback";
 import Modality from "../components/tabs/Modality";
-
-//alert
 import Dynamics from "../components/tabs/Dynamics";
 import Personalization from "../components/tabs/Personalization";
+
+//alert
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
+import { Snackbar } from "@mui/material";
 
 export const getServerSideProps = ({ req, res }) => {
   let url = (process.env.SECURE) ? "https://" : "http://"
@@ -245,6 +248,8 @@ export default withPageAuthRequired(function Home({ token, url }) {
   // DRAFT SAVER  
   const [timer, setTimer] = useState(false)
   const [draftID, setDraftID] = useState(query.draftID)
+  const [allertBool, setAllertBool] = useState(false)
+
   useEffect(() => {
     console.log("1st: in the useEffect")
     mutex.current.runExclusive(async function() {
@@ -288,6 +293,8 @@ export default withPageAuthRequired(function Home({ token, url }) {
             }).then((val) => {
               console.log("NEW:", val.data)
               setDraftID(val.data.draft._id)
+              setAllertBool(true)
+              console.log(allertBool)
             }
             )
         }
@@ -319,7 +326,11 @@ export default withPageAuthRequired(function Home({ token, url }) {
                 Authorization: "Bearer " + token
               }
             })
-            .then((val) => console.log("PATCH:", val.data))
+            .then((val) => {
+              console.log("PATCH:", val.data)
+              setAllertBool(true)
+              console.log(allertBool)
+            })
         }
       } else console.log("NO DRAFTING")
     })
@@ -385,7 +396,19 @@ export default withPageAuthRequired(function Home({ token, url }) {
 
 
   return (
+
     <div className="flex flex-col justify-between h-screen ">
+
+      <Snackbar
+        open={allertBool}
+        autoHideDuration={5000}
+        onClose={() => { setAllertBool(false) }}
+      >
+        <Alert severity="info" >
+          <AlertTitle >Paper saved as a Draft </AlertTitle>
+        </Alert>
+      </Snackbar>
+
       <Head>
         <title>GamiDoc</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
