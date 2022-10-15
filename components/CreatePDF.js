@@ -1,6 +1,6 @@
 import { useRouter } from "next/router"
 import Swal from "sweetalert2"
-// import Link from "next/link";
+import Link from "next/link";
 // import { useRef, useState } from "react";
 import axios from "axios"
 import {
@@ -61,15 +61,31 @@ export default function CreatePDF({
 
   const styles = StyleSheet.create({
     page: {
-      // flexDirection: "row",
+      alignContent: "center",
+      alignItems: "center",
+      flexDirection: "col",
       backgroundColor: "white",
-      margin: 20,
-      lineHeight: 2,
+      margin: "20",
+      lineHeight: "2",
+    },
+    firstPage: {
+      width: "80%",
+      flexDirection: "col",
+      alignContent: "left ",
+      alignItems: "left",
+      margin: "10",
+      padding: "10",
+      gap: "12px",
+      top: 116,
     },
     section: {
-      margin: 10,
-      padding: 10,
-      // flexGrow: 1,
+      flexDirection: "col",
+      alignContent: "left ",
+      alignItems: "left",
+      margin: "10",
+      padding: "10",
+      gap: "12px",
+
     },
     logo: {
       alignContent: "right",
@@ -81,7 +97,7 @@ export default function CreatePDF({
       alignItems: "center",
       alignSelf: "center",
       top: 64,
-      width: "40%",
+      width: "65%",
     },
     title: {
       fontSize: "20",
@@ -93,33 +109,23 @@ export default function CreatePDF({
       fontfamily: "Sen",
       top: 78,
     },
-    description: {
-      fontSize: "13",
-      fontWeight: "black",
-      alignContent: "center",
-      alignItems: "center",
-      alignSelf: "center",
-      position: "relative",
-      fontfamily: "Sen",
-      top: 500,
-    },
     tab: {
       fontSize: "18",
       fontWeight: "bold",
+      color: "#5555dd",
       fontfamily: "Sen",
-    },
-    h1: {
-      fontSize: "13",
-      fontWeight: "black",
-      fontfamily: "Sen",
-
     },
     h2: {
-      fontSize: "11",
+      fontSize: "12",
       fontfamily: "Sen",
+      marginTop: "12"
     },
   });
 
+  // My own <br/>
+  const Br = () => "\n";
+
+  // The document
   const MyDoc = () => (
     <Document>
       <Page size="A4" style={styles.page}>
@@ -128,8 +134,25 @@ export default function CreatePDF({
           style={styles.centerImage}
           alt="logo"
         />
-        <Text style={styles.title}>{name}</Text>
-        <Text style={styles.description}>{description}</Text>
+        <View style={styles.firstPage}>
+          <Text style={styles.h2}>
+            The following gamification design document, called {name} was created using GamiDOC, a tool developed by the
+            <a href="https://www.unitn.it/" style={{ color: "#5555dd", fontFamily: "Sen-Bold", fontSize: 12 }}> University of Trento</a>{","}
+            <a href="https://www.fbk.eu/it/" style={{ color: "#5555dd", fontFamily: 'Sen-Bold', fontSize: 12 }}> Fondazione Bruno Kessler</a> {" and "}
+            <a href="https://uwaterloo.ca/games-institute/" style={{ color: "#5555dd", fontFamily: "Sen-Bold", fontSize: 12 }}> the Games Institute </a> {". "}
+            {"You can visit the website "}<a href="https://uwaterloo.ca/games-institute/" style={{ color: "#5555dd", fontFamily: "Sen-Bold", fontSize: 12 }}> Here</a> <Br />
+          </Text>
+          <Text style={styles.h2}>
+            The tool's aim is to guide designers through the design process and the final evaluation of gamified solutions, taking into account contextual information, such as <Text style={{ fontFamily: "Sen-Bold", fontSize: 13 }}> domain, aim, target user,</Text> and <Text style={{ fontFamily: "Sen-Bold", fontSize: 13 }}>  encouraged behaviors</Text>, and information related to <Text style={{ fontFamily: "Sen-Bold", fontSize: 13 }}> game modality</Text>, and the <Text style={{ fontSize: 13, fontFamily: "Sen-Bold" }}>device</Text> used. Moreover, it allows to select feedback and gamification elements according to the previous selection.
+          </Text>
+          <Text style={styles.h2}>
+            Then, it provides a control over the goodness of the design through a peer-review process.
+          </Text>
+          <Text style={styles.h2}>
+            To cite the gamification design model implemented or the tool, please refer to <Text style={{ fontFamily: "Sen-Bold", fontSize: 13 }}> Bassanelli S., & Bucchiarone A.</Text>(2022). GamiDOC: a Tool for Designing and Evaluating Gamified Solutions, In Work in progress of the 2022 Annual Symposium on Computer-Human Interaction in Play (CHI PLAY ’22), November 02-05, 2022, Bremen, Germany. ACM, New York, NY, USA, 10 pages.
+          </Text>
+        </View>
+        {/* <Text style={styles.description}>{description}</Text> */}
       </Page>
       <Page size="A4" style={styles.page}>
         <View style={styles.section}>
@@ -206,7 +229,7 @@ export default function CreatePDF({
           )}
         </View>
       </Page>
-    </Document>
+    </Document >
   );
 
 
