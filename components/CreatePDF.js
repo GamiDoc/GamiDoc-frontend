@@ -31,6 +31,7 @@ export default function CreatePDF({
   domain,
   aim,
   targetAge,
+  targetUser,
 
   device,
   modality,
@@ -144,7 +145,7 @@ export default function CreatePDF({
   const MyDoc = () => (
     <Document>
 
-      {/* Page ONE  */}
+      {/* PAGE ONE  */}
       <Page size="A4" style={styles.page}>
         <Image
           src="https://i.imgur.com/Y3QF08D.png"
@@ -153,17 +154,20 @@ export default function CreatePDF({
         />
         <View style={styles.firstPage}>
           <Text style={styles.h2}>
-            The following gamification design document, called {name} was created using GamiDOC, a tool developed by the
+            The following gamification design document, called <Text style={{ fontFamily: "Sen-Bold", fontSize: 12 }}>{name}</Text> was created using GamiDOC, a tool developed by the
             <Link src="https://www.unitn.it/" style={{ color: "#5555dd", fontFamily: "Sen-Bold", fontSize: 12 }}> <Text > University of Trento </Text></Link>{","}
             <Link src="https://www.fbk.eu/it/" style={{ color: "#5555dd", fontFamily: 'Sen-Bold', fontSize: 12 }}> <Text >Fondazione Bruno Kessler </Text ></Link> {" and "}
-            <Link src="https://uwaterloo.ca/games-institute/" style={{ fontFamily: "Sen-Bold", fontSize: 12 }}> <Text >the Games Institute </Text ></Link> {". "}
-            {"You can visit the website "}<Link src="https://uwaterloo.ca/games-institute/" style={{ color: "#5555dd", fontFamily: "Sen-Bold", fontSize: 12 }}> <Text>Here </Text></Link>{"."} <Br />
+            <Link src="https://uwaterloo.ca/games-institute/" style={{ color: "#5555dd", fontFamily: "Sen-Bold", fontSize: 12 }}> <Text >the Games Institute </Text ></Link> {". "}
+            {"You can visit the website "}<Link src="https://uwaterloo.ca/games-institute/" style={{ color: "#5555dd", fontFamily: "Sen-Bold", fontSize: 12 }}> <Text>Here </Text></Link>{"."}
+            <Br /><Br />
           </Text>
           <Text style={styles.h2}>
-            The tool's aim is to guide designers through the design process and the final evaluation of gamified solutions, taking into account contextual information, such as <Text style={{ fontFamily: "Sen-Bold", fontSize: 13 }}> domain, aim, target user,</Text> and <Text style={{ fontFamily: "Sen-Bold", fontSize: 13 }}>  encouraged behaviors</Text>, and information related to <Text style={{ fontFamily: "Sen-Bold", fontSize: 13 }}> game modality</Text>, and the <Text style={{ fontSize: 13, fontFamily: "Sen-Bold" }}>device</Text> used. Moreover, it allows to select feedback and gamification elements according to the previous selection.
+            The tool{`&#39;`}s aim is to guide designers through the design process and the final evaluation of gamified solutions, taking into account contextual information, such as <Text style={{ fontFamily: "Sen-Bold", fontSize: 13 }}> domain, aim, target user,</Text> and <Text style={{ fontFamily: "Sen-Bold", fontSize: 13 }}>  encouraged behaviors</Text>, and information related to <Text style={{ fontFamily: "Sen-Bold", fontSize: 13 }}> game modality</Text>, and the <Text style={{ fontSize: 13, fontFamily: "Sen-Bold" }}>device</Text> used. Moreover, it allows to select feedback and gamification elements according to the previous selection.
+            < Br /><Br />
           </Text>
           <Text style={styles.h2}>
             Then, it provides a control over the goodness of the design through a peer-review process.
+            <Br /><Br />
           </Text>
           <Text style={styles.h2}>
             To cite the gamification design model implemented or the tool, please refer to <Text style={{ fontFamily: "Sen-Bold", fontSize: 13 }}> Bassanelli S., & Bucchiarone A.</Text>(2022). GamiDOC: a Tool for Designing and Evaluating Gamified Solutions, In Work in progress of the 2022 Annual Symposium on Computer-Human Interaction in Play (CHI PLAY ’22), November 02-05, 2022, Bremen, Germany. ACM, New York, NY, USA, 10 pages.
@@ -171,99 +175,155 @@ export default function CreatePDF({
         </View>
       </Page >
 
-      {/* Page TWO  */}
+      {/* PAGE TWO  */}
       < Page size="A4" style={styles.page} >
-        <View style={styles.section}>
-          <Text style={{ fontFamily: "Sen-Bold", fontSize: 15 }}>The Model <Br /></Text>
-          <Image
-            src="/model.png"
-            style={styles.centerImage}
-            alt="logo" />
-        </View>
-        <View style={styles.firstPage}>
+        <Text style={{ fontFamily: "Sen-Bold", fontSize: 22, top: 35 }}>The Model  <Br /></Text>
+        <View style={{
+          width: "80%",
+          flexDirection: "col",
+          alignContent: "left ",
+          alignItems: "left",
+          margin: "10",
+          padding: "10",
+          gap: "12px",
+        }}>
           <Text style={styles.h2}>
             The gamification model implemented in the tool aims to support the designer through a bottom-up process, taking into account contextual information, the game modality and the device used in order to help in selecting the best-fitting gamification elements and feedback. Then it provides a control over the aesthetic features. It allows designers to list the dynamics wanted and unwanted, and eventually personalization and adaptive framework or strategies.
           </Text>
         </View>
+        <Image
+          src="/model.png"
+          style={{
+            alignContent: "center",
+            alignItems: "center",
+            alignSelf: "center",
+            width: "65%",
+          }}
+          alt="logo" />
       </Page >
 
+      {/* Page THREE */}
+      < Page size="A4" style={styles.page} >
+        <Text style={{ fontFamily: "Sen-Bold", fontSize: 26 }}> Gamification Design Document <Br /><Br /></Text>
+        <Text style={{ fontFamily: "Sen-Bold", fontSize: 22 }}> Context<Br /></Text>
+        <View style={{
+          width: "80%",
+          flexDirection: "col",
+          alignContent: "left ",
+          alignItems: "left",
+          margin: "10",
+          padding: "10",
+          gap: "12px",
+        }}>
+          <Text style={styles.h2}>
+            Contextual information is of crucial importance in the design of gamified solutions (both digital and analogic) in order to get the expectations. In this part, designers reported their contextual choices.
+            <Br /><Br />
+            {/* Domain */}
+            <Text style={{ fontFamily: "Sen-Bold", fontSize: 14 }}>Domain: </Text> This gamified solution will be used in the {domain} domain. Specifically, INSERIRE RISPOSTA BOX VUOTO CONDIZIONALE.
+            <Br /><Br />
+            {/* Aim */}
+            <Text style={{ fontFamily: "Sen-Bold", fontSize: 14 }}>Aim: </Text> This gamified solution will be used with a {aim} puropse. That is INSERIRE DESCRIZIONE DELLO SCOPO IN RELAZIONE ALLA SCELTA. Specifically, INSERIRE RISPOSTA BOX VUOTO CONDIZIONALE.
+            <Br /><Br />
+            {/* User */}
+            <Text style={{ fontFamily: "Sen-Bold", fontSize: 14 }}>Target User: </Text> This gamified solution will be used with {targetAge} years-old  inserire CATEGORIA USER. {(targetUser != "") ? ("Specifically, " + targetUser + ".") : ""}
+            <Br /><Br />
+            {/* Behaviors */}
+            <Text style={{ fontFamily: "Sen-Bold", fontSize: 14 }}>Encouraged Behaviors: </Text> This gamified solution will encourage the following behaviors among users: {behavior}. In the meantime, it should prevent the following behaviors: {/* behaviorsToAvoid */}.
+            <Br /><Br />
+          </Text>
+        </View>
+      </Page >
 
+      {/* PAGE FOUR  */}
+      < Page size="A4" style={styles.page} >
+        <Text style={{ fontFamily: "Sen-Bold", fontSize: 22 }}> Modality<Br /></Text>
+        <View style={{
+          width: "80%",
+          flexDirection: "col",
+          alignContent: "left ",
+          alignItems: "left",
+          margin: "10",
+          padding: "10",
+          gap: "12px",
+        }}>
+          <Text style={styles.h2}>
+            The users will engaged in a {modality} modality. Specifically INSERIRE RISPOSTA BOX VUOTO CONDIZIONALE.
+          </Text>
+        </View>
+        <Text><Br /></Text>
+        <Text style={{ fontFamily: "Sen-Bold", fontSize: 22 }}> Device<Br /></Text>
+        <View style={{
+          width: "80%",
+          flexDirection: "col",
+          alignContent: "left ",
+          alignItems: "left",
+          margin: "10",
+          padding: "10",
+          gap: "12px",
+        }}>
+          <Text style={styles.h2}>
+            The gamified tool will be used with the following device {device}. Specifically, INSERIRE RISPOSTA BOX VUOTO CONDIZIONALE.
+          </Text>
+        </View>
+      </Page >
 
-      {/* <Page size="A4" style={styles.page}> */}
-      {/*   <View style={styles.section}> */}
-      {/*     <Text style={styles.h1}>Behaviors to be encouraged:</Text> */}
-      {/*     <Text style={styles.h2}>{behavior}</Text> */}
-      {/*     <Text style={styles.h1}>Domain:</Text> */}
-      {/*     <Text style={styles.h2}>{domain}</Text> */}
-      {/*     <Text style={styles.h1}>Aim:</Text> */}
-      {/*     <Text style={styles.h2}>{aim}</Text> */}
-      {/*     <Text style={styles.h1}>Target Age:</Text> */}
-      {/*     <Text style={styles.h2}>{targetAge}</Text> */}
-      {/*   </View> */}
-      {/* </Page> */}
-      {/* <Page size="A4" style={styles.page}> */}
-      {/*   <View style={styles.section}> */}
-      {/*     <Text style={styles.h1}>Device:</Text> */}
-      {/*     <Text style={styles.h2}>{device}</Text> */}
-      {/*   </View> */}
-      {/* </Page> */}
-      {/* <Page size="A4" style={styles.page}> */}
-      {/*   <View style={styles.section}> */}
-      {/*     <Text style={styles.h1}>Modality:</Text> */}
-      {/*     <Text style={styles.h2}>{modality}</Text> */}
-      {/*   </View> */}
-      {/* </Page> */}
-
-      {/* <Page size="A4" style={styles.page}> */}
-      {/*   <View style={styles.section}> */}
-      {/*     <Text style={styles.h1}>Dynamics:</Text> */}
-      {/*     <Text style={styles.h2}>{dynamics}</Text> */}
-      {/*     <Text style={styles.h1}>Personalization:</Text> */}
-      {/*     <Text style={styles.h2}>{personalization}</Text> */}
-      {/*   </View> */}
-      {/* </Page> */}
-
-      {/* <Page size="A4" style={styles.page}> */}
-      {/*   <View style={styles.section}> */}
-      {/*     <Text style={styles.h1}>Timing:</Text> */}
-      {/*     <Text style={styles.h2}>{timing}</Text> */}
-      {/*     <Text style={styles.h2}>{timingDescription}</Text> */}
-      {/*     <Text style={styles.h1}>Context:</Text> */}
-      {/*     <Text style={styles.h2}>{context}</Text> */}
-      {/*     <Text style={styles.h2}>{contextDescription}</Text> */}
-      {/*   </View> */}
-      {/* </Page> */}
-
-      {/* <Page size="A4" style={styles.page}> */}
-      {/*   <View style={styles.section}> */}
-      {/*     <Text style={styles.h1}>Affordances:</Text> */}
-      {/*     <Text style={styles.h2}>{affordances}</Text> */}
-      {/*   </View> */}
-      {/* </Page> */}
-
-      {/* <Page size="A4" style={styles.page}> */}
-      {/*   <View style={styles.section}> */}
-      {/*     <Text style={styles.h1}>Rules:</Text> */}
-      {/*     <Text style={styles.h2}>{rules}</Text> */}
-      {/*   </View> */}
-      {/* </Page> */}
-
-      {/* <Page size="A4" style={styles.page}> */}
-      {/*   <View style={styles.section}> */}
-      {/*     <Text style={styles.h1}>Aestethics:</Text> */}
-      {/*     <Text style={styles.h2}>{aesthetics}</Text> */}
-      {/*   </View> */}
-      {/*   <View style={styles.section}> */}
-      {/*     {imgUrl.map((val) => */}
-      {/*       <Image */}
-      {/*         key={val.id} */}
-      {/*         src={val} */}
-      {/*         style={styles.tab} */}
-      {/*         alt="logo" */}
-      {/*       /> */}
-      {/*     )} */}
-      {/*   </View> */}
-      {/* </Page> */}
+      {/* PAGE FIVE*/}
+      < Page size="A4" style={styles.page} >
+        <Text style={{ fontFamily: "Sen-Bold", fontSize: 26 }}> Core <Br /><Br /></Text>
+        <View style={{
+          width: "80%",
+          flexDirection: "col",
+          alignContent: "left ",
+          alignItems: "left",
+          margin: "10",
+          padding: "10",
+          gap: "12px",
+        }}>
+          <Text style={styles.h2}>
+            The core refers to the central part of the design. It collects information about game rules, game dynamics, game mechanics and feedback.
+            <Br /><Br />
+            {/* Rules*/}
+            <Text style={{ fontFamily: "Sen-Bold", fontSize: 14 }}>Game Rules: </Text> {rules}
+            <Br /><Br />
+            {/* Affordances, gamification elements*/}
+            {/* MISSING !!! */}
+            {/* Feedback*/}
+            <Text style={{ fontFamily: "Sen-Bold", fontSize: 14 }}>Feedback: </Text>To provide information to the user, feedback with {timing} timing and with {context} content will be used. Specifically, {timingDescription}. {/* NO CONTEXT DESCRIPTION */}
+            <Br /><Br />
+            {/* Dynamics*/}
+            {(dynamics) ?
+              <Text>< Text style={{ fontFamily: "Sen-Bold", fontSize: 14 }}>Dynamics: </Text> {dynamics}. The interaction between users and the gamified solution could lead to certain unwanted dynamics. Hence, within the interaction, the following dynamics should be taken into consideration: INSERIRE RISPOSTA BOX VUOTO CONDIZIONALE <Br /><Br /> </Text>
+              :
+              <Text>< Text style={{ fontFamily: "Sen-Bold", fontSize: 14 }}>Dynamics: </Text>Dynamics are not taken into consideration in the design phase.</Text>
+            }
+            {/* Personalization*/}
+            {(personalization) ?
+              <Text>< Text style={{ fontFamily: "Sen-Bold", fontSize: 14 }}>Personalization: </Text> {personalization}. The gamified solution will provide a personalization according to:INSERIRE RISPOSTA  <Br /><Br /> </Text>
+              :
+              < Text > < Text style={{ fontFamily: "Sen-Bold", fontSize: 14 }}>Dynamics: </Text>Personalization strategies won’t be adopted for this gamified solution.</Text>
+            }
+          </Text>
+        </View>
+      </Page >
+      {/* PAGE SIX */}
+      < Page size="A4" style={styles.page} >
+        <Text style={{ fontFamily: "Sen-Bold", fontSize: 26 }}>Aesthetics<Br /><Br /></Text>
+        <View style={{
+          width: "80%",
+          flexDirection: "col",
+          alignContent: "left ",
+          alignItems: "left",
+          margin: "10",
+          padding: "10",
+          gap: "12px",
+        }}>
+          <Text style={styles.h2}>
+            The aesthetic part is of crucial importance, since it has a direct relationship with the users’ experience: the more beautiful the aesthetic part is, the more interesting and compelling the users will find it. In the developed gamified solution {aesthetics} will be used.
+            <Br />
+            IMMAGINI
+          </Text>
+        </View>
+      </Page>
     </Document >
   );
 

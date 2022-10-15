@@ -10,14 +10,14 @@ export default function PdfDisplayer({ pdfBlob }) {
   const previus = () => {
     // console.log("Previus: " + pageNumber)
     if (pageNumber == 1) {
-      setPageNumber(9)
+      setPageNumber(6)
       return
     }
     setPageNumber(pageNumber - 1)
   }
   const next = () => {
     // console.log("Next: " + pageNumber)
-    if (pageNumber == 9) {
+    if (pageNumber == 6) {
       setPageNumber(1)
       return
     }

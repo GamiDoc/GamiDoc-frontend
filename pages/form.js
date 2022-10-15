@@ -662,6 +662,7 @@ export default withPageAuthRequired(function Home({ token, url }) {
               domain={domain}
               aim={aim}
               targetAge={targetAge}
+              targetUser={targetUser}
 
               device={device}
               modality={modality}
