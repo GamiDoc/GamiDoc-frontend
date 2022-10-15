@@ -1,15 +1,13 @@
 import { useRouter } from "next/router"
 import Swal from "sweetalert2"
-import Link from "next/link";
-
-// Fonts
-import senBold from '../public/fonts/sen.bold.ttf'
-
 import axios from "axios"
+
+// React-pdf/renderer
 import {
   Document,
   Font,
   Page,
+  Link,
   Text,
   Image,
   View,
@@ -17,6 +15,9 @@ import {
   BlobProvider,
   PDFDownloadLink,
 } from "@react-pdf/renderer";
+
+// Fonts
+import senBold from '../public/fonts/sen.bold.ttf'
 
 export default function CreatePDF({
   selectedIndex,
@@ -142,6 +143,8 @@ export default function CreatePDF({
   // The document
   const MyDoc = () => (
     <Document>
+
+      {/* Page ONE  */}
       <Page size="A4" style={styles.page}>
         <Image
           src="https://i.imgur.com/Y3QF08D.png"
@@ -151,10 +154,10 @@ export default function CreatePDF({
         <View style={styles.firstPage}>
           <Text style={styles.h2}>
             The following gamification design document, called {name} was created using GamiDOC, a tool developed by the
-            <a href="https://www.unitn.it/" style={{ color: "#5555dd", fontFamily: "Sen-Bold", fontSize: 12 }}> University of Trento</a>{","}
-            <a href="https://www.fbk.eu/it/" style={{ color: "#5555dd", fontFamily: 'Sen-Bold', fontSize: 12 }}> Fondazione Bruno Kessler</a> {" and "}
-            <a href="https://uwaterloo.ca/games-institute/" style={{ color: "#5555dd", fontFamily: "Sen-Bold", fontSize: 12 }}> the Games Institute </a> {". "}
-            {"You can visit the website "}<a href="https://uwaterloo.ca/games-institute/" style={{ color: "#5555dd", fontFamily: "Sen-Bold", fontSize: 12 }}> Here</a> <Br />
+            <Link src="https://www.unitn.it/" style={{ color: "#5555dd", fontFamily: "Sen-Bold", fontSize: 12 }}> <Text > University of Trento </Text></Link>{","}
+            <Link src="https://www.fbk.eu/it/" style={{ color: "#5555dd", fontFamily: 'Sen-Bold', fontSize: 12 }}> <Text >Fondazione Bruno Kessler </Text ></Link> {" and "}
+            <Link src="https://uwaterloo.ca/games-institute/" style={{ fontFamily: "Sen-Bold", fontSize: 12 }}> <Text >the Games Institute </Text ></Link> {". "}
+            {"You can visit the website "}<Link src="https://uwaterloo.ca/games-institute/" style={{ color: "#5555dd", fontFamily: "Sen-Bold", fontSize: 12 }}> <Text>Here </Text></Link>{"."} <Br />
           </Text>
           <Text style={styles.h2}>
             The tool's aim is to guide designers through the design process and the final evaluation of gamified solutions, taking into account contextual information, such as <Text style={{ fontFamily: "Sen-Bold", fontSize: 13 }}> domain, aim, target user,</Text> and <Text style={{ fontFamily: "Sen-Bold", fontSize: 13 }}>  encouraged behaviors</Text>, and information related to <Text style={{ fontFamily: "Sen-Bold", fontSize: 13 }}> game modality</Text>, and the <Text style={{ fontSize: 13, fontFamily: "Sen-Bold" }}>device</Text> used. Moreover, it allows to select feedback and gamification elements according to the previous selection.
@@ -166,21 +169,23 @@ export default function CreatePDF({
             To cite the gamification design model implemented or the tool, please refer to <Text style={{ fontFamily: "Sen-Bold", fontSize: 13 }}> Bassanelli S., & Bucchiarone A.</Text>(2022). GamiDOC: a Tool for Designing and Evaluating Gamified Solutions, In Work in progress of the 2022 Annual Symposium on Computer-Human Interaction in Play (CHI PLAY ’22), November 02-05, 2022, Bremen, Germany. ACM, New York, NY, USA, 10 pages.
           </Text>
         </View>
-      </Page>
-      {/* <Page size="A4" style={styles.page}> */}
-      {/*   <View style={styles.section}> */}
-      {/*     <Text style={{ fontFamily: "Sen-Bold", fontSize: 15 }}>The Model <Br /></Text> */}
-      {/*     <Image */}
-      {/*       src="/model.png" */}
-      {/*       style={styles.centerImage} */}
-      {/*       alt="logo" /> */}
-      {/*   </View> */}
-      {/*   <View style={styles.firstPage}> */}
-      {/*     <Text style={styles.h2}> */}
-      {/*       The gamification model implemented in the tool aims to support the designer through a bottom-up process, taking into account contextual information, the game modality and the device used in order to help in selecting the best-fitting gamification elements and feedback. Then it provides a control over the aesthetic features. It allows designers to list the dynamics wanted and unwanted, and eventually personalization and adaptive framework or strategies. */}
-      {/*     </Text> */}
-      {/*   </View> */}
-      {/* </Page> */}
+      </Page >
+
+      {/* Page TWO  */}
+      < Page size="A4" style={styles.page} >
+        <View style={styles.section}>
+          <Text style={{ fontFamily: "Sen-Bold", fontSize: 15 }}>The Model <Br /></Text>
+          <Image
+            src="/model.png"
+            style={styles.centerImage}
+            alt="logo" />
+        </View>
+        <View style={styles.firstPage}>
+          <Text style={styles.h2}>
+            The gamification model implemented in the tool aims to support the designer through a bottom-up process, taking into account contextual information, the game modality and the device used in order to help in selecting the best-fitting gamification elements and feedback. Then it provides a control over the aesthetic features. It allows designers to list the dynamics wanted and unwanted, and eventually personalization and adaptive framework or strategies.
+          </Text>
+        </View>
+      </Page >
 
 
 
