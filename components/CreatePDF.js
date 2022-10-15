@@ -1,10 +1,14 @@
 import { useRouter } from "next/router"
 import Swal from "sweetalert2"
 import Link from "next/link";
-// import { useRef, useState } from "react";
+
+// Fonts
+import senBold from '../public/fonts/sen.bold.ttf'
+
 import axios from "axios"
 import {
   Document,
+  Font,
   Page,
   Text,
   Image,
@@ -58,7 +62,17 @@ export default function CreatePDF({
     })
   };
 
-
+  // Font.register({ family: 'Sen-Bold', src: font })
+  Font.register({
+    family: "Sen-Bold",
+    fontStyle: "normal",
+    fontWeight: "normal",
+    fonts: [
+      {
+        src: senBold,
+      },
+    ],
+  });
   const styles = StyleSheet.create({
     page: {
       alignContent: "center",
@@ -152,83 +166,99 @@ export default function CreatePDF({
             To cite the gamification design model implemented or the tool, please refer to <Text style={{ fontFamily: "Sen-Bold", fontSize: 13 }}> Bassanelli S., & Bucchiarone A.</Text>(2022). GamiDOC: a Tool for Designing and Evaluating Gamified Solutions, In Work in progress of the 2022 Annual Symposium on Computer-Human Interaction in Play (CHI PLAY ’22), November 02-05, 2022, Bremen, Germany. ACM, New York, NY, USA, 10 pages.
           </Text>
         </View>
-        {/* <Text style={styles.description}>{description}</Text> */}
       </Page>
-      <Page size="A4" style={styles.page}>
-        <View style={styles.section}>
-          <Text style={styles.h1}>Behaviors to be encouraged:</Text>
-          <Text style={styles.h2}>{behavior}</Text>
-          <Text style={styles.h1}>Domain:</Text>
-          <Text style={styles.h2}>{domain}</Text>
-          <Text style={styles.h1}>Aim:</Text>
-          <Text style={styles.h2}>{aim}</Text>
-          <Text style={styles.h1}>Target Age:</Text>
-          <Text style={styles.h2}>{targetAge}</Text>
-        </View>
-      </Page>
-      <Page size="A4" style={styles.page}>
-        <View style={styles.section}>
-          <Text style={styles.h1}>Device:</Text>
-          <Text style={styles.h2}>{device}</Text>
-        </View>
-      </Page>
-      <Page size="A4" style={styles.page}>
-        <View style={styles.section}>
-          <Text style={styles.h1}>Modality:</Text>
-          <Text style={styles.h2}>{modality}</Text>
-        </View>
-      </Page>
+      {/* <Page size="A4" style={styles.page}> */}
+      {/*   <View style={styles.section}> */}
+      {/*     <Text style={{ fontFamily: "Sen-Bold", fontSize: 15 }}>The Model <Br /></Text> */}
+      {/*     <Image */}
+      {/*       src="/model.png" */}
+      {/*       style={styles.centerImage} */}
+      {/*       alt="logo" /> */}
+      {/*   </View> */}
+      {/*   <View style={styles.firstPage}> */}
+      {/*     <Text style={styles.h2}> */}
+      {/*       The gamification model implemented in the tool aims to support the designer through a bottom-up process, taking into account contextual information, the game modality and the device used in order to help in selecting the best-fitting gamification elements and feedback. Then it provides a control over the aesthetic features. It allows designers to list the dynamics wanted and unwanted, and eventually personalization and adaptive framework or strategies. */}
+      {/*     </Text> */}
+      {/*   </View> */}
+      {/* </Page> */}
 
-      <Page size="A4" style={styles.page}>
-        <View style={styles.section}>
-          <Text style={styles.h1}>Dynamics:</Text>
-          <Text style={styles.h2}>{dynamics}</Text>
-          <Text style={styles.h1}>Personalization:</Text>
-          <Text style={styles.h2}>{personalization}</Text>
-        </View>
-      </Page>
 
-      <Page size="A4" style={styles.page}>
-        <View style={styles.section}>
-          <Text style={styles.h1}>Timing:</Text>
-          <Text style={styles.h2}>{timing}</Text>
-          <Text style={styles.h2}>{timingDescription}</Text>
-          <Text style={styles.h1}>Context:</Text>
-          <Text style={styles.h2}>{context}</Text>
-          <Text style={styles.h2}>{contextDescription}</Text>
-        </View>
-      </Page>
 
-      <Page size="A4" style={styles.page}>
-        <View style={styles.section}>
-          <Text style={styles.h1}>Affordances:</Text>
-          <Text style={styles.h2}>{affordances}</Text>
-        </View>
-      </Page>
+      {/* <Page size="A4" style={styles.page}> */}
+      {/*   <View style={styles.section}> */}
+      {/*     <Text style={styles.h1}>Behaviors to be encouraged:</Text> */}
+      {/*     <Text style={styles.h2}>{behavior}</Text> */}
+      {/*     <Text style={styles.h1}>Domain:</Text> */}
+      {/*     <Text style={styles.h2}>{domain}</Text> */}
+      {/*     <Text style={styles.h1}>Aim:</Text> */}
+      {/*     <Text style={styles.h2}>{aim}</Text> */}
+      {/*     <Text style={styles.h1}>Target Age:</Text> */}
+      {/*     <Text style={styles.h2}>{targetAge}</Text> */}
+      {/*   </View> */}
+      {/* </Page> */}
+      {/* <Page size="A4" style={styles.page}> */}
+      {/*   <View style={styles.section}> */}
+      {/*     <Text style={styles.h1}>Device:</Text> */}
+      {/*     <Text style={styles.h2}>{device}</Text> */}
+      {/*   </View> */}
+      {/* </Page> */}
+      {/* <Page size="A4" style={styles.page}> */}
+      {/*   <View style={styles.section}> */}
+      {/*     <Text style={styles.h1}>Modality:</Text> */}
+      {/*     <Text style={styles.h2}>{modality}</Text> */}
+      {/*   </View> */}
+      {/* </Page> */}
 
-      <Page size="A4" style={styles.page}>
-        <View style={styles.section}>
-          <Text style={styles.h1}>Rules:</Text>
-          <Text style={styles.h2}>{rules}</Text>
-        </View>
-      </Page>
+      {/* <Page size="A4" style={styles.page}> */}
+      {/*   <View style={styles.section}> */}
+      {/*     <Text style={styles.h1}>Dynamics:</Text> */}
+      {/*     <Text style={styles.h2}>{dynamics}</Text> */}
+      {/*     <Text style={styles.h1}>Personalization:</Text> */}
+      {/*     <Text style={styles.h2}>{personalization}</Text> */}
+      {/*   </View> */}
+      {/* </Page> */}
 
-      <Page size="A4" style={styles.page}>
-        <View style={styles.section}>
-          <Text style={styles.h1}>Aestethics:</Text>
-          <Text style={styles.h2}>{aesthetics}</Text>
-        </View>
-        <View style={styles.section}>
-          {imgUrl.map((val) =>
-            <Image
-              key={val.id}
-              src={val}
-              style={styles.tab}
-              alt="logo"
-            />
-          )}
-        </View>
-      </Page>
+      {/* <Page size="A4" style={styles.page}> */}
+      {/*   <View style={styles.section}> */}
+      {/*     <Text style={styles.h1}>Timing:</Text> */}
+      {/*     <Text style={styles.h2}>{timing}</Text> */}
+      {/*     <Text style={styles.h2}>{timingDescription}</Text> */}
+      {/*     <Text style={styles.h1}>Context:</Text> */}
+      {/*     <Text style={styles.h2}>{context}</Text> */}
+      {/*     <Text style={styles.h2}>{contextDescription}</Text> */}
+      {/*   </View> */}
+      {/* </Page> */}
+
+      {/* <Page size="A4" style={styles.page}> */}
+      {/*   <View style={styles.section}> */}
+      {/*     <Text style={styles.h1}>Affordances:</Text> */}
+      {/*     <Text style={styles.h2}>{affordances}</Text> */}
+      {/*   </View> */}
+      {/* </Page> */}
+
+      {/* <Page size="A4" style={styles.page}> */}
+      {/*   <View style={styles.section}> */}
+      {/*     <Text style={styles.h1}>Rules:</Text> */}
+      {/*     <Text style={styles.h2}>{rules}</Text> */}
+      {/*   </View> */}
+      {/* </Page> */}
+
+      {/* <Page size="A4" style={styles.page}> */}
+      {/*   <View style={styles.section}> */}
+      {/*     <Text style={styles.h1}>Aestethics:</Text> */}
+      {/*     <Text style={styles.h2}>{aesthetics}</Text> */}
+      {/*   </View> */}
+      {/*   <View style={styles.section}> */}
+      {/*     {imgUrl.map((val) => */}
+      {/*       <Image */}
+      {/*         key={val.id} */}
+      {/*         src={val} */}
+      {/*         style={styles.tab} */}
+      {/*         alt="logo" */}
+      {/*       /> */}
+      {/*     )} */}
+      {/*   </View> */}
+      {/* </Page> */}
     </Document >
   );
 
