@@ -122,6 +122,16 @@ function Context({
           ))}
         </Select>
       </FormControl>
+      <TextField
+        className="w-full border  shadow-md "
+        id="aim"
+        type="text"
+        multiline
+        rows={3}
+        placeholder="Describe your Aim"
+      // value={aimDescription}
+      // onChange={(e) => setAimDescription(e.target.value)}
+      />
       <label className="mt-4 block text-gray-700  font-bold mb-2">
         <IconButton aria-label="Example">
           <InfoOutlinedIcon sx={{ fontSize: 20 }} onClick={() => {

@@ -90,7 +90,7 @@ const DeviceSelection = [
   "Tablet",
   "Head-mounted Display",
   "Augmented Reality",
-  "Real Life (/non digital)",
+  "Real Life (non digital)",
 ];
 
 //affordances
@@ -161,8 +161,10 @@ export default withPageAuthRequired(function Home({ token, url }) {
   const [targetUser, setTargetUser] = useState("");
   //Device
   const [device, setDevice] = useState("");
+
   //Affordances
-  const [affordances, setAffordances] = useState("");
+  const [affordances, setAffordances] = useState([]);
+
   //Aestethics
   const [aesthetics, setAesthetics] = useState("");
   const [images, setImages] = useState([])
@@ -396,9 +398,7 @@ export default withPageAuthRequired(function Home({ token, url }) {
 
 
   return (
-
     <div className="flex flex-col justify-between h-screen ">
-
       <Snackbar
         open={allertBool}
         autoHideDuration={5000}
@@ -475,7 +475,7 @@ export default withPageAuthRequired(function Home({ token, url }) {
                           : " text-center text-xl font-medium text-black rounded-md font-sans px-3 py-2 ring ring-transparent outline-none"
                       }
                     >
-                      Dynamics
+                      Rules
                     </div>
                   )}
                 </Tab>
@@ -488,7 +488,7 @@ export default withPageAuthRequired(function Home({ token, url }) {
                           : " text-center text-xl font-medium text-black rounded-md font-sans px-3 py-2 ring ring-transparent outline-none"
                       }
                     >
-                      Personalization
+                      Affordances
                     </div>
                   )}
                 </Tab>
@@ -514,7 +514,7 @@ export default withPageAuthRequired(function Home({ token, url }) {
                           : " text-center text-xl font-medium text-black rounded-md font-sans px-3 py-2 ring ring-transparent outline-none"
                       }
                     >
-                      Affordances
+                      Dynamics
                     </div>
                   )}
                 </Tab>
@@ -527,7 +527,7 @@ export default withPageAuthRequired(function Home({ token, url }) {
                           : " text-center text-xl font-medium text-black rounded-md font-sans px-3 py-2 ring ring-transparent outline-none"
                       }
                     >
-                      Rules
+                      Personalization
                     </div>
                   )}
                 </Tab>
@@ -540,7 +540,7 @@ export default withPageAuthRequired(function Home({ token, url }) {
                           : " text-center text-xl font-medium text-black rounded-md font-sans px-3 py-2 ring ring-transparent outline-none"
                       }
                     >
-                      Aesthetics
+                      Aestethics
                     </div>
                   )}
                 </Tab>
@@ -586,17 +586,17 @@ export default withPageAuthRequired(function Home({ token, url }) {
                   />
                 </Tab.Panel>
                 <Tab.Panel>
-                  <Dynamics
-                    dynamics={dynamics}
-                    setDynamics={setDynamics}
+                  <Rules
+                    rules={rules}
+                    setRules={setRules}
                     saveDraft={saveDraft}
                   />
-
                 </Tab.Panel>
                 <Tab.Panel>
-                  <Personalization
-                    personalization={personalization}
-                    setPersonalization={setPersonalization}
+                  <Affordances
+                    affordances={affordances}
+                    setAffordances={setAffordances}
+                    affordancesSelection={affordancesSelection}
                     saveDraft={saveDraft}
                   />
                 </Tab.Panel>
@@ -616,17 +616,16 @@ export default withPageAuthRequired(function Home({ token, url }) {
                   />
                 </Tab.Panel>
                 <Tab.Panel>
-                  <Affordances
-                    affordances={affordances}
-                    setAffordances={setAffordances}
-                    affordancesSelection={affordancesSelection}
+                  <Dynamics
+                    dynamics={dynamics}
+                    setDynamics={setDynamics}
                     saveDraft={saveDraft}
                   />
                 </Tab.Panel>
                 <Tab.Panel>
-                  <Rules
-                    rules={rules}
-                    setRules={setRules}
+                  <Personalization
+                    personalization={personalization}
+                    setPersonalization={setPersonalization}
                     saveDraft={saveDraft}
                   />
                 </Tab.Panel>
