@@ -27,7 +27,6 @@ import Personalization from "../components/tabs/Personalization";
 
 //alert
 import Alert from '@mui/material/Alert';
-import AlertTitle from '@mui/material/AlertTitle';
 import { Snackbar } from "@mui/material";
 
 export const getServerSideProps = ({ req, res }) => {
@@ -39,6 +38,7 @@ export const getServerSideProps = ({ req, res }) => {
 }
 
 const Aimo = ["Outcome", "Performance", "Process/learning"];
+const categorySelection = ["Student", "Employee", "Researcher"];
 
 const KoivistoHamari = [
   "Education/Learning",
@@ -141,34 +141,45 @@ const contenuti = [
 ];
 
 export default withPageAuthRequired(function Home({ token, url }) {
+
   // Feedback Page states
   const [timing, setTiming] = useState("");
+  // const [timingDescription, setTimingDescription] = useState("");
   const [context, setContext] = useState("");
-  const [timingDescription, setTimingDescription] = useState("");
   const [contextDescription, setContextDescription] = useState("");
+
   // Modality Page state
   const [modality, setModality] = useState("");
+  const [modalityDescription, setModalityDescription] = useState("");
   //Dynamics
   const [dynamics, setDynamics] = useState("");
   //Personalization
   const [personalization, setPersonalization] = useState("");
+
   //context
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [domain, setDomain] = useState("");
+  const [domainDescription, setDomainDescription] = useState("");
   const [behavior, setBehavior] = useState("");
+  const [discBehavior, setDiscBehavior] = useState("");
   const [aim, setAim] = useState("");
+  const [aimDescription, setAimDescription] = useState("");
   const [targetAge, setTargetAge] = useState([]);
   const [targetUser, setTargetUser] = useState("");
+  const [targetCategory, setTargetCategory] = useState("");
+
   //Device
   const [device, setDevice] = useState("");
+  const [deviceDescription, setDeviceDescription] = useState("");
 
   //Affordances
-  const [affordances, setAffordances] = useState([]);
+  const [affordances, setAffordances] = useState([{ type: "Game Elements", text: "Description", pos: 0 },]);
 
   //Aestethics
   const [aesthetics, setAesthetics] = useState("");
   const [images, setImages] = useState([])
   const [imgUrl, setImgUrl] = useState([])
+
   //Rules
   const [rules, setRules] = useState("");
 
@@ -180,7 +191,7 @@ export default withPageAuthRequired(function Home({ token, url }) {
   const mutex = useRef(new Mutex())
 
   const saveDraft = () => {
-    let aff = affordances.split("=>")
+    // let aff = affordances.split("=>")
     if (!draftID) {
       axios.post(url + "/draft/new", {
         title: query.name,
@@ -198,9 +209,9 @@ export default withPageAuthRequired(function Home({ token, url }) {
         contextDescription: contextDescription,
         timing: timing,
         timingDescription: timingDescription,
-        gameAction: aff[0],
-        condition: aff[1],
-        affordances: aff[2],
+        // gameAction: aff[0],
+        // condition: aff[1],
+        affordances: affordances,
         rules: rules,
         aesthetics: aesthetics,
         draftId: draftID
@@ -232,9 +243,9 @@ export default withPageAuthRequired(function Home({ token, url }) {
         contextDescription: contextDescription,
         timing: timing,
         timingDescription: timingDescription,
-        gameAction: aff[0],
-        condition: aff[1],
-        affordances: aff[2],
+        // gameAction: aff[0],
+        // condition: aff[1],
+        affordances: affordances,
         rules: rules,
         aesthetics: aesthetics,
       },
@@ -251,6 +262,7 @@ export default withPageAuthRequired(function Home({ token, url }) {
   const [timer, setTimer] = useState(false)
   const [draftID, setDraftID] = useState(query.draftID)
   const [allertBool, setAllertBool] = useState(false)
+  const [snackBool, setSnackBool] = useState(false)
 
   useEffect(() => {
     console.log("1st: in the useEffect")
@@ -263,7 +275,7 @@ export default withPageAuthRequired(function Home({ token, url }) {
         }, 5000);
         setTimer(false)
         console.log("inside the setState callback")
-        let aff = affordances.split("=>")
+        // let aff = affordances.split("=>")
         if (!draftID) {
           axios.post(url + "/draft/new", {
             title: query.name,
@@ -272,7 +284,7 @@ export default withPageAuthRequired(function Home({ token, url }) {
             domain: domain,
             aim: aim,
             targetAge: targetAge,
-            targetUser: targetUser, //!!!!!!!!!!!!!!!!!!!!!
+            targetUser: targetUser,
             device: device,
             modality: modality,
             dynamics: dynamics,
@@ -281,9 +293,9 @@ export default withPageAuthRequired(function Home({ token, url }) {
             contextDescription: contextDescription,
             timing: timing,
             timingDescription: timingDescription,
-            gameAction: aff[0],
-            condition: aff[1],
-            affordances: aff[2],
+            // gameAction: aff[0],
+            // condition: aff[1],
+            affordances: affordances,
             rules: rules,
             aesthetics: aesthetics,
             draftId: draftID
@@ -317,9 +329,9 @@ export default withPageAuthRequired(function Home({ token, url }) {
             contextDescription: contextDescription,
             timing: timing,
             timingDescription: timingDescription,
-            gameAction: aff[0],
-            condition: aff[1],
-            affordances: aff[2],
+            // gameAction: aff[0],
+            // condition: aff[1],
+            affordances: affordances,
             rules: rules,
             aesthetics: aesthetics,
           },
@@ -386,7 +398,7 @@ export default withPageAuthRequired(function Home({ token, url }) {
           setAffordances(val.data.draft.Affordances)
           setRules(val.data.draft.Rules)
           setAesthetics(val.data.draft.Aestethics)
-
+          console.log("Affordances server data: ", val.data.draft.Affordances)
         })
       setDraftID(query.draftID)
     }
@@ -408,6 +420,18 @@ export default withPageAuthRequired(function Home({ token, url }) {
           Paper saved as a Draft
         </Alert>
       </Snackbar>
+
+      <Snackbar
+        open={snackBool}
+        autoHideDuration={5000}
+        onClose={() => { setSnackBool(false) }}
+      >
+        <Alert severity="error" >
+          Too many game elements
+        </Alert>
+      </Snackbar>
+
+
 
       <Head>
         <title>GamiDoc</title>
@@ -550,9 +574,13 @@ export default withPageAuthRequired(function Home({ token, url }) {
                   <Context
                     aim={aim}
                     setAim={setAim}
+                    aimDescription={aimDescription}
+                    setAimDescription={setAimDescription}
 
                     domain={domain}
                     setDomain={setDomain}
+                    domainDescription={domainDescription}
+                    setDomainDescription={setDomainDescription}
 
                     targetAge={targetAge}
                     setTargetAge={setTargetAge}
@@ -560,12 +588,18 @@ export default withPageAuthRequired(function Home({ token, url }) {
                     targetUser={targetUser}
                     setTargetUser={setTargetUser}
 
+                    targetCategory={targetCategory}
+                    setTargetCategory={setTargetCategory}
+
                     behavior={behavior}
                     setBehavior={setBehavior}
+                    discBehavior={discBehavior}
+                    setDiscBehavior={setDiscBehavior}
 
                     selectObj1={KoivistoHamari}
                     selectObj2={Aimo}
                     selectObj3={ageSelection}
+                    selectObj4={categorySelection}
                     saveDraft={saveDraft}
                   />
                 </Tab.Panel>
@@ -573,6 +607,8 @@ export default withPageAuthRequired(function Home({ token, url }) {
                   <Device
                     device={device}
                     setDevice={setDevice}
+                    deviceDescription={deviceDescription}
+                    setDeviceDescription={setDeviceDescription}
                     DeviceSelection={DeviceSelection}
                     saveDraft={saveDraft}
                   />
@@ -581,6 +617,8 @@ export default withPageAuthRequired(function Home({ token, url }) {
                   <Modality
                     modality={modality}
                     setModality={setModality}
+                    modalityDescription={modalityDescription}
+                    setModalityDescription={setModalityDescription}
                     selectObj1={modes}
                     saveDraft={saveDraft}
                   />
@@ -598,6 +636,8 @@ export default withPageAuthRequired(function Home({ token, url }) {
                     setAffordances={setAffordances}
                     affordancesSelection={affordancesSelection}
                     saveDraft={saveDraft}
+                    snackBool={snackBool}
+                    setSnackBool={setSnackBool}
                   />
                 </Tab.Panel>
                 <Tab.Panel>
@@ -658,18 +698,23 @@ export default withPageAuthRequired(function Home({ token, url }) {
 
               // Stati delle tabs 
               behavior={behavior}
+              descBehavior={descBehavior}
               domain={domain}
+              domainDescription={domainDescription}
               aim={aim}
+              aimDescription={aimDescription}
               targetAge={targetAge}
               targetUser={targetUser}
+              targetCategory={targetCategory}
 
               device={device}
+              deviceDescription={deviceDescription}
               modality={modality}
+              modalityDescription={modalityDescription}
               dynamics={dynamics}
               personalization={personalization}
 
               timing={timing}
-              timingDescription={timingDescription}
               context={context}
               contextDescription={contextDescription}
 

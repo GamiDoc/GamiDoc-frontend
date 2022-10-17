@@ -9,23 +9,34 @@ import TextField from "@mui/material/TextField";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import IconButton from "@mui/material/IconButton";
 import { useRouter } from "next/router";
-import Link from "next/link";
 
 function Context({
   behavior,
   setBehavior,
+  discBehavior,
+  setDiscBehavior,
+
   domain,
   setDomain,
+  domainDescription,
+  setDomainDescription,
+
   aim,
   setAim,
+  aimDescription,
+  setAimDescription,
+
   targetAge,
   setTargetAge,
   targetUser,
   setTargetUser,
+  targetCategory,
+  setTargetCategory,
 
   selectObj1, // L'oggetto che contiene i campi del select
   selectObj2, // Aimo
   selectObj3, // Target categories
+  selectObj4, // Categories selection
   saveDraft
 }) {
   const router = useRouter();
@@ -35,7 +46,6 @@ function Context({
       target: { value },
     } = event;
     setTargetAge(
-      // On autofill we get a stringified value.
       typeof value === "string" ? value.split(",") : value
     );
   };
@@ -86,6 +96,16 @@ function Context({
           ))}
         </Select>
       </FormControl>
+      <TextField
+        className="w-full border  shadow-md "
+        id="domain"
+        type="text"
+        multiline
+        rows={3}
+        placeholder="Describe your Domain"
+        value={domainDescription}
+        onChange={(e) => setDomainDescription(e.target.value)}
+      />
       <label className=" mt-4 block text-gray-700  font-bold mb-2">
         <IconButton aria-label="Example">
           <InfoOutlinedIcon sx={{ fontSize: 20 }} onClick={() => {
@@ -129,8 +149,8 @@ function Context({
         multiline
         rows={3}
         placeholder="Describe your Aim"
-      // value={aimDescription}
-      // onChange={(e) => setAimDescription(e.target.value)}
+        value={aimDescription}
+        onChange={(e) => setAimDescription(e.target.value)}
       />
       <label className="mt-4 block text-gray-700  font-bold mb-2">
         <IconButton aria-label="Example">
@@ -140,7 +160,7 @@ function Context({
             router.push("documentation#behaviors")
           }} />
         </IconButton>
-        Behaviors to be encouraged...
+        Encouraged Behaviors
       </label>
       <h2 className="w-[60em] mt-4 block text-gray-700  mb-2 ">
         One of the main aspects of gamification is to modify a behavioral
@@ -149,16 +169,35 @@ function Context({
         which ones need to be avoided.
       </h2>
       <label className="block text-gray-700   font-bold mb-2" />
-      <TextField
-        className="w-full border  shadow-md "
-        id="username"
-        type="text"
-        multiline
-        rows={3}
-        placeholder="Behaviors"
-        value={behavior}
-        onChange={(e) => setBehavior(e.target.value)}
-      />
+
+      <FormControl fullWidth>
+        <TextField
+          className="w-full border  shadow-md "
+          id="Encouraged Behaviors"
+          type="text"
+          multiline
+          rows={3}
+          value={behavior}
+          onChange={(e) => setBehavior(e.target.value)}
+          label="Encouraged Behaviors"
+        />
+      </FormControl>
+
+      <div className="my-5">
+        <FormControl fullWidth>
+          <TextField
+            className="w-full border  shadow-md "
+            id="Discouraged Behaviors"
+            type="text"
+            multiline
+            rows={3}
+            value={discBehavior}
+            onChange={(e) => setDiscBehavior(e.target.value)}
+            label="Discouraged Behaviors"
+          />
+        </FormControl>
+      </div>
+
       <label className="mt-4 block text-gray-700  font-bold mb-2">
         <IconButton aria-label="Example">
           <InfoOutlinedIcon sx={{ fontSize: 20 }} onClick={() => {
@@ -174,22 +213,40 @@ function Context({
         individual differences and preferences are crucial for the success of
         gamified solution.
       </h2>
+      <div className="my-5">
+        <FormControl fullWidth>
+          <InputLabel>Age</InputLabel>
+          <Select
+            className="relative w-full shadow-md "
+            multiple
+            value={targetAge}
+            onChange={handleChange}
+            input={<OutlinedInput label="Age" />}
+          >
+            {selectObj3.map((name) => (
+              <MenuItem key={name} value={name}>
+                {name}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      </div>
       <FormControl>
-        <InputLabel>Age</InputLabel>
+        <InputLabel>Category</InputLabel>
         <Select
           className="relative w-full shadow-md "
-          multiple
-          value={targetAge}
-          onChange={handleChange}
-          input={<OutlinedInput label="Age" />}
+          value={targetCategory}
+          onChange={(event) => { setTargetCategory(event.target.value) }}
+          input={<OutlinedInput label="Category" />}
         >
-          {selectObj3.map((name) => (
+          {selectObj4.map((name) => (
             <MenuItem key={name} value={name}>
               {name}
             </MenuItem>
           ))}
         </Select>
       </FormControl>
+
       <TextField
         className="w-full border  shadow-md top-5"
         id="username"
