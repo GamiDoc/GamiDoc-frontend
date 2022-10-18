@@ -197,18 +197,24 @@ export default withPageAuthRequired(function Home({ token, url }) {
         title: query.name,
         description: query.description,
         behavior: behavior,
+        discbehavior: discbehavior,
         domain: domain,
+        domainDescription: domainDescription,
         aim: aim,
+        aimDescription: aimDescription,
         targetAge: targetAge,
-        targetUser: targetUser, //!!!!!!!!!!!!!!!!!!!!!
+        targetUser: targetUser,
+        targetCategory: targetCategory,
         device: device,
+        deviceDescription: deviceDescription,
         modality: modality,
+        modalityDescription: modalityDescription,
         dynamics: dynamics,
         personalization: personalization,
         context: context,
         contextDescription: contextDescription,
         timing: timing,
-        timingDescription: timingDescription,
+        // timingDescription: timingDescription,
         // gameAction: aff[0],
         // condition: aff[1],
         affordances: affordances,
@@ -229,25 +235,33 @@ export default withPageAuthRequired(function Home({ token, url }) {
     else {
       axios.patch(url + "/draft/" + draftID, {
         title: name,
-        description: description,
+        description: query.description,
         behavior: behavior,
+        discbehavior: discbehavior,
         domain: domain,
+        domainDescription: domainDescription,
         aim: aim,
+        aimDescription: aimDescription,
         targetAge: targetAge,
         targetUser: targetUser,
+        targetCategory: targetCategory,
         device: device,
+        deviceDescription: deviceDescription,
         modality: modality,
+        modalityDescription: modalityDescription,
         dynamics: dynamics,
         personalization: personalization,
         context: context,
         contextDescription: contextDescription,
         timing: timing,
-        timingDescription: timingDescription,
+        // timingDescription: timingDescription,
         // gameAction: aff[0],
         // condition: aff[1],
         affordances: affordances,
         rules: rules,
         aesthetics: aesthetics,
+        draftId: draftID
+
       },
         {
           headers: {
@@ -275,30 +289,36 @@ export default withPageAuthRequired(function Home({ token, url }) {
         }, 5000);
         setTimer(false)
         console.log("inside the setState callback")
-        // let aff = affordances.split("=>")
         if (!draftID) {
           axios.post(url + "/draft/new", {
             title: query.name,
             description: query.description,
             behavior: behavior,
+            discbehavior: discbehavior,
             domain: domain,
+            domainDescription: domainDescription,
             aim: aim,
+            aimDescription: aimDescription,
             targetAge: targetAge,
             targetUser: targetUser,
+            targetCategory: targetCategory,
             device: device,
+            deviceDescription: deviceDescription,
             modality: modality,
+            modalityDescription: modalityDescription,
             dynamics: dynamics,
             personalization: personalization,
             context: context,
             contextDescription: contextDescription,
             timing: timing,
-            timingDescription: timingDescription,
+            // timingDescription: timingDescription,
             // gameAction: aff[0],
             // condition: aff[1],
             affordances: affordances,
             rules: rules,
             aesthetics: aesthetics,
             draftId: draftID
+
           },
             {
               headers: {
@@ -314,26 +334,34 @@ export default withPageAuthRequired(function Home({ token, url }) {
         }
         else {
           axios.patch(url + "/draft/" + draftID, {
-            title: name,
-            description: description,
+
+            title: query.name,
+            description: query.description,
             behavior: behavior,
+            discbehavior: discbehavior,
             domain: domain,
+            domainDescription: domainDescription,
             aim: aim,
+            aimDescription: aimDescription,
             targetAge: targetAge,
             targetUser: targetUser,
+            targetCategory: targetCategory,
             device: device,
+            deviceDescription: deviceDescription,
             modality: modality,
+            modalityDescription: modalityDescription,
             dynamics: dynamics,
             personalization: personalization,
             context: context,
             contextDescription: contextDescription,
             timing: timing,
-            timingDescription: timingDescription,
+            // timingDescription: timingDescription,
             // gameAction: aff[0],
             // condition: aff[1],
             affordances: affordances,
             rules: rules,
             aesthetics: aesthetics,
+            draftId: draftID,
           },
             {
               headers: {
@@ -352,17 +380,22 @@ export default withPageAuthRequired(function Home({ token, url }) {
     [
       timing,
       context,
-      timingDescription,
       contextDescription,
       modality,
+      modalityDescription,
       dynamics,
       personalization,
       domain,
+      domainDescription,
       behavior,
+      discBehavior,
       aim,
+      aimDescription,
       targetAge,
       targetUser,
+      targetCategory,
       device,
+      deviceDescription,
       affordances,
       aesthetics,
       images,
@@ -384,17 +417,21 @@ export default withPageAuthRequired(function Home({ token, url }) {
           setDescription(val.data.draft.Description)
           setBehavior(val.data.draft.Behavior)
           setDomain(val.data.draft.Domain)
+          setDomainDescription(val.data.draft.DomainDescription)
           setAim(val.data.draft.Aim)
+          setAimDescription(val.data.draft.AimDescription)
           setTargetAge(val.data.draft.TargetAge)
           setTargetUser(val.data.draft.TargetUser)
+          setTargetCategory(val.data.draft.TargetCategory)
           setDevice(val.data.draft.Device)
+          setDeviceDescription(val.data.draft.DeviceDescription)
           setModality(val.data.draft.Modality)
           setDynamics(val.data.draft.Dynamics)
           setPersonalization(val.data.draft.Personalization)
           setContext(val.data.draft.Context)
           setContextDescription(val.data.draft.ContextDescription)
           setTiming(val.data.draft.Timing)
-          setTimingDescription(val.data.draft.TimingDescription)
+          // setTimingDescription(val.data.draft.TimingDescription)
           setAffordances(val.data.draft.Affordances)
           setRules(val.data.draft.Rules)
           setAesthetics(val.data.draft.Aestethics)
@@ -698,7 +735,7 @@ export default withPageAuthRequired(function Home({ token, url }) {
 
               // Stati delle tabs 
               behavior={behavior}
-              descBehavior={descBehavior}
+              discBehavior={discBehavior}
               domain={domain}
               domainDescription={domainDescription}
               aim={aim}
@@ -715,6 +752,7 @@ export default withPageAuthRequired(function Home({ token, url }) {
               personalization={personalization}
 
               timing={timing}
+              // timingDescription={timingDescription}
               context={context}
               contextDescription={contextDescription}
 

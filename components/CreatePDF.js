@@ -28,18 +28,24 @@ export default function CreatePDF({
   draftID,
 
   behavior,
+  discBehavior,
   domain,
   aim,
+  domainDescription,
+  aimDescription,
   targetAge,
   targetUser,
+  targetCategory,
 
   device,
+  deviceDescription,
   modality,
+  modalityDescription,
   dynamics,
   personalization,
 
   timing,
-  timingDescription,
+  // timingDescription,
   context,
   contextDescription,
 
@@ -50,7 +56,6 @@ export default function CreatePDF({
 }) {
   const router = useRouter()
   let requestURL = url + "/paper/new"
-
   function blobToBase64(blob) {
     return new Promise((resolve, _) => {
       var reader = new FileReader();
@@ -219,16 +224,16 @@ export default function CreatePDF({
             Contextual information is of crucial importance in the design of gamified solutions (both digital and analogic) in order to get the expectations. In this part, designers reported their contextual choices.
             <Br /><Br />
             {/* Domain */}
-            <Text style={{ fontFamily: "Sen-Bold", fontSize: 14 }}>Domain: </Text> This gamified solution will be used in the {domain} domain. Specifically, INSERIRE RISPOSTA BOX VUOTO CONDIZIONALE.
+            <Text style={{ fontFamily: "Sen-Bold", fontSize: 14 }}>Domain: </Text> This gamified solution will be used in the {domain} domain. Specifically, {domainDescription}
             <Br /><Br />
             {/* Aim */}
-            <Text style={{ fontFamily: "Sen-Bold", fontSize: 14 }}>Aim: </Text> This gamified solution will be used with a {aim} puropse. That is INSERIRE DESCRIZIONE DELLO SCOPO IN RELAZIONE ALLA SCELTA. Specifically, INSERIRE RISPOSTA BOX VUOTO CONDIZIONALE.
-            <Br /><Br />
+            <Text style={{ fontFamily: "Sen-Bold", fontSize: 14 }}>Aim: </Text> This gamified solution will be used with a {aim} puropse. That is INSERIRE DESCRIZIONE DELLO SCOPO IN RELAZIONE ALLA SCELTA. Specifically, {aimDescription}.
+            < Br /> <Br />
             {/* User */}
             <Text style={{ fontFamily: "Sen-Bold", fontSize: 14 }}>Target User: </Text> This gamified solution will be used with {targetAge} years-old  inserire CATEGORIA USER. {(targetUser != "") ? ("Specifically, " + targetUser + ".") : ""}
             <Br /><Br />
             {/* Behaviors */}
-            <Text style={{ fontFamily: "Sen-Bold", fontSize: 14 }}>Encouraged Behaviors: </Text> This gamified solution will encourage the following behaviors among users: {behavior}. In the meantime, it should prevent the following behaviors: {/* behaviorsToAvoid */}.
+            <Text style={{ fontFamily: "Sen-Bold", fontSize: 14 }}>Encouraged Behaviors: </Text> This gamified solution will encourage the following behaviors among users: {behavior}. In the meantime, it should prevent the following behaviors: {discBehavior}.
             <Br /><Br />
           </Text>
         </View>
@@ -247,7 +252,7 @@ export default function CreatePDF({
           gap: "12px",
         }}>
           <Text style={styles.h2}>
-            The users will engaged in a {modality} modality. Specifically INSERIRE RISPOSTA BOX VUOTO CONDIZIONALE.
+            The users will engaged in a {modality} modality. Specifically, {modalityDescription}.
           </Text>
         </View>
         <Text><Br /></Text>
@@ -262,7 +267,7 @@ export default function CreatePDF({
           gap: "12px",
         }}>
           <Text style={styles.h2}>
-            The gamified tool will be used with the following device {device}. Specifically, INSERIRE RISPOSTA BOX VUOTO CONDIZIONALE.
+            The gamified tool will be used with the following device {device}. Specifically, {deviceDescription}
           </Text>
         </View>
       </Page >
@@ -288,17 +293,17 @@ export default function CreatePDF({
             {/* Affordances, gamification elements*/}
             {/* MISSING !!! */}
             {/* Feedback*/}
-            <Text style={{ fontFamily: "Sen-Bold", fontSize: 14 }}>Feedback: </Text>To provide information to the user, feedback with {timing} timing and with {context} content will be used. Specifically, {timingDescription}. {/* NO CONTEXT DESCRIPTION */}
+            <Text style={{ fontFamily: "Sen-Bold", fontSize: 14 }}>Feedback: </Text>To provide information to the user, feedback with {timing} timing and with {context} content will be used. Specifically, {contextDescription}.
             <Br /><Br />
             {/* Dynamics*/}
             {(dynamics) ?
-              <Text>< Text style={{ fontFamily: "Sen-Bold", fontSize: 14 }}>Dynamics: </Text> {dynamics}. The interaction between users and the gamified solution could lead to certain unwanted dynamics. Hence, within the interaction, the following dynamics should be taken into consideration: INSERIRE RISPOSTA BOX VUOTO CONDIZIONALE <Br /><Br /> </Text>
+              <Text>< Text style={{ fontFamily: "Sen-Bold", fontSize: 14 }}>Dynamics: </Text>  The interaction between users and the gamified solution could lead to certain unwanted dynamics. Hence, within the interaction, the following dynamics should be taken into consideration: {dynamics}<Br /><Br /> </Text>
               :
               <Text>< Text style={{ fontFamily: "Sen-Bold", fontSize: 14 }}>Dynamics: </Text>Dynamics are not taken into consideration in the design phase.</Text>
             }
             {/* Personalization*/}
             {(personalization) ?
-              <Text>< Text style={{ fontFamily: "Sen-Bold", fontSize: 14 }}>Personalization: </Text> {personalization}. The gamified solution will provide a personalization according to:INSERIRE RISPOSTA  <Br /><Br /> </Text>
+              <Text>< Text style={{ fontFamily: "Sen-Bold", fontSize: 14 }}>Personalization: </Text>  The gamified solution will provide a personalization according to: {personalization} <Br /><Br /> </Text>
               :
               < Text > < Text style={{ fontFamily: "Sen-Bold", fontSize: 14 }}>Dynamics: </Text>Personalization strategies won’t be adopted for this gamified solution.</Text>
             }
@@ -348,23 +353,24 @@ export default function CreatePDF({
                   cancelButtonColor: "#374151",
                 })
                 if (result.isConfirmed) {
-                  let time = ""
+                  // let time = ""
                   let blobString = await blobToBase64(blob)
                   console.log(blob)
                   console.log(blobString)
                   console.log(draftID)
-                  for (let i; i < timing.lenght; i++) time = time + timing[i]
+                  // for (let i; i < timing.lenght; i++) time = time + timing[i]
                   axios.post(requestURL, {
                     title: name,
                     description: description,
-                    behavior: behavior,
-                    domain: domain,
-                    aim: aim + targetAge,
-                    device: device,
+                    behavior: behavior + "/" + discBehavior,
+                    domain: domain + ": " + domainDescription,
+                    aim: aim + ": " + aimDescription,
+                    device: device + ": " + deviceDescription,
+                    targets: [targetAge, targetUser, targetCategory],
                     modality: modality,
                     dynamics: dynamics,
                     personalization: personalization,
-                    timing: time + timingDescription,
+                    timing: timing, // + timingDescription
                     context: context + contextDescription,
                     affordances: affordances,
                     rules: rules,
@@ -379,7 +385,6 @@ export default function CreatePDF({
                     })
                     .then((val) => {
                       Swal.fire({ title: 'Paper Saved!', icon: 'success' })
-                      // console.log(val.data)
                       router.push("/")
                     })
                     .catch((err) => {
