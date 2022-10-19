@@ -81,12 +81,11 @@ function Affordances({
           <br />
         </h2>
         <div className="w-auto mt-3">
-
           {(affordances[0]) ?
             affordances.map((item) => {
               console.log(Boolean(affordances.find((el) => el.type == "Level")))
               return (
-                <div className="flex flex-col gap-1 items-center justify-center w-full my-5">
+                <div key={item.pos} className="flex flex-col gap-1 items-center justify-center w-full my-5">
                   <FormControl variant="outlined" fullWidth>
                     <Select
                       single
