@@ -15,7 +15,13 @@ import { useUser, getSession, withPageAuthRequired } from '@auth0/nextjs-auth0';
 
 // Tabs
 import { Tab } from "@headlessui/react";
-import Context from "../components/tabs/Context";
+
+// import Context from "../components/tabs/context/Context";
+import Aim from "../components/tabs/context/Aim";
+import Domain from "../components/tabs/context/Domain";
+import Targets from "../components/tabs/context/Targets";
+import Behaviors from "../components/tabs/context/Behaviors";
+
 import Affordances from "../components/tabs/Affordances";
 import Rules from "../components/tabs/Rules";
 import Aesthetics from "../components/tabs/Aesthetics";
@@ -82,7 +88,6 @@ const ageSelection = [
   "70-79",
   "80+",
 ];
-
 
 const DeviceSelection = [
   "Mobile",
@@ -173,7 +178,7 @@ export default withPageAuthRequired(function Home({ token, url }) {
   const [deviceDescription, setDeviceDescription] = useState("");
 
   //Affordances
-  const [affordances, setAffordances] = useState([{ type: "Game Elements", text: "Description", pos: 0 },]);
+  const [affordances, setAffordances] = useState([{ type: "Novelty", text: "", pos: 0 },]);
 
   //Aestethics
   const [aesthetics, setAesthetics] = useState("");
@@ -193,6 +198,7 @@ export default withPageAuthRequired(function Home({ token, url }) {
   const saveDraft = () => {
     // let aff = affordances.split("=>")
     if (!draftID) {
+      console.log("Affordances before server mapping", affordances)
       axios.post(url + "/draft/new", {
         title: query.name,
         description: query.description,
@@ -214,9 +220,6 @@ export default withPageAuthRequired(function Home({ token, url }) {
         context: context,
         contextDescription: contextDescription,
         timing: timing,
-        // timingDescription: timingDescription,
-        // gameAction: aff[0],
-        // condition: aff[1],
         affordances: affordances,
         rules: rules,
         aesthetics: aesthetics,
@@ -226,18 +229,20 @@ export default withPageAuthRequired(function Home({ token, url }) {
           headers: {
             Authorization: "Bearer " + token
           }
-        }).then((val) => {
+        })
+        .then((val) => {
           console.log("NEW:", val.data)
           setDraftID(val.data.draft._id)
         }
         )
+        .catch(err => console.log(err))
     }
     else {
       axios.patch(url + "/draft/" + draftID, {
         title: name,
         description: query.description,
         behavior: behavior,
-        discbehavior: discbehavior,
+        discBehavior: discBehavior,
         domain: domain,
         domainDescription: domainDescription,
         aim: aim,
@@ -254,14 +259,10 @@ export default withPageAuthRequired(function Home({ token, url }) {
         context: context,
         contextDescription: contextDescription,
         timing: timing,
-        // timingDescription: timingDescription,
-        // gameAction: aff[0],
-        // condition: aff[1],
         affordances: affordances,
         rules: rules,
         aesthetics: aesthetics,
         draftId: draftID
-
       },
         {
           headers: {
@@ -269,6 +270,7 @@ export default withPageAuthRequired(function Home({ token, url }) {
           }
         })
         .then((val) => console.log("PATCH:", val.data))
+        .catch(err => console.log(err))
     }
   }
 
@@ -294,7 +296,7 @@ export default withPageAuthRequired(function Home({ token, url }) {
             title: query.name,
             description: query.description,
             behavior: behavior,
-            discbehavior: discbehavior,
+            discBehavior: discBehavior,
             domain: domain,
             domainDescription: domainDescription,
             aim: aim,
@@ -311,9 +313,6 @@ export default withPageAuthRequired(function Home({ token, url }) {
             context: context,
             contextDescription: contextDescription,
             timing: timing,
-            // timingDescription: timingDescription,
-            // gameAction: aff[0],
-            // condition: aff[1],
             affordances: affordances,
             rules: rules,
             aesthetics: aesthetics,
@@ -331,6 +330,7 @@ export default withPageAuthRequired(function Home({ token, url }) {
               console.log(allertBool)
             }
             )
+            .catch(err => console.log(err))
         }
         else {
           axios.patch(url + "/draft/" + draftID, {
@@ -338,7 +338,7 @@ export default withPageAuthRequired(function Home({ token, url }) {
             title: query.name,
             description: query.description,
             behavior: behavior,
-            discbehavior: discbehavior,
+            discBehavior: discBehavior,
             domain: domain,
             domainDescription: domainDescription,
             aim: aim,
@@ -355,9 +355,6 @@ export default withPageAuthRequired(function Home({ token, url }) {
             context: context,
             contextDescription: contextDescription,
             timing: timing,
-            // timingDescription: timingDescription,
-            // gameAction: aff[0],
-            // condition: aff[1],
             affordances: affordances,
             rules: rules,
             aesthetics: aesthetics,
@@ -373,6 +370,7 @@ export default withPageAuthRequired(function Home({ token, url }) {
               setAllertBool(true)
               console.log(allertBool)
             })
+            .catch(err => console.log(err))
         }
       } else console.log("NO DRAFTING")
     })
@@ -431,11 +429,22 @@ export default withPageAuthRequired(function Home({ token, url }) {
           setContext(val.data.draft.Context)
           setContextDescription(val.data.draft.ContextDescription)
           setTiming(val.data.draft.Timing)
-          // setTimingDescription(val.data.draft.TimingDescription)
-          setAffordances(val.data.draft.Affordances)
+
           setRules(val.data.draft.Rules)
           setAesthetics(val.data.draft.Aestethics)
-          console.log("Affordances server data: ", val.data.draft.Affordances)
+
+          let affArrayOfObjects = []
+          let pos = 0
+          for (const [key, value] of Object.entries(val.data.draft.Affordances)) {
+            let obj = {}
+            obj["type"] = key
+            obj["text"] = value
+            obj["pos"] = pos
+            affArrayOfObjects.push(obj)
+            pos++
+          }
+          setAffordances([...affArrayOfObjects])
+          console.log("Affordances with pos: ", affArrayOfObjects)
         })
       setDraftID(query.draftID)
     }
@@ -608,37 +617,75 @@ export default withPageAuthRequired(function Home({ token, url }) {
               </Tab.List>
               <Tab.Panels>
                 <Tab.Panel>
-                  <Context
-                    aim={aim}
-                    setAim={setAim}
-                    aimDescription={aimDescription}
-                    setAimDescription={setAimDescription}
+                  {/* OLD CONTEXT */}
+                  {/* <Context */}
+                  {/*   aim={aim} */}
+                  {/*   setAim={setAim} */}
+                  {/*   aimDescription={aimDescription} */}
+                  {/*   setAimDescription={setAimDescription} */}
 
-                    domain={domain}
-                    setDomain={setDomain}
-                    domainDescription={domainDescription}
-                    setDomainDescription={setDomainDescription}
+                  {/*   domain={domain} */}
+                  {/*   setDomain={setDomain} */}
+                  {/*   domainDescription={domainDescription} */}
+                  {/*   setDomainDescription={setDomainDescription} */}
 
-                    targetAge={targetAge}
-                    setTargetAge={setTargetAge}
+                  {/*   targetAge={targetAge} */}
+                  {/*   setTargetAge={setTargetAge} */}
+                  {/*   targetUser={targetUser} */}
+                  {/*   setTargetUser={setTargetUser} */}
+                  {/*   targetCategory={targetCategory} */}
+                  {/*   setTargetCategory={setTargetCategory} */}
 
-                    targetUser={targetUser}
-                    setTargetUser={setTargetUser}
+                  {/*   behavior={behavior} */}
+                  {/*   setBehavior={setBehavior} */}
+                  {/*   discBehavior={discBehavior} */}
+                  {/*   setDiscBehavior={setDiscBehavior} */}
 
-                    targetCategory={targetCategory}
-                    setTargetCategory={setTargetCategory}
+                  {/*   selectObj1={KoivistoHamari} */}
+                  {/*   selectObj2={Aimo} */}
+                  {/*   selectObj3={ageSelection} */}
+                  {/*   selectObj4={categorySelection} */}
+                  {/*   saveDraft={saveDraft} */}
+                  {/* /> */}
 
-                    behavior={behavior}
-                    setBehavior={setBehavior}
-                    discBehavior={discBehavior}
-                    setDiscBehavior={setDiscBehavior}
+                  {/* NEW CONTEXT */}
+                  <div className="flex flex-col py-4 w-[60em]">
+                    <Domain
+                      domain={domain}
+                      setDomain={setDomain}
+                      domainDescription={domainDescription}
+                      setDomainDescription={setDomainDescription}
+                      selectObj1={KoivistoHamari}
+                      saveDraft={saveDraft}
+                    />
+                    <Aim
+                      aim={aim}
+                      setAim={setAim}
+                      aimDescription={aimDescription}
+                      setAimDescription={setAimDescription}
+                      selectObj2={Aimo}
+                      saveDraft={saveDraft}
+                    />
+                    <Behaviors
+                      behavior={behavior}
+                      setBehavior={setBehavior}
+                      discBehavior={discBehavior}
+                      setDiscBehavior={setDiscBehavior}
+                      saveDraft={saveDraft}
+                    />
 
-                    selectObj1={KoivistoHamari}
-                    selectObj2={Aimo}
-                    selectObj3={ageSelection}
-                    selectObj4={categorySelection}
-                    saveDraft={saveDraft}
-                  />
+                    <Targets
+                      targetAge={targetAge}
+                      setTargetAge={setTargetAge}
+                      targetUser={targetUser}
+                      setTargetUser={setTargetUser}
+                      targetCategory={targetCategory}
+                      setTargetCategory={setTargetCategory}
+                      selectObj3={ageSelection}
+                      selectObj4={categorySelection}
+                      saveDraft={saveDraft}
+                    />
+                  </div>
                 </Tab.Panel>
                 <Tab.Panel>
                   <Device
@@ -683,8 +730,6 @@ export default withPageAuthRequired(function Home({ token, url }) {
                     setTiming={setTiming}
                     context={context}
                     setContext={setContext}
-                    timingDescription={timingDescription}
-                    setTimingDescription={setTimingDescription}
                     contextDescription={contextDescription}
                     setContextDescription={setContextDescription}
                     selectObj1={tt}

@@ -13,11 +13,12 @@ import {
   View,
   StyleSheet,
   BlobProvider,
-  PDFDownloadLink,
+  // PDFDownloadLink,
 } from "@react-pdf/renderer";
 
 // Fonts
 import senBold from '../public/fonts/sen.bold.ttf'
+import robotoItalic from '../public/fonts/roboto.italic.ttf'
 
 export default function CreatePDF({
   selectedIndex,
@@ -80,6 +81,17 @@ export default function CreatePDF({
       },
     ],
   });
+  Font.register({
+    family: "Roboto-Italic",
+    fontStyle: "normal",
+    fontWeight: "normal",
+    fonts: [
+      {
+        src: robotoItalic,
+      },
+    ],
+  });
+
   const styles = StyleSheet.create({
     page: {
       alignContent: "center",
@@ -163,7 +175,7 @@ export default function CreatePDF({
             <Link src="https://www.unitn.it/" style={{ color: "#5555dd", fontFamily: "Sen-Bold", fontSize: 12 }}> <Text > University of Trento </Text></Link>{","}
             <Link src="https://www.fbk.eu/it/" style={{ color: "#5555dd", fontFamily: 'Sen-Bold', fontSize: 12 }}> <Text >Fondazione Bruno Kessler </Text ></Link> {" and "}
             <Link src="https://uwaterloo.ca/games-institute/" style={{ color: "#5555dd", fontFamily: "Sen-Bold", fontSize: 12 }}> <Text >the Games Institute </Text ></Link> {". "}
-            {"You can visit the website "}<Link src="https://uwaterloo.ca/games-institute/" style={{ color: "#5555dd", fontFamily: "Sen-Bold", fontSize: 12 }}> <Text>Here </Text></Link>{"."}
+            {"You can visit the website "}<Link src="https://gami-doc-frontend-test-auth.vercel.app/" style={{ color: "#5555dd", fontFamily: "Sen-Bold", fontSize: 12 }}> <Text>Here </Text></Link>{"."}
             <Br /><Br />
           </Text>
           <Text style={styles.h2}>
@@ -224,16 +236,16 @@ export default function CreatePDF({
             Contextual information is of crucial importance in the design of gamified solutions (both digital and analogic) in order to get the expectations. In this part, designers reported their contextual choices.
             <Br /><Br />
             {/* Domain */}
-            <Text style={{ fontFamily: "Sen-Bold", fontSize: 14 }}>Domain: </Text> This gamified solution will be used in the {domain} domain. Specifically, {domainDescription}
+            <Text style={{ fontFamily: "Sen-Bold", fontSize: 14 }}>Domain: </Text> This gamified solution will be used in the <Text style={{ fontFamily: "Roboto-Italic", fontSize: 13 }}>{domain}</Text> domain. Specifically, <Text style={{ fontFamily: "Roboto-Italic", fontSize: 13 }}>{domainDescription} </Text>
             <Br /><Br />
             {/* Aim */}
-            <Text style={{ fontFamily: "Sen-Bold", fontSize: 14 }}>Aim: </Text> This gamified solution will be used with a {aim} puropse. That is INSERIRE DESCRIZIONE DELLO SCOPO IN RELAZIONE ALLA SCELTA. Specifically, {aimDescription}.
+            <Text style={{ fontFamily: "Sen-Bold", fontSize: 14 }}>Aim: </Text> This gamified solution will be used with a <Text style={{ fontFamily: "Roboto-Italic", fontSize: 13 }}>{aim} </Text> purpouse. That is INSERIRE DESCRIZIONE DELLO SCOPO IN RELAZIONE ALLA SCELTA. Specifically, <Text style={{ fontFamily: "Roboto-Italic", fontSize: 13 }}>{aimDescription} </Text>.
             < Br /> <Br />
             {/* User */}
-            <Text style={{ fontFamily: "Sen-Bold", fontSize: 14 }}>Target User: </Text> This gamified solution will be used with {targetAge} years-old  inserire CATEGORIA USER. {(targetUser != "") ? ("Specifically, " + targetUser + ".") : ""}
+            <Text style={{ fontFamily: "Sen-Bold", fontSize: 14 }}>Target User: </Text> This gamified solution will be used with <Text style={{ fontFamily: "Roboto-Italic", fontSize: 13 }}>{targetAge}</Text> years-old <Text style={{ fontFamily: "Roboto-Italic", fontSize: 13 }}> {targetCategory}</Text>. {(targetUser != "") ? ("Specifically, " + <Text style={{ fontFamily: "Roboto-Italic", fontSize: 13 }}> {targetUser}</Text>) : ""}
             <Br /><Br />
             {/* Behaviors */}
-            <Text style={{ fontFamily: "Sen-Bold", fontSize: 14 }}>Encouraged Behaviors: </Text> This gamified solution will encourage the following behaviors among users: {behavior}. In the meantime, it should prevent the following behaviors: {discBehavior}.
+            <Text style={{ fontFamily: "Sen-Bold", fontSize: 14 }}>Encouraged Behaviors: </Text> This gamified solution will encourage the following behaviors among users: <Text style={{ fontFamily: "Roboto-Italic", fontSize: 13 }}>{behavior}</Text>. In the meantime, it should prevent the following behaviors: <Text style={{ fontFamily: "Roboto-Italic", fontSize: 13 }}>{discBehavior}</Text>.
             <Br /><Br />
           </Text>
         </View>
@@ -252,7 +264,7 @@ export default function CreatePDF({
           gap: "12px",
         }}>
           <Text style={styles.h2}>
-            The users will engaged in a {modality} modality. Specifically, {modalityDescription}.
+            The users will engaged in a <Text style={{ fontFamily: "Roboto-Italic", fontSize: 13 }}>{modality}</Text> modality. Specifically, <Text style={{ fontFamily: "Roboto-Italic", fontSize: 13 }}>{modalityDescription} </Text>.
           </Text>
         </View>
         <Text><Br /></Text>
@@ -267,7 +279,7 @@ export default function CreatePDF({
           gap: "12px",
         }}>
           <Text style={styles.h2}>
-            The gamified tool will be used with the following device {device}. Specifically, {deviceDescription}
+            The gamified tool will be used with the following device <Text style={{ fontFamily: "Roboto-Italic", fontSize: 13 }}>{device} </Text>. Specifically, <Text style={{ fontFamily: "Roboto-Italic", fontSize: 13 }}>{deviceDescription} </Text>
           </Text>
         </View>
       </Page >
@@ -288,22 +300,23 @@ export default function CreatePDF({
             The core refers to the central part of the design. It collects information about game rules, game dynamics, game mechanics and feedback.
             <Br /><Br />
             {/* Rules*/}
-            <Text style={{ fontFamily: "Sen-Bold", fontSize: 14 }}>Game Rules: </Text> {rules}
+            <Text style={{ fontFamily: "Sen-Bold", fontSize: 14 }}>Game Rules: </Text> <Text style={{ fontFamily: "Roboto-Italic", fontSize: 13 }}>{rules}</Text>
             <Br /><Br />
             {/* Affordances, gamification elements*/}
-            {/* MISSING !!! */}
+            <Text style={{ fontFamily: "Sen-Bold", fontSize: 14 }}>Gamification Elements: </Text> In this gamified solution,<Text style={{ fontFamily: "Roboto-Italic", fontSize: 13 }}>{affordances.map((element) => { return (element.type + ", ") })}</Text> will be used as gamification elements.
+            Specifically:<Br />  <Text style={{ fontFamily: "Roboto-Italic", fontSize: 13 }}>{affordances.map((element) => { return (element.type + ": " + element.text) + ".\n" })}</Text>
             {/* Feedback*/}
-            <Text style={{ fontFamily: "Sen-Bold", fontSize: 14 }}>Feedback: </Text>To provide information to the user, feedback with {timing} timing and with {context} content will be used. Specifically, {contextDescription}.
+            <Text style={{ fontFamily: "Sen-Bold", fontSize: 14 }}>Feedback: </Text>To provide information to the user, feedback with {timing} timing and with <Text style={{ fontFamily: "Roboto-Italic", fontSize: 13 }}>{context}</Text> content will be used. Specifically, <Text style={{ fontFamily: "Roboto-Italic", fontSize: 13 }}>{contextDescription}</Text>.
             <Br /><Br />
             {/* Dynamics*/}
             {(dynamics) ?
-              <Text>< Text style={{ fontFamily: "Sen-Bold", fontSize: 14 }}>Dynamics: </Text>  The interaction between users and the gamified solution could lead to certain unwanted dynamics. Hence, within the interaction, the following dynamics should be taken into consideration: {dynamics}<Br /><Br /> </Text>
+              <Text>< Text style={{ fontFamily: "Sen-Bold", fontSize: 14 }}>Dynamics: </Text>  The interaction between users and the gamified solution could lead to certain unwanted dynamics. Hence, within the interaction, the following dynamics should be taken into consideration: <Text style={{ fontFamily: "Roboto-Italic", fontSize: 13 }}>{dynamics}</Text><Br /><Br /> </Text>
               :
               <Text>< Text style={{ fontFamily: "Sen-Bold", fontSize: 14 }}>Dynamics: </Text>Dynamics are not taken into consideration in the design phase.</Text>
             }
             {/* Personalization*/}
             {(personalization) ?
-              <Text>< Text style={{ fontFamily: "Sen-Bold", fontSize: 14 }}>Personalization: </Text>  The gamified solution will provide a personalization according to: {personalization} <Br /><Br /> </Text>
+              <Text>< Text style={{ fontFamily: "Sen-Bold", fontSize: 14 }}>Personalization: </Text>  The gamified solution will provide a personalization according to: <Text style={{ fontFamily: "Roboto-Italic", fontSize: 13 }}>{personalization}</Text> <Br /><Br /> </Text>
               :
               < Text > < Text style={{ fontFamily: "Sen-Bold", fontSize: 14 }}>Dynamics: </Text>Personalization strategies won’t be adopted for this gamified solution.</Text>
             }
@@ -323,7 +336,7 @@ export default function CreatePDF({
           gap: "12px",
         }}>
           <Text style={styles.h2}>
-            The aesthetic part is of crucial importance, since it has a direct relationship with the users’ experience: the more beautiful the aesthetic part is, the more interesting and compelling the users will find it. In the developed gamified solution {aesthetics} will be used.
+            The aesthetic part is of crucial importance, since it has a direct relationship with the users’ experience: the more beautiful the aesthetic part is, the more interesting and compelling the users will find it. In the developed gamified solution <Text style={{ fontFamily: "Roboto-Italic", fontSize: 13 }}> {aesthetics} </Text> will be used.
             <Br />
             IMMAGINI
           </Text>
@@ -341,86 +354,105 @@ export default function CreatePDF({
       >
         {({ blob, url, loading, error }) => {
           return (name && description) ?
-            <button
-              onClick={async () => {
-                /* let result = await */
-                let result = await Swal.fire({
-                  icon: "question",
-                  title: 'Do you want to save the changes?',
-                  showCancelButton: true,
-                  confirmButtonText: 'Save',
-                  confirmButtonColor: "#FFB900",
-                  cancelButtonColor: "#374151",
-                })
-                if (result.isConfirmed) {
-                  // let time = ""
-                  let blobString = await blobToBase64(blob)
-                  console.log(blob)
-                  console.log(blobString)
-                  console.log(draftID)
-                  // for (let i; i < timing.lenght; i++) time = time + timing[i]
-                  axios.post(requestURL, {
-                    title: name,
-                    description: description,
-                    behavior: behavior + "/" + discBehavior,
-                    domain: domain + ": " + domainDescription,
-                    aim: aim + ": " + aimDescription,
-                    device: device + ": " + deviceDescription,
-                    targets: [targetAge, targetUser, targetCategory],
-                    modality: modality,
-                    dynamics: dynamics,
-                    personalization: personalization,
-                    timing: timing, // + timingDescription
-                    context: context + contextDescription,
-                    affordances: affordances,
-                    rules: rules,
-                    aesthetics: aesthetics,
-                    draftID: draftID,
-                    pdf: blobString,
-                  },
-                    {
-                      headers: {
-                        Authorization: "Bearer " + token
-                      }
-                    })
-                    .then((val) => {
-                      Swal.fire({ title: 'Paper Saved!', icon: 'success' })
-                      router.push("/")
-                    })
-                    .catch((err) => {
-                      Swal.fire({ title: 'Server Error!', icon: 'error' })
-                      console.log(err)
-                    })
+            <>
+              <button
+                onClick={async () => {
+                  let result = await Swal.fire({
+                    icon: "question",
+                    title: 'Do you want to save the changes?',
+                    showCancelButton: true,
+                    confirmButtonText: 'Save',
+                    confirmButtonColor: "#FFB900",
+                    cancelButtonColor: "#374151",
+                  })
+                  if (result.isConfirmed) {
+                    // let time = ""
+                    let blobString = await blobToBase64(blob)
+                    console.log(blob)
+                    console.log(blobString)
+                    console.log(draftID)
+                    // for (let i; i < timing.lenght; i++) time = time + timing[i]
+                    axios.post(requestURL, {
+                      title: name,
+                      description: description,
+                      behavior: behavior + "/" + discBehavior,
+                      domain: domain + ": " + domainDescription,
+                      aim: aim + ": " + aimDescription,
+                      device: device + ": " + deviceDescription,
+                      targets: [targetAge, targetUser, targetCategory],
+                      modality: modality,
+                      dynamics: dynamics,
+                      personalization: personalization,
+                      timing: timing, // + timingDescription
+                      context: context + contextDescription,
+                      affordances: affordances,
+                      rules: rules,
+                      aesthetics: aesthetics,
+                      draftID: draftID,
+                      pdf: blobString,
+                    },
+                      {
+                        headers: {
+                          Authorization: "Bearer " + token
+                        }
+                      })
+                      .then((val) => {
+                        Swal.fire({ title: 'Paper Saved!', icon: 'success' })
+                        router.push("/")
+                      })
+                      .catch((err) => {
+                        Swal.fire({ title: 'Server Error!', icon: 'error' })
+                        console.log(err)
+                      })
 
+                  }
+                }}
+                className={
+                  selectedIndex == 8 ?
+                    " py-4 inline-block px-8 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md  hover:bg-blue-400 hover:shadow-lg focus:bg-blue-400 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out"
+                    : "invisible"
                 }
-              }}
-              className={
-                selectedIndex == 8 ?
-                  " py-4 inline-block px-8 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md  hover:bg-blue-400 hover:shadow-lg focus:bg-blue-400 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out"
-                  : "invisible"
-              }
-            >
-              Save and Send!
-            </button> : ""
+              >
+                Save and Send!
+              </button>
+
+              <button
+                onClick={async () => {
+                  const fileURL = window.URL.createObjectURL(blob);
+                  let alink = document.createElement('a');
+                  alink.href = fileURL;
+                  alink.download = `${name}.pdf`;
+                  alink.click();
+                }}
+                className={
+                  selectedIndex == 8 ?
+                    " py-4 inline-block px-8 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md  hover:bg-blue-400 hover:shadow-lg focus:bg-blue-400 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out"
+                    : "invisible"
+                }
+              >
+                Download!
+              </button>
+            </>
+            : ""
         }
         }
       </BlobProvider>
 
-      <PDFDownloadLink
-        document={<MyDoc />}
-        fileName={name + ".pdf"}
-        className={
-          selectedIndex == 8
-            ? " py-4 inline-block px-8 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md  hover:bg-blue-400 hover:shadow-lg focus:bg-blue-400 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out"
-            : " invisible"
-        }
-      >
-        {
-          ({ blob, url, loading, error }) => {
-            return "Download as a PDF"
-          }
-        }
-      </PDFDownloadLink>
+      {/* <PDFDownloadLink */}
+      {/*   document={<MyDoc />} */}
+      {/*   fileName={name + ".pdf"} */}
+      {/*   className={ */}
+      {/*     selectedIndex == 8 */}
+      {/*       ? " py-4 inline-block px-8 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md  hover:bg-blue-400 hover:shadow-lg focus:bg-blue-400 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out" */}
+      {/*       : " invisible" */}
+      {/*   } */}
+      {/* > */}
+      {/*   { */}
+      {/*     ({ blob, url, loading, error }) => { */}
+      {/*       return "Download as a PDF" */}
+      {/*     } */}
+      {/*   } */}
+      {/* </PDFDownloadLink> */}
     </div >
   );
 }
