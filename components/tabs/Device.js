@@ -8,8 +8,16 @@ import Select from "@mui/material/Select";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import IconButton from "@mui/material/IconButton";
 import { useRouter } from "next/router"
+import { TextField } from "@mui/material";
 
-function Device({ device, setDevice, DeviceSelection, saveDraft }) {
+function Device({
+  device,
+  setDevice,
+  DeviceSelection,
+  deviceDescription,
+  setDeviceDescription,
+  saveDraft
+}) {
   const router = useRouter()
   return (
     <div className="flex flex-col w-[60em] py-4">
@@ -34,22 +42,34 @@ function Device({ device, setDevice, DeviceSelection, saveDraft }) {
         engine, etc), and then if the selected gamified elements are optimal for
         the selected device.
       </h2>
-      <FormControl>
-        <InputLabel>Device</InputLabel>
-        <Select
-          className="relative w-full shadow-md "
-          single
-          value={device}
-          onChange={(e) => setDevice(e.target.value)}
-          input={<OutlinedInput label="Name" />}
-        >
-          {DeviceSelection.map((name) => (
-            <MenuItem key={name} value={name}>
-              {name}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
+      <div className="mb-5">
+        <FormControl fullWidth>
+          <InputLabel>Device</InputLabel>
+          <Select
+            className="relative w-full shadow-md "
+            single
+            value={device}
+            onChange={(e) => setDevice(e.target.value)}
+            input={<OutlinedInput label="Name" />}
+          >
+            {DeviceSelection.map((name) => (
+              <MenuItem key={name} value={name}>
+                {name}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      </div>
+      <TextField
+        className="w-full border shadow-md "
+        id="Device"
+        type="text"
+        multiline
+        rows={3}
+        placeholder="Device Description"
+        value={deviceDescription}
+        onChange={(e) => setDeviceDescription(e.target.value)}
+      />
     </div>
   );
 }

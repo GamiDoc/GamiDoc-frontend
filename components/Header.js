@@ -9,7 +9,7 @@ import Avatar from "boring-avatars"
 
 // Sweetalert2
 import Swal from "sweetalert2"
-import withReactContent from 'sweetalert2-react-content'
+// import withReactContent from 'sweetalert2-react-content'
 // const MySwal = withReactContent(Swal) // semplice wrapper
 
 // Mui menu stuff 
@@ -20,7 +20,6 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemIcon from '@mui/material/ListItemIcon';
-import Typography from '@mui/material/Typography';
 
 // Menu icons 
 import PersonIcon from '@mui/icons-material/Person';

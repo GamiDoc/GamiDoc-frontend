@@ -8,9 +8,16 @@ import Select from "@mui/material/Select";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import IconButton from "@mui/material/IconButton";
 import { useRouter } from "next/router";
-import Link from "next/link";
+import { TextField } from "@mui/material";
 
-export default function Modality({ modality, setModality, selectObj1, saveDraft }) {
+export default function Modality({
+  modality,
+  setModality,
+  modalityDescription,
+  setModalityDescription,
+  selectObj1,
+  saveDraft
+}) {
   const router = useRouter();
 
   return (
@@ -41,22 +48,34 @@ export default function Modality({ modality, setModality, selectObj1, saveDraft 
         ingroup (i.e., team mates), and competition with the outgroup (i.e.,
         team competition).
       </h2>
-      <FormControl>
-        <InputLabel>Modality</InputLabel>
-        <Select
-          className="relative w-full shadow-md "
-          single
-          value={modality}
-          onChange={(e) => setModality(e.target.value)}
-          input={<OutlinedInput label="Name" />}
-        >
-          {selectObj1.map((name) => (
-            <MenuItem key={name} value={name}>
-              {name}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
+      <div className="mb-5">
+        <FormControl fullWidth>
+          <InputLabel>Modality</InputLabel>
+          <Select
+            className="relative w-full shadow-md "
+            single
+            value={modality}
+            onChange={(e) => setModality(e.target.value)}
+            input={<OutlinedInput label="Name" />}
+          >
+            {selectObj1.map((name) => (
+              <MenuItem key={name} value={name}>
+                {name}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      </div>
+      <TextField
+        className="w-full border  shadow-md "
+        id="Modality"
+        type="text"
+        multiline
+        rows={3}
+        placeholder="Modality Description"
+        value={modalityDescription}
+        onChange={(e) => setModalityDescription(e.target.value)}
+      />
     </div>
   );
 }
