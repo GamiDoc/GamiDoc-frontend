@@ -13,7 +13,7 @@ import {
   View,
   StyleSheet,
   BlobProvider,
-  // PDFDownloadLink,
+  PDFDownloadLink,
 } from "@react-pdf/renderer";
 
 // Fonts
@@ -179,7 +179,7 @@ export default function CreatePDF({
             <Br /><Br />
           </Text>
           <Text style={styles.h2}>
-            The tool{`&#39;`}s aim is to guide designers through the design process and the final evaluation of gamified solutions, taking into account contextual information, such as <Text style={{ fontFamily: "Sen-Bold", fontSize: 13 }}> domain, aim, target user,</Text> and <Text style={{ fontFamily: "Sen-Bold", fontSize: 13 }}>  encouraged behaviors</Text>, and information related to <Text style={{ fontFamily: "Sen-Bold", fontSize: 13 }}> game modality</Text>, and the <Text style={{ fontSize: 13, fontFamily: "Sen-Bold" }}>device</Text> used. Moreover, it allows to select feedback and gamification elements according to the previous selection.
+            The tool{`&apos;`}s aim is to guide designers through the design process and the final evaluation of gamified solutions, taking into account contextual information, such as <Text style={{ fontFamily: "Sen-Bold", fontSize: 13 }}> domain, aim, target user,</Text> and <Text style={{ fontFamily: "Sen-Bold", fontSize: 13 }}>  encouraged behaviors</Text>, and information related to <Text style={{ fontFamily: "Sen-Bold", fontSize: 13 }}> game modality</Text>, and the <Text style={{ fontSize: 13, fontFamily: "Sen-Bold" }}>device</Text> used. Moreover, it allows to select feedback and gamification elements according to the previous selection.
             < Br /><Br />
           </Text>
           <Text style={styles.h2}>
@@ -236,16 +236,16 @@ export default function CreatePDF({
             Contextual information is of crucial importance in the design of gamified solutions (both digital and analogic) in order to get the expectations. In this part, designers reported their contextual choices.
             <Br /><Br />
             {/* Domain */}
-            <Text style={{ fontFamily: "Sen-Bold", fontSize: 14 }}>Domain: </Text> This gamified solution will be used in the <Text style={{ fontFamily: "Roboto-Italic", fontSize: 13 }}>{domain}</Text> domain. Specifically, <Text style={{ fontFamily: "Roboto-Italic", fontSize: 13 }}>{domainDescription} </Text>
+            <Text style={{ fontFamily: "Sen-Bold", fontSize: 14 }}>Domain: </Text> This gamified solution will be used in the <Text style={{ fontFamily: "Roboto-Italic", fontSize: 13 }}>{domain}</Text> domain. Specifically, <Text style={{ fontFamily: "Roboto-Italic", fontSize: 12 }}>{domainDescription} </Text>
             <Br /><Br />
             {/* Aim */}
-            <Text style={{ fontFamily: "Sen-Bold", fontSize: 14 }}>Aim: </Text> This gamified solution will be used with a <Text style={{ fontFamily: "Roboto-Italic", fontSize: 13 }}>{aim} </Text> purpouse. That is INSERIRE DESCRIZIONE DELLO SCOPO IN RELAZIONE ALLA SCELTA. Specifically, <Text style={{ fontFamily: "Roboto-Italic", fontSize: 13 }}>{aimDescription} </Text>.
+            <Text style={{ fontFamily: "Sen-Bold", fontSize: 14 }}>Aim: </Text> This gamified solution will be used with a <Text style={{ fontFamily: "Roboto-Italic", fontSize: 13 }}>{aim} </Text> purpouse. That is INSERIRE DESCRIZIONE DELLO SCOPO IN RELAZIONE ALLA SCELTA. Specifically, <Text style={{ fontFamily: "Roboto-Italic", fontSize: 12 }}>{aimDescription} </Text>.
             < Br /> <Br />
             {/* User */}
-            <Text style={{ fontFamily: "Sen-Bold", fontSize: 14 }}>Target User: </Text> This gamified solution will be used with <Text style={{ fontFamily: "Roboto-Italic", fontSize: 13 }}>{targetAge}</Text> years-old <Text style={{ fontFamily: "Roboto-Italic", fontSize: 13 }}> {targetCategory}</Text>. {(targetUser != "") ? ("Specifically, " + <Text style={{ fontFamily: "Roboto-Italic", fontSize: 13 }}> {targetUser}</Text>) : ""}
+            <Text style={{ fontFamily: "Sen-Bold", fontSize: 14 }}>Target User: </Text> This gamified solution will be used with <Text style={{ fontFamily: "Roboto-Italic", fontSize: 13 }}>{targetAge}</Text> years-old <Text style={{ fontFamily: "Roboto-Italic", fontSize: 13 }}> {targetCategory}</Text>. {(targetUser != "") ? ("Specifically, " + <Text style={{ fontFamily: "Roboto-Italic", fontSize: 12 }}> {targetUser}</Text>) : ""}
             <Br /><Br />
             {/* Behaviors */}
-            <Text style={{ fontFamily: "Sen-Bold", fontSize: 14 }}>Encouraged Behaviors: </Text> This gamified solution will encourage the following behaviors among users: <Text style={{ fontFamily: "Roboto-Italic", fontSize: 13 }}>{behavior}</Text>. In the meantime, it should prevent the following behaviors: <Text style={{ fontFamily: "Roboto-Italic", fontSize: 13 }}>{discBehavior}</Text>.
+            <Text style={{ fontFamily: "Sen-Bold", fontSize: 14 }}>Encouraged Behaviors: </Text> This gamified solution will encourage the following behaviors among users: <Text style={{ fontFamily: "Roboto-Italic", fontSize: 13 }}>{behavior}</Text>. In the meantime, it should prevent the following behaviors: <Text style={{ fontFamily: "Roboto-Italic", fontSize: 12 }}>{discBehavior}</Text>.
             <Br /><Br />
           </Text>
         </View>
@@ -264,7 +264,7 @@ export default function CreatePDF({
           gap: "12px",
         }}>
           <Text style={styles.h2}>
-            The users will engaged in a <Text style={{ fontFamily: "Roboto-Italic", fontSize: 13 }}>{modality}</Text> modality. Specifically, <Text style={{ fontFamily: "Roboto-Italic", fontSize: 13 }}>{modalityDescription} </Text>.
+            The users will engaged in a <Text style={{ fontFamily: "Roboto-Italic", fontSize: 13 }}>{modality}</Text> modality. Specifically, <Text style={{ fontFamily: "Roboto-Italic", fontSize: 12 }}>{modalityDescription} </Text>.
           </Text>
         </View>
         <Text><Br /></Text>
@@ -279,7 +279,7 @@ export default function CreatePDF({
           gap: "12px",
         }}>
           <Text style={styles.h2}>
-            The gamified tool will be used with the following device <Text style={{ fontFamily: "Roboto-Italic", fontSize: 13 }}>{device} </Text>. Specifically, <Text style={{ fontFamily: "Roboto-Italic", fontSize: 13 }}>{deviceDescription} </Text>
+            The gamified tool will be used with the following device <Text style={{ fontFamily: "Roboto-Italic", fontSize: 13 }}>{device} </Text>. Specifically, <Text style={{ fontFamily: "Roboto-Italic", fontSize: 12 }}>{deviceDescription} </Text>
           </Text>
         </View>
       </Page >
@@ -303,20 +303,20 @@ export default function CreatePDF({
             <Text style={{ fontFamily: "Sen-Bold", fontSize: 14 }}>Game Rules: </Text> <Text style={{ fontFamily: "Roboto-Italic", fontSize: 13 }}>{rules}</Text>
             <Br /><Br />
             {/* Affordances, gamification elements*/}
-            <Text style={{ fontFamily: "Sen-Bold", fontSize: 14 }}>Gamification Elements: </Text> In this gamified solution,<Text style={{ fontFamily: "Roboto-Italic", fontSize: 13 }}>{affordances.map((element) => { return (element.type + ", ") })}</Text> will be used as gamification elements.
-            Specifically:<Br />  <Text style={{ fontFamily: "Roboto-Italic", fontSize: 13 }}>{affordances.map((element) => { return (element.type + ": " + element.text) + ".\n" })}</Text>
+            <Text style={{ fontFamily: "Sen-Bold", fontSize: 14 }}>Gamification Elements: </Text> In this gamified solution,<Text style={{ fontFamily: "Roboto-Italic", fontSize: 12 }}>{affordances.map((element) => { return (element.type + ", ") })}</Text> will be used as gamification elements.
+            Specifically:<Br />  <Text style={{ fontFamily: "Roboto-Italic", fontSize: 12 }}>{affordances.map((element) => { return (element.type + ": " + element.text) + ".\n" })}</Text>
             {/* Feedback*/}
-            <Text style={{ fontFamily: "Sen-Bold", fontSize: 14 }}>Feedback: </Text>To provide information to the user, feedback with {timing} timing and with <Text style={{ fontFamily: "Roboto-Italic", fontSize: 13 }}>{context}</Text> content will be used. Specifically, <Text style={{ fontFamily: "Roboto-Italic", fontSize: 13 }}>{contextDescription}</Text>.
+            <Text style={{ fontFamily: "Sen-Bold", fontSize: 14 }}>Feedback: </Text>To provide information to the user, feedback with {timing} timing and with <Text style={{ fontFamily: "Roboto-Italic", fontSize: 12 }}>{context}</Text> content will be used. Specifically, <Text style={{ fontFamily: "Roboto-Italic", fontSize: 12 }}>{contextDescription}</Text>.
             <Br /><Br />
             {/* Dynamics*/}
             {(dynamics) ?
-              <Text>< Text style={{ fontFamily: "Sen-Bold", fontSize: 14 }}>Dynamics: </Text>  The interaction between users and the gamified solution could lead to certain unwanted dynamics. Hence, within the interaction, the following dynamics should be taken into consideration: <Text style={{ fontFamily: "Roboto-Italic", fontSize: 13 }}>{dynamics}</Text><Br /><Br /> </Text>
+              <Text>< Text style={{ fontFamily: "Sen-Bold", fontSize: 14 }}>Dynamics: </Text>  The interaction between users and the gamified solution could lead to certain unwanted dynamics. Hence, within the interaction, the following dynamics should be taken into consideration: <Text style={{ fontFamily: "Roboto-Italic", fontSize: 12 }}>{dynamics}</Text><Br /><Br /> </Text>
               :
               <Text>< Text style={{ fontFamily: "Sen-Bold", fontSize: 14 }}>Dynamics: </Text>Dynamics are not taken into consideration in the design phase.</Text>
             }
             {/* Personalization*/}
             {(personalization) ?
-              <Text>< Text style={{ fontFamily: "Sen-Bold", fontSize: 14 }}>Personalization: </Text>  The gamified solution will provide a personalization according to: <Text style={{ fontFamily: "Roboto-Italic", fontSize: 13 }}>{personalization}</Text> <Br /><Br /> </Text>
+              <Text>< Text style={{ fontFamily: "Sen-Bold", fontSize: 14 }}>Personalization: </Text>  The gamified solution will provide a personalization according to: <Text style={{ fontFamily: "Roboto-Italic", fontSize: 12 }}>{personalization}</Text> <Br /><Br /> </Text>
               :
               < Text > < Text style={{ fontFamily: "Sen-Bold", fontSize: 14 }}>Dynamics: </Text>Personalization strategies won’t be adopted for this gamified solution.</Text>
             }
@@ -336,7 +336,7 @@ export default function CreatePDF({
           gap: "12px",
         }}>
           <Text style={styles.h2}>
-            The aesthetic part is of crucial importance, since it has a direct relationship with the users’ experience: the more beautiful the aesthetic part is, the more interesting and compelling the users will find it. In the developed gamified solution <Text style={{ fontFamily: "Roboto-Italic", fontSize: 13 }}> {aesthetics} </Text> will be used.
+            The aesthetic part is of crucial importance, since it has a direct relationship with the users’ experience: the more beautiful the aesthetic part is, the more interesting and compelling the users will find it. In the developed gamified solution <Text style={{ fontFamily: "Roboto-Italic", fontSize: 12 }}> {aesthetics} </Text> will be used.
             <Br />
             IMMAGINI
           </Text>
@@ -353,7 +353,7 @@ export default function CreatePDF({
         document={<MyDoc />}
       >
         {({ blob, url, loading, error }) => {
-          return (name && description) ?
+          return (
             <>
               <button
                 onClick={async () => {
@@ -407,11 +407,8 @@ export default function CreatePDF({
 
                   }
                 }}
-                className={
-                  selectedIndex == 8 ?
-                    " py-4 inline-block px-8 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md  hover:bg-blue-400 hover:shadow-lg focus:bg-blue-400 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out"
-                    : "invisible"
-                }
+                className=" py-4 inline-block px-8 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md  hover:bg-blue-400 hover:shadow-lg focus:bg-blue-400 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out"
+
               >
                 Save and Send!
               </button>
@@ -424,16 +421,11 @@ export default function CreatePDF({
                   alink.download = `${name}.pdf`;
                   alink.click();
                 }}
-                className={
-                  selectedIndex == 8 ?
-                    " py-4 inline-block px-8 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md  hover:bg-blue-400 hover:shadow-lg focus:bg-blue-400 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out"
-                    : "invisible"
-                }
+                className=" py-4 inline-block px-8 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md  hover:bg-blue-400 hover:shadow-lg focus:bg-blue-400 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out"
               >
                 Download!
               </button>
-            </>
-            : ""
+            </>)
         }
         }
       </BlobProvider>
