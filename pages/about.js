@@ -2,15 +2,24 @@ import * as React from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { Avatar, Stack, Divider, Typography } from "@mui/material";
-export default function About() {
+import { getSession } from '@auth0/nextjs-auth0';
+
+export const getServerSideProps = ({ req, res }) => {
+  let url = (process.env.SECURE) ? "https://" : "http://"
+  url = url + process.env.BACK_ENDPOINT
+  const session = getSession(req, res)
+  return ({ props: { token: session.accessToken, url: url } })
+}
+
+
+
+export default function About({ token, url }) {
   return (
     <div className="flex flex-col justify-between h-screen">
-      <Header />
+      <Header token={token} url={url} />
       <h1 className="text-4xl font-bold ml-48 xs:ml-8 xs:mb-16">The team</h1>
       <div
         className="justify-center items-center flex flex-row text-xl gap-24 xs:flex-col"
-      // direction="row"
-      // divider={<Divider orientation="vertical" flexItem />}
       >
         <Stack className="items-left font-semibold xs:w-40 w-60">
           <Avatar
@@ -41,7 +50,7 @@ export default function About() {
             className="border border-black"
           />
           <h1 className="py-4">Carlo Bottaro</h1>
-          <h2 className="font-normal">Non si è ancora capito</h2>
+          <h2 className="font-normal">Developer</h2>
         </Stack>
         <Stack className="items-left font-semibold xs:mb-16 xs:w-40 w-60">
           <Avatar
@@ -51,10 +60,9 @@ export default function About() {
             className="border border-black"
           />
           <h1 className="py-4">Andrea Mangrella</h1>
-          <h2 className="font-normal">Schiavo</h2>
+          <h2 className="font-normal">Developer</h2>
         </Stack>
       </div>
-
       <Footer />
     </div>
   );

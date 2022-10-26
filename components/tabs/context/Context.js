@@ -1,4 +1,3 @@
-// OLD COMPONENT WITH ALL THE CONTEXT STUFF 
 import Swal from "sweetalert2"
 import * as React from "react";
 import OutlinedInput from "@mui/material/OutlinedInput";
@@ -47,7 +46,8 @@ function Context({
       target: { value },
     } = event;
     setTargetAge(
-      typeof value === "string" ? value.split(",") : value);
+      typeof value === "string" ? value.split(",") : value
+    );
   };
 
   const handleChangeDomain = (event) => {

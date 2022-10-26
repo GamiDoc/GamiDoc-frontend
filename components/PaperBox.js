@@ -10,7 +10,7 @@ export default function PaperBox({ id, me, author, title, description }) {
     <Card sx={{ minWidth: 25 }}
     >
       <CardContent
-        className="pl-3 hover:bg-yellow-gamy hover:text-white rounded-lg "
+        className="pl-3 hover:bg-gray-gamy hover:text-white rounded-xl font-sans "
       >
         <Typography sx={{ fontSize: 14 }} gutterBottom
           className="flex justify-center "
@@ -32,36 +32,24 @@ export default function PaperBox({ id, me, author, title, description }) {
         </Typography>
         <div className='justify-center flex items-center'>
           <div
-            className=" flex justify-center items-center rounded-lg shadow-md hover:font-semibold hover:bg-blue-300 hover:underline w-1/3 mt-3"
+            className=" flex justify-center items-center rounded-lg border-dotted hover:border-solid  hover:font-semibold hover:bg-yellow-gamy w-1/3 mt-3"
             onClick={() => {
-              router.push({
-                pathname: "/reviewPdf",
-                query: { id: id, me: me }
-              })
+              (me) ?
+                router.push({
+                  pathname: "/viewPdf",
+                  query: { id: id }
+                })
+                :
+                router.push({
+                  pathname: "/reviewPdf",
+                  query: { id: id }
+                })
             }}
           >
-            Open
+            {(me) ? "Open" : "Review"}
           </div>
         </div>
       </CardContent>
     </Card >
   )
-
 }
-// import CardActions from '@mui/material/CardActions';
-// import Button from '@mui/material/Button';
-{/* <CardActions> */ }
-{/* <Button */ }
-{/*           size="small" */ }
-{/*           className="my-3 flex justify-center items-center" */ }
-{/*           onClick={() => { */ }
-{/*             router.push({ */ }
-{/*               pathname: "/reviewPdf", */ }
-{/*               query: { id: id, me: me } */ }
-{/*             }) */ }
-{/*           } */ }
-{/*           } */ }
-{/*         > */ }
-{/*           Open */ }
-{/*         </Button> */ }
-{/* </CardActions> */ }
