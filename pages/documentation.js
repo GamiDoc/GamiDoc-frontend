@@ -4,6 +4,15 @@ import Footer from "../components/Footer";
 import Image from "next/image";
 import Sidebar from "../components/Sidebar";
 import Head from "next/head";
+import { getSession } from "@auth0/nextjs-auth0"
+
+export const getServerSideProps = ({ req, res }) => {
+  let url = (process.env.SECURE) ? "https://" : "http://"
+  url = url + process.env.BACK_ENDPOINT
+  const session = getSession(req, res)
+  if (!session) return { props: {} }
+  return { props: { token: session.accessToken, url: url } }
+}
 
 const figure1 = ({ src, width, quality }) => {
   return `https://i.imgur.com/np0Cgo4.png`;
@@ -11,14 +20,15 @@ const figure1 = ({ src, width, quality }) => {
 const figure2 = ({ src, width, quality }) => {
   return `https://i.imgur.com/hRswSlN.png`;
 };
-export default function documentation() {
+
+export default function documentation({ token, url }) {
   return (
     <div>
       <Head>
         <title>GamiDoc</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <Header />
+      <Header token={token} url={url} />
       <div className="flex flex-row p-10 ">
         <div className="w-full relative top-0 ">
           {" "}

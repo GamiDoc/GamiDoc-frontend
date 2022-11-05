@@ -1,36 +1,50 @@
 import * as React from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Fragment } from "react";
 import dynamic from "next/dynamic";
 const Pdf = dynamic(() => import("../components/CreatePDF"), { ssr: false });
 import MobileOffIcon from "@mui/icons-material/MobileOff";
 import Head from "next/head";
+import { useRouter } from "next/router"
+import axios from "axios"
+var Mutex = require("async-mutex").Mutex
+// Auth0 user hook  
+import { useUser, getSession, withPageAuthRequired } from '@auth0/nextjs-auth0';
 
 // Tabs
 import { Tab } from "@headlessui/react";
-import Context from "../components/tabs/Context";
+
+// import Context from "../components/tabs/context/Context";
+import Aim from "../components/tabs/context/Aim";
+import Domain from "../components/tabs/context/Domain";
+import Targets from "../components/tabs/context/Targets";
+import Behaviors from "../components/tabs/context/Behaviors";
+
 import Affordances from "../components/tabs/Affordances";
 import Rules from "../components/tabs/Rules";
 import Aesthetics from "../components/tabs/Aesthetics";
 import Device from "../components/tabs/Device";
 import Feedback from "../components/tabs/Feedback";
 import Modality from "../components/tabs/Modality";
-
-//alert
-import Snackbar from "@mui/material/Snackbar";
-import MuiAlert from "@mui/material/Alert";
 import Dynamics from "../components/tabs/Dynamics";
 import Personalization from "../components/tabs/Personalization";
 
-const Alert = React.forwardRef(function Alert(props, ref) {
-  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-});
+//alert
+import Alert from '@mui/material/Alert';
+import { Snackbar } from "@mui/material";
 
-// import { Rule } from "postcss";
+export const getServerSideProps = ({ req, res }) => {
+  let url = (process.env.SECURE) ? "https://" : "http://"
+  url = url + process.env.BACK_ENDPOINT
+  const session = getSession(req, res)
+  if (!session) return { props: {} }
+  return { props: { token: session.accessToken, url: url } }
+}
 
 const Aimo = ["Outcome", "Performance", "Process/learning"];
+const categorySelection = ["Student", "Employee", "Researcher"];
 
 const KoivistoHamari = [
   "Education/Learning",
@@ -75,15 +89,13 @@ const ageSelection = [
   "80+",
 ];
 
-const categoriesSelection = ["Student", "Employees"];
-
 const DeviceSelection = [
   "Mobile",
   "Computer/Laptop",
   "Tablet",
   "Head-mounted Display",
   "Augmented Reality",
-  "Real Life (/non digital)",
+  "Real Life (non digital)",
 ];
 
 //affordances
@@ -114,38 +126,6 @@ const affordancesSelection = [
   "Narrative",
   "Story telling",
 ];
-const performanceSelection = [
-  "Acknowledgement",
-  "Level",
-  "Progression",
-  "Point",
-  "Stats",
-];
-
-const ecologicalSelection = [
-  "Chance",
-  "Imposed choice",
-  "Economy",
-  "Rarity",
-  "Time pressure",
-];
-
-const socialSelection = [
-  "Competition",
-  "Cooperation",
-  "Reputation",
-  "Social pressure",
-];
-
-const personalSelection = [
-  "Novelty",
-  "Objectives",
-  "Puzzle",
-  "Renovation",
-  "Sensation",
-];
-
-const fictionalSelection = ["Narrative", "Story telling"];
 
 // Modality
 const modes = [
@@ -165,74 +145,345 @@ const contenuti = [
   "Personalized Feedback",
 ];
 
-export default function Home() {
+export default withPageAuthRequired(function Home({ token, url }) {
+
   // Feedback Page states
-  const [timing, setTiming] = useState([]);
-  const [context, setContext] = useState([]);
-  const [timingDescription, setTimingDescription] = useState("");
+  const [timing, setTiming] = useState("");
+  // const [timingDescription, setTimingDescription] = useState("");
+  const [context, setContext] = useState("");
   const [contextDescription, setContextDescription] = useState("");
 
   // Modality Page state
-  const [modality, setModality] = useState([]);
-
+  const [modality, setModality] = useState("");
+  const [modalityDescription, setModalityDescription] = useState("");
   //Dynamics
   const [dynamics, setDynamics] = useState("");
-
   //Personalization
   const [personalization, setPersonalization] = useState("");
 
   //context
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [domain, setDomain] = useState([]);
-  const [behavior, setBehavior] = useState();
-  const [aim, setAim] = useState([]);
-  const [name, setName] = useState("");
-  const [target, setTarget] = useState("");
+  const [domain, setDomain] = useState("");
+  const [domainDescription, setDomainDescription] = useState("");
+  const [behavior, setBehavior] = useState("");
+  const [discBehavior, setDiscBehavior] = useState("");
+  const [aim, setAim] = useState("");
+  const [aimDescription, setAimDescription] = useState("");
   const [targetAge, setTargetAge] = useState([]);
-
-  const [targetCat, setTargetCat] = useState([]);
+  const [targetUser, setTargetUser] = useState("");
+  const [targetCategory, setTargetCategory] = useState("");
 
   //Device
-  const [device, setDevice] = useState([]);
+  const [device, setDevice] = useState("");
+  const [deviceDescription, setDeviceDescription] = useState("");
 
   //Affordances
-  const [performance, setPerformance] = useState(2);
-  const [ecological, setEcological] = useState("");
-  const [social, setSocial] = useState("");
-  const [personal, setPersonal] = useState("");
-  const [fictional, setFictional] = useState("");
-  const [select1, setSelected1] = useState(false);
-  const [select2, setSelected2] = useState(false);
-  const [affordances1, setAffordances1] = useState("");
-  const [affordances2, setAffordances2] = useState("");
-  const [affordances3, setAffordances3] = useState("");
-  const [affordances4, setAffordances4] = useState("");
-  const [affordances5, setAffordances5] = useState("");
-  const [affordances6, setAffordances6] = useState("");
-  const [open, setOpen] = React.useState(false);
-  const handleClick = () => {
-    setOpen(true);
-  };
-  const handleClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    setOpen(false);
-  };
+  const [affordances, setAffordances] = useState([{ type: "Novelty", text: "", pos: 0 },]);
 
   //Aestethics
   const [aesthetics, setAesthetics] = useState("");
+  const [images, setImages] = useState([])
+  const [imgUrl, setImgUrl] = useState([])
 
   //Rules
   const [rules, setRules] = useState("");
 
+  // Valori URL
+  const { query } = useRouter()
+  const [name, setName] = useState(query.name)
+  const [description, setDescription] = useState(query.description)
+
+  const mutex = useRef(new Mutex())
+
+  const saveDraft = () => {
+    // let aff = affordances.split("=>")
+    if (!draftID) {
+      console.log("Affordances before server mapping", affordances)
+      axios.post(url + "/draft/new", {
+        title: query.name,
+        description: query.description,
+        behavior: behavior,
+        discbehavior: discbehavior,
+        domain: domain,
+        domainDescription: domainDescription,
+        aim: aim,
+        aimDescription: aimDescription,
+        targetAge: targetAge,
+        targetUser: targetUser,
+        targetCategory: targetCategory,
+        device: device,
+        deviceDescription: deviceDescription,
+        modality: modality,
+        modalityDescription: modalityDescription,
+        dynamics: dynamics,
+        personalization: personalization,
+        context: context,
+        contextDescription: contextDescription,
+        timing: timing,
+        affordances: affordances,
+        rules: rules,
+        aesthetics: aesthetics,
+        draftId: draftID
+      },
+        {
+          headers: {
+            Authorization: "Bearer " + token
+          }
+        })
+        .then((val) => {
+          console.log("NEW:", val.data)
+          setDraftID(val.data.draft._id)
+        }
+        )
+        .catch(err => console.log(err))
+    }
+    else {
+      axios.patch(url + "/draft/" + draftID, {
+        title: name,
+        description: query.description,
+        behavior: behavior,
+        discBehavior: discBehavior,
+        domain: domain,
+        domainDescription: domainDescription,
+        aim: aim,
+        aimDescription: aimDescription,
+        targetAge: targetAge,
+        targetUser: targetUser,
+        targetCategory: targetCategory,
+        device: device,
+        deviceDescription: deviceDescription,
+        modality: modality,
+        modalityDescription: modalityDescription,
+        dynamics: dynamics,
+        personalization: personalization,
+        context: context,
+        contextDescription: contextDescription,
+        timing: timing,
+        affordances: affordances,
+        rules: rules,
+        aesthetics: aesthetics,
+        draftId: draftID
+      },
+        {
+          headers: {
+            Authorization: "Bearer " + token
+          }
+        })
+        .then((val) => console.log("PATCH:", val.data))
+        .catch(err => console.log(err))
+    }
+  }
+
+  // DRAFT SAVER  
+  const [timer, setTimer] = useState(false)
+  const [draftID, setDraftID] = useState(query.draftID)
+  const [allertBool, setAllertBool] = useState(false)
+  const [snackBool, setSnackBool] = useState(false)
+
+  useEffect(() => {
+    console.log("1st: in the useEffect")
+    mutex.current.runExclusive(async function() {
+      if (timer) {
+        console.log("2nd:there was no timer")
+        setTimeout(() => {
+          console.log("timer is up ")
+          setTimer(true)
+        }, 5000);
+        setTimer(false)
+        console.log("inside the setState callback")
+        if (!draftID) {
+          axios.post(url + "/draft/new", {
+            title: query.name,
+            description: query.description,
+            behavior: behavior,
+            discBehavior: discBehavior,
+            domain: domain,
+            domainDescription: domainDescription,
+            aim: aim,
+            aimDescription: aimDescription,
+            targetAge: targetAge,
+            targetUser: targetUser,
+            targetCategory: targetCategory,
+            device: device,
+            deviceDescription: deviceDescription,
+            modality: modality,
+            modalityDescription: modalityDescription,
+            dynamics: dynamics,
+            personalization: personalization,
+            context: context,
+            contextDescription: contextDescription,
+            timing: timing,
+            affordances: affordances,
+            rules: rules,
+            aesthetics: aesthetics,
+            draftId: draftID
+
+          },
+            {
+              headers: {
+                Authorization: "Bearer " + token
+              }
+            }).then((val) => {
+              console.log("NEW:", val.data)
+              setDraftID(val.data.draft._id)
+              setAllertBool(true)
+              console.log(allertBool)
+            }
+            )
+            .catch(err => console.log(err))
+        }
+        else {
+          axios.patch(url + "/draft/" + draftID, {
+
+            title: query.name,
+            description: query.description,
+            behavior: behavior,
+            discBehavior: discBehavior,
+            domain: domain,
+            domainDescription: domainDescription,
+            aim: aim,
+            aimDescription: aimDescription,
+            targetAge: targetAge,
+            targetUser: targetUser,
+            targetCategory: targetCategory,
+            device: device,
+            deviceDescription: deviceDescription,
+            modality: modality,
+            modalityDescription: modalityDescription,
+            dynamics: dynamics,
+            personalization: personalization,
+            context: context,
+            contextDescription: contextDescription,
+            timing: timing,
+            affordances: affordances,
+            rules: rules,
+            aesthetics: aesthetics,
+            draftId: draftID,
+          },
+            {
+              headers: {
+                Authorization: "Bearer " + token
+              }
+            })
+            .then((val) => {
+              console.log("PATCH:", val.data)
+              setAllertBool(true)
+              console.log(allertBool)
+            })
+            .catch(err => console.log(err))
+        }
+      } else console.log("NO DRAFTING")
+    })
+  },
+    [
+      timing,
+      context,
+      contextDescription,
+      modality,
+      modalityDescription,
+      dynamics,
+      personalization,
+      domain,
+      domainDescription,
+      behavior,
+      discBehavior,
+      aim,
+      aimDescription,
+      targetAge,
+      targetUser,
+      targetCategory,
+      device,
+      deviceDescription,
+      affordances,
+      aesthetics,
+      images,
+      rules,
+    ])
+
+
+  // Start saving the paper after 10 seconds that u open it 
+  useEffect(() => {
+    console.log("0n:in the start useEffect")
+    if (query.draftID) {
+      axios({
+        method: "get",
+        url: url + "/draft/" + draftID,
+        headers: { Authorization: "Bearer " + token },
+      })
+        .then((val) => {
+          setName(val.data.draft.Title)
+          setDescription(val.data.draft.Description)
+          setBehavior(val.data.draft.Behavior)
+          setDomain(val.data.draft.Domain)
+          setDomainDescription(val.data.draft.DomainDescription)
+          setAim(val.data.draft.Aim)
+          setAimDescription(val.data.draft.AimDescription)
+          setTargetAge(val.data.draft.TargetAge)
+          setTargetUser(val.data.draft.TargetUser)
+          setTargetCategory(val.data.draft.TargetCategory)
+          setDevice(val.data.draft.Device)
+          setDeviceDescription(val.data.draft.DeviceDescription)
+          setModality(val.data.draft.Modality)
+          setDynamics(val.data.draft.Dynamics)
+          setPersonalization(val.data.draft.Personalization)
+          setContext(val.data.draft.Context)
+          setContextDescription(val.data.draft.ContextDescription)
+          setTiming(val.data.draft.Timing)
+
+          setRules(val.data.draft.Rules)
+          setAesthetics(val.data.draft.Aestethics)
+
+          let affArrayOfObjects = []
+          let pos = 0
+          for (const [key, value] of Object.entries(val.data.draft.Affordances)) {
+            let obj = {}
+            obj["type"] = key
+            obj["text"] = value
+            obj["pos"] = pos
+            affArrayOfObjects.push(obj)
+            pos++
+          }
+          setAffordances([...affArrayOfObjects])
+          console.log("Affordances with pos: ", affArrayOfObjects)
+        })
+      setDraftID(query.draftID)
+    }
+    setTimeout(() => {
+      console.log("timer is up (from start timer)")
+      setTimer(true)
+    }, 10000); // 10s 
+  }, [])
+
+
   return (
     <div className="flex flex-col justify-between h-screen ">
+      <Snackbar
+        open={allertBool}
+        autoHideDuration={5000}
+        onClose={() => { setAllertBool(false) }}
+      >
+        <Alert severity="info" >
+          Paper saved as a Draft
+        </Alert>
+      </Snackbar>
+
+      <Snackbar
+        open={snackBool}
+        autoHideDuration={5000}
+        onClose={() => { setSnackBool(false) }}
+      >
+        <Alert severity="error" >
+          Too many game elements
+        </Alert>
+      </Snackbar>
+
+
+
       <Head>
         <title>GamiDoc</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <Header />
+      <Header url={url} token={token} />
       <h1 className="hidden items-center justify-center font-bold text-2xl xs:flex ">
         {" "}
         ONLY DESKTOP USE <MobileOffIcon />{" "}
@@ -294,7 +545,7 @@ export default function Home() {
                           : " text-center text-xl font-medium text-black rounded-md font-sans px-3 py-2 ring ring-transparent outline-none"
                       }
                     >
-                      Dynamics
+                      Rules
                     </div>
                   )}
                 </Tab>
@@ -307,7 +558,7 @@ export default function Home() {
                           : " text-center text-xl font-medium text-black rounded-md font-sans px-3 py-2 ring ring-transparent outline-none"
                       }
                     >
-                      Personalization
+                      Affordances
                     </div>
                   )}
                 </Tab>
@@ -333,7 +584,7 @@ export default function Home() {
                           : " text-center text-xl font-medium text-black rounded-md font-sans px-3 py-2 ring ring-transparent outline-none"
                       }
                     >
-                      Affordances
+                      Dynamics
                     </div>
                   )}
                 </Tab>
@@ -346,7 +597,7 @@ export default function Home() {
                           : " text-center text-xl font-medium text-black rounded-md font-sans px-3 py-2 ring ring-transparent outline-none"
                       }
                     >
-                      Rules
+                      Personalization
                     </div>
                   )}
                 </Tab>
@@ -359,53 +610,118 @@ export default function Home() {
                           : " text-center text-xl font-medium text-black rounded-md font-sans px-3 py-2 ring ring-transparent outline-none"
                       }
                     >
-                      Aesthetics
+                      Aestethics
                     </div>
                   )}
                 </Tab>
               </Tab.List>
               <Tab.Panels>
                 <Tab.Panel>
-                  <Context
-                    aim={aim}
-                    setAim={setAim}
-                    domain={domain}
-                    setDomain={setDomain}
-                    target={target}
-                    setTarget={setTarget}
-                    targetAge={targetAge}
-                    setTargetAge={setTargetAge}
-                    targetCat={targetCat}
-                    setTargetCat={setTargetCat}
-                    behavior={behavior}
-                    setBehavior={setBehavior}
-                    selectObj1={KoivistoHamari}
-                    selectObj2={Aimo}
-                    selectObj3={categoriesSelection}
-                    selectObj4={ageSelection}
-                  />
+                  {/* OLD CONTEXT */}
+                  {/* <Context */}
+                  {/*   aim={aim} */}
+                  {/*   setAim={setAim} */}
+                  {/*   aimDescription={aimDescription} */}
+                  {/*   setAimDescription={setAimDescription} */}
+
+                  {/*   domain={domain} */}
+                  {/*   setDomain={setDomain} */}
+                  {/*   domainDescription={domainDescription} */}
+                  {/*   setDomainDescription={setDomainDescription} */}
+
+                  {/*   targetAge={targetAge} */}
+                  {/*   setTargetAge={setTargetAge} */}
+                  {/*   targetUser={targetUser} */}
+                  {/*   setTargetUser={setTargetUser} */}
+                  {/*   targetCategory={targetCategory} */}
+                  {/*   setTargetCategory={setTargetCategory} */}
+
+                  {/*   behavior={behavior} */}
+                  {/*   setBehavior={setBehavior} */}
+                  {/*   discBehavior={discBehavior} */}
+                  {/*   setDiscBehavior={setDiscBehavior} */}
+
+                  {/*   selectObj1={KoivistoHamari} */}
+                  {/*   selectObj2={Aimo} */}
+                  {/*   selectObj3={ageSelection} */}
+                  {/*   selectObj4={categorySelection} */}
+                  {/*   saveDraft={saveDraft} */}
+                  {/* /> */}
+
+                  {/* NEW CONTEXT */}
+                  <div className="flex flex-col py-4 w-[60em]">
+                    <Domain
+                      domain={domain}
+                      setDomain={setDomain}
+                      domainDescription={domainDescription}
+                      setDomainDescription={setDomainDescription}
+                      selectObj1={KoivistoHamari}
+                      saveDraft={saveDraft}
+                    />
+                    <Aim
+                      aim={aim}
+                      setAim={setAim}
+                      aimDescription={aimDescription}
+                      setAimDescription={setAimDescription}
+                      selectObj2={Aimo}
+                      saveDraft={saveDraft}
+                    />
+                    <Behaviors
+                      behavior={behavior}
+                      setBehavior={setBehavior}
+                      discBehavior={discBehavior}
+                      setDiscBehavior={setDiscBehavior}
+                      saveDraft={saveDraft}
+                    />
+
+                    <Targets
+                      targetAge={targetAge}
+                      setTargetAge={setTargetAge}
+                      targetUser={targetUser}
+                      setTargetUser={setTargetUser}
+                      targetCategory={targetCategory}
+                      setTargetCategory={setTargetCategory}
+                      selectObj3={ageSelection}
+                      selectObj4={categorySelection}
+                      saveDraft={saveDraft}
+                    />
+                  </div>
                 </Tab.Panel>
                 <Tab.Panel>
                   <Device
                     device={device}
                     setDevice={setDevice}
+                    deviceDescription={deviceDescription}
+                    setDeviceDescription={setDeviceDescription}
                     DeviceSelection={DeviceSelection}
+                    saveDraft={saveDraft}
                   />
                 </Tab.Panel>
                 <Tab.Panel>
                   <Modality
                     modality={modality}
                     setModality={setModality}
+                    modalityDescription={modalityDescription}
+                    setModalityDescription={setModalityDescription}
                     selectObj1={modes}
+                    saveDraft={saveDraft}
                   />
                 </Tab.Panel>
                 <Tab.Panel>
-                  <Dynamics dynamics={dynamics} setDynamics={setDynamics} />
+                  <Rules
+                    rules={rules}
+                    setRules={setRules}
+                    saveDraft={saveDraft}
+                  />
                 </Tab.Panel>
                 <Tab.Panel>
-                  <Personalization
-                    personalization={personalization}
-                    setPersonalization={setPersonalization}
+                  <Affordances
+                    affordances={affordances}
+                    setAffordances={setAffordances}
+                    affordancesSelection={affordancesSelection}
+                    saveDraft={saveDraft}
+                    snackBool={snackBool}
+                    setSnackBool={setSnackBool}
                   />
                 </Tab.Panel>
                 <Tab.Panel>
@@ -414,53 +730,36 @@ export default function Home() {
                     setTiming={setTiming}
                     context={context}
                     setContext={setContext}
-                    timingDescription={timingDescription}
-                    setTimingDescription={setTimingDescription}
                     contextDescription={contextDescription}
                     setContextDescription={setContextDescription}
                     selectObj1={tt}
                     selectObj2={contenuti}
+                    saveDraft={saveDraft}
                   />
                 </Tab.Panel>
                 <Tab.Panel>
-                  <Affordances
-                    select1={select1}
-                    setSelected1={setSelected1}
-                    select2={select2}
-                    setSelected2={setSelected2}
-                    affordances1={affordances1}
-                    setAffordances1={setAffordances1}
-                    affordances2={affordances2}
-                    setAffordances2={setAffordances2}
-                    affordances3={affordances3}
-                    setAffordances3={setAffordances3}
-                    affordances4={affordances4}
-                    setAffordances4={setAffordances4}
-                    affordances5={affordances5}
-                    setAffordances5={setAffordances5}
-                    affordances6={affordances6}
-                    setAffordances6={setAffordances6}
-                    open={open}
-                    setOpen={setOpen}
-                    affordancesSelection={affordancesSelection}
+                  <Dynamics
+                    dynamics={dynamics}
+                    setDynamics={setDynamics}
+                    saveDraft={saveDraft}
                   />
                 </Tab.Panel>
                 <Tab.Panel>
-                  <Rules
-                    rules={rules}
-                    setRules={setRules}
-                    affordances1={affordances1}
-                    affordances2={affordances2}
-                    affordances3={affordances3}
-                    affordances4={affordances4}
-                    affordances5={affordances5}
-                    affordances6={affordances6}
+                  <Personalization
+                    personalization={personalization}
+                    setPersonalization={setPersonalization}
+                    saveDraft={saveDraft}
                   />
                 </Tab.Panel>
                 <Tab.Panel>
                   <Aesthetics
                     aesthetics={aesthetics}
                     setAesthetics={setAesthetics}
+                    images={images}
+                    setImages={setImages}
+                    imgUrl={imgUrl}
+                    setImgUrl={setImgUrl}
+                    saveDraft={saveDraft}
                   />
                 </Tab.Panel>
               </Tab.Panels>
@@ -469,21 +768,43 @@ export default function Home() {
 
           <div className="flex flex-row justify-center items-center mb-10 mr-2">
             <Pdf
+              // Indice e token auth 
               selectedIndex={selectedIndex}
+              token={token}
+              imgUrl={imgUrl}
+              url={url}
+
+              // Dati paper presi come props  
               name={name}
+              description={description}
+
+              // Stati delle tabs 
               behavior={behavior}
+              discBehavior={discBehavior}
               domain={domain}
+              domainDescription={domainDescription}
               aim={aim}
+              aimDescription={aimDescription}
               targetAge={targetAge}
-              targetCat={targetCat}
-              timing={timing}
-              context={context}
-              modality={modality}
+              targetUser={targetUser}
+              targetCategory={targetCategory}
+
               device={device}
-              timingDescription={timingDescription}
+              deviceDescription={deviceDescription}
+              modality={modality}
+              modalityDescription={modalityDescription}
+              dynamics={dynamics}
+              personalization={personalization}
+
+              timing={timing}
+              // timingDescription={timingDescription}
+              context={context}
               contextDescription={contextDescription}
+
+              affordances={affordances}
               rules={rules}
               aesthetics={aesthetics}
+              draftID={draftID}
             />
             <div className="grow flex-row flex gap-5 items-center justify-end">
               <div
@@ -512,12 +833,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="warning" sx={{ width: "100%" }}>
-          too much feedback - pls stop!
-        </Alert>
-      </Snackbar>
       <Footer />
     </div>
   );
-}
+})

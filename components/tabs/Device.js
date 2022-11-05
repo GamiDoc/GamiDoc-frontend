@@ -1,4 +1,4 @@
-import { useState } from "react";
+import Swal from "sweetalert2"
 import * as React from "react";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
@@ -7,28 +7,28 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import IconButton from "@mui/material/IconButton";
-import { useRouter } from "next/router";
-import Link from "next/link";
+import { useRouter } from "next/router"
+import { TextField } from "@mui/material";
 
-function Device({ device, setDevice, DeviceSelection }) {
-  const router = useRouter();
-  const handleChange = (event) => {
-    const {
-      target: { value },
-    } = event;
-    setDevice(
-      // On autofill we get a stringified value.
-      typeof value === "string" ? value.split(",") : value
-    );
-  };
+function Device({
+  device,
+  setDevice,
+  DeviceSelection,
+  deviceDescription,
+  setDeviceDescription,
+  saveDraft
+}) {
+  const router = useRouter()
   return (
     <div className="flex flex-col w-[60em] py-4">
       <label className=" mt-4 block text-gray-700  font-bold mb-2">
-        <Link href="/documentation#technology">
-          <IconButton aria-label="Example">
-            <InfoOutlinedIcon sx={{ fontSize: 20 }} />
-          </IconButton>
-        </Link>
+        <IconButton aria-label="Example">
+          <InfoOutlinedIcon sx={{ fontSize: 20 }} onClick={() => {
+            Swal.fire({ title: 'Your changes have been saved in a Draft', icon: 'info' })
+            saveDraft()
+            router.push("documentation#technology")
+          }} />
+        </IconButton>
         Device
       </label>
 
@@ -42,22 +42,34 @@ function Device({ device, setDevice, DeviceSelection }) {
         engine, etc), and then if the selected gamified elements are optimal for
         the selected device.
       </h2>
-      <FormControl>
-        <InputLabel>Device</InputLabel>
-        <Select
-          className="relative w-full shadow-md "
-          single
-          value={device}
-          onChange={handleChange}
-          input={<OutlinedInput label="Name" />}
-        >
-          {DeviceSelection.map((name) => (
-            <MenuItem key={name} value={name}>
-              {name}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
+      <div className="mb-5">
+        <FormControl fullWidth>
+          <InputLabel>Device</InputLabel>
+          <Select
+            className="relative w-full shadow-md "
+            single
+            value={device}
+            onChange={(e) => setDevice(e.target.value)}
+            input={<OutlinedInput label="Name" />}
+          >
+            {DeviceSelection.map((name) => (
+              <MenuItem key={name} value={name}>
+                {name}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      </div>
+      <TextField
+        className="w-full border shadow-md "
+        id="Device"
+        type="text"
+        multiline
+        rows={3}
+        placeholder="Device Description"
+        value={deviceDescription}
+        onChange={(e) => setDeviceDescription(e.target.value)}
+      />
     </div>
   );
 }

@@ -1,3 +1,4 @@
+import Swal from "sweetalert2"
 import * as React from "react";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
@@ -8,32 +9,36 @@ import TextField from "@mui/material/TextField";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import IconButton from "@mui/material/IconButton";
 import { useRouter } from "next/router";
-import Link from "next/link";
 
 export default function Feedback({
+
   timing,
-  timingDescription,
-  setTimingDescription,
   setTiming,
+  selectObj1,
+  // timingDescription,
+  // setTimingDescription,
+
   context,
+  setContext,
+  selectObj2,
   contextDescription,
   setContextDescription,
-  setContext,
-  selectObj1,
-  selectObj2,
+
+  saveDraft
+
 }) {
   const router = useRouter();
   return (
     <div className="flex flex-col py-4 w-[60em]">
       <label className=" mt-4 block text-gray-700  font-bold mb-2">
-        <Link href="/documentation#technology">
-          <IconButton
-            aria-label="Example"
-            //onClick={() => router.push("/documentation#technology")}
-          >
-            <InfoOutlinedIcon sx={{ fontSize: 20 }} />
-          </IconButton>
-        </Link>
+        {/* STRANO CHE FEEDBACK RIPORTI A TECHNOLOGY */}
+        <IconButton aria-label="Example">
+          <InfoOutlinedIcon sx={{ fontSize: 20 }} onClick={() => {
+            Swal.fire({ title: 'Your changes have been saved in a Draft', icon: 'info' })
+            saveDraft()
+            router.push("documentation#technology")
+          }} />
+        </IconButton>
         Feedback
       </label>
       <h2 className=" mt-4 block text-gray-700  mb-2 ">
@@ -48,7 +53,7 @@ export default function Feedback({
         reporting feedback, and personalized feedback).
       </h2>
 
-      <FormControl className="top-3">
+      <FormControl className="">
         <InputLabel>Timing</InputLabel>
         <Select
           className="relative w-full shadow-md"
@@ -65,41 +70,42 @@ export default function Feedback({
         </Select>
       </FormControl>
 
+      {/* <TextField */}
+      {/*   className="w-full border  top-4" */}
+      {/*   id="username" */}
+      {/*   type="text" */}
+      {/*   multiline */}
+      {/*   rows={3} */}
+      {/*   placeholder="Timing description" */}
+      {/*   value={timingDescription} */}
+      {/*   onChange={(e) => setTimingDescription(e.target.value)} */}
+      {/* /> */}
+
+      <div className="my-5">
+        <FormControl fullWidth>
+          <InputLabel>Content</InputLabel>
+          <Select
+            className=" w-full  shadow-md"
+            single
+            value={context}
+            onChange={(e) => setContext(e.target.value)}
+            input={<OutlinedInput label="Name" />}
+          >
+            {selectObj2.map((name) => (
+              <MenuItem key={name} value={name}>
+                {name}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      </div>
       <TextField
-        className="w-full border  top-4"
-        id="username"
+        className="  w-full border  "
+        id="Description"
         type="text"
         multiline
         rows={3}
-        placeholder="Timing description"
-        value={timingDescription}
-        onChange={(e) => setTimingDescription(e.target.value)}
-      />
-
-      <FormControl className="top-10">
-        <InputLabel>Content</InputLabel>
-        <Select
-          className=" w-full  shadow-md"
-          single
-          value={context}
-          onChange={(e) => setContext(e.target.value)}
-          input={<OutlinedInput label="Name" />}
-        >
-          {selectObj2.map((name) => (
-            <MenuItem key={name} value={name}>
-              {name}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-
-      <TextField
-        className=" top-11  w-full border  "
-        id="username"
-        type="text"
-        multiline
-        rows={3}
-        placeholder="Context description"
+        placeholder="Describe your choices"
         value={contextDescription}
         onChange={(e) => setContextDescription(e.target.value)}
       />

@@ -8,10 +8,11 @@ module.exports = {
 
       colors: {
         'yellow-gamy': '#FFB900',
+        "gray-gamy": "#374151",
       },
       screens: {
-        'xs':{'max': '1200px'},
-       
+        'xs': { 'max': '1200px' },
+
       },
 
     },

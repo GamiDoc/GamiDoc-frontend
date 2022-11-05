@@ -31,8 +31,8 @@ export default function SmvPage() {
   // useRef per i blobs dei due file di testo 
   var blob = useRef()
   var graphBlob = useRef()
-
   // useEffect  che avviene ogni nuova traduzione aggiorna blob output e lo stato graph  
+
   useEffect(() => {
     if (output != "") {
       blob.current = new Blob([output]);
@@ -50,13 +50,13 @@ export default function SmvPage() {
   // Il jsx del componente ! 
   return (
     <div >
-      <Header />
+      {/* <Header /> */}
       <div className="flex justify-center m-2 items-center gap-3">
 
         {(text == "") ? <></> :
           <button
             onClick={
-              async () => await axios.post("https://provadocker1234.herokuapp.com/converter/convert", { "data": text })
+              async () => await axios.post(process.env.SMV_ENDPOINT + "/converter/convert", { "data": text })
                 .then((response) => {
                   // console.log(response)
                   if (response.data.Data.search("syntools") != -1) {
